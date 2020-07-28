@@ -6,11 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class UserDAO {
 	private Connection conn;	// db에 접근하게 해주는 객체
 	private PreparedStatement pstmt;	// sql injection 방어 기법
 	private ResultSet rs;	// 정보 담는 객체
+	private Statement st;
 	
 	// 실제 mysql에 접속을 하게 해주는 부분
 	public UserDAO() {
@@ -47,7 +50,7 @@ public class UserDAO {
 	}
 	
 	public int register(User user) {
-		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -55,6 +58,9 @@ public class UserDAO {
 			pstmt.setString(3,  user.getUserName());
 			pstmt.setString(4,  user.getUserGender());
 			pstmt.setString(5,  user.getUserLevel());
+			pstmt.setString(6,  user.getUserType());
+			pstmt.setString(7,  user.getUserDescription());
+
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -84,7 +90,7 @@ public class UserDAO {
 	private int string_pattern1(String str) {	// id
 		int i;
 		
-		for(i = 0; i < str.length() && (Character.isDigit(str.charAt(i)) || str.charAt(i) >= 'a' && str.charAt(i) <= 'z'); i++) ;
+		for(i = 0; i < str.length() && ((Character.isDigit(str.charAt(i)) || str.charAt(i) >= 'a' && str.charAt(i) <= 'z')); i++) ;
 		
 		if(i < str.length())
 			return -1;
@@ -169,4 +175,30 @@ public class UserDAO {
 		return -2;	// db 오류
 	}
 	
+	/*회원 정보 불러오기*/
+	public ArrayList<User> getUserlist(){
+		ArrayList<User> list = new ArrayList<User>();
+		
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery("Select * from user");
+			
+			while(rs.next()) {
+				User user = new User();
+				
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				user.setUserDescription(rs.getString(7));
+				
+				list.add(user);
+			}
+			} catch(Exception e) {
+				System.out.println(e+"=> getUserlist fail");
+			} finally {
+			}
+			return list;
+	}
 }

@@ -8,6 +8,20 @@ public class User {
 	private String userName;
 	private String userGender;
 	private String userLevel;
+	private String userType;
+	private String userDescription;
+	
+	public User(){}
+	public User(String userID, String userPassword, String userName, String userGender, String userLevel, String userType, String userDescription){    
+	    this.userID = userID;
+	    this.userPassword = userPassword;
+	    this.userName = userName;
+	    this.userGender = userGender;
+	    this.userLevel = userLevel;
+	    this.userType = userType;
+	    this.userDescription = userDescription;
+	       
+	}
 	
 	public String getUserID() {
 		return userID;
@@ -45,5 +59,16 @@ public class User {
 	public void setUserLevel(String userLevel) {
 		this.userLevel = userLevel;
 	}
-	
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	public String getUserDescription() {
+		return userDescription;
+	}
+	public void setUserDescription(String userDescription) {
+		this.userDescription = userDescription;
+	}
 }

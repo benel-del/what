@@ -86,7 +86,19 @@
   						<option value='6'>6</option>
   						<option value='7'>7</option>
 					</select>
-				<br><br>
+				<br>
+					<select name="userType">
+						<option value='' selected>-- 전형 --</option>
+	  					<option value='오른손잡이 / 드라이브 전형'>오른손잡이 / 드라이브 전형</option>
+	  					<option value='왼손잡이 / 드라이브 전형'>왼손잡이 / 드라이브 전형</option>
+	  					<option value='오른손잡이 / 스트로크 전형'>오른손잡이 / 스트로크 전형</option>
+	  					<option value='왼손잡이 / 스트로크 전형'>왼손잡이 / 스트로크 전형</option>
+	  					<option value='오른손잡이 / 수비수 전형'>오른손잡이 / 수비수 전형</option>
+	  					<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
+					</select>
+				<br>
+					내 소개..
+				
 				<input type="submit" class="login_submit-btn" value="회원가입">
 
 			</div>

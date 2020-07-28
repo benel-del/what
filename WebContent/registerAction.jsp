@@ -11,7 +11,8 @@
 <jsp:setProperty name="user" property="userName"/>
 <jsp:setProperty name="user" property="userGender"/>
 <jsp:setProperty name="user" property="userLevel"/>
-
+<jsp:setProperty name="user" property="userType"/>
+<jsp:setProperty name="user" property="userDescription"/>
 
 <!DOCTYPE html>
 

@@ -97,6 +97,7 @@
         %>
         
         <section class="container">
+       		<form method="post" action="myinfoModifyAction.jsp">
        		<div class="dm_page">
        		
        		<div class="dm_header">
@@ -104,7 +105,7 @@
             </div>
 			<br>
 			
-   			<form method="post" action="myinfoModifyAction.jsp">
+   			
    		    	<table class="myinfo_table">
      				<tr class="myinfo_userID">
      				<th id="myinfo_title" class="dm_page_th1">아이디</th>
@@ -210,12 +211,11 @@
             }
        		%>   	  		
        		   				
-     			</table>
-     		</form>
-     		
+     			</table>     		
         	<br>
                <input type="submit" class="dm_submit-btn" value="수정하기" >
         	</div>
+        	</form>
         </section>
 		<% 
            	}
