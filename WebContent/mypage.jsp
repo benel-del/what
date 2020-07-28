@@ -11,7 +11,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userPassword" />
 <jsp:setProperty name="user" property="userName"/>
 <jsp:setProperty name="user" property="userGender"/>
 <jsp:setProperty name="user" property="userLevel"/>
@@ -31,12 +30,12 @@
 
 	<% //userID 존재 여부
 	String userID = null;
-	
+
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
 	%>
-	
+
     <div id="wrapper">
 
         <br>
@@ -48,7 +47,7 @@
 			script.println("alert('로그인 후 이용가능합니다.')");
 			script.println("location.href = 'login.jsp'");
 			script.println("</script>");
-           	} else {    
+           	} else {
 		%>
 			<!--로그아웃, 마이페이지 버튼-->
             <div id="service">
@@ -56,8 +55,8 @@
                 |
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
-            <br>		
-            
+            <br>
+
              <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
@@ -74,18 +73,18 @@
             </ul>
         </nav>
         <br>
-        
+
          <%
             // 1. JDBC 드라이버 로딩
-			Class.forName("com.mysql.jdbc.Driver"); 
+			Class.forName("com.mysql.jdbc.Driver");
         	String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
 			String dbID = "root";
 			String dbPassword = "whatpassword0706!";
             Connection conn = null;
             Statement stmt = null;
             ResultSet rs = null;
- 
-            try {                
+
+            try {
                 String query = "select * from user where userID='"+userID+"'";
                 // 2. 데이터베이스 커넥션 생성
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -96,7 +95,7 @@
                 // 5. 쿼리 실행 결과 출력
                 while (rs.next()) {
         %>
-        
+
         <section class="container">
        		<div class="mypage_contents">
        		    <table class="myinfo_table">
@@ -104,7 +103,7 @@
        				<th id="myinfo_title">아이디</th>
        				<th><%=rs.getString(1) %></th>
        				</tr>
-       				
+
        				<tr class="myinfo_userName">
        				<th id="myinfo_title">이름</th>
        				<th><%=rs.getString(3) %></th>
@@ -114,21 +113,28 @@
        				<th id="myinfo_title">성별</th>
        				<th><%=rs.getString(4) %></th>
        				</tr>
-       				
+
        				<tr class="myinfo_userLevel">
        				<th id="myinfo_title">부수</th>
        				<th><%=rs.getString(5) %></th>
        				</tr>
-       				
+
        				<tr class="myinfo_userType">
        				<th id="myinfo_title">전형</th>
-       				<th><%=rs.getString(6) %></th>
+       				<th><%
+       				if(rs.getString(6) != null){
+       					out.println(rs.getString(6));
+       				} else{ out.println("");}%></th>
+
        				</tr>
-       				
+
        				<tr class="myinfo_userDescription">
        				<th id="myinfo_title">내 소개</th>
-       				<th><%=rs.getString(7) %></th>
-       				</tr>     
+       				<th><%
+       				if(rs.getString(6) != null){
+       					out.println(rs.getString(6));
+       				} else{ out.println("");}%></th>
+       				</tr>
        		<%
                 }
             } catch (SQLException ex) {
@@ -153,18 +159,18 @@
                     } catch (SQLException ex) {
                     }
             }
-       		%>   	  				
- 		  		       	
- 		    
+       		%>
+
+
         		</table>
-        	<a class=link href="myinfoModify.jsp">회원정보수정</a>
+        	<a class=link href="preModify.jsp">회원정보수정</a>
         	|
         	<a class=link href="delete.jsp">회원탈퇴</a>
         	</div>
         </section>
-        
-        
-		<% 
+
+
+		<%
            	}
        	%>
 

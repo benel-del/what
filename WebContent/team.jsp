@@ -66,9 +66,7 @@
             </ul>
         </nav>
         <br>
-
-  
-          	
+       	
         <!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">팀원 찾기</div>
@@ -76,7 +74,6 @@
             <!-- 검색 바 -->
 	            <div class="board_search">	            	
    	        		<input id="notice_search-btn" type="submit" class="notice_submit-btn" value="검색">  	        	
-   	        		
    	        		<select name="team_level" id="team_search_userLevel">
     	        		<option value='null'>--부수--</option>
     	        		<option value='-3'>-3</option>
