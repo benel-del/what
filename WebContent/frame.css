@@ -1,0 +1,600 @@
+
+
+/* RESET_COMMON */
+body{
+    min-width: 1190px;
+    min-height: 1480px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ul{
+    list-style: none;   /*리스트 앞에 .같은거 제거*/
+}
+a{
+    text-decoration: none; /* 링크 밑줄 같은거 제거*/
+}
+section{
+	height: 1130px;
+}
+#wrapper {
+    max-width: 1024px;
+    max-height: 100%;
+    margin: 0 auto;
+}
+.link:link {
+    background-color: none;
+    color: black;
+}
+.link:visited {
+    background-color: none;
+    color: black;
+}
+.link:hover:not(.active) {
+    border-radius: 0.4em;
+    color: #92A8D1;
+}
+.container{	/* section */
+	padding : 10px;
+}
+
+/* 화면 너비 0 ~ 1200px */
+@media (max-width: 1220px) {
+}
+/* 화면 너비 0 ~ 768px */
+@media (max-width: 768px) {
+}
+/* 화면 너비 0 ~ 480px */
+@media (max-width: 480px) {
+    header {
+        height: 300px;
+    }
+}
+
+
+/* 이게 뭐지???? */
+.clearfix {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+
+/* HEADER */
+header{ /*common*/
+    position: relative;
+    width: 100%;
+    height: 120px;
+}
+    header h1{
+        font-size: 50px;
+    }
+#title { /*title*/
+    position: relative;
+    text-align: center !important;
+    height: 55px;
+    font-size: 20px;
+    color: #0F4C81;
+}
+    #title a:link {
+        background-color: none;
+        color: #0F4C81;
+    }
+    #title a:visited {
+        background-color: none;
+        color: #0F4C81;
+    }
+    #title a:hover:not(.active) {
+        background-color: none;
+        color: #0F4C81;
+    }
+#service { /*로그인&회원가입 버튼*/
+    position: absolute;
+    right: 0px;
+    display: inline-block !important;
+    margin: 4px 6px;
+    height: 23px;
+    padding: 2px 3px;
+    font-size: small;
+    font-weight:600;
+}
+
+/* NAV */
+.menu {
+    margin: 0 auto;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    background-color:#0F4C81;
+}
+    .menu li {
+        display: inline;
+    }
+        .menu li a.active {
+            background-color: white;
+            color: #0F4C81;
+        }
+        .menu li a:hover:not(.active) {
+            background-color: white;
+            color: #0F4C81;
+        }
+    .menu a {
+        display: inline-block;
+        line-height: 50px;
+        width: 150px;
+        padding: 0 15px;
+        color: white;
+    }
+    
+/* FOOTER */
+footer {
+    height: 100px;
+    text-align: right;
+    padding: 2px 5px;
+    font-size: 13px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	background-color:#0F4C81;
+	color:white;
+}
+
+
+
+/* INDEX_SECTION */
+.index_title {
+    font-size: 20px;
+    margin: 10px 5px;
+    font-weight: 600;
+}
+#index_top {
+    height: 600px;
+    width: 100%;
+}
+#index_notice {
+    width: 30%;
+    height: 100%;
+    float: left;
+    margin: 0px 10px 10px 0px;
+    padding: 10px;
+    border-radius: 0.4em;
+    border: 1px solid #0F4C81;
+}
+#index_notice-inform {
+    height: 80%;
+    border: 1px dashed #0F4C81;
+    padding: 5px;
+}
+.index_notice-btn {
+    background-color: #0F4C81;
+    border-radius: 1em;
+    width: 200px;
+    padding: 10px 0;
+    margin: 10px auto;
+}
+#index_notice-btn a {/*button in notice area*/
+    margin: 0 auto;
+    height: 25px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+    #index_notice-btn a:link {
+        background-color: #0F4C81;
+        color: white;
+        width: 200px;
+    }
+    #index_notice-btn a:visited {
+        background-color: #0F4C81;
+        color: white;
+    }
+    #index_notice-btn a:hover:not(.active) {
+        color: #92A8D1;
+    }
+
+#index_inform {
+    width: 30%;
+    height: 100%;
+    float: left;
+    margin: 0px 0px 10px 0px;
+    padding: 10px;
+    border-radius: 0.4em;
+    border: 1px solid #0F4C81;
+}
+#index_rank {
+    width: 38%;
+    height: 100%;
+    float: right;
+    margin: 0px 0px 10px 10px;
+    padding: 10px;
+    border-radius: 0.4em;
+    border: 1px solid #0F4C81;
+}
+
+#index_bottom {
+    width: 100%;
+    height: 500px;
+    margin: 10px 0px;
+}
+#index_shop {
+    width: 30%;
+    height: 100%;
+    float: left;
+    margin: 0px 5px 10px 0px;
+    padding: 5px 15px;
+    border-radius: 0.4em;
+    border: 1px solid #0F4C81;
+}
+	.index_shop img {
+    margin: 10px 20px;
+    height: 150px;
+    width: 200px;
+}
+#index_youtube {
+    width: 69%;
+    height: 100%;
+    float: right;
+    margin: 0px 0px 10px 5px;
+    padding: 5px 15px;
+    border-radius: 0.4em;
+    border: 1px solid #0F4C81;
+}
+    #index_youtube iframe {
+        margin: 2px 10px;
+        height: 170px;
+        width: 280px;
+    }
+#index_TBAL-avi {
+    height: 85%;
+    width: 48%;
+    float: left;
+    margin: 10px 5px;
+    padding: 10px;
+    border: 1px dashed #0F4C81;
+}
+#index_FROM-avi {
+    height: 85%;
+    width: 48%;
+    float: right;
+    margin: 10px 5px;
+    padding: 10px;
+    border: 1px dashed #0F4C81;
+}
+
+
+
+/*LOGIN_SECTION*/
+.login_page{
+	margin:60px auto;
+	text-align:center;
+}
+.login_header{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 20px auto;
+}
+	.login_header a:link{
+		color: #0F4C81;
+	}
+	.login_header a:visited{
+		color: #0F4C81;
+	}
+.login_form{
+	display:block;	
+}
+	.login_form input{
+		margin:6px auto;
+	    height: 30px;
+	    width: 300px;
+	}
+	.login_form input:hover:not(.active){
+		border:1px solid #0F4C81;
+	}
+.login_submit-btn{
+	display: block;
+	margin: 7px auto;
+    width: 300px;
+    height: 40px;
+    border:none;
+    background-color: #0F4C81;
+	color:white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+.login_find a{
+	font-size:13px;
+	font-weight: 600;
+	color:#0F4C81;
+}
+
+
+
+/*REGISTER_SECTION*/
+.register_gender-btn{
+	text-align:center;
+	margin: 0 20px;
+}
+.register_gender-btn input{
+	height: 20px;
+	width: 20px;
+}
+.register_gender-btn label{
+	margin : 0 10px;
+	margin-bottom: 5px;
+	color:#0F4C81;
+	font-size: 18px;
+}
+.login_form select{
+	width: 300px;
+	height: 30px;
+}
+.register_label{
+	font-size: 10px;
+	font-color: gray;
+	text-align: right;
+}
+
+/*DELETE_SECTION*/
+.delete_page{
+	margin:60px auto;
+	text-align:center;
+}
+.delete_header{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 20px auto;
+}
+	.delete_header a:link{
+		color: #0F4C81;
+	}
+	.delete_header a:visited{
+		color: #0F4C81;
+	}
+delete_form{
+	display:block;	
+}
+	.delete_form input{
+		margin:6px auto;
+	    height: 30px;
+	    width: 300px;
+	}
+	.delete_form input:hover:not(.active){
+		border:1px solid #0F4C81;
+	}
+	.delete_form label{
+		font-size: 17px;
+		font-color: black;
+		text-align: right;
+	}
+#delete_submit-btn{
+	display: block;
+	margin: 7px auto;
+    width: 300px;
+    height: 40px;
+    border:none;
+    background-color: #0F4C81;
+	color:white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* BOARD COMMON */	/* 다른 게시판에서 사용하지 않으면 board -> notice로 변경 */
+.board_container{
+	padding: 5px;
+	height: 700px;
+	width: 100%;
+}
+.board_subtitle{
+	margin : 5px;
+	height: 35px;
+	font-size : 30px;
+	font-weight : 600;
+}
+.board_table{
+	text-align: center;
+	border: 1px solid #0F4C81;
+	width: 100%;
+}
+.board_thead{
+	background-color: #0F4C81;
+	text-align: center;
+	color: white;
+}
+.board_tr{
+	height: 50px;
+}
+.board_write-btn{	/* 사용자 계정에서는 숨김 */
+	background-color: #0F4C81;
+	float: right;
+	height: 25px;
+	width: 100px;
+	display:block;
+}
+
+.board_write-btn a{
+	height:100%;
+    width: 100%;
+	font-size: 18px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    color: white;
+}
+
+	.board_write-btn a:link {
+        background-color: #0F4C81;
+        color: white;
+    }
+    .board_write-btn a:visited {
+        background-color: #0F4C81;
+        color: white;
+    }
+    
+.board_page-move{
+	margin: 20px 0px;
+	padding: 5px 30px;
+	width: 100%;
+	height: 50px;
+	border: 1px solid black;
+}
+.board_page-move a{
+	font-size: 25px;
+	color: #0F4C81;
+}
+.board_page-move-symbol-left{
+	float: left;
+}
+.board_page-move-symbol-right{
+	float: right;
+}
+.board_search{
+	margin: 10px 0px;
+	padding: 20px 20px;
+	width: 100%;
+	height: 70px;
+	border: 1px solid black;
+}
+
+
+
+/* NOTICE SECTION */
+#notice_type{
+	width: 120px;
+}
+#notice_num{
+	width: 60px;
+}
+#notice_day{
+	width: 140px;
+}
+#notice_fix{
+	background-color: #cfe6fa;
+}
+#notice_search-period{
+	float: right;
+	height: 100%;
+	width: 144px;
+}
+#notice_search-bar{
+	float: right;
+	height: 100%;
+	width: 250px;
+	padding: 5px;
+	margin: 0px 5px;
+}
+#notice_search-btn{
+	float: right;
+	height: 100%;
+	width: 60px;
+	display: block;
+    border:none;
+    background-color: #0F4C81;
+	color:white;
+    cursor: pointer;
+}
+
+/* RANK SECTION */
+#rank_num{
+	width:60px;
+}
+#rank_name{
+	width:100px;
+}
+#rank_type{
+	width:250px;
+}
+#rank_level{
+	width: 60px;
+}
+#rank_prize{
+	width: 60px;
+}
+
+/* FAQ_SECTION */
+input[id*="answer"]{
+	display:none;
+}
+
+input[id*="answer"]:checked + label + div{
+	max-height:200px;
+}
+
+input[id*="answer"] + label{
+	display:block;
+	padding:20px;
+	border:1px solid #0F4C81;
+	color:white;
+	font-weight:900;
+	background: #0F4C81;
+	cursor:pointer;
+	position:relative;
+}
+
+input[id*="answer"]:hover:not(.active) + label{
+	background-color: white;
+    color: #0F4C81;
+}
+
+input[id*="answer"] + label + div{
+	max-height:0px;
+	transition: all .35s;
+	overflow: hidden;
+	background: white;
+	font-size:14px;
+	font-weight:700;
+}
+
+input[id*="answer"] + label + div p{
+	display:inline-block;
+	padding:30px;	
+}
+
+/* MY_PAGE */
+.mypage_contents {
+	text-align:center;
+	padding: 20px;
+	margin: 60px auto;
+}
+
+.myinfo_table{
+	margin:20px auto;
+}
+
+.myinfo_table th{
+	border:1px solid #0F4C81;
+	width: 150px;
+	height: 30px;
+}
+
+#myinfo_title{
+    background-color: #0F4C81;
+	color:white;
+}
+
+/* 팀원 찾기 */
+#team_search_userLevel{
+	margin: 0 5px;
+	float: right;
+	height: 100%;
+	width: 100px;
+}
+
+#team_userName{
+	width:120px;
+}
+#team_userGender{
+	width: 80px;
+}
+#team_userLevel{
+	width : 60px;
+}
+#team_userType{
+	width:270px;
+}
