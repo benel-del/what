@@ -148,30 +148,22 @@ public class UserDAO {
 		
 		return rt;
 	}
-}
-	/*
-	public int delete(String userID, String userPassword) {
-		int rt = -1;
-		String SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?";
+	
+	public int preModify(String userID, String userPassword) {
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
-			pstmt.setString(2,  userPassword);
-			pstmt.executeUpdate();
-
-			rt = 1;	// 탈퇴 성공
-
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.getString(1).equals(userPassword))
+				return 1;
+			else
+				return 0; 	// 비밀번호 불일치
 		} catch(Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if(rs!=null)	rs.close();
-				if(pstmt!=null)	pstmt.close();
-				if(conn!=null)	conn.close();
-			} catch(Exception e2) {
-				e2.printStackTrace();
-			}
 		}
-		return rt;
+		return -2;	// db 오류
 	}
-*/
+}
