@@ -55,7 +55,7 @@
 				<input type="text" placeholder="아이디 입력" name="userID" maxlength="20">
 				<br>
 				<label class="register_label">ID는 8~15자의 영문 소문자 혹은 숫자만 입력 가능합니다.</label>
-				<br>
+				<br><br>
 				<input type="password" placeholder="비밀번호 입력(숫자 4자리)" name="userPassword" maxlength="4">
 				<br>
 				<input type="password" placeholder="비밀번호 확인(숫자 4자리)" name="userRePassword" maxlength="4">
@@ -86,7 +86,7 @@
   						<option value='6'>6</option>
   						<option value='7'>7</option>
 					</select>
-				<br>
+				<br><br>
 					<select name="userType">
 						<option value='' selected>-- 전형 --</option>
 	  					<option value='오른손잡이 / 드라이브 전형'>오른손잡이 / 드라이브 전형</option>
@@ -96,8 +96,8 @@
 	  					<option value='오른손잡이 / 수비수 전형'>오른손잡이 / 수비수 전형</option>
 	  					<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
 					</select>
-				<br>
-					내 소개..
+				<br><br>
+					<!-- 내 소개.. -->
 				
 				<input type="submit" class="login_submit-btn" value="회원가입">
 

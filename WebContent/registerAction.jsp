@@ -39,21 +39,21 @@
 	} //로그인 된 사람은 회원가입 페이지에 접근할 수 없음
     
     UserDAO userDAO = new UserDAO();
-    if(userDAO.register_limit(user) == -1){
+    if(userDAO.check_limit(user) == -1){
     	PrintWriter script = response.getWriter();
 	    script.println("<script>");
 	    script.println("alert('아이디는 8~15자의 영문 소문자, 숫자만 사용 가능합니다.')");
 		script.println("history.back()");
 	    script.println("</script>");
     }
-    else if(userDAO.register_limit(user) == -2){
+    else if(userDAO.check_limit(user) == -2){
     	PrintWriter script = response.getWriter();
 	    script.println("<script>");
 	    script.println("alert('비밀번호는 4자리 숫자로만 설정해주세요.')");
 		script.println("history.back()");
 	    script.println("</script>");
     }    
-    else if(userDAO.register_limit(user) == -3){
+    else if(userDAO.check_limit(user) == -3){
     	PrintWriter script = response.getWriter();
 	    script.println("<script>");
 	    script.println("alert('이름은 한글만 가능합니다.')");
@@ -92,11 +92,18 @@
     else if(user.getUserLevel() == null){
        	PrintWriter script = response.getWriter();
        	script.println("<script>");
-        script.println("alert('부수를 입력해주세요.')");
+        script.println("alert('부수를 선택해주세요.')");
         script.println("history.back()");
        	script.println("</script>");
     }
-    else if(userDAO.register_pw_cmp(user) == -1){	// 비밀번호와 비밀번호 재입력이 일치하지 않는 경우
+    else if(user.getUserType() == null){
+       	PrintWriter script = response.getWriter();
+       	script.println("<script>");
+        script.println("alert('전형을 선택주세요.')");
+        script.println("history.back()");
+       	script.println("</script>");
+    }
+    else if(userDAO.check_pw_cmp(user) == -1){	// 비밀번호와 비밀번호 재입력이 일치하지 않는 경우
     	PrintWriter script = response.getWriter();
        	script.println("<script>");
         script.println("alert('비밀번호가 서로 맞지 않습니다.')");

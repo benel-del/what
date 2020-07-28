@@ -97,28 +97,28 @@
        		<div class="mypage_contents">
        		    <table class="myinfo_table">
        				<tr class="myinfo_userID">
-       				<th id="myinfo_title">아이디</th>
-       				<th><%=rs.getString(1) %></th>
+       				<th id="myinfo_title" class="table_th1">아이디</th>
+       				<th class="table_th2"><%=rs.getString(1) %></th>
        				</tr>
 
        				<tr class="myinfo_userName">
-       				<th id="myinfo_title">이름</th>
-       				<th><%=rs.getString(3) %></th>
+       				<th id="myinfo_title" class="table_th1">이름</th>
+       				<th class="table_th2"><%=rs.getString(3) %></th>
        				</tr>
 
        				<tr class="myinfo_userGender">
-       				<th id="myinfo_title">성별</th>
-       				<th><%=rs.getString(4) %></th>
+       				<th id="myinfo_title" class="table_th1">성별</th>
+       				<th class="table_th2"><%=rs.getString(4) %></th>
        				</tr>
 
        				<tr class="myinfo_userLevel">
-       				<th id="myinfo_title">부수</th>
-       				<th><%=rs.getString(5) %></th>
+       				<th id="myinfo_title" class="table_th1">부수</th>
+       				<th class="table_th2"><%=rs.getString(5) %></th>
        				</tr>
 
        				<tr class="myinfo_userType">
-       				<th id="myinfo_title">전형</th>
-       				<th><%
+       				<th id="myinfo_title" class="table_th1">전형</th>
+       				<th class="table_th2"><%
        				if(rs.getString(6) != null){
        					out.println(rs.getString(6));
        				} else{ out.println("");}%></th>
@@ -126,8 +126,8 @@
        				</tr>
 
        				<tr class="myinfo_userDescription">
-       				<th id="myinfo_title">내 소개</th>
-       				<th><%
+       				<th id="myinfo_title" class="table_th1">내 소개</th>
+       				<th id="userDescription"><%
        				if(rs.getString(7) != null){
        					out.println(rs.getString(7));
        				} else{ out.println("");}%></th>

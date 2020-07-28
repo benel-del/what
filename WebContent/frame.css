@@ -516,13 +516,6 @@ input[id*="answer"] + label + div p{
 .myinfo_table{
 	margin:20px auto;
 }
-
-.mypage_contents th{
-	border:1px solid #0F4C81;
-	width: 150px;
-	height: 30px;
-}
-
 #myinfo_title{
     background-color: #0F4C81;
 	color:white;
@@ -575,15 +568,15 @@ input[id*="answer"] + label + div p{
     font-weight: 600;
 }
 
-/* MODIFY_SETCTION */
-.dm_page_th1{
+/* MYPAGE & MODIFY_SETCTION */
+.table_th1{
 	border:1px solid #0F4C81;
 	width: 150px;
 	height: 30px;
 }
-.dm_page_th2{
+.table_th2{
 	border:1px solid #0F4C81;
-	width: 250px;
+	width: 300px;
 	height: 30px;
 }
 	.myinfo_table input{
@@ -596,7 +589,7 @@ input[id*="answer"] + label + div p{
 	}
 #userDescription{
 	border:1px solid #0F4C81;
-	width: 250px;
+	width: 300px;
 	height: 90px;
 }
 

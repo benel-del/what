@@ -4,6 +4,7 @@ public class User {
 
 	private String userID;
 	private String userPassword;
+	private String userNewPassword;	//password 변경시에만 사용
 	private String userRePassword;
 	private String userName;
 	private String userGender;
@@ -34,6 +35,12 @@ public class User {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	public String getUserNewPassword() {
+		return userNewPassword;
+	}
+	public void setUserNewPassword(String userNewPassword) {
+		this.userNewPassword = userNewPassword;
 	}
 	public String getUserRePassword() {
 		return userRePassword;

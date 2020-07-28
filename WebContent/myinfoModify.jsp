@@ -108,78 +108,76 @@
    			
    		    	<table class="myinfo_table">
      				<tr class="myinfo_userID">
-     				<th id="myinfo_title" class="dm_page_th1">아이디</th>
-     				<th class="dm_page_th2"><%=rs.getString(1) %></th>
+     				<th id="myinfo_title" class="table_th1">아이디</th>
+     				<th class="table_th2"><%=rs.getString(1) %></th>
      				</tr>
      				
      				<tr class="myinfo_userName">
-     				<th id="myinfo_title" class="dm_page_th1">이름</th>
-     				<th class="dm_page_th2"><%=rs.getString(3) %></th>
+     				<th id="myinfo_title" class="table_th1">이름</th>
+     				<th class="table_th2"><%=rs.getString(3) %></th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title" class="dm_page_th1">현재 비밀번호</th>
-     				<th class="dm_page_th2">
+     				<th id="myinfo_title" class="table_th1">* 현재 비밀번호</th>
+     				<th class="table_th2">
      					<input type="password" placeholder="기존의 비밀번호를 입력해주세요" name="userPassword" maxlength="4" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title" class="dm_page_th1">새 비밀번호</th>
-     				<th class="dm_page_th2">
-     					<input type="password" placeholder="새 비밀번호를 입력해주세요. 바꾸지 않을 경우 기존의 비밀번호 그대로 입력" name="userPassword" maxlength="4" /> 
+     				<th id="myinfo_title" class="table_th1">비밀번호 변경</th>
+     				<th class="table_th2">
+     					<input type="password" placeholder="새 비밀번호를 입력해주세요." name="userNewPassword" maxlength="4" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title" class="dm_page_th1">비밀번호 확인</th>
-     				<th class="dm_page_th2">
-     					<input type="password" placeholder="비밀번호를 다시 입력해주세요" name="userPassword" maxlength="4" /> 
+     				<th id="myinfo_title" class="table_th1">비밀번호 확인</th>
+     				<th class="table_th2">
+     					<input type="password" placeholder="새 비밀번호를 다시 입력해주세요" name="userRePassword" maxlength="4" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userGender">
-     				<th id="myinfo_title" class="dm_page_th1">성별</th>
-     				<th class="dm_page_th2"><%=rs.getString(4) %></th>
+     				<th id="myinfo_title" class="table_th1">성별</th>
+     				<th class="table_th2"><%=rs.getString(4) %></th>
      				</tr>
      				
      				<tr class="myinfo_userLevel">
-     				<th id="myinfo_title" class="dm_page_th1">부수</th>
-     				<th class="dm_page_th2">
+     				<th id="myinfo_title" class="table_th1">* 부수</th>
+     				<th class="table_th2">
      					<select name="userLevel">
-							<option value='' selected>-- 부수 --</option>
-	  						<option value='-3'>-3</option>
-	  						<option value='-2'>-2</option>
-	  						<option value='-1'>-1</option>
-	  						<option value='0'>0</option>
-	  						<option value='1'>1</option>
-	  						<option value='2'>2</option>
-	  						<option value='3'>3</option>
-	  						<option value='4'>4</option>
-	  						<option value='5'>5</option>
-	  						<option value='6'>6</option>
-	  						<option value='7'>7</option>
+	  						<option value='-3' <% if(rs.getString(5).equals("-3")) out.print("selected"); %>>-3</option>
+	  						<option value='-2' <% if(rs.getString(5).equals("-2")) out.print("selected"); %>>-2</option>
+	  						<option value='-1' <% if(rs.getString(5).equals("-1")) out.print("selected"); %>>-1</option>
+	  						<option value='0' <% if(rs.getString(5).equals("0")) out.print("selected"); %>>0</option>
+	  						<option value='1' <% if(rs.getString(5).equals("1")) out.print("selected"); %>>1</option>
+	  						<option value='2' <% if(rs.getString(5).equals("2")) out.print("selected"); %>>2</option>
+	  						<option value='3' <% if(rs.getString(5).equals("3")) out.print("selected"); %>>3</option>
+	  						<option value='4' <% if(rs.getString(5).equals("4")) out.print("selected"); %>>4</option>
+	  						<option value='5' <% if(rs.getString(5).equals("5")) out.print("selected"); %>>5</option>
+	  						<option value='6' <% if(rs.getString(5).equals("6")) out.print("selected"); %>>6</option>
+	  						<option value='7' <% if(rs.getString(5).equals("7")) out.print("selected"); %>>7</option>
 						</select>
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userType">
-     				<th id="myinfo_title" class="dm_page_th1">전형</th>
-     				<th class="dm_page_th2">
+     				<th id="myinfo_title" class="table_th1">* 전형</th>
+     				<th class="table_th2">
      					<select name="userType">
-							<option value='' selected>-- 전형 --</option>
-	  						<option value='오른손잡이 / 드라이브 전형'>오른손잡이 / 드라이브 전형</option>
-	  						<option value='왼손잡이 / 드라이브 전형'>왼손잡이 / 드라이브 전형</option>
-	  						<option value='오른손잡이 / 스트로크 전형'>오른손잡이 / 스트로크 전형</option>
-	  						<option value='왼손잡이 / 스트로크 전형'>왼손잡이 / 스트로크 전형</option>
-	  						<option value='오른손잡이 / 수비수 전형'>오른손잡이 / 수비수 전형</option>
-	  						<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
+	  						<option value='오른손잡이 / 드라이브 전형' <% if(rs.getString(6).equals("오른손잡이 / 드라이브 전형")) out.print("selected"); %>>오른손잡이 / 드라이브 전형</option>
+	  						<option value='왼손잡이 / 드라이브 전형' <% if(rs.getString(6).equals("왼손잡이 / 드라이브 전형")) out.print("selected"); %>>왼손잡이 / 드라이브 전형</option>
+	  						<option value='오른손잡이 / 스트로크 전형' <% if(rs.getString(6).equals("오른손잡이 / 스트로크 전형")) out.print("selected"); %>>오른손잡이 / 스트로크 전형</option>
+	  						<option value='왼손잡이 / 스트로크 전형' <% if(rs.getString(6).equals("왼손잡이 / 스트로크 전형")) out.print("selected"); %>>왼손잡이 / 스트로크 전형</option>
+	  						<option value='오른손잡이 / 수비수 전형' <% if(rs.getString(6).equals("오른손잡이 / 수비수 전형")) out.print("selected"); %>>오른손잡이 / 수비수 전형</option>
+	  						<option value='왼손잡이 / 수비수 전형' <% if(rs.getString(6).equals("왼손잡이 / 수비수 전형")) out.print("selected"); %>>왼손잡이 / 수비수 전형</option>
 						</select>
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userDescription">
-     				<th id="myinfo_title" class="dm_page_th1">내 소개</th>
+     				<th id="myinfo_title" class="table_th1">내 소개</th>
      				<th id="userDescription">
      					<input type="text" placeholder="최대 200자" name="userDescription" maxlength="200">
      				</th>
