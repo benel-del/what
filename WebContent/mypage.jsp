@@ -11,9 +11,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userName"/>
-<jsp:setProperty name="user" property="userGender"/>
-<jsp:setProperty name="user" property="userLevel"/>
 
 <!DOCTYPE html>
 
@@ -131,8 +128,8 @@
        				<tr class="myinfo_userDescription">
        				<th id="myinfo_title">내 소개</th>
        				<th><%
-       				if(rs.getString(6) != null){
-       					out.println(rs.getString(6));
+       				if(rs.getString(7) != null){
+       					out.println(rs.getString(7));
        				} else{ out.println("");}%></th>
        				</tr>
        		<%
