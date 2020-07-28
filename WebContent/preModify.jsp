@@ -65,22 +65,22 @@
         <section>
         
            <div class="dm_page">
-              <form method="post" action="deleteAction.jsp">
+              <form method="post" action="preModifyAction.jsp">
               
                <div class="dm_header">
-                   <a href="delete.jsp">회원 탈퇴 페이지</a>
+                   <a href="modify.jsp">회원 정보 수정</a>
                </div>
    				<br><br>
                <!--로그인 폼-->
                <div class="dm_form">
-					<label class="dm_label">탈퇴하려면 비밀번호를 입력해주세요.</label>
+					<label class="dm_label">정보를 수정하려면 비밀번호를 입력해주세요.</label>
 					<br><br>
                    <input type="password" placeholder="비밀번호 입력" name="userPassword" maxlength="20">
 					<br>
                        
                </div>
                <br>
-               <input type="submit" class="dm_submit-btn" value="탈퇴하기" >
+               <input type="submit" class="dm_submit-btn" value="확인" >
 
            </form>
                

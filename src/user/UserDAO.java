@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
 
 public class UserDAO {
 	private Connection conn;	// db에 접근하게 해주는 객체
@@ -149,6 +148,24 @@ public class UserDAO {
 		
 		return rt;
 	}
-
-}
 	
+	public int preModify(String userID, String userPassword) {
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString(1).equals(userPassword))
+					return 1;
+				else
+					return 0; 	// 비밀번호 불일치
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -2;	// db 오류
+	}
+}

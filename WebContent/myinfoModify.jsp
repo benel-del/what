@@ -71,7 +71,7 @@
        		<div class="myinfoModify_header">
             	<a href="myinfoModify.jsp">회원 정보 수정</a>
             </div>
-			<br><br>
+			<br>
 			
    			<form method="post" action="myinfoModifyAction.jsp">
    		    	<table class="myinfo_table">
@@ -86,7 +86,21 @@
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title">비밀번호</th>
+     				<th id="myinfo_title">현재 비밀번호</th>
+     				<th>
+     					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
+     				</th>
+     				</tr>
+     				
+     				<tr class="myinfo_userPassword">
+     				<th id="myinfo_title">현재 비밀번호</th>
+     				<th>
+     					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
+     				</th>
+     				</tr>
+     				
+     				<tr class="myinfo_userPassword">
+     				<th id="myinfo_title">현재 비밀번호</th>
      				<th>
      					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
      				</th>
@@ -134,7 +148,7 @@
      		</form>
      		
         	<br>
-               <input type="submit" id="delete_submit-btn" value="탈퇴하기" >
+               <input type="submit" class="dm_submit-btn" value="수정하기" >
         	</div>
         </section>
 		<% 
