@@ -382,6 +382,19 @@ delete_form{
     font-weight: 600;
 }
 
+/*MODIFY_SECTION*/
+.myinfoModify_header{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 20px auto;
+}
+	.myinfoModify_header a:link{
+		color: #0F4C81;
+	}
+	.myinfoModify_header a:visited{
+		color: #0F4C81;
+	}
+
 
 /* BOARD COMMON */	/* 다른 게시판에서 사용하지 않으면 board -> notice로 변경 */
 .board_container{

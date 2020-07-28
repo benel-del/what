@@ -67,41 +67,74 @@
         <br>
         <section class="container">
        		<div class="mypage_contents">
-       		    <table class="myinfo_table">
-       				<tr class="myinfo_userID">
-       				<th id="myinfo_title">아이디</th>
-       				<th><%=userID %></th>
-       				</tr>
-       				
-       				<tr class="myinfo_userName">
-       				<th id="myinfo_title">비밀번호</th>
-       				<th></th>
-       				</tr>
-       				
-       				<tr class="myinfo_userGender">
-       				<th id="myinfo_title">성별</th>
-       				<th></th>
-       				</tr>
-       				
-       				<tr class="myinfo_userLevel">
-       				<th id="myinfo_title">부수</th>
-       				<th></th>
-       				</tr>
-       				
-       				<tr class="myinfo_userType">
-       				<th id="myinfo_title">전형</th>
-       				<th></th>
-       				</tr>
-       				
-       				<tr class="myinfo_userDescription">
-       				<th id="myinfo_title">내 소개</th>
-       				<th></th>
-       				</tr>       				
- 		       	
-        		</table>
-        	<a class=link href="myinfoModify.jsp">회원정보수정</a>
-        	|
-        	<a class=link href="delete.jsp">회원탈퇴</a>
+       		
+       		<div class="myinfoModify_header">
+            	<a href="myinfoModify.jsp">회원 정보 수정</a>
+            </div>
+			<br><br>
+			
+   			<form method="post" action="myinfoModifyAction.jsp">
+   		    	<table class="myinfo_table">
+     				<tr class="myinfo_userID">
+     				<th id="myinfo_title">아이디</th>
+     				<th><%=userID %></th>
+     				</tr>
+     				
+     				<tr class="myinfo_userName">
+     				<th id="myinfo_title">이름</th>
+     				<th></th>
+     				</tr>
+     				
+     				<tr class="myinfo_userPassword">
+     				<th id="myinfo_title">비밀번호</th>
+     				<th>
+     					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
+     				</th>
+     				</tr>
+     				
+     				<tr class="myinfo_userGender">
+     				<th id="myinfo_title">성별</th>
+     				<th></th>
+     				</tr>
+     				
+     				<tr class="myinfo_userLevel">
+     				<th id="myinfo_title">부수</th>
+     				<th>
+     					<select name="userLevel">
+							<option value='' selected>-- 부수 --</option>
+	  						<option value='-3'>-3</option>
+	  						<option value='-2'>-2</option>
+	  						<option value='-1'>-1</option>
+	  						<option value='0'>0</option>
+	  						<option value='1'>1</option>
+	  						<option value='2'>2</option>
+	  						<option value='3'>3</option>
+	  						<option value='4'>4</option>
+	  						<option value='5'>5</option>
+	  						<option value='6'>6</option>
+	  						<option value='7'>7</option>
+						</select>
+     				</th>
+     				</tr>
+     				
+     				<tr class="myinfo_userType">
+     				<th id="myinfo_title">전형</th>
+     				<th>
+     					<input type="text" placeholder="??" name="userType" maxlength="10">
+     				</th>
+     				</tr>
+     				
+     				<tr class="myinfo_userDescription">
+     				<th id="myinfo_title">내 소개</th>
+     				<th>
+     					<input type="text" placeholder="최대 30자" name="userIntro" maxlength="30">
+     				</th>
+     				</tr>       				
+     			</table>
+     		</form>
+     		
+        	<br>
+               <input type="submit" id="delete_submit-btn" value="탈퇴하기" >
         	</div>
         </section>
 		<% 

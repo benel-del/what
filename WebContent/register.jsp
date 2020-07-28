@@ -56,9 +56,9 @@
 				<br>
 				<label class="register_label">ID는 8~15자의 영문 소문자 혹은 숫자만 입력 가능합니다.</label>
 				<br>
-				<input type="password" placeholder="비밀번호 입력(숫자 4자리)" name="userPassword" maxlength="20">
+				<input type="password" placeholder="비밀번호 입력(숫자 4자리)" name="userPassword" maxlength="4">
 				<br>
-				<input type="password" placeholder="비밀번호 확인(숫자 4자리)" name="userRePassword" maxlength="20">
+				<input type="password" placeholder="비밀번호 확인(숫자 4자리)" name="userRePassword" maxlength="4">
 				<br>
 				<label class="register_label" id="re_password"></label>
 				<input type="text" placeholder="이름 입력" name="userName" maxlength="20">
