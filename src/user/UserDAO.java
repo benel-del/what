@@ -148,30 +148,6 @@ public class UserDAO {
 		
 		return rt;
 	}
+
 }
-	/*
-	public int delete(String userID, String userPassword) {
-		int rt = -1;
-		String SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?";
-		try {
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  userID);
-			pstmt.setString(2,  userPassword);
-			pstmt.executeUpdate();
-
-			rt = 1;	// Ε»Επ ΌΊ°ψ
-
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(rs!=null)	rs.close();
-				if(pstmt!=null)	pstmt.close();
-				if(conn!=null)	conn.close();
-			} catch(Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return rt;
-	}
-*/
+	

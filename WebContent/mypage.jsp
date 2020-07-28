@@ -25,8 +25,7 @@
 
 	<% //userID 존재 여부
 	String userID = null;
-	String userName = null;
-
+	
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
@@ -43,10 +42,9 @@
 			script.println("alert('로그인 후 이용가능합니다.')");
 			script.println("location.href = 'login.jsp'");
 			script.println("</script>");
-           	} else {
-           		userName = (String) session.getAttribute("userName");
+           	} else {    
 		%>
-			<!--로그인, 회원가입 버튼-->
+			<!--로그아웃, 마이페이지 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃</a>
                 |
@@ -79,10 +77,10 @@
        				</tr>
        				
        				<tr class="myinfo_userName">
-       				<th id="myinfo_title">비밀번호</th>
-       				<th>***</th>
+       				<th id="myinfo_title">이름</th>
+       				<th></th>
        				</tr>
-       				
+
        				<tr class="myinfo_userGender">
        				<th id="myinfo_title">성별</th>
        				<th><% %></th>
@@ -90,12 +88,12 @@
        				
        				<tr class="myinfo_userLevel">
        				<th id="myinfo_title">부수</th>
-       				<th></th>
+       				<th><%%></th>
        				</tr>
        				
        				<tr class="myinfo_userType">
        				<th id="myinfo_title">전형</th>
-       				<th></th>
+       				<th><%%></th>
        				</tr>
        				
        				<tr class="myinfo_userDescription">
