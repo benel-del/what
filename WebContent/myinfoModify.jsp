@@ -179,7 +179,7 @@
      				<tr class="myinfo_userDescription">
      				<th id="myinfo_title" class="table_th1">내 소개</th>
      				<th id="userDescription">
-     					<input type="text" placeholder="최대 200자" name="userDescription" maxlength="200">
+     					<input type="text" name="userDescription" maxlength="200" <% if(rs.getString(7) != null) out.print("placeholder=\""+rs.getString(7)+"\""); else out.print("placeholder=\"최대 200자\""); %>>
      				</th>
      				</tr>    
      				
