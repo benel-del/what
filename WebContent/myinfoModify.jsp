@@ -1,3 +1,9 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
@@ -5,7 +11,9 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userPassword" />
+<jsp:setProperty name="user" property="userName"/>
+<jsp:setProperty name="user" property="userGender"/>
+<jsp:setProperty name="user" property="userLevel"/>
 
 <!DOCTYPE html>
 
@@ -65,10 +73,33 @@
             </ul>
         </nav>
         <br>
+        
+        <%
+            // 1. JDBC 드라이버 로딩
+			Class.forName("com.mysql.jdbc.Driver"); 
+        	String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
+			String dbID = "root";
+			String dbPassword = "whatpassword0706!";
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+ 
+            try {                
+                String query = "select * from user where userID='"+userID+"'";
+                // 2. 데이터베이스 커넥션 생성
+                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+                // 3. Statement 생성
+                stmt = conn.createStatement();
+                // 4. 쿼리 실행
+                rs = stmt.executeQuery(query);
+                // 5. 쿼리 실행 결과 출력
+                while (rs.next()) {
+        %>
+        
         <section class="container">
-       		<div class="mypage_contents">
+       		<div class="dm_page">
        		
-       		<div class="myinfoModify_header">
+       		<div class="dm_header">
             	<a href="myinfoModify.jsp">회원 정보 수정</a>
             </div>
 			<br>
@@ -76,44 +107,44 @@
    			<form method="post" action="myinfoModifyAction.jsp">
    		    	<table class="myinfo_table">
      				<tr class="myinfo_userID">
-     				<th id="myinfo_title">아이디</th>
-     				<th><%=userID %></th>
+     				<th id="myinfo_title" class="dm_page_th1">아이디</th>
+     				<th class="dm_page_th2"><%=rs.getString(1) %></th>
      				</tr>
      				
      				<tr class="myinfo_userName">
-     				<th id="myinfo_title">이름</th>
-     				<th></th>
+     				<th id="myinfo_title" class="dm_page_th1">이름</th>
+     				<th class="dm_page_th2"><%=rs.getString(3) %></th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title">현재 비밀번호</th>
-     				<th>
-     					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
+     				<th id="myinfo_title" class="dm_page_th1">현재 비밀번호</th>
+     				<th class="dm_page_th2">
+     					<input type="password" placeholder="기존의 비밀번호를 입력해주세요" name="userPassword" maxlength="4" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title">현재 비밀번호</th>
-     				<th>
-     					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
+     				<th id="myinfo_title" class="dm_page_th1">새 비밀번호</th>
+     				<th class="dm_page_th2">
+     					<input type="password" placeholder="새 비밀번호를 입력해주세요. 바꾸지 않을 경우 기존의 비밀번호 그대로 입력" name="userPassword" maxlength="4" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title">현재 비밀번호</th>
-     				<th>
-     					<input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" /> 
+     				<th id="myinfo_title" class="dm_page_th1">비밀번호 확인</th>
+     				<th class="dm_page_th2">
+     					<input type="password" placeholder="비밀번호를 다시 입력해주세요" name="userPassword" maxlength="4" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userGender">
-     				<th id="myinfo_title">성별</th>
-     				<th></th>
+     				<th id="myinfo_title" class="dm_page_th1">성별</th>
+     				<th class="dm_page_th2"><%=rs.getString(4) %></th>
      				</tr>
      				
      				<tr class="myinfo_userLevel">
-     				<th id="myinfo_title">부수</th>
-     				<th>
+     				<th id="myinfo_title" class="dm_page_th1">부수</th>
+     				<th class="dm_page_th2">
      					<select name="userLevel">
 							<option value='' selected>-- 부수 --</option>
 	  						<option value='-3'>-3</option>
@@ -132,18 +163,53 @@
      				</tr>
      				
      				<tr class="myinfo_userType">
-     				<th id="myinfo_title">전형</th>
-     				<th>
-     					<input type="text" placeholder="??" name="userType" maxlength="10">
+     				<th id="myinfo_title" class="dm_page_th1">전형</th>
+     				<th class="dm_page_th2">
+     					<select name="userType">
+							<option value='' selected>-- 전형 --</option>
+	  						<option value='오른손잡이 / 드라이브 전형'>오른손잡이 / 드라이브 전형</option>
+	  						<option value='왼손잡이 / 드라이브 전형'>왼손잡이 / 드라이브 전형</option>
+	  						<option value='오른손잡이 / 스트로크 전형'>오른손잡이 / 스트로크 전형</option>
+	  						<option value='왼손잡이 / 스트로크 전형'>왼손잡이 / 스트로크 전형</option>
+	  						<option value='오른손잡이 / 수비수 전형'>오른손잡이 / 수비수 전형</option>
+	  						<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
+						</select>
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userDescription">
-     				<th id="myinfo_title">내 소개</th>
-     				<th>
-     					<input type="text" placeholder="최대 30자" name="userIntro" maxlength="30">
+     				<th id="myinfo_title" class="dm_page_th1">내 소개</th>
+     				<th id="userDescription">
+     					<input type="text" placeholder="최대 200자" name="userDescription" maxlength="200">
      				</th>
-     				</tr>       				
+     				</tr>    
+     				
+     				<%
+                }
+            } catch (SQLException ex) {
+                out.println(ex.getMessage());
+                ex.printStackTrace();
+            } finally {
+                // 6. 사용한 Statement 종료
+                if (rs != null)
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                    }
+                if (stmt != null)
+                    try {
+                        stmt.close();
+                    } catch (SQLException ex) {
+                    }
+                // 7. 커넥션 종료
+                if (conn != null)
+                    try {
+                        conn.close();
+                    } catch (SQLException ex) {
+                    }
+            }
+       		%>   	  		
+       		   				
      			</table>
      		</form>
      		
