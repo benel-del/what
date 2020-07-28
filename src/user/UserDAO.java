@@ -69,19 +69,19 @@ public class UserDAO {
 		
 		try {
 			// ±ÛÀÚ¼ö Á¦ÇÑ
-			if((id.length() < 8 || id.length() > 15) || (pw.length() < 8 || pw.length() > 15))
+			if((id.length() < 8 || id.length() > 15) || string_pattern1(id) == -1)
 				return -1;
-			if(string_pattern1(id) == -1 || string_pattern1(pw) == -1)
-				return -1;
-			if(string_pattern2(name) == -1)
+			if((pw.length() != 4) || !Pattern.matches("[0-9]+", pw))
 				return -2;
+			if(string_pattern2(name) == -1)
+				return -3;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return 1;	// Á¤»ó
 	}
 	
-	private int string_pattern1(String str) {	// id, pw
+	private int string_pattern1(String str) {	// id
 		int i;
 		
 		for(i = 0; i < str.length() && (Character.isDigit(str.charAt(i)) || str.charAt(i) >= 'a' && str.charAt(i) <= 'z'); i++) ;
@@ -93,7 +93,7 @@ public class UserDAO {
 	}
 	
 	private int string_pattern2(String str) {	// name
-		if(Pattern.matches(".*[°¡-ÆR]+.*", str))
+		if(Pattern.matches("[°¡-ÆR]+", str))
 			return 0;
 		else
 			return -1;
