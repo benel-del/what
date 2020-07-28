@@ -168,4 +168,5 @@ public class UserDAO {
 		}
 		return -2;	// db ¿À·ù
 	}
+	
 }
