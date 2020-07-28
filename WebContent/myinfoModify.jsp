@@ -148,7 +148,7 @@
      		</form>
      		
         	<br>
-               <input type="submit" id="delete_submit-btn" value="수정하기" >
+               <input type="submit" class="dm_submit-btn" value="수정하기" >
         	</div>
         </section>
 		<% 

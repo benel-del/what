@@ -64,23 +64,23 @@
 
         <section>
         
-           <div class="modify_page">
+           <div class="dm_page">
               <form method="post" action="preModifyAction.jsp">
               
-               <div class="modify_header">
+               <div class="dm_header">
                    <a href="modify.jsp">회원 정보 수정</a>
                </div>
    				<br><br>
                <!--로그인 폼-->
-               <div class="modify_form">
-					<label class="modify_label">정보를 수정하려면 비밀번호를 입력해주세요.</label>
+               <div class="dm_form">
+					<label class="dm_label">정보를 수정하려면 비밀번호를 입력해주세요.</label>
 					<br><br>
                    <input type="password" placeholder="비밀번호 입력" name="userPassword" maxlength="20">
 					<br>
                        
                </div>
                <br>
-               <input type="submit" id="modify_submit-btn" value="확인" >
+               <input type="submit" class="dm_submit-btn" value="확인" >
 
            </form>
                

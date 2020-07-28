@@ -157,10 +157,12 @@ public class UserDAO {
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.getString(1).equals(userPassword))
-				return 1;
-			else
-				return 0; 	// 비밀번호 불일치
+			if(rs.next()) {
+				if(rs.getString(1).equals(userPassword))
+					return 1;
+				else
+					return 0; 	// 비밀번호 불일치
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

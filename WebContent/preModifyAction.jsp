@@ -49,7 +49,7 @@
 			script.println("location.href = 'myinfoModify.jsp'");
 			script.println("</script>");
 	    }
-		else if (result == 0){
+		else{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('비밀번호가 틀립니다.')");
