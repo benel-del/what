@@ -1,3 +1,9 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
@@ -68,45 +74,96 @@
             </ul>
         </nav>
         <br>
+        
+         <%
+            // 1. JDBC 드라이버 로딩
+			Class.forName("com.mysql.jdbc.Driver"); 
+        	String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
+			String dbID = "root";
+			String dbPassword = "whatpassword0706!";
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+ 
+            try {                
+                String query = "select * from user where userID='"+userID+"'";
+                // 2. 데이터베이스 커넥션 생성
+                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+                // 3. Statement 생성
+                stmt = conn.createStatement();
+                // 4. 쿼리 실행
+                rs = stmt.executeQuery(query);
+                // 5. 쿼리 실행 결과 출력
+                while (rs.next()) {
+        %>
+        
         <section class="container">
        		<div class="mypage_contents">
        		    <table class="myinfo_table">
        				<tr class="myinfo_userID">
        				<th id="myinfo_title">아이디</th>
-       				<th><%=userID %></th>
+       				<th><%=rs.getString(1) %></th>
        				</tr>
        				
        				<tr class="myinfo_userName">
        				<th id="myinfo_title">이름</th>
-       				<th></th>
+       				<th><%=rs.getString(3) %></th>
        				</tr>
 
        				<tr class="myinfo_userGender">
        				<th id="myinfo_title">성별</th>
-       				<th><% %></th>
+       				<th><%=rs.getString(4) %></th>
        				</tr>
        				
        				<tr class="myinfo_userLevel">
        				<th id="myinfo_title">부수</th>
-       				<th><%%></th>
+       				<th><%=rs.getString(5) %></th>
        				</tr>
        				
        				<tr class="myinfo_userType">
        				<th id="myinfo_title">전형</th>
-       				<th><%%></th>
+       				<th><%=rs.getString(6) %></th>
        				</tr>
        				
        				<tr class="myinfo_userDescription">
        				<th id="myinfo_title">내 소개</th>
-       				<th></th>
-       				</tr>       				
- 		       	
+       				<th><%=rs.getString(7) %></th>
+       				</tr>     
+       		<%
+                }
+            } catch (SQLException ex) {
+                out.println(ex.getMessage());
+                ex.printStackTrace();
+            } finally {
+                // 6. 사용한 Statement 종료
+                if (rs != null)
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                    }
+                if (stmt != null)
+                    try {
+                        stmt.close();
+                    } catch (SQLException ex) {
+                    }
+                // 7. 커넥션 종료
+                if (conn != null)
+                    try {
+                        conn.close();
+                    } catch (SQLException ex) {
+                    }
+            }
+       		%>   	  				
+ 		  		       	
+ 		    
         		</table>
         	<a class=link href="myinfoModify.jsp">회원정보수정</a>
         	|
         	<a class=link href="delete.jsp">회원탈퇴</a>
         	</div>
         </section>
+        
+        
 		<% 
            	}
        	%>

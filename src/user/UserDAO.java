@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 public class UserDAO {
 	private Connection conn;	// db에 접근하게 해주는 객체
