@@ -11,7 +11,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userPassword" />
 <jsp:setProperty name="user" property="userName"/>
 <jsp:setProperty name="user" property="userGender"/>
 <jsp:setProperty name="user" property="userLevel"/>
@@ -157,7 +156,7 @@
  		  		       	
  		    
         		</table>
-        	<a class=link href="myinfoModify.jsp">회원정보수정</a>
+        	<a class=link href="preModify.jsp">회원정보수정</a>
         	|
         	<a class=link href="delete.jsp">회원탈퇴</a>
         	</div>
