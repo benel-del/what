@@ -32,8 +32,8 @@
         %>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="login.jsp">로그인</a>
-                |
+                <a class="link" href="login.jsp">로그인 |</a>
+                
                 <a class="link" href="register.jsp">회원가입</a>
             </div>
             <br>
@@ -42,8 +42,8 @@
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+                
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
@@ -57,15 +57,17 @@
             </div>
         </header>
 
-        <nav class="menu">
-            <ul>
+        <div class="menu">
+        	<input type="checkbox" id="toggle">
+        	<label for="toggle">메뉴</label>
+            <ul id="nav">
                 <li><a href="notice.jsp">공지사항</a></li>
                 <li><a href="result.jsp">결과게시판</a></li>
                 <li><a href="rank.jsp">랭킹게시판</a></li>
                 <li><a href="review.jsp">후기게시판</a></li>
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
-        </nav>
+        </div>
         <br>
 
         <section>
@@ -107,11 +109,13 @@
                 <!--용품점 사이트 링크-->
                 <div id="index_shop">
                     <div class="index_title">탁구용품 사러가기</div>
-                    <br />⊙ 티밸런스
+                  	⊙ 티밸런스
+                    <br>
                     <a class="index_shop" href="https://smartstore.naver.com/ttbalance"><img src="https://yt3.ggpht.com/a/AATXAJwt5EX6O6G2XGnhY04m0RmmZKs2WS9t3GXJUcXlqg=s144-c-k-c0xffffffff-no-rj-mo" title="티밸런스 바로가기" /></a>
+              
                     <br />
-                    <br />⊙ 프롬탁구
-                    <a class="index_shop" href="http://fromtakgu.com/"><img src="from.png" title="프롬탁구 바로가기" /></a>
+              		 ⊙ 프롬탁구<br>
+                    <a class="index_shop"href="http://fromtakgu.com/"><img src="from.png" title="프롬탁구 바로가기" /></a>
                 </div>
 
                 <!--youtube강좌 영상 & 링크-->
@@ -120,15 +124,15 @@
                     <div id="index_TBAL-avi">
                         <a class="link" href="https://www.youtube.com/playlist?list=PL8nQm58dOh1hD9mVtoeMI8Ni3pL94fUFH" target="_blank">▶ 윤홍균's 따라잡기</a>
                         <br /><br />
-                        <div><iframe src="https://www.youtube.com/embed/1NRnjmixGIg"></iframe></div>
-                        <div><iframe src="https://www.youtube.com/embed/GOc43m2ke5g"></iframe></div>
+                        <iframe src="https://www.youtube.com/embed/1NRnjmixGIg"></iframe>
+                        <iframe src="https://www.youtube.com/embed/GOc43m2ke5g"></iframe>
                     </div>
 
                     <div id="index_FROM-avi">
-                        <a class="link" href="https://www.youtube.com/playlist?list=PL-XIrIGMCEwlnM-W34it_o8vIsS-qZZ5K" target="_blank">▶ 효영핑퐁 HOW TO PINGPONG</a>
+                        <a class="link" href="https://www.youtube.com/playlist?list=PL-XIrIGMCEwlnM-W34it_o8vIsS-qZZ5K" target="_blank">▶ HOW TO PINGPONG</a>
                         <br /><br />
-                        <div><iframe src="https://www.youtube.com/embed/HszbKMS46GI"></iframe></div>
-                        <div><iframe src="https://www.youtube.com/embed/xwkbNEzCeVU"></iframe></div>
+                        <iframe src="https://www.youtube.com/embed/HszbKMS46GI"></iframe>
+                        <iframe src="https://www.youtube.com/embed/xwkbNEzCeVU"></iframe>
                     </div>
                 </div>
 
@@ -136,8 +140,7 @@
         </section>
 
         <footer>
-        <br />
-            회장 : 전성빈 tel.010-5602-4112<br />총무 : 정하영 tel.010-9466-9742
+        	    회장 : 전성빈 tel.010-5602-4112<br />총무 : 정하영 tel.010-9466-9742
             <br /><br /><br />
         </footer>
     </div>

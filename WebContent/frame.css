@@ -1,10 +1,14 @@
 
+.clearfix {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+@media (max-width: 1500px) {
 
 /* RESET_COMMON */
-body{
-    min-width: 1190px;
-    min-height: 1480px;
-}
+body{}
 *{
     margin: 0;
     padding: 0;
@@ -26,11 +30,11 @@ section{
 }
 .link:link {
     background-color: none;
-    color: black;
+    color: #0F4C81;
 }
 .link:visited {
     background-color: none;
-    color: black;
+    color: #0F4C81;
 }
 .link:hover:not(.active) {
     border-radius: 0.4em;
@@ -40,24 +44,6 @@ section{
 	padding : 10px;
 }
 
-/* 화면 너비 0 ~ 1200px */
-@media (max-width: 1220px) {
-}
-/* 화면 너비 0 ~ 768px */
-@media (max-width: 768px) {
-}
-/* 화면 너비 0 ~ 480px */
-@media (max-width: 480px) {
-    header {
-        height: 300px;
-    }
-}
-
-.clearfix {
-    content: '';
-    display: block;
-    clear: both;
-}
 
 /* HEADER */
 header{ /*common*/
@@ -106,6 +92,12 @@ header{ /*common*/
     text-align: center;
     background-color:#0F4C81;
 }
+.menu label{
+	display:none;
+}
+.menu input{
+	display:none;
+}
     .menu li {
         display: inline;
     }
@@ -120,7 +112,7 @@ header{ /*common*/
     .menu a {
         display: inline-block;
         line-height: 50px;
-        width: 150px;
+        width: 140px;
         padding: 0 15px;
         color: white;
     }
@@ -152,7 +144,7 @@ footer {
     width: 30%;
     height: 100%;
     float: left;
-    margin: 0px 10px 10px 0px;
+    margin: 0px 5px;
     padding: 10px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
@@ -194,17 +186,16 @@ footer {
 #index_inform {
     width: 30%;
     height: 100%;
+    margin: 0px 5px;
     float: left;
-    margin: 0px 0px 10px 0px;
     padding: 10px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
 #index_rank {
-    width: 38%;
+    width: 37%;
     height: 100%;
     float: right;
-    margin: 0px 0px 10px 10px;
     padding: 10px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
@@ -219,18 +210,18 @@ footer {
     width: 30%;
     height: 100%;
     float: left;
-    margin: 0px 5px 10px 0px;
+    margin: 0px 5px;
     padding: 5px 15px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
 	.index_shop img {
     margin: 10px 20px;
-    height: 150px;
-    width: 200px;
+    height:35%;
+    width: 90%;
 }
 #index_youtube {
-    width: 69%;
+    width: 68%;
     height: 100%;
     float: right;
     margin: 0px 0px 10px 5px;
@@ -240,22 +231,22 @@ footer {
 }
     #index_youtube iframe {
         margin: 2px 10px;
-        height: 170px;
-        width: 280px;
+        height: 40%;
+        width: 95%;
     }
 #index_TBAL-avi {
     height: 85%;
-    width: 48%;
+    width: 47%;
     float: left;
-    margin: 10px 5px;
+    margin: 5px 5px;
     padding: 10px;
     border: 1px dashed #0F4C81;
 }
 #index_FROM-avi {
     height: 85%;
-    width: 48%;
+    width: 47%;
     float: right;
-    margin: 10px 5px;
+    margin: 5px 5px;
     padding: 10px;
     border: 1px dashed #0F4C81;
 }
@@ -612,4 +603,149 @@ input[id*="answer"] + label + div p{
 }
 #team_userType{
 	width:270px;
+}
+
+}
+
+
+
+
+
+
+
+/* 화면 너비 0 ~ 768px */
+@media (max-width: 768px) {	
+body{height:2000px;}
+
+/* HEADER */
+header{ /*common*/
+    height:15%;
+}
+header h1{
+    font-size: 30px;
+}
+#title { /*title*/
+    height: 50px;
+}
+    
+/* FOOTER */
+footer {
+    height: 100px;
+    font-size: 10px;
+	overflow:auto;
+}
+
+/*MENU*/
+.menu a{
+	width:90px;
+	font-size:11px;
+}
+
+/* INDEX_SECTION */
+
+#index_top {
+    width: 100%;
+    height:900px;
+}
+#index_notice {
+    width: 100%;
+    height: 50%;
+}
+#index_notice-inform {
+    height: 75%;
+}
+
+#index_notice-btn a {/*button in notice area*/      
+    background-color: #0F4C81;
+    border-radius: 1em;
+    margin: auto auto;
+    height: 15px;
+    width: auto;
+    font-size: 15px;
+}
+
+#index_inform {
+   display:none;
+}
+
+#index_rank {
+    width: 100%;
+    height: 50%;
+}
+
+#index_bottom {
+    height:800px;
+}
+
+#index_shop {
+    display:none;
+}
+#index_youtube {
+    width: 100%;
+    height: 95%;
+    padding: 5px 5px;
+}
+
+    #index_youtube iframe {
+        margin: 2px 5px;
+        height: 40%;
+        width: 95%;
+    }
+
+#index_TBAL-avi {
+    height: 46%;
+    width: 95%;
+    margin: 5px 10px;
+    padding: 5px;
+}
+#index_FROM-avi {
+   	height:46%;
+    width: 95%;
+}
+	
+}
+
+/* 화면 너비 0 ~ 480px */
+@media (max-width: 480px) {
+#service a{display:none;}
+.menu {
+    height: 50px;
+    background-color:white;
+}
+
+	input [id*="toggle"]{
+	display:none;}
+	
+	input[id*="toggle"]:checked + label + ul{
+	max-height:200px;}
+	
+	#toggle checked + #nav{
+	display:block;}
+	
+input[id*="toggle"] + label{
+	display:block;
+	margin-top:0px;
+	padding:10px;
+	border:1px solid #0F4C81;
+	color:white;
+	font-weight:900;
+	background: #0F4C81;
+	cursor:pointer;
+	position:relative;
+}
+
+input[id*="toggle"] + label + ul{
+	max-height:0px;
+	transition: all .35s;
+	overflow: hidden;
+	background: #0F4C81;
+	font-size:14px;
+	font-weight:700;
+}
+
+input[id*="toggle"] + label + li a{
+	display:inline-block;
+	padding:30px;
+	width:100px;	
+}
 }
