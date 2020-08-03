@@ -30,12 +30,18 @@
         <header>
        <%
         	if(userID == null){
-            PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인 후 이용가능합니다.')");
-			script.println("location.href = 'login.jsp'");
-			script.println("</script>");
-           	} else {
+	            PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('로그인 후 이용가능합니다.')");
+				script.println("location.href = 'login.jsp'");
+				script.println("</script>");
+           	} else if(userID.equals("admin") == true){
+           		PrintWriter script = response.getWriter();
+    			script.println("<script>");
+    			script.println("alert('관리자는 접근 불가.')");
+    			script.println("history.back()");
+    			script.println("</script>");
+           	} else{
 		%>
             <!--로그인, 회원가입 버튼-->
             <div id="service">

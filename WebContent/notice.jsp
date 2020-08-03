@@ -41,18 +41,28 @@
         %>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="login.jsp">로그인</a>
-                |
+                <a class="link" href="login.jsp">로그인 |</a>
+                
                 <a class="link" href="register.jsp">회원가입</a>
             </div>
             <br>
+        <% 
+           	} else if(userID.equals("admin") == true) {
+		%>
+			<!--로그인, 회원가입 버튼-->
+            <div id="service">
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+
+                <a class="link" href="admin.jsp">관리자 페이지</a>
+           </div>
+            <br>		
         <% 
            	} else {
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+                
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
@@ -83,10 +93,15 @@
         <section class="container">
             <div class="board_subtitle">
             	공지게시판
-            	
-            	<div class="board_write-btn">
+            	<% try{
+            		%>
+            	<div class="board_write-btn" <% if(userID.equals("admin") == false) out.print("style=\"visibility: hidden;\""); %>>
             		<a href="notice_write.jsp">글쓰기</a>
             	</div>
+            	<%
+            		} catch(Exception e){
+            			e.printStackTrace();
+            		}%>
             </div>
 
             <div class="board_container">
