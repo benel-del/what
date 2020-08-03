@@ -19,6 +19,13 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	if(userID.equals("admin") == false){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('관리자만 접근 가능합니다.')");
+		script.println("history.back()");
+		script.println("</script>");
+	}
 	%>
 	
     <div id="wrapper">
@@ -26,23 +33,13 @@
         <br>
         <header>
         <%
-        	if(userID == null){
+        	if(userID.equals("admin") == true){
         %>
-            <!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="login.jsp">로그인</a>
-                |
-                <a class="link" href="register.jsp">회원가입</a>
-            </div>
-            <br>
-        <% 
-           	} else {
-		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃</a>
                 |
-                <a class="link" href="mypage.jsp">마이페이지</a>
+                <a class="link" href="mypage.jsp">관리자 페이지</a>
            </div>
             <br>		
 		<% 

@@ -42,20 +42,29 @@
         <header>
         <%
         	if(userID == null){
-            PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인 후 이용가능합니다.')");
-			script.println("location.href = 'login.jsp'");
-			script.println("</script>");
+	            PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('로그인 후 이용 가능합니다.')");
+				script.println("history.back()");
+				script.println("</script>");
+           	} else if(userID.equals("admin") == true){
+             	PrintWriter script = response.getWriter();
+      			script.println("<script>");
+      			script.println("alert('관리자는 접근 불가.')");
+      			script.println("history.back()");
+      			script.println("</script>");
            	} else {
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+                
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
+		<% 
+           	}
+       	%>	
             
              <!--사이트 이름-->
             <div id="title">
@@ -182,6 +191,7 @@
      				<th id="myinfo_title" class="table_th1">내 소개</th>
      				<th id="userDescription">
      					<input type="text" name="userDescription" maxlength="200" <% if(rs.getString(7) != null) out.print("placeholder=\""+rs.getString(7)+"\""); else out.print("placeholder=\"최대 200자\""); %>>
+     					<textarea> </textarea>
      				</th>
      				</tr>    
      				
@@ -217,10 +227,6 @@
         	</div>
         	</form>
         </section>
-		<% 
-           	}
-       	%>
-
 
         <footer>
         <br />

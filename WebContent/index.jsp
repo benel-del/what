@@ -38,6 +38,16 @@
             </div>
             <br>
         <% 
+           	} else if(userID.equals("admin") == true) {
+		%>
+			<!--로그인, 회원가입 버튼-->
+            <div id="service">
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+
+                <a class="link" href="admin.jsp">관리자 페이지</a>
+           </div>
+            <br>		
+        <% 
            	} else {
 		%>
 			<!--로그인, 회원가입 버튼-->
