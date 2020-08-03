@@ -133,19 +133,18 @@
 
        				<tr class="myinfo_userType">
        				<th id="myinfo_title" class="table_th1">전형</th>
-       				<th class="table_th2"><%
-       				if(rs.getString(6) != null){
-       					out.println(rs.getString(6));
-       				} else{ out.println("");}%></th>
+       				<th class="table_th2"><%=rs.getString(6) %></th>
 
        				</tr>
 
        				<tr class="myinfo_userDescription">
        				<th id="myinfo_title" class="table_th1">내 소개</th>
-       				<th id="userDescription"><%
-       				if(rs.getString(7) != null){
-       					out.println(rs.getString(7));
-       				} else{ out.println("");}%></th>
+       				<th id="userDescription">
+       					<textarea readonly><%
+       					if(rs.getString(7) != null){
+	       					out.println(rs.getString(7));
+	       				} else{ out.println("");}%></textarea>
+       				</th>
        				</tr>
        		<%
                 }

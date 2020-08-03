@@ -155,7 +155,7 @@
      				</tr>
      				
      				<tr class="myinfo_userLevel">
-     				<th id="myinfo_title" class="table_th1">* 부수</th>
+     				<th id="myinfo_title" class="table_th1">부수</th>
      				<th class="table_th2">
      					<select name="userLevel">
 	  						<option value='-3' <% if(rs.getString(5).equals("-3")) out.print("selected"); %>>-3</option>
@@ -174,7 +174,7 @@
      				</tr>
      				
      				<tr class="myinfo_userType">
-     				<th id="myinfo_title" class="table_th1">* 전형</th>
+     				<th id="myinfo_title" class="table_th1">전형</th>
      				<th class="table_th2">
      					<select name="userType">
 	  						<option value='오른손잡이 / 드라이브 전형' <% if(rs.getString(6).equals("오른손잡이 / 드라이브 전형")) out.print("selected"); %>>오른손잡이 / 드라이브 전형</option>
@@ -190,8 +190,7 @@
      				<tr class="myinfo_userDescription">
      				<th id="myinfo_title" class="table_th1">내 소개</th>
      				<th id="userDescription">
-     					<input type="text" name="userDescription" maxlength="200" <% if(rs.getString(7) != null) out.print("placeholder=\""+rs.getString(7)+"\""); else out.print("placeholder=\"최대 200자\""); %>>
-     					<textarea> </textarea>
+     					<textarea name="userDescription" maxlength="200" <% if(rs.getString(7) != null) out.print("placeholder=\""+rs.getString(7)+"\""); else out.print("placeholder=\"최대 200자\""); %>></textarea>
      				</th>
      				</tr>    
      				
