@@ -76,7 +76,7 @@
             	공지게시판
             	
             	<div class="board_write-btn">
-            		<a href="notcie_write.jsp">글쓰기</a>
+            		<a href="notice_write.jsp">글쓰기</a>
             	</div>
             </div>
 
