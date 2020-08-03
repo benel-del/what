@@ -30,12 +30,18 @@
         <header>
        <%
         	if(userID == null){
-            PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인 후 이용가능합니다.')");
-			script.println("location.href = 'login.jsp'");
-			script.println("</script>");
-           	} else {
+	            PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('로그인 후 이용가능합니다.')");
+				script.println("location.href = 'login.jsp'");
+				script.println("</script>");
+           	} else if(userID.equals("admin") == true){
+           		PrintWriter script = response.getWriter();
+    			script.println("<script>");
+    			script.println("alert('관리자는 접근 불가.')");
+    			script.println("history.back()");
+    			script.println("</script>");
+           	} else{
 		%>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
@@ -51,15 +57,17 @@
             </div>
         </header>
 
-        <nav class="menu">
-            <ul>
+         <div class="menu">
+        	<input type="checkbox" id="toggle">
+        	<label for="toggle">메뉴</label>
+            <ul id="nav">
                 <li><a href="notice.jsp">공지사항</a></li>
                 <li><a href="result.jsp">결과게시판</a></li>
                 <li><a href="rank.jsp">랭킹게시판</a></li>
                 <li><a href="review.jsp">후기게시판</a></li>
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
-        </nav>
+        </div>
         <br>
 
         <section>

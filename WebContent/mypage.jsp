@@ -11,9 +11,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userName"/>
-<jsp:setProperty name="user" property="userGender"/>
-<jsp:setProperty name="user" property="userLevel"/>
 
 <!DOCTYPE html>
 
@@ -44,34 +41,49 @@
         	if(userID == null){
             PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('로그인 후 이용가능합니다.')");
-			script.println("location.href = 'login.jsp'");
+			script.println("alert('로그인 후 이용 가능합니다.')");
+			script.println("history.back()");
 			script.println("</script>");
+           	} else if(userID.equals("admin") == true) {
+		%>
+			<!--로그인, 회원가입 버튼-->
+            <div id="service">
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+
+                <a class="link" href="admin.jsp">관리자 페이지</a>
+           </div>
+            <br>		
+        <% 
            	} else {
 		%>
-			<!--로그아웃, 마이페이지 버튼-->
+			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+                
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
-            <br>
-
+            <br>		
+		<% 
+           	}
+       	%>
+       	
              <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
         </header>
 
-        <nav class="menu">
-            <ul>
+         <div class="menu">
+        	<input type="checkbox" id="toggle">
+        	<label for="toggle">메뉴</label>
+            <ul id="nav">
                 <li><a href="notice.jsp">공지사항</a></li>
                 <li><a href="result.jsp">결과게시판</a></li>
                 <li><a href="rank.jsp">랭킹게시판</a></li>
                 <li><a href="review.jsp">후기게시판</a></li>
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
-        </nav>
+        </div>
         <br>
 
          <%
@@ -100,40 +112,39 @@
        		<div class="mypage_contents">
        		    <table class="myinfo_table">
        				<tr class="myinfo_userID">
-       				<th id="myinfo_title">아이디</th>
-       				<th><%=rs.getString(1) %></th>
+       				<th id="myinfo_title" class="table_th1">아이디</th>
+       				<th class="table_th2"><%=rs.getString(1) %></th>
        				</tr>
 
        				<tr class="myinfo_userName">
-       				<th id="myinfo_title">이름</th>
-       				<th><%=rs.getString(3) %></th>
+       				<th id="myinfo_title" class="table_th1">이름</th>
+       				<th class="table_th2"><%=rs.getString(3) %></th>
        				</tr>
 
        				<tr class="myinfo_userGender">
-       				<th id="myinfo_title">성별</th>
-       				<th><%=rs.getString(4) %></th>
+       				<th id="myinfo_title" class="table_th1">성별</th>
+       				<th class="table_th2"><%=rs.getString(4) %></th>
        				</tr>
 
        				<tr class="myinfo_userLevel">
-       				<th id="myinfo_title">부수</th>
-       				<th><%=rs.getString(5) %></th>
+       				<th id="myinfo_title" class="table_th1">부수</th>
+       				<th class="table_th2"><%=rs.getString(5) %></th>
        				</tr>
 
        				<tr class="myinfo_userType">
-       				<th id="myinfo_title">전형</th>
-       				<th><%
-       				if(rs.getString(6) != null){
-       					out.println(rs.getString(6));
-       				} else{ out.println("");}%></th>
+       				<th id="myinfo_title" class="table_th1">전형</th>
+       				<th class="table_th2"><%=rs.getString(6) %></th>
 
        				</tr>
 
        				<tr class="myinfo_userDescription">
-       				<th id="myinfo_title">내 소개</th>
-       				<th><%
-       				if(rs.getString(6) != null){
-       					out.println(rs.getString(6));
-       				} else{ out.println("");}%></th>
+       				<th id="myinfo_title" class="table_th1">내 소개</th>
+       				<th id="userDescription">
+       					<textarea readonly><%
+       					if(rs.getString(7) != null){
+	       					out.println(rs.getString(7));
+	       				} else{ out.println("");}%></textarea>
+       				</th>
        				</tr>
        		<%
                 }
@@ -168,11 +179,6 @@
         	<a class=link href="delete.jsp">회원탈퇴</a>
         	</div>
         </section>
-
-
-		<%
-           	}
-       	%>
 
 
         <footer>

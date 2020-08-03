@@ -30,15 +30,18 @@
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
         </header>
-        <nav class="menu">
-            <ul>
+         <div class="menu">
+        	<input type="checkbox" id="toggle">
+        	<label for="toggle">메뉴</label>
+            <ul id="nav">
                 <li><a href="notice.jsp">공지사항</a></li>
                 <li><a href="result.jsp">결과게시판</a></li>
                 <li><a href="rank.jsp">랭킹게시판</a></li>
                 <li><a href="review.jsp">후기게시판</a></li>
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
-        </nav>
+        </div>
+        <br>
 
         <section>
         <!-- 로그인된 회원들은 페이지에 접속할 수 없도록 해야함 -->
@@ -55,7 +58,7 @@
 				<input type="text" placeholder="아이디 입력" name="userID" maxlength="20">
 				<br>
 				<label class="register_label">ID는 8~15자의 영문 소문자 혹은 숫자만 입력 가능합니다.</label>
-				<br>
+				<br><br>
 				<input type="password" placeholder="비밀번호 입력(숫자 4자리)" name="userPassword" maxlength="4">
 				<br>
 				<input type="password" placeholder="비밀번호 확인(숫자 4자리)" name="userRePassword" maxlength="4">
@@ -87,6 +90,18 @@
   						<option value='7'>7</option>
 					</select>
 				<br><br>
+					<select name="userType">
+						<option value='' selected>-- 전형 --</option>
+	  					<option value='오른손잡이 / 드라이브 전형'>오른손잡이 / 드라이브 전형</option>
+	  					<option value='왼손잡이 / 드라이브 전형'>왼손잡이 / 드라이브 전형</option>
+	  					<option value='오른손잡이 / 스트로크 전형'>오른손잡이 / 스트로크 전형</option>
+	  					<option value='왼손잡이 / 스트로크 전형'>왼손잡이 / 스트로크 전형</option>
+	  					<option value='오른손잡이 / 수비수 전형'>오른손잡이 / 수비수 전형</option>
+	  					<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
+					</select>
+				<br><br>
+					<!-- 내 소개.. -->
+				
 				<input type="submit" class="login_submit-btn" value="회원가입">
 
 			</div>
