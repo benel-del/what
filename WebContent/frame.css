@@ -8,10 +8,7 @@
 @media (max-width: 1500px) {
 
 /* RESET_COMMON */
-body{
-    min-width: 1190px;
-    min-height: 1480px;
-}
+body{}
 *{
     margin: 0;
     padding: 0;
