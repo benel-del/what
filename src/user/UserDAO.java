@@ -80,6 +80,8 @@ public class UserDAO {
 				return -2;
 			if(string_pattern2(name) == -1)
 				return -3;
+			if(string_pattern3(name) == -1 || string_pattern3(id) == -1)
+				return -4;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -102,6 +104,13 @@ public class UserDAO {
 			return 0;
 		else
 			return -1;
+	}
+	
+	private int string_pattern3(String str) {	// name _ "관리자"
+		if(Pattern.matches(".*관리자.*", str) || Pattern.matches(".*admin.*", str))
+			return -1;
+		else
+			return 0;
 	}
 	
 	public int check_pw_limit(String pw) {

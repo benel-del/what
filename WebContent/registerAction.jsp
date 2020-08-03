@@ -60,6 +60,13 @@
 		script.println("history.back()");
 	    script.println("</script>");
     }
+    else if(userDAO.check_limit(user) == -4){
+    	PrintWriter script = response.getWriter();
+	    script.println("<script>");
+	    script.println("alert('해당 아이디 또는 이름을 사용할 수 없습니다.')");
+		script.println("history.back()");
+	    script.println("</script>");
+    }
     	 
     else if(user.getUserID() == null){ 
        	PrintWriter script = response.getWriter();
