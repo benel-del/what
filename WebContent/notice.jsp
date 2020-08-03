@@ -94,14 +94,14 @@
             <div class="board_subtitle">
             	공지게시판
             	<% try{
-            		%>
-            	<div class="board_write-btn" <% if(userID.equals("admin") == false) out.print("style=\"visibility: hidden;\""); %>>
-            		<a href="notice_write.jsp">글쓰기</a>
-            	</div>
-            	<%
-            		} catch(Exception e){
-            			e.printStackTrace();
-            		}%>
+            		if(userID.equals("admin") == true){
+            			out.println("<div class=\"board_write-btn\">");
+            			out.println("<a href=\"notice_write.jsp\">글쓰기</a>");
+            			out.println("</div>");
+            		}
+           		} catch(Exception e){
+           			e.printStackTrace();
+           		}%>
             </div>
 
             <div class="board_container">
