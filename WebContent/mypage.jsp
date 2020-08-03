@@ -41,32 +41,19 @@
         	if(userID == null){
             PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('로그인 후 이용 가능합니다.')");
-			script.println("history.back()");
+			script.println("alert('로그인 후 이용가능합니다.')");
+			script.println("location.href = 'login.jsp'");
 			script.println("</script>");
-           	} else if(userID.equals("admin") == true) {
-		%>
-			<!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-
-                <a class="link" href="admin.jsp">관리자 페이지</a>
-           </div>
-            <br>		
-        <% 
            	} else {
 		%>
-			<!--로그인, 회원가입 버튼-->
+			<!--로그아웃, 마이페이지 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-                
+                <a class="link" href="logoutAction.jsp">로그아웃</a>
+                |
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
-            <br>		
-		<% 
-           	}
-       	%>
-       	
+            <br>
+
              <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
@@ -180,6 +167,11 @@
         	<a class=link href="delete.jsp">회원탈퇴</a>
         	</div>
         </section>
+
+
+		<%
+           	}
+       	%>
 
 
         <footer>
