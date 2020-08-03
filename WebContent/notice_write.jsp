@@ -85,12 +85,18 @@
             					<th colspan="2" style="text-align:center;">게시판글쓰기 양식</th>
             				</tr>
             			</thead>
+            			
             			<tbody>
             				<tr>
-            					<td><input type="text" class="form-control" placeholder="글 제목" name="notice_title" maxlength="50"></td>
+            					<td>
+            					<select name="bbsType">
+	  								<option value='일반공지'>일반공지</option>
+	  								<option value='모임공지' selected>모임공지</option>
+								</select>
+            					<input type="text" class="form-control" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
             				</tr>
             				<tr>
-            					<td><textarea class="form-control" placeholder="글 내용" name="notice_contents" maxlength="2048" style="height:350px;"></textarea></td>	
+            					<td><textarea class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea></td>	
             				</tr>   				
             			</tbody>
             		</table>
