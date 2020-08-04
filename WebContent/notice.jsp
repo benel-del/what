@@ -163,7 +163,7 @@
 	            <div class="board_search">	            	
    	        		<input id="notice_search-btn" type="submit" class="notice_submit-btn" value="검색">
    	        	
-   	        		<input id="notice_search-bar" type="text" placeholder="제목 검색어를 입력해주세요" name="notice_search-word" maxlength="30">
+   	        		<input id="notice_search-bar" type="text" placeholder="제목 검색어를 입력해주세요" name="notice_search-word" maxlength="50">
    	        		
    	        		<!-- 기간.. 잘 모르겠군 -->
    	        		<select name="notice-period" id="notice_search-period">
