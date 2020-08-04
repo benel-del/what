@@ -108,10 +108,10 @@
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead" id="result_num">no.</th>
+            					<th class="board_thead" id="notice_num">no.</th>
             					<th class="board_thead" id="result_title">제목</th>
-            					<th class="board_thead" id="result_writer">작성자</th>
-            					<th class="board_thead" id="result_day">날짜</th>
+            					<th class="board_thead" id="notice_writer">작성자</th>
+            					<th class="board_thead" id="notice_day">날짜</th>
             				</tr>
             			</thead>
             			<tbody>

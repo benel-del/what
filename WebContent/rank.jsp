@@ -85,13 +85,13 @@
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead" id="rank_num">순위</th>
+            					<th class="board_thead" id="notice_num">순위</th>
             					<th class="board_thead" id="rank_name">이름</th>
             					<th class="board_thead" id="rank_level">부수</th>
             					<th class="board_thead" id="rank_type">전형</th>
-            					<th class="board_thead" id="rank_prize">우승</th>
-            					<th class="board_thead" id="rank_prize">준우승</th>
-            					<th class="board_thead" id="rank_prize">3위</th>   					
+            					<th class="board_thead" id="rank_level">우승</th>
+            					<th class="board_thead" id="rank_level">준우승</th>
+            					<th class="board_thead" id="rank_level">3위</th>   					
             				</tr>
             			</thead>
             			
