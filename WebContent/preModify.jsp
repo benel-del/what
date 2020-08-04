@@ -34,7 +34,7 @@
 	            PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('로그인 후 이용 가능합니다.')");
-				script.println("history.back()");
+				script.println("location.href = 'login.jsp'");
 				script.println("</script>");
            	} else if(userID.equals("admin") == true){
              	PrintWriter script = response.getWriter();

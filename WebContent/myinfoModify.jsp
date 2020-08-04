@@ -190,7 +190,7 @@
      				<tr class="myinfo_userDescription">
      				<th id="myinfo_title" class="table_th1">내 소개</th>
      				<th id="userDescription">
-     					<textarea name="userDescription" maxlength="200" <% if(rs.getString(7) == null) out.print("placeholder=\"최대 200자\""); %>><% if(rs.getString(7) != null) out.print(rs.getString(7));%></textarea>
+     					<textarea class="info_textarea" name="userDescription" maxlength="200" <% if(rs.getString(7) == null) out.print("placeholder=\"최대 200자\""); %>><% if(rs.getString(7) != null) out.print(rs.getString(7));%></textarea>
      				</th>
      				</tr>    
      				

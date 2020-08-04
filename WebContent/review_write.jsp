@@ -18,7 +18,7 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID.equals("admin") == false){
+	if(userID == null || userID.equals("admin") == false){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('관리자만 접근 가능합니다.')");
@@ -38,7 +38,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃</a>
                 |
-                <a class="link" href="mypage.jsp">관리자 페이지</a>
+                <a class="link" href="admin.jsp">관리자 페이지</a>
            </div>
             <br>		
 		<% 

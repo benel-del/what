@@ -22,7 +22,7 @@ public class BbsDAO {
 		}
 	}	
 	
-	public String getDate() {
+	public String getDate() {	// 현재 시간 불러오기
 		String SQL="SELECT NOW();";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -37,7 +37,7 @@ public class BbsDAO {
 		return ""; //데이터베이스 오류
 	}
 	
-	public int getNext() {
+	public int getNext() {	// 새 글 작성을 위한 bbsId 지정하기
 		String SQL="SELECT bbsID FROM BBS ORDER BY bbsID DESC;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -52,8 +52,8 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent, String bbsType) {
-		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?);";
+	public int write(String bbsTitle, String userID, String bbsContent, String bbsType, int bbsFix) {
+		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -63,6 +63,7 @@ public class BbsDAO {
 			pstmt.setString(5,  bbsContent);
 			pstmt.setInt(6,  1);
 			pstmt.setString(7,  bbsType);
+			pstmt.setInt(8,  bbsFix);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -84,7 +85,8 @@ public class BbsDAO {
 				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));	
-				bbs.setBbsType(rs.getNString(7));
+				bbs.setBbsType(rs.getString(7));
+				bbs.setBbsFix(rs.getInt(8));
 				list.add(bbs);
 			}
 		} catch(Exception e) {

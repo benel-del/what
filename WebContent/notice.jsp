@@ -121,6 +121,7 @@
             					BbsDAO bbsDAO = new BbsDAO();
             					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
+            						if(list.get(i).getBbsFix() == 1){
             				%>          				
             				<tr class="board_tr" id="notice_fix">
             					<td><%=list.get(i).getBbsID()%></td>
@@ -130,6 +131,18 @@
             					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
             				</tr>   
             				<%
+            						}
+            						else{
+            							%>          				
+                        				<tr class="board_tr">
+                        					<td><%=list.get(i).getBbsID()%></td>
+                        					<td><%=list.get(i).getBbsType()%></td>
+                        					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
+                        					<td><%=list.get(i).getUserID() %></td>
+                        					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+                        				</tr>   
+                        				<%
+            						}
             					}
             				%>				
             			</tbody>

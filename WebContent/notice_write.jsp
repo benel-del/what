@@ -19,7 +19,7 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID.equals("admin") == false){
+	if(userID == null || userID.equals("admin") == false){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('관리자만 접근 가능합니다.')");
@@ -39,7 +39,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃</a>
                 |
-                <a class="link" href="mypage.jsp">관리자 페이지</a>
+                <a class="link" href="admin.jsp">관리자 페이지</a>
            </div>
             <br>		
 		<% 
@@ -73,31 +73,50 @@
             	공지게시판
             </div>
 
-            <div class="board_container">
-            	<div class="board_row">
+            <div class="write_container">
+            	<div class="write_row">
             	<form method="post" action="notice_writeAction.jsp">
-            		<table class="board_table">
+            		<table class="write_table">
             			<thead>
-            				<tr class="board_tr">
-            					<th colspan="2">글쓰기</th>
+            				<tr class="write_tr">
+            					<th colspan="3" class="write_title">글쓰기</th>
             				</tr>
             			</thead>
             			
             			<tbody>
             				<tr>
-            					<td>
-            					<select name="bbsType" class="bbsType">
-	  								<option value='일반공지'>일반공지</option>
-	  								<option value='모임공지' selected>모임공지</option>
-								</select>
-            					<input type="text" class="form-control" id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
+	            				<td class="space"></td>
+	            				<td>
+	            					<div class="write_subtitle">
+			            				<div class="bbsType">
+			            					<select name="bbsType" id="bbs_type">
+				  								<option value='일반공지'>일반공지</option>
+				  								<option value='모임공지' selected>모임공지</option>
+											</select>
+			            				</div>
+			            				<div class="bbsTitle">
+			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
+			            				</div>
+			            				<div class="bbsFix">
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value="상단에 고정하기">상단에 고정하기
+		            					</div>
+	            					</div>
+								</td>
+								<td class="space"></td>
             				</tr>
             				<tr>
-            					<td><textarea class="form-control" id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea></td>	
-            				</tr>   				
+            					<td colspan="3" class="bbsContent">
+            						<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
+            					</td>
+            				</tr>
+ 							<tr>
+ 								<td  colspan="3">
+ 									<input type="submit" class="write-btn" value="글쓰기">
+ 								</td>
+ 							</tr>
             			</tbody>
             		</table>
-            		<input type="submit" class="board_write-btn" value="글쓰기">
+            		
             		
             		</form>
             	</div>

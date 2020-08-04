@@ -44,7 +44,7 @@
 				script.println("</script>");
 			} else{
 				BbsDAO bbsDAO = new BbsDAO();
-				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType());
+				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

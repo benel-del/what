@@ -8,6 +8,7 @@ public class Bbs {
 	private String bbsContent;
 	private int bbsAvailable;
 	private String bbsType;
+	private int bbsFix;
 	
 
 	public int getBbsID() {
@@ -51,5 +52,11 @@ public class Bbs {
 	}
 	public void setBbsType(String bbsType) {
 		this.bbsType = bbsType;
+	}
+	public int getBbsFix() {
+		return bbsFix;
+	}
+	public void setBbsFix(int bbsFix) {
+		this.bbsFix = bbsFix;
 	}
 }
