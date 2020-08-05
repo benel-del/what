@@ -98,16 +98,20 @@
 			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
 			            				</div>
 			            				<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value="상단에 고정하기">상단에 고정하기
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value="bbsFix" /> 상단에 고정하기
 		            					</div>
 	            					</div>
 								</td>
 								<td class="space"></td>
             				</tr>
             				<tr>
-            					<td colspan="3" class="bbsContent">
-            						<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
+            					<td class="space"></td>
+            					<td>
+            						<div class="bbsContent">
+            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
+            						</div>
             					</td>
+            					<td class="space"></td>
             				</tr>
  							<tr>
  								<td  colspan="3">

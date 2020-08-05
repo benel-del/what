@@ -401,21 +401,93 @@ footer {
 }
 
 /*notice_write, review_write, result_write */
-.bbs_type {
-	width:10%;
-	height:25px;
+
+.write_container{
+	padding: 10px;
+	height: 700px;
+	width: 100%;
+}
+.write_title{
+	margin : 5px;
+	height: 35px;
+	font-size : 25px;
+	font-weight : 600;
+	float: middle;
+}
+.write_subtitle{
+	border: 1px solid #0F4C81;
+	width: 100%;
+}
+.write_table{
+	text-align: center;
+	border: 1px solid #0F4C81;
+	width: 100%;
+	border-spacing: 5px;
+	border-collapse: separate;
+}
+.write_thead{
+	background-color: #0F4C81;
+	text-align: center;
+	color: white;
+}
+.write_tr{
+	height: 50px;
+	width: 100%;
+}
+.write-btn{
+	background-color: #0F4C81;
+	float: middle;
+	height: 40px;
+	width: 120px;
+	color: white;
+    cursor: pointer;
+}
+
+
+.bbsType {
+	width: 10%;
+	height: 100%;
+	display: inline-block;
+}
+.bbsTitle{
+	width: 60%;
+	height: 100%;
+	display: inline-block;
+}
+.bbsFix{
+	width: 20%;
+	height: 100%;
+	display: inline-block;
+}
+.bbsContent{
+	width: 100%;
+	height: 500px;
+	border: 1px solid #0F4C81;
+	padding: 4px;
+}
+#bbs_type{
+	width: 100%;
+	height: 100%;
 }
 #bbs_title{
-	width: 70%;
-	height:25px;
+	width: 100%;
+	height: 100%;
 	font-size: 20px;
 }
+#bbs_fix{
+	width: 100%;
+	height: 100%;
+}
 #bbs_content{
-	margin:10px auto;
-	width:95%;
-	height: 500px;
-	font-size:10px;
-	border:1px solid #0F4C81;
+	width: 100%;
+	height: 100%;
+	font-size:15px;
+	border: none;
+	overflow: hidden;
+	resize: none;
+}
+.space{
+	width: 5%;
 }
 
 /* NOTICE SECTION */
@@ -594,7 +666,7 @@ input[id*="answer"] + label + div p{
 	height: 100px;
 	padding: 3px;
 }
-textarea{
+.info_textarea{
 	overflow: hidden;
 	resize: none;
 	width: 100%;
