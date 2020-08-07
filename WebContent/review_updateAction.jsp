@@ -19,13 +19,6 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		if(userID.equals("admin") == false){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('관리자만 접근 가능합니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		}
 		int bbsID = 0;
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
