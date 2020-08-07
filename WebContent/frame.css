@@ -528,6 +528,12 @@ footer {
 	color:white;
     cursor: pointer;
 }
+#notice_btn-primary{
+	margin:5px auto;
+	text-align:center;
+	font-weight:800;
+	color:#0F4C81;
+}
 
 /* RANK SECTION */
 #rank_name{
@@ -536,6 +542,7 @@ footer {
 #rank_level{
 	width: 10%;
 }
+
 
 /* FAQ_SECTION */
 input[id*="answer"]{
@@ -575,6 +582,18 @@ input[id*="answer"] + label + div p{
 	display:inline-block;
 	padding:30px;	
 }
+
+#faq_table{
+	margin:3px 10px;
+	border:1px solid #0F4C81;
+	text-align:center;
+}
+#faq_table td{
+	border:1px solid #0F4C81;
+	height:20px;
+	width:300px;
+	color:#0F4C81;
+	}
 
 /* MY_PAGE */
 .mypage_contents {

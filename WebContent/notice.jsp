@@ -110,7 +110,7 @@
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="notice_num">no.</th>
-            					<th class="board_thead" id="notice_type">[ 모임 / 일반 ]</th>
+            					<th class="board_thead" id="notice_type">머릿말</th>
             					<th class="board_thead" id="notice_title">제목</th>
             					<th class="board_thead" id="notice_writer">작성자</th>
             					<th class="board_thead" id="notice_day">날짜</th>

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class BbsDAO {
-	private Connection conn;	// db�뿉 �젒洹쇳븯寃� �빐二쇰뒗 媛앹껜
+	private Connection conn;
 	private ResultSet rs;
 	
 	public BbsDAO() { 
@@ -110,4 +110,45 @@ public class BbsDAO {
 		}
 		return false;
 	}
+	
+	//글내용 불러오기
+	public Bbs getBbs(int bbsID) {
+		String SQL="SELECT * FROM BBS WHERE bbsID = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1,  bbsID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				bbs.setBbsType(rs.getString(7));
+				return bbs;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix) {
+		String SQL="UPDATE bbs SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ? WHERE bbsID = ?;";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  bbsType);
+			pstmt.setString(2,  bbsTitle);
+			pstmt.setString(3,  bbsContent);
+			pstmt.setInt(4, bbsFix);
+			pstmt.setInt(5, bbsID);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
 }
