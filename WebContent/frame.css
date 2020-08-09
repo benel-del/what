@@ -542,7 +542,7 @@ footer {
 	width: 100%;
 }
 .view_table{
-	text-align: center;
+	text-align: left;
 	border: 1px solid #0F4C81;
 	width: 100%;
 	border-spacing: 5px;
@@ -551,26 +551,30 @@ footer {
 .view_title{
 	margin : 5px;
 	height: 45px;
-	font-size : 18px;
+	font-size : 20px;
 	font-weight : 600;
-	float: middle;
-	background-color: #0F4C81;
-	text-align: center;
-	color: white;
-}
-.view_subtitle{
-	background-color: #cfe6fa;
-	width: 15%;
-	height: 35px;
-}
-.view_content1{
-	width: 20%;
-}
-.view_content2{
-	height: 200px;
-	text-align: left;
+	padding: 2px 20px;
 }
 
+.view_content1{
+	font-size: 16px;
+	padding: 2px 20px;
+}
+.view_content2{
+	color: gray;
+	font-size: 12px;
+	padding: 2px 20px;
+}
+.view_content3{
+	height: 200px;
+	padding: 12px 20px;
+	
+}
+.view_border{
+	border: 1px solid #0F4C81;
+	height: 1px;
+	padding: 2px 20px;
+}
 
 
 /* RANK SECTION */
