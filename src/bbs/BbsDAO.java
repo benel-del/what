@@ -127,6 +127,7 @@ public class BbsDAO {
 				bbs.setBbsContent(rs.getString(5));
 				bbs.setBbsAvailable(rs.getInt(6));	
 				bbs.setBbsType(rs.getString(7));
+				bbs.setBbsFix(rs.getInt(8));
 				return bbs;
 			}
 		} catch(Exception e) {
