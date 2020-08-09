@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import = "java.io.PrintWriter" %>
+<%@ page import="bbs.Bbs" %>
+<%@ page import="bbs.BbsDAO" %>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -12,11 +16,24 @@
 </head>
 
 <body>
-    <% //userID 존재 여부
+<% //userID 존재 여부
 	String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+
+	int bbsID =0;
+	if(request.getParameter("bbsID") != null){
+		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+	}
+	if(bbsID ==0){
+		PrintWriter script=response.getWriter();
+		script.println("<script>");
+		script.println("alert('유효하지 않은 글입니다.')");
+		script.println("location.href='notice.jsp'");
+		script.println("</script>");
+	}
+	Bbs bbs = new BbsDAO().getBbs(bbsID);
 	%>
 	
     <div id="wrapper">
@@ -56,14 +73,13 @@
 		<% 
            	}
        	%>
-
             <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
         </header>
-        
-        <div class="menu">
+
+         <div class="menu">
         	<input type="checkbox" id="toggle">
         	<label for="toggle">메뉴</label>
             <ul id="nav">
@@ -77,63 +93,56 @@
         <br>
 
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
+	
         <section class="container">
-            <div class="board_subtitle">랭킹게시판</div>
+            <div class="board_subtitle">
+            	공지게시판
+            </div>
 
-            <div class="board_container">
-            	<div class="board_row">
-            		<table class="board_table">
+            <div class="view_container">
+            	<div class="view_row">
+            		<table class="view_table">  
             			<thead>
-            				<tr class="board_tr">
-            					<th class="board_thead" id="notice_num">순위</th>
-            					<th class="board_thead" id="rank_name">이름</th>
-            					<th class="board_thead" id="rank_level">부수</th>
-            					<th class="board_thead" id="rank_type">전형</th>
-            					<th class="board_thead" id="rank_level">우승</th>
-            					<th class="board_thead" id="rank_level">준우승</th>
-            					<th class="board_thead" id="rank_level">3위</th>   					
+            				<tr>
+            					<th colspan="4" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></th>
             				</tr>
-            			</thead>
-            			
+            			</thead>    			
             			<tbody>
-            				<!-- EXAMPLE -->
-            				<tr class="board_tr">
-            					<td>1</td>
-            					<td><a href="#" class="link">김민선</a></td>
-            					<td>2부</td>
-            					<td>오른손잡이 / 드라이브전형</td>
-            					<td>3</td>
-            					<td>0</td>
-            					<td>2</td>
-            				</tr>   				
+            				<tr>
+	            				<td class="view_subtitle">작성자</td>
+	            				<td class="view_content1"><%=bbs.getUserID() %></td>
+	            				<td class="view_subtitle">작성일자</td>
+	            				<td class="view_content1"><%=bbs.getBbsDate() %></td>
+            				</tr>
+            				<tr>
+	            				<td class="view_subtitle">내용</td>
+	            				<td colspan="3" class="view_content2"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            				</tr>
             			</tbody>
             		</table>
+            		
+            		<div id="notice_btn-primary">
+            			<a href="notice.jsp" class="link">글 목록 </a>
+            		
+            		<%
+            			if(userID != null && userID.equals(bbs.getUserID())){
+            		%>
+            			/
+            			<a href = "notice_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
+            			/
+            			<a href = "notice_delete.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
+            		<%
+            			}
+            		%>
+            		</div>
             	</div>
-            	
-            	
-            	<!-- 이전/다음 페이지 -->
-            	<div class="board_page-move">
-            		<div class="board_page-move-symbol-left">
-            			<a href="pre.." class="link" id=> ◀ </a>
-					</div>
-					<div class="board_page-move-symbol-right">
-            			<a href="next.." class="link"> ▶ </a>
-            		</div>           	
-            	</div>
-            	
-     			<!-- 검색 바 -->
-	            <div class="board_search">	            	
-   	        		<input id="notice_search-btn" type="submit" class="notice_submit-btn" value="검색">
-   	        	
-   	        		<input id="notice_search-bar" type="text" placeholder="이름을 입력해주세요" name="notice_search-word" maxlength="30">
-	            </div>    
-	    	</div>  
+            </div>
+            		
         </section>
 
         <footer>
-            	회장 : 전성빈 tel.010-5602-4112<br />총무 : 정하영 tel.010-9466-9742
+      	      회장 : 전성빈 tel.010-5602-4112<br />총무 : 정하영 tel.010-9466-9742
         </footer>
     </div>
-    
 </body>
 </html>

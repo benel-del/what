@@ -110,7 +110,7 @@
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="notice_num">no.</th>
-            					<th class="board_thead" id="notice_type">[ 모임 / 일반 ]</th>
+            					<th class="board_thead" id="notice_type">머릿말</th>
             					<th class="board_thead" id="notice_title">제목</th>
             					<th class="board_thead" id="notice_writer">작성자</th>
             					<th class="board_thead" id="notice_day">날짜</th>
@@ -121,6 +121,7 @@
             					BbsDAO bbsDAO = new BbsDAO();
             					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
+            						if(list.get(i).getBbsFix() == 1){
             				%>          				
             				<tr class="board_tr" id="notice_fix">
             					<td><%=list.get(i).getBbsID()%></td>
@@ -130,7 +131,22 @@
             					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
             				</tr>   
             				<%
+            						}
             					}
+            					for(int i=0; i<list.size(); i++){
+            						if(list.get(i).getBbsFix() == 0){
+           							%>          				
+                       				<tr class="board_tr">
+                       					<td><%=list.get(i).getBbsID()%></td>
+                       					<td><%=list.get(i).getBbsType()%></td>
+                       					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
+                       					<td><%=list.get(i).getUserID() %></td>
+                       					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+                       				</tr>   
+                       				<%
+           							}
+            					}
+            					
             				%>				
             			</tbody>
             		</table>
@@ -163,7 +179,7 @@
 	            <div class="board_search">	            	
    	        		<input id="notice_search-btn" type="submit" class="notice_submit-btn" value="검색">
    	        	
-   	        		<input id="notice_search-bar" type="text" placeholder="제목 검색어를 입력해주세요" name="notice_search-word" maxlength="30">
+   	        		<input id="notice_search-bar" type="text" placeholder="제목 검색어를 입력해주세요" name="notice_search-word" maxlength="50">
    	        		
    	        		<!-- 기간.. 잘 모르겠군 -->
    	        		<select name="notice-period" id="notice_search-period">

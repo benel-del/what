@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "java.io.PrintWriter" %>
-    
+<%@ page import= "java.io.PrintWriter" %>
+<%@ page import="bbs_result.Bbs_result" %>
+<%@ page import="bbs_result.BbsDAO_result" %>
+
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
@@ -19,13 +20,19 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID == null || userID.equals("admin") == false){
-		PrintWriter script = response.getWriter();
+	
+	int bbsID =0;
+	if(request.getParameter("bbsID") != null){
+		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+	}
+	if(bbsID ==0){
+		PrintWriter script=response.getWriter();
 		script.println("<script>");
-		script.println("alert('관리자만 접근 가능합니다.')");
-		script.println("history.back()");
+		script.println("alert('유효하지 않은 글입니다.')");
+		script.println("location.href='result.jsp'");
 		script.println("</script>");
 	}
+	Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
 	%>
 	
     <div id="wrapper">
@@ -68,61 +75,61 @@
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
 	
         <section class="container">
-
             <div class="board_subtitle">
-            	공지게시판
+            	결과게시판
             </div>
 
             <div class="write_container">
             	<div class="write_row">
-            	<form method="post" action="notice_writeAction.jsp">
-            		<table class="write_table">
+            		<table class="write_table">  
             			<thead>
-            				<tr class="write_tr">
-            					<th colspan="3" class="write_title">글쓰기</th>
+            				<tr>
+            					<td colspan="3" style="text-align:center; "></td>
             				</tr>
-            			</thead>
-            			
+            			</thead>    			
             			<tbody>
             				<tr>
 	            				<td class="space"></td>
-	            				<td>
-	            					<div class="write_subtitle">
-			            				<div class="bbsType">
-			            					<select name="bbsType" id="bbs_type">
-				  								<option value='일반공지'>일반공지</option>
-				  								<option value='모임공지' selected>모임공지</option>
-											</select>
-			            				</div>
-			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
-			            				</div>
-			            				<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 /> 상단에 고정하기  	
-		            					</div>
-	            					</div>
-								</td>
+	            				<td style="width:20%;">글제목</td>
+	            				<td colspan="2"><%=bbs_result.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
 								<td class="space"></td>
             				</tr>
             				<tr>
-            					<td class="space"></td>
-            					<td>
-            						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
-            						</div>
-            					</td>
-            					<td class="space"></td>
+	            				<td class="space"></td>
+	            				<td >작성자</td>
+	            				<td colspan="2"><%=bbs_result.getUserID() %></td>
+								<td class="space"></td>
             				</tr>
- 							<tr>
- 								<td  colspan="3">
- 									<input type="submit" class="write-btn" value="글쓰기">
- 								</td>
- 							</tr>
+            				<tr>
+	            				<td class="space"></td>
+	            				<td >작성일자</td>
+	            				<td colspan="2"><%=bbs_result.getBbsDate() %></td>
+								<td class="space"></td>
+            				</tr>
+            				<tr>
+	            				<td class="space"></td>
+	            				<td>내용</td>
+	            				<td colspan="2" style="min-height:200px; text-align:left;"><%=bbs_result.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+								<td class="space"></td>
+            				</tr>
             			</tbody>
             		</table>
             		
+            		<div id="notice_btn-primary">
+            		<a href="result.jsp" class="link">글 목록 </a>
             		
-            		</form>
+            		<%
+            			if(userID != null && userID.equals(bbs_result.getUserID())){
+            		%>
+            			/
+            			<a href = "result_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
+            			/
+            			<a href = "result_deleteAction.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
+            		<%
+            			}
+            		%>
+            		</div>
+            	
             	</div>
  
 	    	</div>  

@@ -1,4 +1,4 @@
-package bbs;
+package bbs_result;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,11 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class BbsDAO {
-	private Connection conn;
+import bbs.Bbs;
+
+public class BbsDAO_result {
+	private Connection conn;	// db�뿉 �젒洹쇳븯寃� �빐二쇰뒗 媛앹껜
 	private ResultSet rs;
 	
-	public BbsDAO() { 
+	public BbsDAO_result() { 
 		try {
 			String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";
 			String dbID = "root";
@@ -22,7 +24,7 @@ public class BbsDAO {
 		}
 	}	
 	
-	public String getDate() {	// 현재 시간 불러오기
+	public String getDate() {
 		String SQL="SELECT NOW();";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -37,8 +39,8 @@ public class BbsDAO {
 		return ""; //데이터베이스 오류
 	}
 	
-	public int getNext() {	// 새 글 작성을 위한 bbsId 지정하기
-		String SQL="SELECT bbsID FROM BBS ORDER BY bbsID DESC;";
+	public int getNext() {
+		String SQL="SELECT bbsID FROM bbs_result ORDER BY bbsID DESC;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -52,8 +54,8 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent, String bbsType, int bbsFix) {
-		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+	public int write(String bbsTitle, String userID, String bbsContent) {
+		String SQL="INSERT INTO bbs_result VALUES(?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -62,32 +64,28 @@ public class BbsDAO {
 			pstmt.setString(4,  getDate());
 			pstmt.setString(5,  bbsContent);
 			pstmt.setInt(6,  1);
-			pstmt.setString(7,  bbsType);
-			pstmt.setInt(8,  bbsFix);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
 	}
-	public ArrayList<Bbs> getList(int pageNumber){
-		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10;";
-		ArrayList<Bbs> list = new ArrayList<Bbs>();
+	public ArrayList<Bbs_result> getList(int pageNumber){
+		String SQL="SELECT * FROM bbs_result WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Bbs bbs = new Bbs();
-				bbs.setBbsID(rs.getInt(1));
-				bbs.setBbsTitle(rs.getString(2));
-				bbs.setUserID(rs.getString(3));
-				bbs.setBbsDate(rs.getString(4));
-				bbs.setBbsContent(rs.getString(5));
-				bbs.setBbsAvailable(rs.getInt(6));	
-				bbs.setBbsType(rs.getString(7));
-				bbs.setBbsFix(rs.getInt(8));
-				list.add(bbs);
+				Bbs_result bbs_result = new Bbs_result();
+				bbs_result.setBbsID(rs.getInt(1));
+				bbs_result.setBbsTitle(rs.getString(2));
+				bbs_result.setUserID(rs.getString(3));
+				bbs_result.setBbsDate(rs.getString(4));
+				bbs_result.setBbsContent(rs.getString(5));
+				bbs_result.setBbsAvailable(rs.getInt(6));	
+				list.add(bbs_result);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -97,7 +95,7 @@ public class BbsDAO {
 	
 	//페이징 처리(특정 페이지가 존재하는가?)
 	public boolean nextPage(int pageNumber) {
-		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10;";
+		String SQL="SELECT * FROM bbs_result WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 10);
@@ -110,41 +108,35 @@ public class BbsDAO {
 		}
 		return false;
 	}
-	
 	//글내용 불러오기
-	public Bbs getBbs(int bbsID) {
-		String SQL="SELECT * FROM BBS WHERE bbsID = ?";
+	public Bbs_result getBbs(int bbsID) {
+		String SQL="SELECT * FROM bbs_result WHERE bbsID = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  bbsID);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				Bbs bbs = new Bbs();
-				bbs.setBbsID(rs.getInt(1));
-				bbs.setBbsTitle(rs.getString(2));
-				bbs.setUserID(rs.getString(3));
-				bbs.setBbsDate(rs.getString(4));
-				bbs.setBbsContent(rs.getString(5));
-				bbs.setBbsAvailable(rs.getInt(6));	
-				bbs.setBbsType(rs.getString(7));
-				bbs.setBbsFix(rs.getInt(8));
-				return bbs;
+				Bbs_result bbs_result = new Bbs_result();
+				bbs_result.setBbsID(rs.getInt(1));
+				bbs_result.setBbsTitle(rs.getString(2));
+				bbs_result.setUserID(rs.getString(3));
+				bbs_result.setBbsDate(rs.getString(4));
+				bbs_result.setBbsContent(rs.getString(5));
+				bbs_result.setBbsAvailable(rs.getInt(6));	
+				return bbs_result;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix) {
-		String SQL="UPDATE bbs SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ? WHERE bbsID = ?;";
+	}		
+	public int update(int bbsID, String bbsTitle, String bbsContent) {
+		String SQL="UPDATE bbs_result SET bbsTitle= ?, bbsContent = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setString(1,  bbsType);
-			pstmt.setString(2,  bbsTitle);
-			pstmt.setString(3,  bbsContent);
-			pstmt.setInt(4, bbsFix);
-			pstmt.setInt(5, bbsID);
+			pstmt.setString(1,  bbsTitle);
+			pstmt.setString(2,  bbsContent);
+			pstmt.setInt(3, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -152,7 +144,7 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	public int delete(int bbsID) {
-		String SQL="UPDATE bbs SET bbsAvailable = 0 WHERE bbsID = ?;";
+		String SQL="UPDATE bbs_result SET bbsAvailable = 0 WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
@@ -161,5 +153,5 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
-	}
+	}	
 }

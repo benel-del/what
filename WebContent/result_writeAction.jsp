@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="bbs_result.BbsDAO_result" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="bbs" class="bbs.Bbs" scope="page" />
-<jsp:setProperty name="bbs" property="bbsTitle" />
-<jsp:setProperty name="bbs" property="bbsContent" />
-<jsp:setProperty name="bbs" property="bbsType" />
-<jsp:setProperty name="bbs" property="bbsFix" />
-
+<jsp:useBean id="bbs_result" class="bbs_result.Bbs_result" scope="page" />
+<jsp:setProperty name="bbs_result" property="bbsTitle" />
+<jsp:setProperty name="bbs_result" property="bbsContent" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,21 +29,21 @@
 			script.println("</script>");
 		}
 		else{
-			if(bbs.getBbsTitle() == null){
+			if(bbs_result.getBbsTitle() == null){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('제목을 입력해주세요.')");
 				script.println("history.back()");
 				script.println("</script>");
-			} else if(bbs.getBbsContent() == null){
+			} else if(bbs_result.getBbsContent() == null){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('내용을 입력해주세요.')");
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				BbsDAO bbsDAO = new BbsDAO();
-				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix());
+				BbsDAO_result bbsDAO_result = new BbsDAO_result();
+				int result = bbsDAO_result.write(bbs_result.getBbsTitle(), userID, bbs_result.getBbsContent());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
@@ -56,7 +53,7 @@
 				} else{
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("location.href='notice.jsp'");
+					script.println("location.href='result.jsp'");
 					script.println("</script>");
 				}
 			}

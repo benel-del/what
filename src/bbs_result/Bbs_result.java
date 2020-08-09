@@ -1,15 +1,12 @@
-package bbs;
+package bbs_result;
 
-public class Bbs {
+public class Bbs_result {
 	private int bbsID;
 	private String bbsTitle;
 	private String userID;
 	private String bbsDate;
 	private String bbsContent;
 	private int bbsAvailable;
-	private String bbsType;
-	private int bbsFix;
-	
 
 	public int getBbsID() {
 		return bbsID;
@@ -46,17 +43,5 @@ public class Bbs {
 	}
 	public void setBbsAvailable(int bbsAvailable) {
 		this.bbsAvailable = bbsAvailable;
-	}	
-	public String getBbsType() {
-		return bbsType;
-	}
-	public void setBbsType(String bbsType) {
-		this.bbsType = bbsType;
-	}
-	public int getBbsFix() {
-		return bbsFix;
-	}
-	public void setBbsFix(int bbsFix) {
-		this.bbsFix = bbsFix;
 	}
 }

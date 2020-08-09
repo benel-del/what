@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "java.io.PrintWriter" %>
-    
+<%@ page import = "java.io.PrintWriter" %>
+<%@ page import = "bbs_review.Bbs_review" %>
+<%@ page import = "bbs_review.BbsDAO_review" %> 
 <!DOCTYPE html>
 
 <html lang="en">
@@ -19,10 +20,30 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID == null || userID.equals("admin") == false){
+	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('관리자만 접근 가능합니다.')");
+		script.println("alert('로그인 후 이용가능합니다.')");
+		script.println("location.href = 'login.jsp'");
+		script.println("</script>");
+	}
+	
+	int bbsID = 0;
+	if(request.getParameter("bbsID") != null){
+		bbsID = Integer.parseInt(request.getParameter("bbsID"));
+	}
+	if(bbsID == 0){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('유효하지 않은 글입니다.')");
+		script.println("history.back()");
+		script.println("</script>");
+	}
+	Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
+	if(!userID.equals(bbs_review.getUserID())){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('수정 권한이 없습니다.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -68,18 +89,17 @@
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
 	
         <section class="container">
-
             <div class="board_subtitle">
             	공지게시판
             </div>
 
             <div class="write_container">
             	<div class="write_row">
-            	<form method="post" action="notice_writeAction.jsp">
+            	<form method="post" action="review_updateAction.jsp?bbsID=<%=bbsID%>">
             		<table class="write_table">
             			<thead>
             				<tr class="write_tr">
-            					<th colspan="3" class="write_title">글쓰기</th>
+            					<th colspan="3" class="write_title">글수정</th>
             				</tr>
             			</thead>
             			
@@ -88,18 +108,9 @@
 	            				<td class="space"></td>
 	            				<td>
 	            					<div class="write_subtitle">
-			            				<div class="bbsType">
-			            					<select name="bbsType" id="bbs_type">
-				  								<option value='일반공지'>일반공지</option>
-				  								<option value='모임공지' selected>모임공지</option>
-											</select>
-			            				</div>
 			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
+			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs_review.getBbsTitle() %>">
 			            				</div>
-			            				<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 /> 상단에 고정하기  	
-		            					</div>
 	            					</div>
 								</td>
 								<td class="space"></td>
@@ -108,14 +119,14 @@
             					<td class="space"></td>
             					<td>
             						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
+            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_review.getBbsContent() %></textarea>
             						</div>
             					</td>
             					<td class="space"></td>
             				</tr>
  							<tr>
  								<td  colspan="3">
- 									<input type="submit" class="write-btn" value="글쓰기">
+ 									<input type="submit" class="write-btn" value="글 수정">
  								</td>
  							</tr>
             			</tbody>
