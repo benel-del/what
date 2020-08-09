@@ -99,50 +99,30 @@
             	공지게시판
             </div>
 
-            <div class="write_container">
-            	<div class="write_row">
-            		<table class="write_table">  
+            <div class="view_container">
+            	<div class="view_row">
+            		<table class="view_table">  
             			<thead>
             				<tr>
-            					<td colspan="3" style="text-align:center; "></td>
+            					<th colspan="4" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></th>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
-	            				<td class="space"></td>
-	            				<td>머릿말</td>
-	            				<td colspan="2"><%=bbs.getBbsType() %></td>
-								<td class="space"></td>
+	            				<td class="view_subtitle">작성자</td>
+	            				<td class="view_content1"><%=bbs.getUserID() %></td>
+	            				<td class="view_subtitle">작성일자</td>
+	            				<td class="view_content1"><%=bbs.getBbsDate() %></td>
             				</tr>
             				<tr>
-	            				<td class="space"></td>
-	            				<td style="width:20%;">글제목</td>
-	            				<td colspan="2"><%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
-								<td class="space"></td>
-            				</tr>
-            				<tr>
-	            				<td class="space"></td>
-	            				<td >작성자</td>
-	            				<td colspan="2"><%=bbs.getUserID() %></td>
-								<td class="space"></td>
-            				</tr>
-            				<tr>
-	            				<td class="space"></td>
-	            				<td >작성일자</td>
-	            				<td colspan="2"><%=bbs.getBbsDate() %></td>
-								<td class="space"></td>
-            				</tr>
-            				<tr>
-	            				<td class="space"></td>
-	            				<td>내용</td>
-	            				<td colspan="2" style="min-height:200px; text-align:left;"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
-								<td class="space"></td>
+	            				<td class="view_subtitle">내용</td>
+	            				<td colspan="3" class="view_content2"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</tbody>
             		</table>
             		
             		<div id="notice_btn-primary">
-            		<a href="notice.jsp" class="link">글 목록 </a>
+            			<a href="notice.jsp" class="link">글 목록 </a>
             		
             		<%
             			if(userID != null && userID.equals(bbs.getUserID())){
