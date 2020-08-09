@@ -98,7 +98,7 @@
 			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
 			            				</div>
 			            				<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value="bbsFix" /> 상단에 고정하기
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 /> 상단에 고정하기  	
 		            					</div>
 	            					</div>
 								</td>

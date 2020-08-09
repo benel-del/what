@@ -3,6 +3,12 @@
 <%@ page import = "java.io.PrintWriter" %>
 <%@ page import = "bbs.Bbs" %>
 <%@ page import = "bbs.BbsDAO" %> 
+
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -118,7 +124,48 @@
 			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs.getBbsTitle() %>">
 			            				</div>
 			            				<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value="" /> 상단에 고정하기
+			            					<%
+			            				Class.forName("com.mysql.jdbc.Driver"); 
+			            				String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
+			            				String dbID = "root";
+			            				String dbPassword = "whatpassword0706!";
+			            			    Connection conn = null;
+			            			    Statement stmt = null;
+			            			    ResultSet rs = null;
+
+			            			    try {                
+			            			        String query = "select * from bbs where bbsID='"+bbsID+"'";
+			            			        conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+			            			        stmt = conn.createStatement();
+			            			        rs = stmt.executeQuery(query);
+			            			        while (rs.next()) {
+			            				%>
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); %>/> 상단에 고정하기
+			            					<%
+							                }
+							            } catch (SQLException ex) {
+							                out.println(ex.getMessage());
+							                ex.printStackTrace();
+							            } finally {
+							                // 6. 사용한 Statement 종료
+							                if (rs != null)
+							                    try {
+							                        rs.close();
+							                    } catch (SQLException ex) {
+							                    }
+							                if (stmt != null)
+							                    try {
+							                        stmt.close();
+							                    } catch (SQLException ex) {
+							                    }
+							                // 7. 커넥션 종료
+							                if (conn != null)
+							                    try {
+							                        conn.close();
+							                    } catch (SQLException ex) {
+							                    }
+							            }
+							       		%>   
 		            					</div>
 	            					</div>
 								</td>
