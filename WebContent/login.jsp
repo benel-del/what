@@ -60,11 +60,11 @@
                <input type="submit" class="login_submit-btn" value="로그인" >
             
                <div class="login_find">
-                   <a href="register.jsp">회원가입</a>
+                   <a class="link" href="register.jsp">회원가입</a>
                    |
-                   <a href="find_id.jsp">아이디찾기</a>
+                   <a class="link" href="find_id.jsp">아이디찾기</a>
                    |
-                   <a href="find_pw.jsp">비밀번호 찾기</a>
+                   <a class="link" href="find_pw.jsp">비밀번호 찾기</a>
                </div>
            </form>
                

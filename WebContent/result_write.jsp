@@ -70,28 +70,40 @@
             	결과게시판
             </div>
 
-            <div class="board_container">
-            	<div class="board_row">
+            <div class="write_container">
+            	<div class="write_row">
             	<form method="post" action="result_writeAction.jsp">
-            		<table class="board_table">
+            		<table class="write_table">
             			<thead>
-            				<tr class="board_tr">
-            					<th colspan="2" style="text-align:center;">게시판글쓰기 양식</th>
+            				<tr class="write_tr">
+            					<th colspan="2" class="write_title" style="text-align:center;">글쓰기</th>
             				</tr>
             			</thead>
             			
             			<tbody>
             				<tr>
             					<td>
-            					<input type="text" class="form-control" id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50"></td>
+            						<div class="write_subtitle">
+            							<div class="bbsTitle">
+            								<input type="text" id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
+            							</div>
+            						</div>
+            					</td>          	
             				</tr>
             				<tr>
-            					<td><textarea class="form-control" id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea></td>	
-            				</tr>   				
+            					<td>
+            						<div class="bbsContent">
+            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>	
+            						</div>
+            					</td>
+            				</tr>
+            				<tr>
+ 								<td  colspan="3">
+ 									<input type="submit" class="write-btn" value="글쓰기">
+ 								</td>
+ 							</tr>   				
             			</tbody>
-            		</table>
-            		<input type="submit" class="board_write-btn" value="글쓰기">
-            		
+            		</table>            		
             		</form>
             	</div>
  

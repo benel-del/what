@@ -99,29 +99,27 @@
             	공지게시판
             </div>
 
-            <div class="view_container">
+            <div class="write_container">
             	<div class="view_row">
             		<table class="view_table">  
             			<thead>
-            				<tr>	
-            					<td class="view_border"></td>
-            				</tr>
             				<tr>
-            					<th class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></th>
+            					<td class="view_cat">제목</td>
+            					<td class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
-	            				<td class="view_content1"><%=bbs.getUserID() %></td>
+            					<td class="view_cat">작성자</td>
+	            				<td class="view_userID"><%=bbs.getUserID() %></td>
 	            			</tr>
 	            			<tr>
-	            				<td class="view_content2"><%=bbs.getBbsDate() %></td>
-            				</tr>
-            				<tr>	
-            					<td class="view_border"></td>
+	            				<td class="view_cat">작성일자</td>
+	            				<td class="view_date"><%=bbs.getBbsDate() %></td>
             				</tr>
             				<tr>
-	            				<td class="view_content3"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            					<td class="view_cat">내용</td>
+	            				<td class="view_content"><div><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
             				</tr>
             			</tbody>
             		</table>
@@ -135,7 +133,7 @@
             			/
             			<a href = "notice_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
             			/
-            			<a href = "notice_delete.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
+            			<a href = "notice_deleteAction.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
             		<%
             			}
             		%>

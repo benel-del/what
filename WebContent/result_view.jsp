@@ -80,37 +80,26 @@
             </div>
 
             <div class="write_container">
-            	<div class="write_row">
-            		<table class="write_table">  
+            	<div class="view_row">
+            		<table class="view_table">  
             			<thead>
             				<tr>
-            					<td colspan="3" style="text-align:center; "></td>
+            					<td class="view_cat">제목</td>
+	            				<td class="view_title"><%=bbs_result.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
-	            				<td class="space"></td>
-	            				<td style="width:20%;">글제목</td>
-	            				<td colspan="2"><%=bbs_result.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
-								<td class="space"></td>
+	            				<td class="view_cat">작성자</td>
+	            				<td class="view_userID"><%=bbs_result.getUserID() %></td>
             				</tr>
             				<tr>
-	            				<td class="space"></td>
-	            				<td >작성자</td>
-	            				<td colspan="2"><%=bbs_result.getUserID() %></td>
-								<td class="space"></td>
+	            				<td class="view_cat">작성일자</td>
+	            				<td class="view_date"><%=bbs_result.getBbsDate() %></td>
             				</tr>
             				<tr>
-	            				<td class="space"></td>
-	            				<td >작성일자</td>
-	            				<td colspan="2"><%=bbs_result.getBbsDate() %></td>
-								<td class="space"></td>
-            				</tr>
-            				<tr>
-	            				<td class="space"></td>
-	            				<td>내용</td>
-	            				<td colspan="2" style="min-height:200px; text-align:left;"><%=bbs_result.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
-								<td class="space"></td>
+	            				<td class="view_cat">내용</td>
+	            				<td class="view_content"><%=bbs_result.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</tbody>
             		</table>
