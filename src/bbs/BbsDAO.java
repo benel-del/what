@@ -71,11 +71,11 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	public ArrayList<Bbs> getList(int pageNumber){
-		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10;";
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 11;";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 10);
+			pstmt.setInt(1,  (pageNumber-1) * 11);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs bbs = new Bbs();
@@ -97,10 +97,10 @@ public class BbsDAO {
 	
 	//페이징 처리(특정 페이지가 존재하는가?)
 	public boolean nextPage(int pageNumber) {
-		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10;";
+		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 11;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 10);
+			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 11);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				return true;
@@ -161,5 +161,19 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
+	}
+	
+	public int fixNumber() {
+		int count = 0;
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsFix = 1";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+				count ++;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 }
