@@ -78,8 +78,7 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
-       	
+
         <!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">팀원 찾기</div>

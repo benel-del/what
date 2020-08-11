@@ -78,7 +78,6 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
 
         <section>
             <div id="index_top">
@@ -119,11 +118,12 @@
                 <!--용품점 사이트 링크-->
                 <div id="index_shop">
                     <div class="index_title">탁구용품 사러가기</div>
+                    <br>
                   	⊙ 티밸런스
                     <br>
                     <a class="index_shop" href="https://smartstore.naver.com/ttbalance"><img src="https://yt3.ggpht.com/a/AATXAJwt5EX6O6G2XGnhY04m0RmmZKs2WS9t3GXJUcXlqg=s144-c-k-c0xffffffff-no-rj-mo" title="티밸런스 바로가기" /></a>
               
-                    <br />
+                    <br /><br>
               		 ⊙ 프롬탁구<br>
                     <a class="index_shop"href="http://fromtakgu.com/"><img src="from.png" title="프롬탁구 바로가기" /></a>
                 </div>
@@ -131,6 +131,7 @@
                 <!--youtube강좌 영상 & 링크-->
                 <div id="index_youtube">
                     <div class="index_title">탁구강좌 보러가기</div>
+                    <br>
                     <div id="index_TBAL-avi">
                         <a class="link" href="https://www.youtube.com/playlist?list=PL8nQm58dOh1hD9mVtoeMI8Ni3pL94fUFH" target="_blank">▶ 윤홍균's 따라잡기</a>
                         <br /><br />

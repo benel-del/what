@@ -72,7 +72,6 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
 
         <section>
         

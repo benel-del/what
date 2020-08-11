@@ -41,9 +41,8 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
-
-        <section>
+        
+        <section class="container">
         <!-- 로그인된 회원들은 페이지에 접속할 수 없도록 해야함 -->
         
         
@@ -103,7 +102,7 @@
 					<!-- 내 소개.. -->
 				
 				<input type="submit" class="login_submit-btn" value="회원가입">
-
+				<br>
 			</div>
             </form>
         </div>

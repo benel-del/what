@@ -39,34 +39,32 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
 
-        <section>
+        <section class="container">
         
            <div class="login_page">
               <form method="post" action="loginAction.jsp">
-              
-               <div class="login_header">
+              	<div class="login_header">
                    <a href="login.jsp">로그인 페이지</a>
-               </div>
+               	</div>
    
                <!--로그인 폼-->
-               <div class="login_form">
+               	<div class="login_form">
                    <input type="text" placeholder="아이디" name="userID" maxlength="20">
                    <br>
                    <input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" />           
-               </div>
+               	</div>
                
-               <input type="submit" class="login_submit-btn" value="로그인" >
+               	<input type="submit" class="login_submit-btn" value="로그인" >
             
-               <div class="login_find">
+               	<div class="login_find">
                    <a class="link" href="register.jsp">회원가입</a>
                    |
                    <a class="link" href="find_id.jsp">아이디찾기</a>
                    |
                    <a class="link" href="find_pw.jsp">비밀번호 찾기</a>
-               </div>
-           </form>
+               	</div>
+          	 </form>
                
            </div>
            

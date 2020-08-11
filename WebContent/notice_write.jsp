@@ -63,7 +63,6 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
 
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
 	

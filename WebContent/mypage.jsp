@@ -84,8 +84,6 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
-
          <%
             // 1. JDBC 드라이버 로딩
 			Class.forName("com.mysql.jdbc.Driver");

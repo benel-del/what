@@ -71,11 +71,11 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	public ArrayList<Bbs> getList(int pageNumber){
-		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 11;";
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber-1) * 11);
+			pstmt.setInt(1,  (pageNumber-1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs bbs = new Bbs();
@@ -97,10 +97,10 @@ public class BbsDAO {
 	
 	//페이징 처리(특정 페이지가 존재하는가?)
 	public boolean nextPage(int pageNumber) {
-		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 11;";
+		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 11);
+			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				return true;

@@ -64,7 +64,7 @@
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
         </header>
-        <br />
+
          <div class="menu">
         	<input type="checkbox" id="toggle">
         	<label for="toggle">메뉴</label>
@@ -76,7 +76,6 @@
                 <li><a href="faq.jsp">FAQ</a></li>
             </ul>
         </div>
-        <br>
 
         <section class="container">
         <div class="board_subtitle">
