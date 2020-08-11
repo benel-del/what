@@ -140,8 +140,8 @@
 			            			        rs = stmt.executeQuery(query);
 			            			        while (rs.next()) {
 			            				%>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); %>/> 상단에 고정하기
-			            					<%
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); %>/> 중요 공지
+			            				<%
 							                }
 							            } catch (SQLException ex) {
 							                out.println(ex.getMessage());
