@@ -46,6 +46,13 @@
 				script.println("</script>");
 			} else{
 				BbsDAO bbsDAO = new BbsDAO();
+				if(bbsDAO.fixNumber() + bbs.getBbsFix() > 10){
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+				}
 				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix());
 				if(result == -1){
 					PrintWriter script = response.getWriter();

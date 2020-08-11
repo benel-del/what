@@ -56,6 +56,13 @@
 				if(request.getParameter("bbsFix") != null){
 					bbsFix = Integer.parseInt(request.getParameter("bbsFix"));
 				}
+				if(bbsDAO.fixNumber() + bbsFix > 10){
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+				}
 				
 				int result = bbsDAO.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix);
 				if(result == -1){

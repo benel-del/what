@@ -114,16 +114,7 @@
 	            				<td class="space"></td>
 	            				<td>
 	            					<div class="write_subtitle">
-			            				<div class="bbsType">
-			            					<select name="bbsType" id="bbs_type">
-				  								<option value='일반공지'>일반공지</option>
-				  								<option value='모임공지' selected>모임공지</option>
-											</select>
-			            				</div>
-			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs.getBbsTitle() %>">
-			            				</div>
-			            				<div class="bbsFix">
+	            						<div class="bbsFix">
 			            					<%
 			            				Class.forName("com.mysql.jdbc.Driver"); 
 			            				String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
@@ -132,15 +123,15 @@
 			            			    Connection conn = null;
 			            			    Statement stmt = null;
 			            			    ResultSet rs = null;
-
-			            			    try {                
+			            			    BbsDAO bbsDAO = new BbsDAO();
+			            			    try {
 			            			        String query = "select * from bbs where bbsID='"+bbsID+"'";
 			            			        conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 			            			        stmt = conn.createStatement();
 			            			        rs = stmt.executeQuery(query);
 			            			        while (rs.next()) {
 			            				%>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); %>/> 중요 공지
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); else if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)
 			            				<%
 							                }
 							            } catch (SQLException ex) {
@@ -167,6 +158,15 @@
 							            }
 							       		%>   
 		            					</div>
+			            				<div class="bbsType">
+			            					<select name="bbsType" id="bbs_type">
+				  								<option value='일반공지'>일반공지</option>
+				  								<option value='모임공지' selected>모임공지</option>
+											</select>
+			            				</div>
+			            				<div class="bbsTitle">
+			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs.getBbsTitle() %>">
+			            				</div>
 	            					</div>
 								</td>
 								<td class="space"></td>

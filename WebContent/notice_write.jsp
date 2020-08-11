@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "java.io.PrintWriter" %>
-    
+<%@ page import = "java.io.PrintWriter" %>
+<%@ page import = "bbs.Bbs" %>
+<%@ page import = "bbs.BbsDAO" %> 
 <!DOCTYPE html>
 
 <html lang="en">
@@ -87,7 +88,8 @@
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 /> 중요공지  	
+	            						<% BbsDAO bbsDAO = new BbsDAO(); %>
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)  	
 		            					</div>
 			            				<div class="bbsType">
 			            					<select name="bbsType" id="bbs_type">
