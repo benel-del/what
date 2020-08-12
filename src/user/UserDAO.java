@@ -50,7 +50,7 @@ public class UserDAO {
 	}
 	
 	public int register(User user) {
-		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -60,6 +60,10 @@ public class UserDAO {
 			pstmt.setString(5,  user.getUserLevel());
 			pstmt.setString(6,  user.getUserType());
 			pstmt.setString(7,  user.getUserDescription());
+			pstmt.setInt(8,  user.getUserRank());
+			pstmt.setInt(9,  user.getUserFirst());
+			pstmt.setInt(10,  user.getUserSecond());
+			pstmt.setInt(11,  user.getUserThird());
 
 			return pstmt.executeUpdate();
 		} catch(Exception e) {

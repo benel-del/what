@@ -4,25 +4,17 @@ public class User {
 
 	private String userID;
 	private String userPassword;
-	private String userNewPassword;	//password 변경시에만 사용
+	private String userNewPassword;	//password 蹂�寃쎌떆�뿉留� �궗�슜
 	private String userRePassword;
 	private String userName;
 	private String userGender;
 	private String userLevel;
 	private String userType;
 	private String userDescription;
-	
-	public User(){}
-	public User(String userID, String userPassword, String userName, String userGender, String userLevel, String userType, String userDescription){    
-	    this.userID = userID;
-	    this.userPassword = userPassword;
-	    this.userName = userName;
-	    this.userGender = userGender;
-	    this.userLevel = userLevel;
-	    this.userType = userType;
-	    this.userDescription = userDescription;
-	       
-	}
+	private int userRank;
+	private int userFirst;
+	private int userSecond;
+	private int userThird;
 	
 	public String getUserID() {
 		return userID;
@@ -77,5 +69,29 @@ public class User {
 	}
 	public void setUserDescription(String userDescription) {
 		this.userDescription = userDescription;
+	}
+	public int getUserRank() {
+		return userRank;
+	}
+	public void setUserRank(int userRank) {
+		this.userRank = userRank;
+	}
+	public int getUserFirst() {
+		return userFirst;
+	}
+	public void setUserFirst(int userFirst) {
+		this.userFirst = userFirst;
+	}
+	public int getUserSecond() {
+		return userSecond;
+	}
+	public void setUserSecond(int userSecond) {
+		this.userSecond = userSecond;
+	}
+	public int getUserThird() {
+		return userThird;
+	}
+	public void setUserThird(int userThird) {
+		this.userThird = userThird;
 	}
 }

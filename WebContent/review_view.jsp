@@ -113,7 +113,7 @@
             			/
             			<a href = "review_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
             			/
-            			<a href = "review_deleteAction.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
+            			<a href = "review_delete.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
             		<%
             			}
             		%>
