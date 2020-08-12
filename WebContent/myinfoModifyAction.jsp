@@ -8,8 +8,6 @@
 <jsp:setProperty name="user" property="userPassword"/>
 <jsp:setProperty name="user" property="userNewPassword"/>
 <jsp:setProperty name="user" property="userRePassword"/>
-<jsp:setProperty name="user" property="userName"/>
-<jsp:setProperty name="user" property="userGender"/>
 <jsp:setProperty name="user" property="userLevel"/>
 <jsp:setProperty name="user" property="userType"/>
 <jsp:setProperty name="user" property="userDescription"/>

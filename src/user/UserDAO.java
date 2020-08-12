@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
+
+import bbs_result.Bbs_result;
+
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -289,7 +292,7 @@ public class UserDAO {
 		return rt;
 	}
 	
-	/*ȸ�� ���� �ҷ�����*/
+	/*team*/
 	public ArrayList<User> getUserlist(){
 		ArrayList<User> list = new ArrayList<User>();
 		
@@ -314,5 +317,60 @@ public class UserDAO {
 			} finally {
 			}
 			return list;
+	}
+	
+	/*rank*/
+	public int getNext() {
+		String SQL="SELECT userRank FROM user ORDER BY userRank ASC;";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1)+1;
+			}
+			return 1; //첫 번째 게시물인 경우
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	public ArrayList<User> getUserRank(int pageNumber){		
+		String SQL="SELECT * FROM user ORDER BY userRank ASC LIMIT ?, 10;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1,  (pageNumber - 1) * 10);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserRank(rs.getInt(8));
+				user.setUserName(rs.getString(3));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				user.setUserFirst(rs.getInt(9));
+				user.setUserSecond(rs.getInt(10));
+				user.setUserThird(rs.getInt(11));
+
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public boolean nextPage(int pageNumber) {
+		String SQL="SELECT * FROM user WHERE userRank < ? ORDER BY userRank DESC LIMIT 10;";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 10);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				return true;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

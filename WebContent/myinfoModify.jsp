@@ -191,7 +191,23 @@
      				<th id="userDescription">
      					<textarea class="info_textarea" name="userDescription" maxlength="200" <% if(rs.getString(7) == null) out.print("placeholder=\"최대 200자\""); %>><% if(rs.getString(7) != null) out.print(rs.getString(7));%></textarea>
      				</th>
-     				</tr>    
+     				</tr>
+       				<tr class="myinfo_userRank">
+       				<th id="myinfo_title" class="table_th1">랭킹</th>
+       				<th class="table_th2"><%=rs.getInt(8) %>위</th>
+       				</tr>
+       				<tr class="myinfo_userFirst">
+       				<th id="myinfo_title" class="table_th1">1위</th>
+       				<th class="table_th2"><%=rs.getInt(9) %>회</th>
+       				</tr>
+       				<tr class="myinfo_userSecond">
+       				<th id="myinfo_title" class="table_th1">2위</th>
+       				<th class="table_th2"><%=rs.getInt(10) %>회</th>
+       				</tr>
+       				<tr class="myinfo_userThird">
+       				<th id="myinfo_title" class="table_th1">3위</th>
+       				<th class="table_th2"><%=rs.getInt(11) %>회</th>
+       				</tr>  
      				
      				<%
                 }
