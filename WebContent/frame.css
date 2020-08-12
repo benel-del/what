@@ -420,19 +420,20 @@ section{
 #notice_fix{
 	background-color: #cfe6fa;
 }
-#notice_search-period{
+
+#bbs_search-option{
 	float: right;
 	height: 100%;
 	width: 15%;
 }
-#notice_search-bar{
+#bbs_search-bar{
 	float: right;
 	height: 100%;
 	width: 40%;
 	padding: 5px;
 	margin: 0px 5px;
 }
-#notice_search-btn{
+#bbs_search-btn{
 	float: right;
 	height: 100%;
 	width: 10%;
