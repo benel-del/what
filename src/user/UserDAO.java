@@ -373,4 +373,24 @@ public class UserDAO {
 		}
 		return false;
 	}
+	/*index rank*/
+	public ArrayList<User> getUserRank_index(){		
+		String SQL="SELECT * FROM user ORDER BY userRank ASC LIMIT 12;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserRank(rs.getInt(8));
+				user.setUserName(rs.getString(3));
+				user.setUserLevel(rs.getString(5));
+
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

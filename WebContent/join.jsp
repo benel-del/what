@@ -93,7 +93,10 @@
             			</thead>
             			<tbody>
 							<tr class="board_tr" id="notice_nonfix">
-							<td  colspan = "2">(전달사항 입력할 위치임) ex.조원 한 분이 일괄로 신청해 주시기 바랍니다</td>
+							<td colspan = "2">(전달사항 입력할 위치임) ex.조원 한 분이 일괄로 신청해 주시기 바랍니다</td>
+							</tr>
+							<tr class="board_tr" id="notice_nonfix">
+							<td colspan = "2">*조원들은 반드시 사이트에 가입되어 있어야 합니다.</td>
 							</tr>
 
 							<tr class="board_tr" id="notice_nonfix">
@@ -110,6 +113,10 @@
 							<option selected>참가자 선택</option>
 							<option>아이디/김민선/2부/성별</option>
 							</select></td>
+							</tr>
+							<tr class="board_tr" id="notice_nonfix">
+							<td>전달내용 기재</td>
+							<td><textarea></textarea></td>
 							</tr>
             			</tbody>
             		</table>

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import = "java.io.PrintWriter" %>
+<%@ page import="user.User" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.io.PrintWriter" %>
 
 <!DOCTYPE html>
 
@@ -32,8 +34,8 @@
         %>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="login.jsp">로그인 |</a>
-                
+                <a class="link" href="login.jsp">로그인 </a>
+                |
                 <a class="link" href="register.jsp">회원가입</a>
             </div>
             <br>
@@ -52,8 +54,8 @@
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-                
+                <a class="link" href="logoutAction.jsp">로그아웃 </a>
+                |
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
@@ -84,7 +86,7 @@
                 <div id="index_notice">
                     <!--모임공지-->
                     <div id="index_notice-inform">
-                        <div class="index_title">모임 공지</div>
+                        <div class="index_title"><a class="link" href = "notice_view.jsp">모임 공지</a></div>
                         여기는 공지사항 게시판 짜면서 (진행중인 모임 회차/모임 날짜/장소/신청기간/) db만 뽑아서
                         보기 좋게 게시해놓을거!
                     </div>
@@ -109,8 +111,29 @@
                 </div>
 
                 <div id="index_rank">
-                    <div class="index_title">랭킹</div>
-                    여기도 랭킹 게시판 짜면서 1~10위 db만 뽑아서 게시
+                    <div class="index_title"><a class="link" href="rank.jsp">랭킹</a></div>
+              			<table class="index_rank_board"> 
+              			<thead>
+            				<tr>
+            					<th class="index_rank_th" id="index_rank_rank">순위</th>
+            					<th class="index_rank_th" id="index_rank_name">이름</th>
+            					<th class="index_rank_th" id="index_rank_level">부수</th>
+            				</tr>
+            			</thead>          			
+            			<tbody>
+            			<%
+    					UserDAO userDAO = new UserDAO();
+    					ArrayList<User> list = userDAO.getUserRank_index();
+            			for(User user : list){%>
+            				<tr>
+            					<td><%=user.getUserRank() %></td>
+            					<td><%=user.getUserName() %></td>
+								<td><%=user.getUserLevel() %></td>
+            				</tr>   				
+						<%}%>
+            			</tbody>
+            		</table>     
+              
                 </div>
             </div>
 
@@ -131,7 +154,6 @@
                 <!--youtube강좌 영상 & 링크-->
                 <div id="index_youtube">
                     <div class="index_title">탁구강좌 보러가기</div>
-                    <br>
                     <div id="index_TBAL-avi">
                         <a class="link" href="https://www.youtube.com/playlist?list=PL8nQm58dOh1hD9mVtoeMI8Ni3pL94fUFH" target="_blank">▶ 윤홍균's 따라잡기</a>
                         <br /><br />

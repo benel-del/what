@@ -121,6 +121,7 @@ section{
 .index_title{
 	font-size:20px;
 	font-weight:600;
+	color:#0f4c81;
 }
 #index_top{
 	width:100%;
@@ -174,7 +175,7 @@ section{
 	height:100%;
 	float:left;
 	margin:0px 0px;
-	padding:10px 10px;
+	padding:20px 20px;
 	border-radius:0.4em;
 	border:1px solid #0F4C81;
 }
@@ -182,10 +183,23 @@ section{
 	width:35%;
 	height:100%;
 	float:left;
-	padding:10px 10px;
+	padding:20px 20px;
 	margin:0px 5px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;	
+}
+.index_rank_board{
+	margin:5px auto;
+	text-align:center;
+	width:100%;
+	height:90%;
+}
+.index_rank_board thead{
+	background-color: #0F4C81;
+	text-align: center;
+	color: white;
+}
+.index_rank_board tr{
 }
 
 #index_bottom{
@@ -198,7 +212,7 @@ section{
 	height:100%;
 	float:left;
 	margin:0px 5px;
-	padding:10px 10px;
+	padding:20px 20px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
@@ -212,7 +226,7 @@ section{
 	height:100%;
 	float:left;
 	margin: 0px 0px;
-	padding:10px 10px;
+	padding:20px 20px;
 	border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
@@ -226,7 +240,7 @@ section{
 	width:47%;
 	float:left;
 	margin:5px 5px;
-	paddint:10px 10px;
+	paddint:20px 20px;
 	border:1px dashed #0F4C81;
 }
 #index_FROM-avi {
@@ -234,7 +248,7 @@ section{
     width: 47%;
     float: right;
     margin: 5px 5px;
-    padding: 10px 10px;
+    padding: 20px 20px;
     border: 1px dashed #0F4C81;
 }
 
@@ -774,10 +788,12 @@ footer {
     height:900px;
 }
 #index_notice {
-    width: 100%;
+	margin:0px auto;
+	width: 100%;
     height: 50%;
 }
 #index_notice-inform {
+	padding:10px 10px;
     height: 75%;
 }
 
@@ -795,11 +811,15 @@ footer {
 }
 
 #index_rank {
+	margin:0px auto;
+	margin-top:5px;
+	paddint:10px 10px;
     width: 100%;
     height: 50%;
 }
 
 #index_bottom {
+	width:100%;
     height:800px;
 }
 
@@ -807,43 +827,50 @@ footer {
     display:none;
 }
 #index_youtube {
+	margin:5px auto;
     width: 100%;
     height: 95%;
-    padding: 5px 5px;
 }
 
     #index_youtube iframe {
-        margin: 2px 5px;
+        margin: 5px auto;
         height: 40%;
         width: 95%;
     }
 
 #index_TBAL-avi {
+	float:left;
     height: 46%;
     width: 95%;
-    margin: 5px 10px;
-    padding: 5px;
+    padding:20px 20px;
+    margin: 5px auto;
 }
 #index_FROM-avi {
+	float:left;
    	height:46%;
     width: 95%;
+    padding:20px 20px;
+    margin: 5px auto;
 }
 	
 }
 
 /* 화면 너비 0 ~ 480px */
 @media (max-width: 480px) {
-#service a{display:none;}
+#service a{}
 .menu {
     height: 50px;
     background-color:white;
 }
-
+.menu a{
+	width:100%;
+	font-size:13px;
+}
 	input [id*="toggle"]{
 	display:none;}
 	
 	input[id*="toggle"]:checked + label + ul{
-	max-height:200px;}
+	max-height:400px;}
 	
 	#toggle checked + #nav{
 	display:block;}
@@ -865,13 +892,12 @@ input[id*="toggle"] + label + ul{
 	transition: all .35s;
 	overflow: hidden;
 	background: #0F4C81;
-	font-size:14px;
+	font-size:15px;
 	font-weight:700;
 }
 
 input[id*="toggle"] + label + li a{
 	display:inline-block;
 	padding:30px;
-	width:100px;	
 }
 }
