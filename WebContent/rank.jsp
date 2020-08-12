@@ -147,11 +147,13 @@
             	</div>
             	
      			<!-- 검색 바 -->
-	            <div class="board_search">	            	
-   	        		<input id="notice_search-btn" type="submit" class="notice_submit-btn" value="검색">
-   	        	
-   	        		<input id="notice_search-bar" type="text" placeholder="이름을 입력해주세요" name="notice_search-word" maxlength="30">
-	            </div>    
+     			<form method="post" action="bbsSearchAction.jsp">
+		            <div class="board_search">	            	
+	   	        		<input id="bbs_search-btn" type="submit" value="검색">
+	   	        	
+	   	        		<input id="bbs_search-bar" type="text" placeholder="이름을 입력해주세요" name="searchWord" maxlength="30">
+		            </div>
+	            </form>
 	    	</div>  
         </section>
 
