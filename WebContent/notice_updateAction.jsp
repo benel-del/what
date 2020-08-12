@@ -56,7 +56,7 @@
 				if(request.getParameter("bbsFix") != null){
 					bbsFix = Integer.parseInt(request.getParameter("bbsFix"));
 				}
-				if(bbsDAO.fixNumber() + bbsFix > 10){
+				if((bbsFix == 1 && bbsDAO.fixNumber() > 10) || (bbsFix != 1 && bbsDAO.fixNumber() + bbsFix > 10)){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");

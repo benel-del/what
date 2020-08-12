@@ -512,44 +512,44 @@ section{
 }
 
 /* NOTICE, RESUlT, REVIEW view */
+.view_container{
+	padding: 10px;
+	height: 700px;
+	width: 100%;
+}
 .view_table{
 	border: 1px solid #0F4C81;
 	width: 100%;
-	table-layout:fixed;
-
+	border-spacing: 5px;
+	border-collapse: separate;
 }
 .view_table td{
-	background-color: #cfe6fa;
 	padding: 10px 10px;
-}
-.view_cat{
-	width:10%;
-	text-align:center;
+	border: 1px solid #cfe6fa;
 }
 .view_title{
-	height:40px;
-	font-size:20px;
-	font-weight:600;
-	padding:10px 10px;
+	margin : 5px;
+	height: 45px;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 10px 10px;
+	text-align: left;
 }
-.view_userID{
-	font-size:16px;
+.view_subtitle{
+	background-color: #cfe6fa;
+	width: 5%;
+	height: 35px;
+	text-align:center;
 }
-.view_date{
-	color:gray;
-	font-size:12px;
+.view_content1{
+	width: 15%;
 }
-.view_content{
-	height:500px;
-	width:100%;
-	valign:top;
-	padding : 10px 10px;
+.view_content2{
+	height: 400px;
+	text-align: left;
 }
-.view_content div{
-	overflow:scroll;
-	height:100%;
-	width:100%;
-}
+
+
 
 
 /* RANK */

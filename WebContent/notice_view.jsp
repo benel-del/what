@@ -98,27 +98,25 @@
             	공지게시판
             </div>
 
-            <div class="write_container">
+            <div class="view_container">
             	<div class="view_row">
             		<table class="view_table">  
             			<thead>
             				<tr>
-            					<td class="view_cat">제목</td>
-            					<td class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            					<td class="view_subtitle">제목</td>
+            					<td colspan="4" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
-            					<td class="view_cat">작성자</td>
-	            				<td class="view_userID"><%=bbs.getUserID() %></td>
-	            			</tr>
-	            			<tr>
-	            				<td class="view_cat">작성일자</td>
-	            				<td class="view_date"><%=bbs.getBbsDate() %></td>
+            					<td class="view_subtitle">작성자</td>
+	            				<td class="view_content1"><%=bbs.getUserID() %></td>
+	            				<td class="view_subtitle">작성일자</td>
+	            				<td class="view_content1"><%=bbs.getBbsDate() %></td>
             				</tr>
             				<tr>
-            					<td class="view_cat">내용</td>
-	            				<td class="view_content"><div><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
+            					<td class="view_subtitle">내용</td>
+	            				<td colspan="3" class="view_content2"><div><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
             				</tr>
             			</tbody>
             		</table>
