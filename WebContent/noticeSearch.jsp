@@ -141,7 +141,7 @@
         		            ResultSet rs = null;
         		            
         		            try {
-        		                String query = "SELECT * FROM search WHERE searchNo = ?";
+        		                String query = "SELECT * FROM search WHERE searchNo = ?;";
         		                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
         		                PreparedStatement pstmt=conn.prepareStatement(query);
         		                pstmt.setInt(1,  bbsSearchDAO.numbering()-1);
