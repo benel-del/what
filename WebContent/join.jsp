@@ -99,27 +99,27 @@
 							<td>신청자 연락처</td>
 							<td>
 							 <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); %>
-							<input type="text" id="user_Phone" name = "userPhone" placeholder="휴대폰번호" maxlength="20">
+							<input type="text" class="join_form" id="user_Phone" name = "userPhone" placeholder="휴대폰번호" maxlength="20">
 							</td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
 							<td>비밀번호</td>
-							<td><input type="password" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="20"></td>
+							<td><input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="20"></td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
 							<td>참가자</td>
-							<td><select name="joinMember" id="join_member">
+							<td><select name="joinMember" class="join_form" id="join_member">
 							<option selected>참가자 선택</option>
 							<option>아이디/김민선/2부/성별</option>
 							</select></td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
-							<td>전달내용 기재</td>
+							<td>전달내용</td>
 							<td><textarea id="join_Content" placeholder="참가 관련 전달내용 기재" name="joinContent" maxlength="2048"></textarea></td>
 							</tr>
 							<tr>
  								<td  colspan="3">
- 									<input type="submit" class="write-btn" value="글쓰기">
+ 									<input type="submit" class="join-btn" value="참가신청">
  								</td>
  							</tr>
             			</tbody>

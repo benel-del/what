@@ -64,7 +64,7 @@
 					script.println("</script>");
 				}
 				
-				int result = bbsDAO.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix);
+				int result = bbsDAO.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix, request.getParameter("bbsJoindate"), request.getParameter("bbsJoinplace"));
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

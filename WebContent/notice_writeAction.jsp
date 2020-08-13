@@ -8,6 +8,9 @@
 <jsp:setProperty name="bbs" property="bbsContent" />
 <jsp:setProperty name="bbs" property="bbsType" />
 <jsp:setProperty name="bbs" property="bbsFix" />
+<jsp:setProperty name="bbs" property="bbsJoindate" />
+<jsp:setProperty name="bbs" property="bbsJoinplace" />
+
 
 
 <!DOCTYPE html>
@@ -53,7 +56,7 @@
 					script.println("history.back()");
 					script.println("</script>");
 				}
-				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix());
+				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix(), bbs.getBbsJoindate(), bbs.getBbsJoinplace());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

@@ -9,7 +9,6 @@
 <jsp:setProperty name="bbs_join" property="joinMember" />
 <jsp:setProperty name="bbs_join" property="joinContent" />
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

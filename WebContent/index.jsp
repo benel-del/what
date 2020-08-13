@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
+<%@ page import="bbs.Bbs" %>
+<%@ page import="bbs.BbsDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
 
@@ -87,8 +89,34 @@
                     <!--모임공지-->
                     <div id="index_notice-inform">
                         <div class="index_title"><a class="link" href = "notice_view.jsp">모임 공지</a></div>
-                        여기는 공지사항 게시판 짜면서 (진행중인 모임 회차/모임 날짜/장소/신청기간/) db만 뽑아서
-                        보기 좋게 게시해놓을거!
+                        <%BbsDAO bbsDAO = new BbsDAO();
+        				ArrayList<Bbs> list_notice = bbsDAO.getList_index();
+        				for(Bbs bbs : list_notice){%>
+                        <table class="index_notice_board"> 
+              			<thead>
+            				<tr>
+            					<th class="index_notice_th" colspan="2"><%=bbs.getBbsTitle() %></th>
+            				</tr>
+            			</thead>          			
+            			<tbody>
+            				<tr>
+            					<td class="index_notice_subtitle">일시</td>
+            					<td class="index_notice_content"><%=bbs.getBbsJoindate() %></td>
+            				</tr>
+            				<tr>
+            					<td class="index_notice_subtitle">장소</td>
+								<td class="index_notice_content"><%=bbs.getBbsJoinplace() %></td>
+						    </tr>
+						    <tr>
+						    	<td class="index_notice_subtitle">요강</td>
+						    	<td class="index_notice_content"><%=bbs.getBbsContent().substring(0, 150).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %>...</td>
+						    </tr>
+						    <tr>
+						    	<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=bbs.getBbsID() %>">요강 자세히 보기 </a></td>
+						    </tr>        					   				
+            			</tbody>
+            		</table>   
+            		<%} %>
                     </div>
 
                     <div id="index_notice-btn">

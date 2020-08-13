@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class BbsDAO_join {
 	private Connection conn;	// db에 접근하게 해주는 객체

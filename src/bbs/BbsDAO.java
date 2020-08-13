@@ -52,8 +52,8 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent, String bbsType, int bbsFix) {
-		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+	public int write(String bbsTitle, String userID, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace) {
+		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -64,11 +64,39 @@ public class BbsDAO {
 			pstmt.setInt(6,  1);
 			pstmt.setString(7,  bbsType);
 			pstmt.setInt(8,  bbsFix);
+			pstmt.setString(9, bbsJoindate);
+			pstmt.setString(10, bbsJoinplace);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
+	}
+	public ArrayList<Bbs> getList_index(){
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsFix = 1 AND bbsType='모임공지';";
+		ArrayList<Bbs> list = new ArrayList<Bbs>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				bbs.setBbsType(rs.getString(7));
+				bbs.setBbsFix(rs.getInt(8));
+				bbs.setBbsJoindate(rs.getString(9));
+				bbs.setBbsJoinplace(rs.getString(10));
+
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	public ArrayList<Bbs> getList(int pageNumber){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
@@ -87,6 +115,9 @@ public class BbsDAO {
 				bbs.setBbsAvailable(rs.getInt(6));	
 				bbs.setBbsType(rs.getString(7));
 				bbs.setBbsFix(rs.getInt(8));
+				bbs.setBbsJoindate(rs.getString(9));
+				bbs.setBbsJoinplace(rs.getString(10));
+
 				list.add(bbs);
 			}
 		} catch(Exception e) {
@@ -128,6 +159,8 @@ public class BbsDAO {
 				bbs.setBbsAvailable(rs.getInt(6));	
 				bbs.setBbsType(rs.getString(7));
 				bbs.setBbsFix(rs.getInt(8));
+				bbs.setBbsJoindate(rs.getString(9));
+				bbs.setBbsJoinplace(rs.getString(10));
 				return bbs;
 			}
 		} catch(Exception e) {
@@ -136,15 +169,17 @@ public class BbsDAO {
 		return null;
 	}
 	
-	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix) {
-		String SQL="UPDATE bbs SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ? WHERE bbsID = ?;";
+	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace) {
+		String SQL="UPDATE bbs SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ?, bbsJoindate = ?, bbsJoinplace = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsType);
 			pstmt.setString(2,  bbsTitle);
 			pstmt.setString(3,  bbsContent);
 			pstmt.setInt(4, bbsFix);
-			pstmt.setInt(5, bbsID);
+			pstmt.setString(5,  bbsJoindate);
+			pstmt.setString(6,  bbsJoinplace);
+			pstmt.setInt(7, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

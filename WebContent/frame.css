@@ -170,6 +170,37 @@ section{
     #index_notice-btn a:hover:not(.active) {
         color: #92A8D1;
     }
+.index_notice_board{
+	margin:5px auto;
+	text-align:center;
+	width:100%;
+	height:80%;
+	padding:10px 10px;
+}
+
+.index_notice_board thead{
+	background-color: #0F4C81;
+	text-align: center;
+	color: white;
+}
+.index_notice_board td{
+	height:15px;
+}
+.index_notice_subtitle{
+	text-align:center;
+	color:white;
+	background-color: #0F4C81;
+	width:10%;
+}
+.index_notice_content{
+}
+#notice_more{
+	background-color:#0F4C81;
+	color:white;
+	width:100%;
+	display:inline-block;
+}
+
 #index_inform{
 	width:27%;
 	height:100%;
@@ -329,7 +360,32 @@ section{
 	text-align:right;
 }
 
-
+/* JOIN */
+.join_form{
+	width:85%;
+	padding: .5em .3em;
+}
+#joinMember option{
+	width:85%;
+	padding: .5em .3em;
+}
+#join_Content{
+	width:85%;
+	height:100px;
+	overflow:scroll;
+	padding:10px 10px;
+}
+.join-btn{
+	background-color:#0F4C81;
+	margin:20px auto;
+	height:40px;
+	width:120px;
+	color:white;
+	cursor:pointer;
+	font-weight:600;
+}
+	
+}
 /* BOARD COMMON */
 .board_container{
 	padding:10px 10px;

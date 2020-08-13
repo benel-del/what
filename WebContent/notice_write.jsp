@@ -105,6 +105,18 @@
             				</tr>
             				<tr>
             					<td>
+            					<div class="write_subtitle">
+            						<div class="bbsTitle">
+            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50">
+            						</div>
+            						<div class="bbsTitle">
+            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
+            						</div>
+            					</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
             						<div class="bbsContent">
             							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
             						</div>

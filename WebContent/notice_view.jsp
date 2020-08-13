@@ -114,6 +114,16 @@
 	            				<td class="view_subtitle">작성일자</td>
 	            				<td class="view_content1"><%=bbs.getBbsDate() %></td>
             				</tr>
+            				
+            				<%if(bbs.getBbsJoindate() != null && bbs.getBbsJoinplace() != null){ %>           				
+            				<tr>
+            					<td class="view_subtitle">모임날짜</td>
+	            				<td class="view_title"><%=bbs.getBbsJoindate() %></td>
+	            
+	            				<td class="view_subtitle">모임장소</td>
+	            				<td class="view_title"><%=bbs.getBbsJoinplace() %></td>
+            				</tr>
+            				<%} %>
             				<tr>
             					<td class="view_subtitle">내용</td>
 	            				<td colspan="3" class="view_content2"><div><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
@@ -142,7 +152,7 @@
             		</div>
             	</div>
             </div>
-            		
+           </div> 		
         </section>
 
         <footer>

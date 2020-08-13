@@ -9,8 +9,21 @@ public class Bbs {
 	private int bbsAvailable;
 	private String bbsType;
 	private int bbsFix;
-	
+	private String bbsJoindate;
+	private String bbsJoinplace;
 
+	public String getBbsJoindate() {
+		return bbsJoindate;
+	}
+	public void setBbsJoindate(String bbsJoindate) {
+		this.bbsJoindate = bbsJoindate;
+	}
+	public String getBbsJoinplace() {
+		return bbsJoinplace;
+	}
+	public void setBbsJoinplace(String bbsJoinplace) {
+		this.bbsJoinplace = bbsJoinplace;
+	}
 	public int getBbsID() {
 		return bbsID;
 	}

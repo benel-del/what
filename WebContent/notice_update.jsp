@@ -111,7 +111,6 @@
             			
             			<tbody>
             				<tr>
-	            				<td class="space"></td>
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
@@ -169,16 +168,25 @@
 			            				</div>
 	            					</div>
 								</td>
-								<td class="space"></td>
             				</tr>
             				<tr>
-            					<td class="space"></td>
+            					<td>
+            					<div class="write_subtitle">
+            						<div class="bbsTitle">
+            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50" value="<%=bbs.getBbsJoindate() %>">
+            						</div>
+            						<div class="bbsTitle">
+            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50" value="<%=bbs.getBbsJoinplace() %>">
+            						</div>
+            					</div>
+            					</td>
+            				</tr>
+            				<tr>
             					<td>
             						<div class="bbsContent">
             							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs.getBbsContent() %></textarea>
             						</div>
             					</td>
-            					<td class="space"></td>
             				</tr>
  							<tr>
  								<td  colspan="3">
