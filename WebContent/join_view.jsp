@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "java.io.PrintWriter" %>
-<%@ page import="bbs.Bbs" %>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="bbs_join.Bbs_join" %>
+<%@ page import="bbs_join.BbsDAO_join" %>
 
 <!DOCTYPE html>
 
@@ -22,7 +23,7 @@
 		userID = (String) session.getAttribute("userID");
 	}
 
-	int bbsID =0;
+	/*int bbsID =0;
 	if(request.getParameter("bbsID") != null){
 		bbsID=Integer.parseInt(request.getParameter("bbsID"));
 	}
@@ -32,8 +33,7 @@
 		script.println("alert('유효하지 않은 글입니다.')");
 		script.println("location.href='notice.jsp'");
 		script.println("</script>");
-	}
-	Bbs bbs = new BbsDAO().getBbs(bbsID);
+	}*/
 	%>
 	
     <div id="wrapper">
@@ -45,8 +45,8 @@
         %>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="login.jsp">로그인 |</a>
-                
+                <a class="link" href="login.jsp">로그인 </a>
+                |
                 <a class="link" href="register.jsp">회원가입</a>
             </div>
             <br>
@@ -55,8 +55,8 @@
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-
+                <a class="link" href="logoutAction.jsp">로그아웃 </a>
+				|
                 <a class="link" href="admin.jsp">관리자 페이지</a>
            </div>
             <br>		
@@ -65,8 +65,8 @@
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-                
+                <a class="link" href="logoutAction.jsp">로그아웃 </a>
+                |
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
@@ -91,63 +91,44 @@
             </ul>
         </div>
 
-	<!-- 게시판 공통 요소 : class board_ 사용 -->
-	
+ 	<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
-            <div class="board_subtitle">
-            	공지게시판
-            </div>
+            <div class="board_subtitle">참가자 명단</div>
 
-            <div class="view_container">
-            	<div class="view_row">
-            		<table class="view_table">  
+    	<%
+    		BbsDAO_join bbsDAO_join = new BbsDAO_join();
+    		ArrayList<Bbs_join> list = bbsDAO_join.getJoinMembers();
+    	%>
+    	
+            <div class="board_container">
+            	<div class="board_row">
+            		<table class="board_table">
             			<thead>
-            				<tr>
-            					<td class="view_subtitle">제목</td>
-            					<td colspan="4" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            				<tr class="board_tr">
+            					<th class="board_thead" id="rank_name">신청자</th>
+            					<th class="board_thead">참가자</th>			
             				</tr>
-            			</thead>    			
+            			</thead>
+            			
             			<tbody>
-            				<tr>
-            					<td class="view_subtitle">작성자</td>
-	            				<td class="view_content1"><%=bbs.getUserID() %></td>
-	            				<td class="view_subtitle">작성일자</td>
-	            				<td class="view_content1"><%=bbs.getBbsDate() %></td>
-            				</tr>
-            				<tr>
-            					<td class="view_subtitle">내용</td>
-	            				<td colspan="3" class="view_content2"><div><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
-            				</tr>
+            	<%
+            		for(Bbs_join bbs_join : list){%>
+            				<tr class="board_tr" id="notice_nonfix">
+            					<td><%=bbs_join.getUserID() %></td>
+            					<td><%=bbs_join.getJoinMember() %></td>
+            				</tr>   				
+						<%}%>
             			</tbody>
             		</table>
-            		
-            		<%if(bbs.getBbsType().equals("모임공지") == true){ %>
-            		<div id="notice_btn-primary">
-            		<a href="join.jsp" class="link">참가신청</a>
-            		<%} %>
-            		
-            		<div id="notice_btn-primary">
-            			<a href="notice.jsp" class="link">글 목록 </a>
-            		
-            		<%
-            			if(userID != null && userID.equals(bbs.getUserID())){
-            		%>
-            			/
-            			<a href = "notice_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
-            			/
-            			<a href = "notice_delete.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
-            		<%
-            			}
-            		%>
-            		</div>
             	</div>
-            </div>
-            		
+      
+	    	</div>  
         </section>
 
         <footer>
-      	      회장 : 전성빈 tel.010-5602-4112<br />총무 : 정하영 tel.010-9466-9742
+            	회장 : 전성빈 tel.010-5602-4112<br />총무 : 정하영 tel.010-9466-9742
         </footer>
     </div>
+    
 </body>
 </html>

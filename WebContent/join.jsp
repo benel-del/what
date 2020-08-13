@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="user.User" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import = "java.io.PrintWriter" %>
+<%@ page import ="java.io.PrintWriter" %>   
+<%@ page import="bbs_join.BbsDAO_join" %>
+<%@ page import="bbs_join.Bbs_join" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -21,6 +20,13 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	if(userID == null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인 후 접근 가능합니다.')");
+		script.println("history.back()");
+		script.println("</script>");
+	}
 	%>
 	
     <div id="wrapper">
@@ -28,32 +34,21 @@
         <br>
         <header>
         <%
-        	if(userID == null){
-        %>
-            <!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="login.jsp">로그인 </a>
-                |
-                <a class="link" href="register.jsp"> 회원가입</a>
-            </div>
-            <br>
-        <% 
-           	} else if(userID.equals("admin") == true) {
+        	if(userID.equals("admin") == true) {
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-                
-                <a class="link" href="admin.jsp">관리자 페이지</a>
+                <a class="link" href="logoutAction.jsp">로그아웃 </a>
+                |
+                <a class="link" href="admin.jsp"> 관리자 페이지</a>
            </div>
             <br>		
         <% 
            	} else {
 		%>
-			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-                
+                <a class="link" href="logoutAction.jsp">로그아웃 </a>
+                | 
                 <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
@@ -85,6 +80,7 @@
     	
             <div class="board_container">
             	<div class="board_row">
+            	    <form method="post" action="joinAction.jsp">        	
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
@@ -98,30 +94,37 @@
 							<tr class="board_tr" id="notice_nonfix">
 							<td colspan = "2">*조원들은 반드시 사이트에 가입되어 있어야 합니다.</td>
 							</tr>
-
+							
 							<tr class="board_tr" id="notice_nonfix">
 							<td>신청자 연락처</td>
-							<td><input type="text" placeholder="휴대폰 또는 카톡 아이디"></td>
+							<td>
+							 <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); %>
+							<input type="text" id="user_Phone" name = "userPhone" placeholder="휴대폰번호" maxlength="20">
+							</td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
 							<td>비밀번호</td>
-							<td><input type="password" placeholder="신청내용 수정시 필요(4자리)"></td>
+							<td><input type="password" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="20"></td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
 							<td>참가자</td>
-							<td><select>
+							<td><select name="joinMember" id="join_member">
 							<option selected>참가자 선택</option>
 							<option>아이디/김민선/2부/성별</option>
 							</select></td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
 							<td>전달내용 기재</td>
-							<td><textarea></textarea></td>
+							<td><textarea id="join_Content" placeholder="참가 관련 전달내용 기재" name="joinContent" maxlength="2048"></textarea></td>
 							</tr>
+							<tr>
+ 								<td  colspan="3">
+ 									<input type="submit" class="write-btn" value="글쓰기">
+ 								</td>
+ 							</tr>
             			</tbody>
             		</table>
-            		 	<a href = "joinAction.jsp">신청하기</a>
-            		 	<a href = "index.jsp">취소</a>
+            		</form>
             		
             	</div>
             	
