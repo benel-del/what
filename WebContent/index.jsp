@@ -118,11 +118,20 @@
             		</table>   
             		<%} %>
                     </div>
-
+					<%
+						ArrayList<Bbs> list_join = bbsDAO.getList_index();
+						int bbsJoin = 0;
+        				for(Bbs bbs : list_join){
+        					if(bbs.getBbsType().equals("모임공지") == true && bbs.getBbsComplete() == 0){
+        						bbsJoin = bbs.getBbsID();
+        					}
+        				}
+       				
+        			%>
                     <div id="index_notice-btn">
                         <!--참가신청 버튼-->
                         <div class="index_notice-btn">
-                            <a href="join.jsp">참가신청하기</a>
+                            <a href="join.jsp?=<%=bbsJoin%>">참가신청하기</a>
                         </div>
 
                         <!--팀 매칭 버튼-->

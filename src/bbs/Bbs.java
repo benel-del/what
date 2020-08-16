@@ -11,6 +11,7 @@ public class Bbs {
 	private int bbsFix;
 	private String bbsJoindate;
 	private String bbsJoinplace;
+	private int bbsComplete;
 
 	public String getBbsJoindate() {
 		return bbsJoindate;
@@ -71,5 +72,11 @@ public class Bbs {
 	}
 	public void setBbsFix(int bbsFix) {
 		this.bbsFix = bbsFix;
+	}
+	public int getBbsComplete() {
+		return bbsComplete;
+	}
+	public void setBbsComplete(int bbsComplete) {
+		this.bbsComplete = bbsComplete;
 	}
 }

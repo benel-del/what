@@ -10,8 +10,7 @@
 <jsp:setProperty name="bbs" property="bbsFix" />
 <jsp:setProperty name="bbs" property="bbsJoindate" />
 <jsp:setProperty name="bbs" property="bbsJoinplace" />
-
-
+<jsp:setProperty name="bbs" property="bbsComplete" />
 
 <!DOCTYPE html>
 <html lang="en">

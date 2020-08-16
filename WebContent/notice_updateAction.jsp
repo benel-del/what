@@ -63,8 +63,12 @@
 					script.println("history.back()");
 					script.println("</script>");
 				}
+				int bbsComplete = 0;
+				if(request.getParameter("bbsComplete") != null){
+					bbsComplete=Integer.parseInt(request.getParameter("bbsComplete"));
+				}
 				
-				int result = bbsDAO.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix, request.getParameter("bbsJoindate"), request.getParameter("bbsJoinplace"));
+				int result = bbsDAO.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix, request.getParameter("bbsJoindate"), request.getParameter("bbsJoinplace"), bbsComplete);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

@@ -53,7 +53,7 @@ public class BbsDAO {
 	}
 	
 	public int write(String bbsTitle, String userID, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace) {
-		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -66,6 +66,7 @@ public class BbsDAO {
 			pstmt.setInt(8,  bbsFix);
 			pstmt.setString(9, bbsJoindate);
 			pstmt.setString(10, bbsJoinplace);
+			pstmt.setInt(11, 0);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -73,7 +74,7 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	public ArrayList<Bbs> getList_index(){
-		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsFix = 1 AND bbsType='모임공지';";
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지';";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -90,7 +91,7 @@ public class BbsDAO {
 				bbs.setBbsFix(rs.getInt(8));
 				bbs.setBbsJoindate(rs.getString(9));
 				bbs.setBbsJoinplace(rs.getString(10));
-
+				bbs.setBbsComplete(rs.getInt(11));
 				list.add(bbs);
 			}
 		} catch(Exception e) {
@@ -117,7 +118,7 @@ public class BbsDAO {
 				bbs.setBbsFix(rs.getInt(8));
 				bbs.setBbsJoindate(rs.getString(9));
 				bbs.setBbsJoinplace(rs.getString(10));
-
+				bbs.setBbsComplete(rs.getInt(11));
 				list.add(bbs);
 			}
 		} catch(Exception e) {
@@ -161,6 +162,7 @@ public class BbsDAO {
 				bbs.setBbsFix(rs.getInt(8));
 				bbs.setBbsJoindate(rs.getString(9));
 				bbs.setBbsJoinplace(rs.getString(10));
+				bbs.setBbsComplete(rs.getInt(11));
 				return bbs;
 			}
 		} catch(Exception e) {
@@ -169,8 +171,8 @@ public class BbsDAO {
 		return null;
 	}
 	
-	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace) {
-		String SQL="UPDATE bbs SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ?, bbsJoindate = ?, bbsJoinplace = ? WHERE bbsID = ?;";
+	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace, int bbsComplete) {
+		String SQL="UPDATE bbs SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ?, bbsJoindate = ?, bbsJoinplace = ?, bbsComplete = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsType);
@@ -179,7 +181,8 @@ public class BbsDAO {
 			pstmt.setInt(4, bbsFix);
 			pstmt.setString(5,  bbsJoindate);
 			pstmt.setString(6,  bbsJoinplace);
-			pstmt.setInt(7, bbsID);
+			pstmt.setInt(7, bbsComplete);
+			pstmt.setInt(8, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

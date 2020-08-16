@@ -131,6 +131,8 @@
 			            			        while (rs.next()) {
 			            				%>
 			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); else if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)
+			            					
+			            					<input type="checkbox" id="bbs_fix" name="bbsComplete" value=1 <% if(rs.getInt(11) == 1) out.print("checked"); %>/> 완료
 			            				<%
 							                }
 							            } catch (SQLException ex) {

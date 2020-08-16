@@ -88,7 +88,7 @@
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
 	            						<% BbsDAO bbsDAO = new BbsDAO(); %>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)  	
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
 			            					<select name="bbsType" id="bbs_type">
