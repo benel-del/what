@@ -40,13 +40,33 @@
         <br>
         <header>
         <%
-        	if(userID.equals("admin") == true){
+        	if(userID == null){
         %>
+            <!--로그인, 회원가입 버튼-->
+            <div id="service">
+                <a class="link" href="login.jsp">로그인 |</a>
+                
+                <a class="link" href="register.jsp">회원가입</a>
+            </div>
+            <br>
+        <% 
+           	} else if(userID.equals("admin") == true) {
+		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+
                 <a class="link" href="admin.jsp">관리자 페이지</a>
+           </div>
+            <br>		
+        <% 
+           	} else {
+		%>
+			<!--로그인, 회원가입 버튼-->
+            <div id="service">
+                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
+                
+                <a class="link" href="mypage.jsp">마이페이지</a>
            </div>
             <br>		
 		<% 
@@ -78,27 +98,27 @@
             	결과게시판
             </div>
 
-            <div class="write_container">
+            <div class="view_container">
             	<div class="view_row">
             		<table class="view_table">  
             			<thead>
             				<tr>
-            					<td class="view_cat">제목</td>
+            					<td class="view_subtitle">제목</td>
 	            				<td class="view_title"><%=bbs_result.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
-	            				<td class="view_cat">작성자</td>
-	            				<td class="view_userID"><%=bbs_result.getUserID() %></td>
+	            				<td class="view_subtitle">작성자</td>
+	            				<td class="view_content1"><%=bbs_result.getUserID() %></td>
             				</tr>
             				<tr>
-	            				<td class="view_cat">작성일자</td>
-	            				<td class="view_date"><%=bbs_result.getBbsDate() %></td>
+	            				<td class="view_subtitle">작성일자</td>
+	            				<td class="view_content1"><%=bbs_result.getBbsDate() %></td>
             				</tr>
             				<tr>
-	            				<td class="view_cat">내용</td>
-	            				<td class="view_content"><%=bbs_result.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+	            				<td class="view_subtitle">내용</td>
+	            				<td class="view_content2"><%=bbs_result.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</tbody>
             		</table>

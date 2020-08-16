@@ -119,7 +119,7 @@
             					ArrayList<Bbs_result> list = bbsDAO_result.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             				%>          				
-            				<tr class="board_tr" id="notice_fix">
+            				<tr class="board_tr" id="notice_nonfix">
             					<td><%=list.get(i).getBbsID()%></td>
             					<td><a href="result_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
             					<td><%=list.get(i).getUserID() %></td>

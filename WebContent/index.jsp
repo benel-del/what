@@ -134,8 +134,7 @@
 
                 <div id="index_inform">
                     <div class="index_title">홍보글</div>
-                    여기는 관리자 페이지 짜면서 필요한 db만 뽑아갖고 게시할 수 있도록 하쟈!
-                    관리자가 계속 글/그림 수정하게 하고 싶어ㅎㅎ
+                    	
                 </div>
 
                 <div id="index_rank">
