@@ -7,7 +7,11 @@ public class Bbs_result {
 	private String bbsDate;
 	private String bbsContent;
 	private int bbsAvailable;
+	private String bbsFirst;
+	private String bbsSecond;
+	private String bbsThird;
 
+	
 	public int getBbsID() {
 		return bbsID;
 	}
@@ -43,5 +47,23 @@ public class Bbs_result {
 	}
 	public void setBbsAvailable(int bbsAvailable) {
 		this.bbsAvailable = bbsAvailable;
+	}
+	public String getBbsFirst() {
+		return bbsFirst;
+	}
+	public void setBbsFirst(String bbsFirst) {
+		this.bbsFirst = bbsFirst;
+	}
+	public String getBbsSecond() {
+		return bbsSecond;
+	}
+	public void setBbsSecond(String bbsSecond) {
+		this.bbsSecond = bbsSecond;
+	}
+	public String getBbsThird() {
+		return bbsThird;
+	}
+	public void setBbsThird(String bbsThird) {
+		this.bbsThird = bbsThird;
 	}
 }

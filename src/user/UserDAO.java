@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.regex.Pattern;
 
-import bbs_result.Bbs_result;
-
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -344,6 +342,7 @@ public class UserDAO {
 			while(rs.next()) {
 				User user = new User();
 				user.setUserRank(rs.getInt(8));
+				user.setUserID(rs.getString(1));
 				user.setUserName(rs.getString(3));
 				user.setUserLevel(rs.getString(5));
 				user.setUserType(rs.getString(6));
@@ -393,4 +392,32 @@ public class UserDAO {
 		}
 		return list;
 	}
+	
+	public User getuser_rank(String userID) {
+		String SQL="SELECT * FROM user WHERE userID = ?";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserRank(rs.getInt(8));
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				user.setUserDescription(rs.getString(7));
+				user.setUserFirst(rs.getInt(9));
+				user.setUserSecond(rs.getInt(10));
+				user.setUserThird(rs.getInt(11));
+				return user;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 }

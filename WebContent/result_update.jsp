@@ -105,7 +105,6 @@
             			
             			<tbody>
             				<tr>
-	            				<td class="space"></td>
 	            				<td>
 	            					<div class="write_subtitle">
 			            				<div class="bbsTitle">
@@ -113,16 +112,34 @@
 			            				</div>
 	            					</div>
 								</td>
-								<td class="space"></td>
             				</tr>
             				<tr>
-            					<td class="space"></td>
             					<td>
-            						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_result.getBbsContent() %></textarea>
+            						<div class="bbs_Result">
+            							<textarea id="bbs_first" placeholder="1위" name="bbsFirst" maxlength="100"><% if(bbs_result.getBbsFirst() != null){out.println(bbs_result.getBbsFirst());} else {out.println("");} %></textarea>	
             						</div>
             					</td>
-            					<td class="space"></td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_Result">
+            							<textarea id="bbs_second" placeholder="2위" name="bbsSecond" maxlength="100"><% if(bbs_result.getBbsSecond() != null){out.println(bbs_result.getBbsSecond());} else {out.println("");} %></textarea>	
+            						</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_Result">
+            							<textarea id="bbs_third" placeholder="3위" name="bbsThird" maxlength="100"><% if(bbs_result.getBbsThird() != null){out.println(bbs_result.getBbsThird());} else {out.println("");}%></textarea>	
+            						</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_Result">
+            							<textarea id="bbs_contents" placeholder="기타" name="bbsContent" maxlength="2048"><% if(bbs_result.getBbsContent() != null){out.println(bbs_result.getBbsContent());} else {out.println("");}%></textarea>	
+            						</div>
+            					</td>
             				</tr>
  							<tr>
  								<td  colspan="3">

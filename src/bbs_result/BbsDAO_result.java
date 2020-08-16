@@ -54,8 +54,8 @@ public class BbsDAO_result {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent) {
-		String SQL="INSERT INTO bbs_result VALUES(?, ?, ?, ?, ?, ?);";
+	public int write(String bbsTitle, String userID, String bbsContent, String bbsFirst, String bbsSecond, String bbsThird) {
+		String SQL="INSERT INTO bbs_result VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -64,6 +64,10 @@ public class BbsDAO_result {
 			pstmt.setString(4,  getDate());
 			pstmt.setString(5,  bbsContent);
 			pstmt.setInt(6,  1);
+			pstmt.setString(7,  bbsFirst);
+			pstmt.setString(8,  bbsSecond);
+			pstmt.setString(9,  bbsThird);
+
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -84,7 +88,11 @@ public class BbsDAO_result {
 				bbs_result.setUserID(rs.getString(3));
 				bbs_result.setBbsDate(rs.getString(4));
 				bbs_result.setBbsContent(rs.getString(5));
-				bbs_result.setBbsAvailable(rs.getInt(6));	
+				bbs_result.setBbsAvailable(rs.getInt(6));
+				bbs_result.setBbsFirst(rs.getString(7));
+				bbs_result.setBbsSecond(rs.getString(8));
+				bbs_result.setBbsThird(rs.getString(9));
+
 				list.add(bbs_result);
 			}
 		} catch(Exception e) {
@@ -122,7 +130,10 @@ public class BbsDAO_result {
 				bbs_result.setUserID(rs.getString(3));
 				bbs_result.setBbsDate(rs.getString(4));
 				bbs_result.setBbsContent(rs.getString(5));
-				bbs_result.setBbsAvailable(rs.getInt(6));	
+				bbs_result.setBbsAvailable(rs.getInt(6));
+				bbs_result.setBbsFirst(rs.getString(7));
+				bbs_result.setBbsSecond(rs.getString(8));
+				bbs_result.setBbsThird(rs.getString(9));
 				return bbs_result;
 			}
 		} catch(Exception e) {
@@ -130,13 +141,16 @@ public class BbsDAO_result {
 		}
 		return null;
 	}		
-	public int update(int bbsID, String bbsTitle, String bbsContent) {
-		String SQL="UPDATE bbs_result SET bbsTitle= ?, bbsContent = ? WHERE bbsID = ?;";
+	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsFirst, String bbsSecond, String bbsThird) {
+		String SQL="UPDATE bbs_result SET bbsTitle= ?, bbsContent = ?, bbsFirst = ?, bbsSecond = ?, bbsThird = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsTitle);
 			pstmt.setString(2,  bbsContent);
-			pstmt.setInt(3, bbsID);
+			pstmt.setString(3, bbsFirst);
+			pstmt.setString(4, bbsSecond);
+			pstmt.setString(5, bbsThird);
+			pstmt.setInt(6, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

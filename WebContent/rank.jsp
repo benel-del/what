@@ -85,7 +85,6 @@
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
             <div class="board_subtitle">랭킹게시판</div>
-
     	<%
     		UserDAO userDAO = new UserDAO();
     		ArrayList<User> list = userDAO.getUserRank(pageNumber);
@@ -98,6 +97,7 @@
             				<tr class="board_tr">
             					<th class="board_thead" id="notice_num">순위</th>
             					<th class="board_thead" id="rank_name">이름</th>
+            					<th class="board_thead" id="rank_name">아이디</th>            			
             					<th class="board_thead" id="rank_level">부수</th>
             					<th class="board_thead" id="rank_type">전형</th>
             					<th class="board_thead" id="rank_level">우승</th>
@@ -108,17 +108,18 @@
             			
             			<tbody>
             	<%
-            		for(User user : list){%>
+            		for(int i=0; i<list.size(); i++){%>
             				<tr class="board_tr" id="notice_nonfix">
-            					<td><%=user.getUserRank() %></td>
-            					<td><a class = "link" href = "show_userInfo.jsp"><%=user.getUserName() %></a></td>
-								<td><%=user.getUserLevel() %></td>
-            					<td><%if(user.getUserType()!=null){
-            						out.println(user.getUserType());
+            					<td><%=list.get(i).getUserRank() %></td>
+            					<td><%=list.get(i).getUserName() %></td>
+            					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
+								<td><%=list.get(i).getUserLevel() %></td>
+            					<td><%if(list.get(i).getUserType()!=null){
+            						out.println(list.get(i).getUserType());
             					} else{ out.println("");}%></td>
-            					<td><%=user.getUserFirst() %></td>
-            					<td><%=user.getUserSecond() %></td>
-            					<td><%=user.getUserThird() %></td>
+            					<td><%=list.get(i).getUserFirst() %></td>
+            					<td><%=list.get(i).getUserSecond() %></td>
+            					<td><%=list.get(i).getUserThird() %></td>
             				</tr>   				
 						<%}%>
             			</tbody>
