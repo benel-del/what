@@ -141,14 +141,14 @@
             		if(pageNumber != 1){
             	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="result.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀이전 </a>
+            			<a href="result.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 				<% 
 					}
             		if(bbsDAO_result.nextPage(pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="result.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음▶ </a>
+            			<a href="result.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
             	<%
             		}

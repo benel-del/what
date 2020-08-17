@@ -7,7 +7,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="bbsSearch" class="bbsSearch.BbsSearch" scope="page" />
 <jsp:setProperty name="bbsSearch" property="userID"/>
-<jsp:setProperty name="bbsSearch" property="searchType"/>
 <jsp:setProperty name="bbsSearch" property="searchWord" />
 <jsp:setProperty name="bbsSearch" property="searchOption" />
 

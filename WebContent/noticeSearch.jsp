@@ -119,11 +119,11 @@
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead" id="notice_num">no.</th>
-            					<th class="board_thead" id="notice_type">머릿말</th>
-            					<th class="board_thead" id="notice_title">제목</th>
-            					<th class="board_thead" id="notice_writer">작성자</th>
-            					<th class="board_thead" id="notice_day">날짜</th>
+            					<th class="board_thead" id="bbs_num">no.</th>
+            					<th class="board_thead" id="bbs_type">머릿말</th>
+            					<th class="board_thead" id="bbs_title">제목</th>
+            					<th class="board_thead" id="bbs_writer">작성자</th>
+            					<th class="board_thead" id="bbs_day">날짜</th>
             				</tr>
             			</thead>
             			<tbody>
@@ -148,15 +148,15 @@
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
 	           						if(rs.getString(3).equals("title") == true){
-	           							paging += bbsSearchDAO.getCount_title(rs.getString(4)) / 12;
+	           							paging += bbsSearchDAO.getCount_title("BBS", rs.getString(4)) / 12;
 	               						list = bbsSearchDAO.getList_title(pageNumber, rs.getString(4));
 	               					}
 	               					else if(rs.getString(3).equals("mix") == true){
-	               						paging += bbsSearchDAO.getCount_mix(rs.getString(4)) / 12;
+	               						paging += bbsSearchDAO.getCount_mix("BBS", rs.getString(4)) / 12;
 	               						list = bbsSearchDAO.getList_mix(pageNumber, rs.getString(4));
 	               					}
 	               					else{
-	               						paging += bbsSearchDAO.getCount_content(rs.getString(4)) / 12;
+	               						paging += bbsSearchDAO.getCount_content("BBS", rs.getString(4)) / 12;
 	               						list = bbsSearchDAO.getList_content(pageNumber, rs.getString(4));
 	               					}
 	
@@ -168,7 +168,7 @@
             					<td><%=list.get(i).getBbsType()%></td>
             					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
             					<td><%=list.get(i).getUserID() %></td>
-            					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+            					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
 	            						}
@@ -181,7 +181,7 @@
 	                       					<td><%=list.get(i).getBbsType()%></td>
 	                       					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
 	                       					<td><%=list.get(i).getUserID() %></td>
-	                       					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+	                       					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
 	                       				</tr>   
 	                       				<%
 	           							}

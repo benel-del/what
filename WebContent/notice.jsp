@@ -112,7 +112,7 @@
             					<th class="board_thead" id="notice_type">머릿말</th>
             					<th class="board_thead" id="notice_title">제목</th>
             					<th class="board_thead" id="notice_writer">작성자</th>
-            					<th class="board_thead" id="notice_day">날짜</th>
+            					<th class="board_thead" id="notice_day">등록일자</th>
             				</tr>
             			</thead>
             			<tbody>
@@ -128,7 +128,7 @@
             					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a>
             						<%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0){out.println("[진행중]");} else{out.println("[완료]");}}%></td>
             					<td><%=list.get(i).getUserID() %></td>
-            					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+            					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
             						}
@@ -142,7 +142,7 @@
                        					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a>
                        					    <%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0 ){out.println("[진행중]");} else{out.println("[완료]");}}%></td>                   
                        					<td><%=list.get(i).getUserID() %></td>
-                       					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+                       					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
                        				</tr>   
                        				<%
            							}

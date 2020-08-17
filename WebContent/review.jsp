@@ -123,7 +123,7 @@
             					<td><%=list.get(i).getBbsID()%></td>
             					<td><a href="review_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
             					<td><%=list.get(i).getUserID() %></td>
-            					<td><%=list.get(i).getBbsDate().substring(0,16) %></td>
+            					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
             					}
