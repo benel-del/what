@@ -56,7 +56,11 @@ public class BbsDAO {
 		String SQL="INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext());
+			int bbsID = getNext();
+			if(bbsType.contentEquals("모임공지")) {
+				getJoin(bbsID);
+			}
+			pstmt.setInt(1,  bbsID);
 			pstmt.setString(2,  bbsTitle);
 			pstmt.setString(3,  userID);
 			pstmt.setString(4,  getDate());
@@ -72,7 +76,18 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
+	}	
+	public int getJoin(int bbsID) {
+		String SQL="CREATE TABLE bbs_join"+bbsID+"(joinID INT, userID VARCHAR(20), userPhone VARCHAR(20), joinPassword VARCHAR(10), joinMember VARCHAR(200), joinContent VARCHAR(2048), moneyCheck INT, PRIMARY KEY(joinID));";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
 	}
+	
 	public ArrayList<Bbs> getList_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지';";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();

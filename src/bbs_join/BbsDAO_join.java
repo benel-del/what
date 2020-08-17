@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import bbs.Bbs;
+
 public class BbsDAO_join {
 	private Connection conn;	// db에 접근하게 해주는 객체
 	private ResultSet rs;	// 정보 담는 객체
@@ -23,8 +25,8 @@ public class BbsDAO_join {
 		}
 	}	
 	
-	public int getNext() {	// 새 글 작성을 위한 joinId 지정하기
-		String SQL="SELECT joinID FROM bbs_join ORDER BY joinID DESC;";
+	public int getNext(int bbsID) {	// 새 글 작성을 위한 joinId 지정하기
+		String SQL="SELECT joinID FROM bbs_join"+bbsID+" ORDER BY joinID DESC;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -38,11 +40,11 @@ public class BbsDAO_join {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int getInfo(String userID, String userPhone, String joinPassword, String joinMember, String joinContent) {
-		String SQL="INSERT INTO bbs_join VALUES(?, ?, ?, ?, ?, ?, ?);";
+	public int getInfo(int bbsID, String userID, String userPhone, String joinPassword, String joinMember, String joinContent) {
+		String SQL="INSERT INTO bbs_join"+bbsID+" VALUES(?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext());
+			pstmt.setInt(1,  getNext(bbsID));
 			pstmt.setString(2,  userID);
 			pstmt.setString(3,  userPhone);
 			pstmt.setString(4,  joinPassword);
@@ -56,8 +58,8 @@ public class BbsDAO_join {
 		return -1; //데이터베이스 오류
 	}
 	
-	public ArrayList<Bbs_join> getJoinMembers(){		
-		String SQL="SELECT * FROM bbs_join;";
+	public ArrayList<Bbs_join> getJoinMembers(int bbsID){		
+		String SQL="SELECT * FROM bbs_join"+bbsID+";";
 		ArrayList<Bbs_join> list = new ArrayList<Bbs_join>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);

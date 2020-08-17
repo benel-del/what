@@ -84,8 +84,19 @@
             <div class="board_subtitle">참가자 명단</div>
 
     	<%
+    	int bbsID =0;
+    	if(request.getParameter("bbsID") != null){
+    		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+    	}
+    	if(bbsID ==0){
+    		PrintWriter script=response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('등록된 참가자가 없습니다.')");
+    		script.println("location.href='index.jsp'");
+    		script.println("</script>");
+    	}
     		BbsDAO_join bbsDAO_join = new BbsDAO_join();
-    		ArrayList<Bbs_join> list = bbsDAO_join.getJoinMembers();
+    		ArrayList<Bbs_join> list = bbsDAO_join.getJoinMembers(bbsID);
     	%>
     	
             <div class="board_container">

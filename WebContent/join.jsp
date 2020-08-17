@@ -27,6 +27,17 @@
 		script.println("history.back()");
 		script.println("</script>");
 	}
+	int bbsID =0;
+	if(request.getParameter("bbsID") != null){
+		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+	}
+	if(bbsID ==0){
+		PrintWriter script=response.getWriter();
+		script.println("<script>");
+		script.println("alert('유효하지 않은 글입니다.')");
+		script.println("location.href='index.jsp'");
+		script.println("</script>");
+	}
 	%>
 	
     <div id="wrapper">
@@ -80,11 +91,15 @@
     	
             <div class="board_container">
             	<div class="board_row">
-            	    <form method="post" action="joinAction.jsp">        	
+            	    <form method="post" action="joinAction.jsp">
+            	    <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); %>           	            	
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead" id="join_title" colspan="2">제 ?회 어쩌다리그</th>
+            					<th class="board_thead" id="join_title" colspan="2">
+            						<input type="hidden" name="bbsID" value="<%=bbsID %>">            						
+            						제?회 어쩌다리그
+            					</th>
             				</tr>
             			</thead>
             			<tbody>
@@ -98,7 +113,6 @@
 							<tr class="board_tr" id="notice_nonfix">
 							<td>신청자 연락처</td>
 							<td>
-							 <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); %>
 							<input type="text" class="join_form" id="user_Phone" name = "userPhone" placeholder="휴대폰번호" maxlength="20">
 							</td>
 							</tr>

@@ -1,6 +1,7 @@
 package bbs_join;
 
 public class Bbs_join {
+	private int bbsID;
 	private int joinID;
 	private String userID;
 	private String userPhone;
@@ -9,6 +10,12 @@ public class Bbs_join {
 	private String joinContent;
 	private int moneyCheck;
 	
+	public int getBbsID() {
+		return bbsID;
+	}
+	public void setBbsID(int bbsID) {
+		this.bbsID = bbsID;
+	}
 	public int getJoinID() {
 		return joinID;
 	}

@@ -9,6 +9,7 @@
 <jsp:setProperty name="bbs_join" property="joinMember" />
 <jsp:setProperty name="bbs_join" property="joinContent" />
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,8 +52,8 @@
 				script.println("</script>");
 			} else{
 				BbsDAO_join bbsDAO_join = new BbsDAO_join();
-				
-				int result = bbsDAO_join.getInfo(userID, bbs_join.getUserPhone(), bbs_join.getJoinPassword(), bbs_join.getJoinMember(), bbs_join.getJoinContent());
+				int bbsID=Integer.parseInt(request.getParameter("bbsID"));
+				int result = bbsDAO_join.getInfo(bbsID, userID, bbs_join.getUserPhone(), bbs_join.getJoinPassword(), bbs_join.getJoinMember(), bbs_join.getJoinContent());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
@@ -62,9 +63,10 @@
 				} else{
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("location.href='join_view.jsp'");
+					script.println("location.href='join_view.jsp?bbsID="+bbsID+"'");
 					script.println("</script>");
 				}
+				
 			}
 		}
 
