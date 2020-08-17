@@ -461,16 +461,16 @@ section{
 }
 
 /* NOTICE, RESULT, REVIEW 목록보기 */
-#notice_type{
+#bbs_type{
 	width: 15%;
 }
-#notice_num{
+#bbs_num{
 	width:8%;
 }
-#notice_writer{
+#bbs_writer{
 	width: 15%;
 }
-#notice_day{
+#bbs_day{
 	width: 20%;
 }
 #notice_fix{
@@ -527,6 +527,14 @@ section{
 	width: 100%;	
 	padding:10px 10px;
 }
+.join_input{
+	font-size: 12px;
+}
+.join_input input{
+	width: 70%;
+	height: 25px;
+	margin: 5px;
+}
 .write_table{
 	text-align:center;
 	border:1px solid #0F4C81;
@@ -552,11 +560,11 @@ section{
 }
 .bbsType{
 	display:inline-block;
-	width:25%;
-} 
+	width:15%;
+}
 .bbsTitle{
 	display:inline-block;
-	width:72%;
+	width:70%;
 }
 .bbsType select{
 	width:100%;
@@ -569,7 +577,7 @@ section{
 }
 .bbsContent{
 	width:100%;
-	height:600px;
+	height:450px;
 	border: 1px solid #0F4C81;
 	padding:10px 10px;
 }
@@ -578,8 +586,18 @@ section{
 	height:100%;
 	font-size:15px;
 	border:none;
-	overflow:scroll;
+	overflow:none;
 	resize:none;
+}
+.bbsResultContent{
+	width: 100%;
+	height: 170px;
+	border: 1px solid #0F4C81;
+	padding: 10px 10px;
+}
+.bbs_rank-field{
+	height: 30px;
+	margin: 10px;
 }
 
 /* NOTICE, RESUlT, REVIEW view */
@@ -624,11 +642,11 @@ section{
 
 
 /* RANK */
-#rank_name{
-	width:15%;
-}
-#rank_level{
+#bbs_name{
 	width:10%;
+}
+#bbs_level{
+	width:5%;
 }
 
 /* FAQ */

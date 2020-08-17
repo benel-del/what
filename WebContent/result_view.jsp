@@ -104,39 +104,37 @@
             			<thead>
             				<tr>
             					<td class="view_subtitle">제목</td>
-	            				<td class="view_title"><%=bbs_result.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+	            				<td colspan="3" class="view_title"><%=bbs_result.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
 	            				<td class="view_subtitle">작성자</td>
 	            				<td class="view_content1"><%=bbs_result.getUserID() %></td>
-            				</tr>
-            				<tr>
 	            				<td class="view_subtitle">작성일자</td>
 	            				<td class="view_content1"><%=bbs_result.getBbsDate() %></td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">우승</td>
-	            				<td class="view_title"><% if(bbs_result.getBbsFirst() != null){
+	            				<td colspan="3" class="content1"><% if(bbs_result.getBbsFirst() != null){
 	            					out.println(bbs_result.getBbsFirst().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
 	            					} else {out.println("");}%></td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">준우승</td>
-	            				<td class="view_title"><% if(bbs_result.getBbsSecond() != null){
+	            				<td colspan="3" class="content1"><% if(bbs_result.getBbsSecond() != null){
 	            					out.println(bbs_result.getBbsSecond().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
 	            					} else {out.println("");}%></td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">3위</td>
-	            				<td class="view_title"><% if(bbs_result.getBbsThird() != null){
+	            				<td colspan="3" class="view_content1"><% if(bbs_result.getBbsThird() != null){
 	            					out.println(bbs_result.getBbsThird().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
 	            					} else {out.println("");}%></td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">내용</td>
-	            				<td class="view_title"><% if(bbs_result.getBbsContent() != null){
+	            				<td colspan="3" class="view_content2"><% if(bbs_result.getBbsContent() != null){
 	            					out.println(bbs_result.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
 	            					} else {out.println("");}%></td>
             				</tr>

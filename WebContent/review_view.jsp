@@ -104,22 +104,20 @@
             			<thead>
             				<tr>
             					<td class="view_subtitle">제목</td>
-            					<td class="view_title"><%=bbs_review.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            					<td colspan="3" class="view_title"><%=bbs_review.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
 							</tr>
             			</thead>    			
             			<tbody>           		
             				<tr>
 	            				<td class="view_subtitle">작성자</td>
 	            				<td class="view_content1"><%=bbs_review.getUserID() %></td>
-            				</tr>
-            				<tr>
 	            				<td class="view_subtitle">작성일자</td>
 	            				<td class="view_content1"><%=bbs_review.getBbsDate() %></td>
             				</tr>
 
             				<tr>
 	            				<td class="view_subtitle">내용</td>
-	            				<td class="view_content2" style="min-height:200px; text-align:left;"><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</tbody>
             		</table>
