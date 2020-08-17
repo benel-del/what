@@ -146,7 +146,7 @@
 
        				<tr class="myinfo_userRank">
        				<th id="myinfo_title" class="table_th1">랭킹</th>
-       				<th class="table_th2"><%=rs.getInt(8) %>위</th>
+       				<th class="table_th2"><%if(rs.getInt(8) == 0) out.print("-"); else out.print(rs.getInt(8) + "위");%></th>
        				</tr>
        				<tr class="myinfo_userFirst">
        				<th id="myinfo_title" class="table_th1">1위</th>

@@ -160,13 +160,14 @@
             			<%
     					UserDAO userDAO = new UserDAO();
     					ArrayList<User> list = userDAO.getUserRank_index();
-            			for(User user : list){%>
+            			for(User user : list){
+            				if(user.getUserID().equals("admin") == false){%>
             				<tr>
-            					<td><%=user.getUserRank() %></td>
+            					<td><%if(user.getUserRank() == 0) out.print("-"); else out.print(user.getUserRank()); %></td>
             					<td><%=user.getUserName() %></td>
 								<td><%=user.getUserLevel() %></td>
             				</tr>   				
-						<%}%>
+						<%}}%>
             			</tbody>
             		</table>     
               

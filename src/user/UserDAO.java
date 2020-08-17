@@ -333,11 +333,11 @@ public class UserDAO {
 		return -1; //데이터베이스 오류
 	}
 	public ArrayList<User> getUserRank(int pageNumber){		
-		String SQL="SELECT * FROM user ORDER BY userRank ASC LIMIT ?, 10;";
+		String SQL="SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT ?, 12;";
 		ArrayList<User> list = new ArrayList<User>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber - 1) * 10);
+			pstmt.setInt(1,  (pageNumber - 1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				User user = new User();
@@ -359,10 +359,10 @@ public class UserDAO {
 	}
 
 	public boolean nextPage(int pageNumber) {
-		String SQL="SELECT * FROM user WHERE userRank < ? ORDER BY userRank DESC LIMIT 10;";
+		String SQL="SELECT * FROM user WHERE userRank > ? ORDER BY userRank ASC LIMIT 12;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 10);
+			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				return true;
@@ -381,6 +381,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				User user = new User();
+				user.setUserID(rs.getString(1));
 				user.setUserRank(rs.getInt(8));
 				user.setUserName(rs.getString(3));
 				user.setUserLevel(rs.getString(5));

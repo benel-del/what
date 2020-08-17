@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import bbs.Bbs;
 import bbs_result.Bbs_result;
 import bbs_review.Bbs_review;
+import user.User;
 
 public class BbsSearchDAO {
 	private Connection conn;
@@ -294,10 +295,7 @@ public class BbsSearchDAO {
 		return list;
 	}
 	
-	
-	
-	
-	
+	/* notice, result, review */
 	public int getCount_title(String table, String searchWord){
 		int count = 0;
 		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
@@ -347,5 +345,46 @@ public class BbsSearchDAO {
 		return count;
 	}
 	
+	/* rank */
+	public ArrayList<User> getList_rank(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM USER WHERE userName LIKE ? ORDER BY userRank ASC, userName ASC LIMIT ?, 12;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setInt(2,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserRank(rs.getInt(8));
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				user.setUserFirst(rs.getInt(9));
+				user.setUserSecond(rs.getInt(10));
+				user.setUserThird(rs.getInt(11));	
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int getCount_rank(String searchWord){
+		int count = 0;
+		String SQL = "SELECT * FROM USER WHERE userName LIKE ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+				count ++;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 }
 	
