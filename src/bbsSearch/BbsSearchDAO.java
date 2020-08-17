@@ -220,6 +220,84 @@ public class BbsSearchDAO {
 		return list;
 	}
 	
+	/* review */
+	public ArrayList<Bbs_review> getList_review_title(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM BBS_REVIEW WHERE bbsAvailable = 1 AND bbsTitle LIKE ? ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_review> list = new ArrayList<Bbs_review>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setInt(2,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_review bbs = new Bbs_review();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_review> getList_review_mix(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM BBS_REVIEW WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?) ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_review> list = new ArrayList<Bbs_review>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setString(2,  "%"+searchWord+"%");
+			pstmt.setInt(3,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_review bbs = new Bbs_review();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_review> getList_review_content(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM BBS_REVIEW WHERE bbsAvailable = 1 AND bbsContent LIKE ? ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_review> list = new ArrayList<Bbs_review>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setInt(2,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_review bbs = new Bbs_review();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
 	public int getCount_title(String table, String searchWord){
 		int count = 0;
 		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
