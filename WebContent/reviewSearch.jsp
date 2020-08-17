@@ -147,15 +147,15 @@
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
 	           						if(rs.getString(3).equals("title") == true){
-	           							paging += bbsSearchDAO.getCount_title("BBS_REVIEW", rs.getString(4)) / 12;
+	           							paging += bbsSearchDAO.getCount_title("BBS_REVIEW", rs.getString(4)) / 13;
 	               						list = bbsSearchDAO.getList_review_title(pageNumber, rs.getString(4));
 	               					}
 	               					else if(rs.getString(3).equals("mix") == true){
-	               						paging += bbsSearchDAO.getCount_mix("BBS_REVIEW", rs.getString(4)) / 12;
+	               						paging += bbsSearchDAO.getCount_mix("BBS_REVIEW", rs.getString(4)) / 13;
 	               						list = bbsSearchDAO.getList_review_mix(pageNumber, rs.getString(4));
 	               					}
 	               					else{
-	               						paging += bbsSearchDAO.getCount_content("BBS_REVIEW", rs.getString(4)) / 12;
+	               						paging += bbsSearchDAO.getCount_content("BBS_REVIEW", rs.getString(4)) / 13;
 	               						list = bbsSearchDAO.getList_review_content(pageNumber, rs.getString(4));
 	               					}
 	

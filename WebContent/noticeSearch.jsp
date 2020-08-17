@@ -37,7 +37,7 @@
 		userID = (String) session.getAttribute("userID");
 	}
 	int paging = 1;
-	int pageNumber = 1; // 기본페이지
+	int pageNumber = 1;
 	if(request.getParameter("pageNumber") != null){
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
@@ -148,15 +148,15 @@
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
 	           						if(rs.getString(3).equals("title") == true){
-	           							paging += bbsSearchDAO.getCount_title("BBS", rs.getString(4)) / 12;
+	           							paging += bbsSearchDAO.getCount_title("BBS", rs.getString(4)) / 13;
 	               						list = bbsSearchDAO.getList_title(pageNumber, rs.getString(4));
 	               					}
 	               					else if(rs.getString(3).equals("mix") == true){
-	               						paging += bbsSearchDAO.getCount_mix("BBS", rs.getString(4)) / 12;
+	               						paging += bbsSearchDAO.getCount_mix("BBS", rs.getString(4)) / 13;
 	               						list = bbsSearchDAO.getList_mix(pageNumber, rs.getString(4));
 	               					}
 	               					else{
-	               						paging += bbsSearchDAO.getCount_content("BBS", rs.getString(4)) / 12;
+	               						paging += bbsSearchDAO.getCount_content("BBS", rs.getString(4)) / 13;
 	               						list = bbsSearchDAO.getList_content(pageNumber, rs.getString(4));
 	               					}
 	

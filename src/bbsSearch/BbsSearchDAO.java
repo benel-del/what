@@ -298,11 +298,18 @@ public class BbsSearchDAO {
 	/* notice, result, review */
 	public int getCount_title(String table, String searchWord){
 		int count = 0;
-		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
+		String SQL;
+		
+		if(table.equals("BBS"))
+			SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
+		else if(table.equals("RESULT"))
+			SQL = "SELECT * FROM BBS_RESULT WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
+		else
+			SQL = "SELECT * FROM BBS_REVIEW WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
+		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  table);
-			pstmt.setString(2,  "%"+searchWord+"%");
+			pstmt.setString(1,  "%"+searchWord+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next())
 				count ++;
@@ -314,12 +321,19 @@ public class BbsSearchDAO {
 	
 	public int getCount_mix(String table, String searchWord){
 		int count = 0;
-		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?);";
+		String SQL;
+		
+		if(table.equals("BBS"))
+			SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?);";
+		else if(table.equals("BBS_RESULT"))
+			SQL = "SELECT * FROM BBS_RESULT WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?);";
+		else
+			SQL = "SELECT * FROM BBS_REVIEW WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?);";
+		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  table);
+			pstmt.setString(1,  "%"+searchWord+"%");
 			pstmt.setString(2,  "%"+searchWord+"%");
-			pstmt.setString(3,  "%"+searchWord+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next())
 				count ++;
@@ -331,11 +345,19 @@ public class BbsSearchDAO {
 	
 	public int getCount_content(String table, String searchWord){
 		int count = 0;
-		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND bbsContent LIKE ?;";
+		
+		String SQL;
+		
+		if(table.equals("BBS"))
+			SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsContent LIKE ?;";
+		else if(table.equals("BBS_RESULT"))
+			SQL = "SELECT * FROM BBS_RESULT WHERE bbsAvailable = 1 AND bbsContent LIKE ?;";
+		else
+			SQL = "SELECT * FROM BBS_REVIEW WHERE bbsAvailable = 1 AND bbsContent LIKE ?;";
+		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  table);
-			pstmt.setString(2,  "%"+searchWord+"%");
+			pstmt.setString(1,  "%"+searchWord+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next())
 				count ++;

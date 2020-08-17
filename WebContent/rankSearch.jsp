@@ -138,7 +138,7 @@
         		                pstmt.setInt(1,  bbsSearchDAO.numbering()-1);
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
-        		                	paging += bbsSearchDAO.getCount_rank(rs.getString(4)) / 12;
+        		                	paging += bbsSearchDAO.getCount_rank(rs.getString(4)) / 13;
                						list = bbsSearchDAO.getList_rank(pageNumber, rs.getString(4));
                						
 	            					for(int i=0; i<list.size(); i++){
@@ -186,7 +186,7 @@
             	</div>
             	
      			<!-- 검색 바 -->
-     			<form method="post" action="reviewSearchAction.jsp">
+     			<form method="post" action="rankSearchAction.jsp">
      				<div class="board_search">	            	
 	   	        		<input id="bbs_search-btn" type="submit" value="검색">
 	   	        	
