@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import bbs.Bbs;
+import bbs_result.Bbs_result;
+import bbs_review.Bbs_review;
 
 public class BbsSearchDAO {
 	private Connection conn;
@@ -55,6 +57,7 @@ public class BbsSearchDAO {
 		return -1; //데이터베이스 오류
 	}
 	
+	/* notice */
 	public ArrayList<Bbs> getList_title(int pageNumber, String searchWord){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsTitle LIKE ? ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
@@ -134,27 +137,95 @@ public class BbsSearchDAO {
 		return list;
 	}
 	
-	public int getCount_title(String searchWord){
-		int count = 0;
-		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
+	/* result */
+	public ArrayList<Bbs_result> getList_result_title(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM BBS_RESULT WHERE bbsAvailable = 1 AND bbsTitle LIKE ? ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setInt(2,  (pageNumber-1) * 12);
 			rs = pstmt.executeQuery();
-			while(rs.next())
-				count ++;
+			while(rs.next()) {
+				Bbs_result bbs = new Bbs_result();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				bbs.setBbsFirst(rs.getString(7));
+				bbs.setBbsSecond(rs.getString(8));
+				bbs.setBbsThird(rs.getString(9));
+				list.add(bbs);
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return count;
+		return list;
 	}
 	
-	public int getCount_mix(String searchWord){
+	public ArrayList<Bbs_result> getList_result_mix(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM BBS_RESULT WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?) ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setString(2,  "%"+searchWord+"%");
+			pstmt.setInt(3,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_result bbs = new Bbs_result();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				bbs.setBbsFirst(rs.getString(7));
+				bbs.setBbsSecond(rs.getString(8));
+				bbs.setBbsThird(rs.getString(9));
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_result> getList_result_content(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM BBS_RESULT WHERE bbsAvailable = 1 AND bbsContent LIKE ? ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setInt(2,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_result bbs = new Bbs_result();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));	
+				bbs.setBbsFirst(rs.getString(7));
+				bbs.setBbsSecond(rs.getString(8));
+				bbs.setBbsThird(rs.getString(9));
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int getCount_title(String table, String searchWord){
 		int count = 0;
-		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?);";
+		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND bbsTitle LIKE ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setString(1,  table);
 			pstmt.setString(2,  "%"+searchWord+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next())
@@ -165,12 +236,30 @@ public class BbsSearchDAO {
 		return count;
 	}
 	
-	public int getCount_content(String searchWord){
+	public int getCount_mix(String table, String searchWord){
 		int count = 0;
-		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsContent LIKE ?;";
+		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND (bbsTitle LIKE ? OR bbsContent LIKE ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  "%"+searchWord+"%");
+			pstmt.setString(1,  table);
+			pstmt.setString(2,  "%"+searchWord+"%");
+			pstmt.setString(3,  "%"+searchWord+"%");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+				count ++;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int getCount_content(String table, String searchWord){
+		int count = 0;
+		String SQL = "SELECT * FROM ? WHERE bbsAvailable = 1 AND bbsContent LIKE ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  table);
+			pstmt.setString(2,  "%"+searchWord+"%");
 			rs = pstmt.executeQuery();
 			while(rs.next())
 				count ++;

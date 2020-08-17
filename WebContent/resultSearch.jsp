@@ -3,10 +3,20 @@
 <%@ page import ="java.io.PrintWriter" %>
 <%@ page import="bbs_result.BbsDAO_result" %>
 <%@ page import="bbs_result.Bbs_result" %>
+<%@ page import="bbsSearch.BbsSearchDAO" %>
+<%@ page import="bbsSearch.BbsSearch" %>
 <%@ page import="java.util.ArrayList" %>
+
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
     
 <%@ page import="user.UserDAO" %>
 <jsp:useBean id="user" class="user.User" scope="page" />
+<jsp:useBean id="bbsSearch" class="bbsSearch.BbsSearch" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
 <!DOCTYPE html>
@@ -15,6 +25,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
@@ -25,6 +36,7 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	int paging = 1;
 	int pageNumber = 1; // 기본페이지
 	if(request.getParameter("pageNumber") != null){
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
@@ -114,10 +126,40 @@
             				</tr>
             			</thead>
             			<tbody>
-            				<%
-            					BbsDAO_result bbsDAO_result = new BbsDAO_result();
-            					ArrayList<Bbs_result> list = bbsDAO_result.getList(pageNumber);
-            					for(int i=0; i<list.size(); i++){
+        				<%
+        					BbsDAO_result bbsDAO = new BbsDAO_result();
+        					BbsSearchDAO bbsSearchDAO = new BbsSearchDAO();
+        					ArrayList<Bbs_result> list;
+        					
+        					Class.forName("com.mysql.jdbc.Driver"); 
+        		        	String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
+        					String dbID = "root";
+        					String dbPassword = "whatpassword0706!";
+        		            Connection conn = null;
+        		            Statement stmt = null;
+        		            ResultSet rs = null;
+        		            
+        		            try {
+        		                String query = "SELECT * FROM search WHERE searchNo = ?;";
+        		                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+        		                PreparedStatement pstmt=conn.prepareStatement(query);
+        		                pstmt.setInt(1,  bbsSearchDAO.numbering()-1);
+        		                rs = pstmt.executeQuery();
+        		                if (rs.next()) {
+	           						if(rs.getString(3).equals("title") == true){
+	           							paging += bbsSearchDAO.getCount_title("BBS_RESULT", rs.getString(4)) / 12;
+	               						list = bbsSearchDAO.getList_result_title(pageNumber, rs.getString(4));
+	               					}
+	               					else if(rs.getString(3).equals("mix") == true){
+	               						paging += bbsSearchDAO.getCount_mix("BBS_RESULT", rs.getString(4)) / 12;
+	               						list = bbsSearchDAO.getList_result_mix(pageNumber, rs.getString(4));
+	               					}
+	               					else{
+	               						paging += bbsSearchDAO.getCount_content("BBS_RESULT", rs.getString(4)) / 12;
+	               						list = bbsSearchDAO.getList_result_content(pageNumber, rs.getString(4));
+	               					}
+	
+	            					for(int i=0; i<list.size(); i++){
             				%>          				
             				<tr class="board_tr">
             					<td><%=list.get(i).getBbsID()%></td>
@@ -126,7 +168,7 @@
             					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
-            					}
+	            					}
             				%>				
             			</tbody>
             		</table>
@@ -141,14 +183,14 @@
             		if(pageNumber != 1){
             	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="result.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀이전 </a>
+            			<a href="resultSearch.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 				<% 
 					}
-            		if(bbsDAO_result.nextPage(pageNumber+1)){
+            		if(paging > pageNumber){
 				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="result.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음▶ </a>
+            			<a href="resultSearch.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
             	<%
             		}
@@ -157,19 +199,45 @@
             	
      			<!-- 검색 바 -->
      			<form method="post" action="resultSearchAction.jsp">
-		            <div class="board_search">	            	
+		            <div class="board_search">	     	
 	   	        		<input id="bbs_search-btn" type="submit" value="검색">
 	   	        	
-	   	        		<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" name="searchWord" maxlength="50">
+	   	        		<input id="bbs_search-bar" type="text" name="searchWord" maxlength="50" placeholder=<%=rs.getString(4) %>>
 	
 	   	        		<select name="searchOption" id="bbs_search-option">
-	    	        		<option value='title'>제목</option>
-	    	        		<option value='mix'>제목 + 내용</option>
-	    	        		<option value='content'>내용</option>
+	    	        		<option value="title" <% if(rs.getString(3).equals("title") == true) out.print("selected"); %>>제목</option>
+	    	        		<option value="mix" <% if(rs.getString(3).equals("mix") == true) out.print("selected"); %>>제목 + 내용</option>
+	    	        		<option value="content" <% if(rs.getString(3).equals("content") == true) out.print("selected"); %>>내용</option>
 	    	        	</select>
 		            </div> 
 	            </form> 
 	    	</div>  
+	    	
+	    		<%
+                }
+            } catch (SQLException ex) {
+                out.println(ex.getMessage());
+                ex.printStackTrace();
+            } finally {
+                // 6. 사용한 Statement 종료
+                if (rs != null)
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                    }
+                if (stmt != null)
+                    try {
+                        stmt.close();
+                    } catch (SQLException ex) {
+                    }
+                // 7. 커넥션 종료
+                if (conn != null)
+                    try {
+                        conn.close();
+                    } catch (SQLException ex) {
+                    }
+            }
+       		%>  
         </section>
 
         <footer>

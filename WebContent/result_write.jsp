@@ -92,28 +92,28 @@
             				<tr>
             					<td>
             						<div class="bbs_Result">
-            							<textarea id="bbs_first" placeholder="1위" name="bbsFirst" maxlength="2048"></textarea>	
+            							<textarea id="bbs_first" placeholder="1위 이름" name="bbsFirst" maxlength="2048"></textarea>	
             						</div>
             					</td>
             				</tr>
             				<tr>
             					<td>
             						<div class="bbs_Result">
-            							<textarea id="bbs_second" placeholder="2위" name="bbsSecond" maxlength="2048"></textarea>	
+            							<textarea id="bbs_second" placeholder="2위 이름" name="bbsSecond" maxlength="2048"></textarea>	
             						</div>
             					</td>
             				</tr>
             				<tr>
             					<td>
             						<div class="bbs_Result">
-            							<textarea id="bbs_third" placeholder="3위" name="bbsThird" maxlength="2048"></textarea>	
+            							<textarea id="bbs_third" placeholder="3위 이름" name="bbsThird" maxlength="2048"></textarea>	
             						</div>
             					</td>
             				</tr>
             				<tr>
             					<td>
             						<div class="bbs_Result">
-            							<textarea id="bbs_contents" placeholder="기타" name="bbsContent" maxlength="2048"></textarea>	
+            							<textarea id="bbs_contents" placeholder="내용" name="bbsContent" maxlength="2048"></textarea>	
             						</div>
             					</td>
             				</tr>
