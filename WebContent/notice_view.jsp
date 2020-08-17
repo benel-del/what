@@ -115,12 +115,12 @@
 	            				<td class="view_content1"><%=bbs.getBbsDate() %></td>
             				</tr>
             				
-            				<%if(bbs.getBbsJoindate() != null && bbs.getBbsJoinplace() != null){ %>           				
+            				<%if(bbs.getBbsType().equals("모임공지") == true) { %>           				
             				<tr>
             					<td class="view_subtitle">모임날짜</td>
-	            				<td class="view_content1"><%=bbs.getBbsJoindate() %></td>
+	            				<td class="view_content1"><%if(bbs.getBbsJoindate() == null) out.print(""); else out.print(bbs.getBbsJoindate()); %></td>
 	            				<td class="view_subtitle">모임장소</td>
-	            				<td class="view_content1"><%=bbs.getBbsJoinplace() %></td>
+	            				<td class="view_content1"><%if(bbs.getBbsJoinplace() == null) out.print(""); else out.print(bbs.getBbsJoinplace()); %></td>
             				</tr>
             				<%} %>
             				<tr>

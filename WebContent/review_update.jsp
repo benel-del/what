@@ -90,7 +90,7 @@
 	
         <section class="container">
             <div class="board_subtitle">
-            	공지게시판
+            	후기게시판
             </div>
 
             <div class="write_container">

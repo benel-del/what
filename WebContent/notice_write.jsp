@@ -82,6 +82,7 @@
             				</tr>
             			</thead>
             			
+            			<% int selected = 0; %>
             			<tbody>
             				<tr>
 	            				<td>
@@ -91,7 +92,7 @@
 			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
-			            					<select name="bbsType" id="bbs_type">
+			            					<select name="bbsType">
 				  								<option value='일반공지'>일반공지</option>
 				  								<option value='모임공지' selected>모임공지</option>
 											</select>
@@ -106,11 +107,13 @@
             				<tr>
             					<td>
             					<div class="write_subtitle">
-            						<div class="bbsTitle">
-            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50">
-            						</div>
-            						<div class="bbsTitle">
-            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
+            						<div class="join_input">
+            							* 모임 공지만<br>
+            							모임 일시: 
+	            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50">
+	            						<br>
+	            						모임 장소:
+	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
             						</div>
             					</div>
             					</td>

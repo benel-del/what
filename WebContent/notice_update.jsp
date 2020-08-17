@@ -160,9 +160,9 @@
 							       		%>   
 		            					</div>
 			            				<div class="bbsType">
-			            					<select name="bbsType" id="bbs_type">
-				  								<option value='일반공지'>일반공지</option>
-				  								<option value='모임공지' selected>모임공지</option>
+			            					<select name="bbsType">
+				  								<option value='일반공지' <%if(bbs.getBbsType().equals("일반공지") == true) out.print("selected"); %>>일반공지</option>
+				  								<option value='모임공지' <%if(bbs.getBbsType().equals("모임공지") == true) out.print("selected"); %>>모임공지</option>
 											</select>
 			            				</div>
 			            				<div class="bbsTitle">
@@ -174,11 +174,13 @@
             				<tr>
             					<td>
             					<div class="write_subtitle">
-            						<div class="bbsTitle">
-            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50" value="<%=bbs.getBbsJoindate() %>">
-            						</div>
-            						<div class="bbsTitle">
-            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50" value="<%=bbs.getBbsJoinplace() %>">
+            						<div class="join_input">
+            							* 모임 공지만<br>
+            							모임 일시: 
+	            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50">
+	            						<br>
+	            						모임 장소:
+	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
             						</div>
             					</div>
             					</td>

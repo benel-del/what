@@ -109,7 +109,7 @@
 						    </tr>
 						    <tr>
 						    	<td class="index_notice_subtitle">요강</td>
-						    	<td class="index_notice_content"><%=bbs.getBbsContent().substring(0, 150).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %>...</td>
+						    	<td class="index_notice_content"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %>...</td>
 						    </tr>
 						    <tr>
 						    	<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=bbs.getBbsID() %>">요강 자세히 보기 </a></td>
