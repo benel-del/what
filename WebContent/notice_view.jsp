@@ -104,7 +104,7 @@
             			<thead>
             				<tr>
             					<td class="view_subtitle">제목</td>
-            					<td colspan="4" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            					<td colspan="3" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
@@ -118,10 +118,9 @@
             				<%if(bbs.getBbsJoindate() != null && bbs.getBbsJoinplace() != null){ %>           				
             				<tr>
             					<td class="view_subtitle">모임날짜</td>
-	            				<td class="view_title"><%=bbs.getBbsJoindate() %></td>
-	            
+	            				<td class="view_content1"><%=bbs.getBbsJoindate() %></td>
 	            				<td class="view_subtitle">모임장소</td>
-	            				<td class="view_title"><%=bbs.getBbsJoinplace() %></td>
+	            				<td class="view_content1"><%=bbs.getBbsJoinplace() %></td>
             				</tr>
             				<%} %>
             				<tr>
@@ -131,28 +130,28 @@
             			</tbody>
             		</table>
             		
-            		<%if(bbs.getBbsType().equals("모임공지") == true){ %>
-            		<div id="notice_btn-primary">
-            		<a href="join.jsp" class="link">참가신청</a>
-            		<%} %>
+            		<%if(bbs.getBbsType().equals("모임공지") == true){ 
+            			out.println("<div id=\"notice_btn-primary\">");
+            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
+            			out.println("</div>");
+            		}
+            		%>
             		
             		<div id="notice_btn-primary">
             			<a href="notice.jsp" class="link">글 목록 </a>
             		
             		<%
             			if(userID != null && userID.equals(bbs.getUserID())){
-            		%>
-            			/
-            			<a href = "notice_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
-            			/
-            			<a href = "notice_delete.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
-            		<%
+            				out.println("/");
+            				out.println("<a href = \"notice_update.jsp?bbsID=" + bbsID + "\" class=\"link\"> 수정 </a>");
+            				out.println("/");
+            				out.println("<a href = \"notice_delete.jsp?bbsID=" + bbsID + "\" class=\"link\"> 삭제 </a>");
             			}
             		%>
             		</div>
             	</div>
             </div>
-           </div> 		
+		
         </section>
 
         <footer>
