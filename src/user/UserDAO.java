@@ -65,7 +65,6 @@ public class UserDAO {
 			pstmt.setInt(9,  user.getUserFirst());
 			pstmt.setInt(10,  user.getUserSecond());
 			pstmt.setInt(11,  user.getUserThird());
-
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -419,6 +418,4 @@ public class UserDAO {
 		}
 		return null;
 	}
-	
-	
 }

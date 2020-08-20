@@ -45,7 +45,7 @@
 		%>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logout.jsp">로그아웃</a>
+                <a class="link" href="logoutAction.jsp">로그아웃</a>
                 |
                 <a class="link" href="mypage.jsp">마이페이지</a>
             </div>          
@@ -70,25 +70,26 @@
         </div>
         <br>
 
-        <section>
+        <section class="container">
         
-           <div class="dm_page">
+           <div class="login_page">
               <form method="post" action="deleteAction.jsp">
               
                <div class="dm_header">
                    <a href="delete.jsp">회원 탈퇴 페이지</a>
                </div>
-   				<br><br>
+               
+   				<br>
                <!--로그인 폼-->
-               <div class="dm_form">
-					<label class="dm_label">탈퇴하려면 비밀번호를 입력해주세요.</label>
+               <div class="login_form">
+					<label class="login_label">탈퇴하려면 비밀번호를 입력해주세요.</label>
 					<br><br>
                    <input type="password" placeholder="비밀번호 입력" name="userPassword" maxlength="20">
-					<br>
-                       
+					<br>                      
                </div>
+               
                <br>
-               <input type="submit" class="dm_submit-btn" value="탈퇴하기" >
+               <input type="submit" class="login_submit-btn" value="탈퇴하기" >
 
            </form>
                

@@ -381,6 +381,7 @@ public class BbsSearchDAO {
 				user.setUserRank(rs.getInt(8));
 				user.setUserID(rs.getString(1));
 				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
 				user.setUserLevel(rs.getString(5));
 				user.setUserType(rs.getString(6));
 				user.setUserFirst(rs.getInt(9));

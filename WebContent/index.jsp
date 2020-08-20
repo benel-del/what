@@ -91,32 +91,36 @@
                         <div class="index_title"><a class="link" href = "notice_view.jsp">모임 공지</a></div>
                         <%BbsDAO bbsDAO = new BbsDAO();
         				ArrayList<Bbs> list_notice = bbsDAO.getList_index();
-        				for(Bbs bbs : list_notice){%>
+        				int i;	
+ 	 	      			for(i=list_notice.size()-1; i>=0; i--){
+ 	 	      				if(list_notice.get(i).getBbsComplete() == 0 && list_notice.get(i).getBbsType().equals("모임공지") == true && list_notice.get(i).getBbsAvailable() == 1){
+ 	 	      					break;
+ 	 	      				}
+ 	 	      			}%>
                         <table class="index_notice_board"> 
               			<thead>
             				<tr>
-            					<th class="index_notice_th" colspan="2"><%=bbs.getBbsTitle() %></th>
+            					<th class="index_notice_th" colspan="2"><%=list_notice.get(i).getBbsTitle() %></th>
             				</tr>
             			</thead>          			
             			<tbody>
             				<tr>
             					<td class="index_notice_subtitle">일시</td>
-            					<td class="index_notice_content"><%=bbs.getBbsJoindate() %></td>
+            					<td class="index_notice_content"><%=list_notice.get(i).getBbsJoindate() %></td>
             				</tr>
             				<tr>
             					<td class="index_notice_subtitle">장소</td>
-								<td class="index_notice_content"><%=bbs.getBbsJoinplace() %></td>
+								<td class="index_notice_content"><%=list_notice.get(i).getBbsJoinplace() %></td>
 						    </tr>
 						    <tr>
 						    	<td class="index_notice_subtitle">요강</td>
-						    	<td class="index_notice_content"><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %>...</td>
+						    	<td class="index_notice_content"><%=list_notice.get(i).getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %>...</td>
 						    </tr>
 						    <tr>
-						    	<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=bbs.getBbsID() %>">요강 자세히 보기 </a></td>
+						    	<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=list_notice.get(i).getBbsID() %>">요강 자세히 보기 </a></td>
 						    </tr>        					   				
             			</tbody>
             		</table>   
-            		<%} %>
                     </div>
 					<%
 						ArrayList<Bbs> list_join = bbsDAO.getList_index();

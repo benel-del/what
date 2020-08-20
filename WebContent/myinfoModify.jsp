@@ -1,19 +1,8 @@
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
+<%@ page import="user.User" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="user" class="user.User" scope="page" />
-<jsp:setProperty name="user" property="userID" />
-<jsp:setProperty name="user" property="userName"/>
-<jsp:setProperty name="user" property="userGender"/>
-<jsp:setProperty name="user" property="userLevel"/>
 
 <!DOCTYPE html>
 
@@ -85,30 +74,11 @@
         </div>
 
         <%
-            // 1. JDBC 드라이버 로딩
-			Class.forName("com.mysql.jdbc.Driver"); 
-        	String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
-			String dbID = "root";
-			String dbPassword = "whatpassword0706!";
-            Connection conn = null;
-            Statement stmt = null;
-            ResultSet rs = null;
- 
-            try {                
-                String query = "select * from user where userID='"+userID+"'";
-                // 2. 데이터베이스 커넥션 생성
-                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                // 3. Statement 생성
-                stmt = conn.createStatement();
-                // 4. 쿼리 실행
-                rs = stmt.executeQuery(query);
-                // 5. 쿼리 실행 결과 출력
-                while (rs.next()) {
-        %>
-        
+		User user = new UserDAO().getuser_rank(userID);
+       	%>
         <section class="container">
        		<form method="post" action="myinfoModifyAction.jsp">
-       		<div class="dm_page">
+       		<div class="login_page">
        		
        		<div class="dm_header">
             	<a href="myinfoModify.jsp">회원 정보 수정</a>
@@ -118,17 +88,17 @@
    			
    		    	<table class="myinfo_table">
      				<tr class="myinfo_userID">
-     				<th id="myinfo_title" class="table_th1">아이디</th>
-     				<th class="table_th2"><%=rs.getString(1) %></th>
-     				</tr>
-     				
-     				<tr class="myinfo_userName">
-     				<th id="myinfo_title" class="table_th1">이름</th>
-     				<th class="table_th2"><%=rs.getString(3) %></th>
-     				</tr>
+       				<th id="myinfo_title" class="table_th1">아이디</th>
+       				<th class="table_th2"><%=user.getUserID() %></th>
+       				</tr>
+
+       				<tr class="myinfo_userName">
+       				<th id="myinfo_title" class="table_th1">이름</th>
+       				<th class="table_th2"><%=user.getUserName() %></th>
+       				</tr>
      				
      				<tr class="myinfo_userPassword">
-     				<th id="myinfo_title" class="table_th1">* 현재 비밀번호</th>
+     				<th id="myinfo_title" class="table_th1">*현재 비밀번호</th>
      				<th class="table_th2">
      					<input type="password" placeholder="기존의 비밀번호를 입력해주세요" name="userPassword" maxlength="4" /> 
      				</th>
@@ -149,25 +119,25 @@
      				</tr>
      				
      				<tr class="myinfo_userGender">
-     				<th id="myinfo_title" class="table_th1">성별</th>
-     				<th class="table_th2"><%=rs.getString(4) %></th>
-     				</tr>
+       				<th id="myinfo_title" class="table_th1">성별</th>
+       				<th class="table_th2"><%=user.getUserGender() %></th>
+       				</tr>
      				
      				<tr class="myinfo_userLevel">
      				<th id="myinfo_title" class="table_th1">부수</th>
      				<th class="table_th2">
      					<select name="userLevel">
-	  						<option value='-3' <% if(rs.getString(5).equals("-3")) out.print("selected"); %>>-3</option>
-	  						<option value='-2' <% if(rs.getString(5).equals("-2")) out.print("selected"); %>>-2</option>
-	  						<option value='-1' <% if(rs.getString(5).equals("-1")) out.print("selected"); %>>-1</option>
-	  						<option value='0' <% if(rs.getString(5).equals("0")) out.print("selected"); %>>0</option>
-	  						<option value='1' <% if(rs.getString(5).equals("1")) out.print("selected"); %>>1</option>
-	  						<option value='2' <% if(rs.getString(5).equals("2")) out.print("selected"); %>>2</option>
-	  						<option value='3' <% if(rs.getString(5).equals("3")) out.print("selected"); %>>3</option>
-	  						<option value='4' <% if(rs.getString(5).equals("4")) out.print("selected"); %>>4</option>
-	  						<option value='5' <% if(rs.getString(5).equals("5")) out.print("selected"); %>>5</option>
-	  						<option value='6' <% if(rs.getString(5).equals("6")) out.print("selected"); %>>6</option>
-	  						<option value='7' <% if(rs.getString(5).equals("7")) out.print("selected"); %>>7</option>
+	  						<option value='-3' <% if(user.getUserLevel().equals("-3")) out.print("selected"); %>>-3</option>
+	  						<option value='-2' <% if(user.getUserLevel().equals("-2")) out.print("selected"); %>>-2</option>
+	  						<option value='-1' <% if(user.getUserLevel().equals("-1")) out.print("selected"); %>>-1</option>
+	  						<option value='0' <% if(user.getUserLevel().equals("0")) out.print("selected"); %>>0</option>
+	  						<option value='1' <% if(user.getUserLevel().equals("1")) out.print("selected"); %>>1</option>
+	  						<option value='2' <% if(user.getUserLevel().equals("2")) out.print("selected"); %>>2</option>
+	  						<option value='3' <% if(user.getUserLevel().equals("3")) out.print("selected"); %>>3</option>
+	  						<option value='4' <% if(user.getUserLevel().equals("4")) out.print("selected"); %>>4</option>
+	  						<option value='5' <% if(user.getUserLevel().equals("5")) out.print("selected"); %>>5</option>
+	  						<option value='6' <% if(user.getUserLevel().equals("6")) out.print("selected"); %>>6</option>
+	  						<option value='7' <% if(user.getUserLevel().equals("7")) out.print("selected"); %>>7</option>
 						</select>
      				</th>
      				</tr>
@@ -176,68 +146,41 @@
      				<th id="myinfo_title" class="table_th1">전형</th>
      				<th class="table_th2">
      					<select name="userType">
-	  						<option value='오른손잡이 / 드라이브 전형' <% if(rs.getString(6).equals("오른손잡이 / 드라이브 전형")) out.print("selected"); %>>오른손잡이 / 드라이브 전형</option>
-	  						<option value='왼손잡이 / 드라이브 전형' <% if(rs.getString(6).equals("왼손잡이 / 드라이브 전형")) out.print("selected"); %>>왼손잡이 / 드라이브 전형</option>
-	  						<option value='오른손잡이 / 스트로크 전형' <% if(rs.getString(6).equals("오른손잡이 / 스트로크 전형")) out.print("selected"); %>>오른손잡이 / 스트로크 전형</option>
-	  						<option value='왼손잡이 / 스트로크 전형' <% if(rs.getString(6).equals("왼손잡이 / 스트로크 전형")) out.print("selected"); %>>왼손잡이 / 스트로크 전형</option>
-	  						<option value='오른손잡이 / 수비수 전형' <% if(rs.getString(6).equals("오른손잡이 / 수비수 전형")) out.print("selected"); %>>오른손잡이 / 수비수 전형</option>
-	  						<option value='왼손잡이 / 수비수 전형' <% if(rs.getString(6).equals("왼손잡이 / 수비수 전형")) out.print("selected"); %>>왼손잡이 / 수비수 전형</option>
+	  						<option value='오른손잡이 / 드라이브 전형' <% if(user.getUserType().equals("오른손잡이 / 드라이브 전형")) out.print("selected"); %>>오른손잡이 / 드라이브 전형</option>
+	  						<option value='왼손잡이 / 드라이브 전형' <% if(user.getUserType().equals("왼손잡이 / 드라이브 전형")) out.print("selected"); %>>왼손잡이 / 드라이브 전형</option>
+	  						<option value='오른손잡이 / 스트로크 전형' <% if(user.getUserType().equals("오른손잡이 / 스트로크 전형")) out.print("selected"); %>>오른손잡이 / 스트로크 전형</option>
+	  						<option value='왼손잡이 / 스트로크 전형' <% if(user.getUserType().equals("왼손잡이 / 스트로크 전형")) out.print("selected"); %>>왼손잡이 / 스트로크 전형</option>
+	  						<option value='오른손잡이 / 수비수 전형' <% if(user.getUserType().equals("오른손잡이 / 수비수 전형")) out.print("selected"); %>>오른손잡이 / 수비수 전형</option>
+	  						<option value='왼손잡이 / 수비수 전형' <% if(user.getUserType().equals("왼손잡이 / 수비수 전형")) out.print("selected"); %>>왼손잡이 / 수비수 전형</option>
 						</select>
      				</th>
      				</tr>
-     				
+
      				<tr class="myinfo_userDescription">
      				<th id="myinfo_title" class="table_th1">내 소개</th>
      				<th id="userDescription">
-     					<textarea class="info_textarea" name="userDescription" maxlength="200" <% if(rs.getString(7) == null) out.print("placeholder=\"최대 200자\""); %>><% if(rs.getString(7) != null) out.print(rs.getString(7));%></textarea>
+     					<textarea class="info_textarea" name="userDescription" maxlength="200"><%if(user.getUserDescription() != null){out.println(user.getUserDescription());} else{ out.println("");}%></textarea>
      				</th>
      				</tr>
        				<tr class="myinfo_userRank">
        				<th id="myinfo_title" class="table_th1">랭킹</th>
-       				<th class="table_th2"><%=rs.getInt(8) %>위</th>
+       				<th class="table_th2"><%if(user.getUserRank() == 0) out.print("-"); else out.print(user.getUserRank() + "위");%></th>
        				</tr>
        				<tr class="myinfo_userFirst">
        				<th id="myinfo_title" class="table_th1">1위</th>
-       				<th class="table_th2"><%=rs.getInt(9) %>회</th>
+       				<th class="table_th2"><%=user.getUserFirst() %>회</th>
        				</tr>
        				<tr class="myinfo_userSecond">
        				<th id="myinfo_title" class="table_th1">2위</th>
-       				<th class="table_th2"><%=rs.getInt(10) %>회</th>
+       				<th class="table_th2"><%=user.getUserSecond() %>회</th>
        				</tr>
        				<tr class="myinfo_userThird">
        				<th id="myinfo_title" class="table_th1">3위</th>
-       				<th class="table_th2"><%=rs.getInt(11) %>회</th>
-       				</tr>  
-     				
-     				<%
-                }
-            } catch (SQLException ex) {
-                out.println(ex.getMessage());
-                ex.printStackTrace();
-            } finally {
-                // 6. 사용한 Statement 종료
-                if (rs != null)
-                    try {
-                        rs.close();
-                    } catch (SQLException ex) {
-                    }
-                if (stmt != null)
-                    try {
-                        stmt.close();
-                    } catch (SQLException ex) {
-                    }
-                // 7. 커넥션 종료
-                if (conn != null)
-                    try {
-                        conn.close();
-                    } catch (SQLException ex) {
-                    }
-            }
-       		%>   	  		
-       		   				
+       				<th class="table_th2"><%=user.getUserThird() %>회</th>
+       				</tr>     					
      			</table>     		
         	<br>
-               <input type="submit" class="dm_submit-btn" value="수정하기" >
+               <input type="submit" class="login_submit-btn" value="수정하기" >
         	</div>
         	</form>
         </section>

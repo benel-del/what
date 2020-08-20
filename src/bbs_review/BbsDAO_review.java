@@ -6,10 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import bbs.Bbs;
-
 public class BbsDAO_review {
-	private Connection conn;	// db�뿉 �젒洹쇳븯寃� �빐二쇰뒗 媛앹껜
+	private Connection conn;
 	private ResultSet rs;
 	
 	public BbsDAO_review() { 

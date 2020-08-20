@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
-
-import bbs.Bbs;
 
 public class BbsDAO_join {
 	private Connection conn;	// db에 접근하게 해주는 객체
@@ -66,6 +63,7 @@ public class BbsDAO_join {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_join bbs_join = new Bbs_join();
+				bbs_join.setJoinID(rs.getInt(1));
 				bbs_join.setUserID(rs.getString(2));
 				bbs_join.setJoinMember(rs.getString(5));
 				list.add(bbs_join);

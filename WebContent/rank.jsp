@@ -97,9 +97,8 @@
             				<tr class="board_tr">
             					<th class="board_thead" id="bbs_level">순위</th>
             					<th class="board_thead" id="bbs_name">이름</th>
-            					<th class="board_thead" id="bbs_name">아이디</th>            			
-            					<th class="board_thead" id="bbs_level">부수</th>
-            					<th class="board_thead" id="bbs_type">전형</th>
+            					<th class="board_thead" id="bbs_level">부수</th>            			
+            					<th class="board_thead" id="bbs_name">아이디</th>
             					<th class="board_thead" id="bbs_level">우승</th>
             					<th class="board_thead" id="bbs_level">준우승</th>
             					<th class="board_thead" id="bbs_level">3위</th>   					
@@ -114,11 +113,8 @@
             				<tr class="board_tr" id="notice_nonfix">
             					<td><%if(list.get(i).getUserRank() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
             					<td><%=list.get(i).getUserName() %></td>
+            					<td><%=list.get(i).getUserLevel() %></td>		
             					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
-								<td><%=list.get(i).getUserLevel() %></td>
-            					<td><%if(list.get(i).getUserType()!=null){
-            						out.println(list.get(i).getUserType());
-            					} else{ out.println("");}%></td>
             					<td><%=list.get(i).getUserFirst() %></td>
             					<td><%=list.get(i).getUserSecond() %></td>
             					<td><%=list.get(i).getUserThird() %></td>

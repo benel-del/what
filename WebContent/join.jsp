@@ -3,6 +3,12 @@
 <%@ page import ="java.io.PrintWriter" %>   
 <%@ page import="bbs_join.BbsDAO_join" %>
 <%@ page import="bbs_join.Bbs_join" %>
+<%@ page import="bbs.BbsDAO" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import = "user.User" %>
+<%@ page import="java.util.ArrayList" %>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -92,13 +98,17 @@
             <div class="board_container">
             	<div class="board_row">
             	    <form method="post" action="joinAction.jsp">
-            	    <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); %>           	            	
+            	    <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); 
+            	       BbsDAO bbsDAO = new BbsDAO();
+            	       UserDAO userDAO = new UserDAO();
+               		   ArrayList<User> list = userDAO.getUserlist();
+            	    %>           	            	
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="join_title" colspan="2">
             						<input type="hidden" name="bbsID" value="<%=bbsID %>">            						
-            						제?회 어쩌다리그
+            						<%=bbsDAO.getBbs(bbsID).getBbsTitle() %>
             					</th>
             				</tr>
             			</thead>
@@ -123,8 +133,10 @@
 							<tr class="board_tr" id="notice_nonfix">
 							<td>참가자</td>
 							<td><select name="joinMember" class="join_form" id="join_member">
-							<option selected>참가자 선택</option>
-							<option>아이디/김민선/2부/성별</option>
+							<option value="" selected>--참가자 선택--</option>
+							<%for(User user : list){ %>
+							<option><%=user.getUserName()%>/<%=user.getUserID()%>/<%=user.getUserLevel()%>/<%=user.getUserGender() %></option>
+							<%} %>
 							</select></td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
