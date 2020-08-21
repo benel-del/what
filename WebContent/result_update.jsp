@@ -40,7 +40,7 @@
 		script.println("</script>");
 	}
 	Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
-	if(!userID.equals(bbs_result.getUserID())){
+	if(userID == null || !userID.equals(bbs_result.getUserID())){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('수정 권한이 없습니다.')");

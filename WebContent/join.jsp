@@ -26,13 +26,7 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID == null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('로그인 후 접근 가능합니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
+
 	int bbsID =0;
 	if(request.getParameter("bbsID") != null){
 		bbsID=Integer.parseInt(request.getParameter("bbsID"));
@@ -51,7 +45,13 @@
         <br>
         <header>
         <%
-        	if(userID.equals("admin") == true) {
+        	if(userID == null){
+    		PrintWriter script = response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('로그인 후 접근 가능합니다.')");
+    		script.println("history.back()");
+    		script.println("</script>");
+    		} else if(userID.equals("admin") == true) {
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
@@ -66,7 +66,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
                 | 
-                <a class="link" href="mypage.jsp">마이페이지</a>
+                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
            </div>
             <br>		
 		<% 

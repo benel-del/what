@@ -15,17 +15,10 @@
 </head>
 
 <body>
-<% //userID 존재 여부
+	<% //userID 존재 여부
 	String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
-	}
-	if(userID == null || userID.equals("admin") == false){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('관리자만 접근 가능합니다.')");
-		script.println("history.back()");
-		script.println("</script>");
 	}
 	%>
 	
@@ -34,7 +27,13 @@
         <br>
         <header>
         <%
-        	if(userID.equals("admin") == true){
+    	if(userID == null || userID.equals("admin") == false){
+    		PrintWriter script = response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('관리자만 접근 가능합니다.')");
+    		script.println("history.back()");
+    		script.println("</script>");
+    	} else if(userID.equals("admin") == true){
         %>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">

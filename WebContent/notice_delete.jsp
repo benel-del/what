@@ -19,10 +19,19 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
+		
 		int bbsID = 0;
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}
+		Bbs bbs = new BbsDAO().getBbs(bbsID);
+		if(userID == null || !userID.equals(bbs.getUserID())){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('권한이 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} 
 		if(bbsID == 0){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

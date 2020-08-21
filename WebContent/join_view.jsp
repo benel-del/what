@@ -22,6 +22,17 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	int bbsID =0;
+	if(request.getParameter("bbsID") != null){
+		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+	}
+	if(bbsID ==0){
+		PrintWriter script=response.getWriter();
+		script.println("<script>");
+		script.println("alert('페이지를 찾을 수 없습니다.')");
+		script.println("location.href='index.jsp'");
+		script.println("</script>");
+	}
 	%>
 	
     <div id="wrapper">
@@ -30,37 +41,33 @@
         <header>
         <%
         	if(userID == null){
-        %>
-            <!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="login.jsp">로그인 </a>
-                |
-                <a class="link" href="register.jsp">회원가입</a>
-            </div>
-            <br>
-        <% 
-           	} else if(userID.equals("admin") == true) {
+    		PrintWriter script = response.getWriter();
+    		script.println("<script>");
+    		script.println("alert('로그인 후 접근 가능합니다.')");
+    		script.println("history.back()");
+    		script.println("</script>");
+    		} else if(userID.equals("admin") == true) {
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
-				|
-                <a class="link" href="admin.jsp">관리자 페이지</a>
+                |
+                <a class="link" href="admin.jsp"> 관리자 페이지</a>
            </div>
             <br>		
         <% 
            	} else {
 		%>
-			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                |
-                <a class="link" href="mypage.jsp">마이페이지</a>
+                | 
+                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
            </div>
             <br>		
 		<% 
            	}
        	%>
+       	
             <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
@@ -84,17 +91,6 @@
             <div class="board_subtitle">참가자 명단</div>
 
     	<%
-    	int bbsID =0;
-    	if(request.getParameter("bbsID") != null){
-    		bbsID=Integer.parseInt(request.getParameter("bbsID"));
-    	}
-    	if(bbsID ==0){
-    		PrintWriter script=response.getWriter();
-    		script.println("<script>");
-    		script.println("alert('페이지를 찾을 수 없습니다.')");
-    		script.println("location.href='index.jsp'");
-    		script.println("</script>");
-    	}
     		BbsDAO_join bbsDAO_join = new BbsDAO_join();
     		ArrayList<Bbs_join> list = bbsDAO_join.getJoinMembers(bbsID);
     	%>

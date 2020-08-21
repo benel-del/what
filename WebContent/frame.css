@@ -1,5 +1,4 @@
 /* RESET_COMMON */
-
 *{
 	margin: 0;
 	padding : 0;
@@ -170,6 +169,7 @@ section{
     #index_notice-btn a:hover:not(.active) {
         color: #92A8D1;
     }
+    
 .index_notice_board{
 	margin:5px auto;
 	text-align:center;
@@ -182,6 +182,7 @@ section{
 	background-color: #0F4C81;
 	text-align: center;
 	color: white;
+	height:20px;
 }
 .index_notice_board td{
 	height:15px;
@@ -192,13 +193,13 @@ section{
 	background-color: #0F4C81;
 	width:10%;
 }
-.index_notice_content{
-}
+
 #notice_more{
 	background-color:#0F4C81;
 	color:white;
 	width:100%;
 	display:inline-block;
+	height:20px;
 }
 
 #index_inform{
@@ -229,8 +230,6 @@ section{
 	background-color: #0F4C81;
 	text-align: center;
 	color: white;
-}
-.index_rank_board tr{
 }
 
 #index_bottom{

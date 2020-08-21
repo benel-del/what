@@ -31,7 +31,7 @@
 			script.println("</script>");
 		}
 		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
-		if(!userID.equals(bbs_review.getUserID())){
+		if(userID == null || !userID.equals(bbs_review.getUserID())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");

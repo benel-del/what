@@ -18,13 +18,6 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID == null || userID.equals("admin") == false){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('관리자만 접근 가능합니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
 	%>
 	
     <div id="wrapper">
@@ -32,7 +25,13 @@
         <br>
         <header>
         <%
-        	if(userID.equals("admin") == true){
+    		if(userID == null || userID.equals("admin") == false){
+    			PrintWriter script = response.getWriter();
+    			script.println("<script>");
+    			script.println("alert('관리자만 접근 가능합니다.')");
+    			script.println("history.back()");
+    			script.println("</script>");
+    		} else if(userID.equals("admin") == true){
         %>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">

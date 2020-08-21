@@ -58,7 +58,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
                 |
-                <a class="link" href="mypage.jsp">마이페이지</a>
+                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
            </div>
             <br>		
 		<% 
@@ -114,7 +114,8 @@
 						    </tr>
 						    <tr>
 						    	<td class="index_notice_subtitle">요강</td>
-						    	<td class="index_notice_content"><%=list_notice.get(i).getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %>...</td>
+						    	<td class="index_notice_content"><%if(list_notice.get(i).getBbsContent().length() > 55){out.println(list_notice.get(i).getBbsContent().substring(0,55).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>")); %>...
+						    	<%}else{out.println(list_notice.get(i).getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));} %></td>
 						    </tr>
 						    <tr>
 						    	<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=list_notice.get(i).getBbsID() %>">요강 자세히 보기 </a></td>

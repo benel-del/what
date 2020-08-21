@@ -23,6 +23,14 @@
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}
+		Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
+		if(userID == null || !userID.equals(bbs_result.getUserID())){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('권한이 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} 
 		if(bbsID == 0){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

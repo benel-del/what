@@ -25,7 +25,7 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		if(userID.equals("admin") == false){
+		if(userID == null || userID.equals("admin") == false){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('관리자만 접근 가능합니다.')");
