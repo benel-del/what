@@ -117,7 +117,7 @@
 
             				<tr>
 	            				<td class="view_subtitle">내용</td>
-	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><div><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
             				</tr>
             			</tbody>
             		</table>
