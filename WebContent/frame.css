@@ -364,10 +364,10 @@ section{
 	width:85%;
 	padding: .5em .3em;
 }
-#joinMember option{
-	width:85%;
-	padding: .5em .3em;
+#join_member{
+	
 }
+
 #join_Content{
 	width:85%;
 	height:100px;

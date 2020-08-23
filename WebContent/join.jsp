@@ -123,7 +123,7 @@
 							<tr class="board_tr" id="notice_nonfix">
 							<td>신청자 연락처</td>
 							<td>
-							<input type="text" class="join_form" id="user_Phone" name = "userPhone" placeholder="휴대폰번호" maxlength="20">
+							<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
 							</td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
@@ -131,13 +131,32 @@
 							<td><input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="20"></td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
-							<td>참가자</td>
-							<td><select name="joinMember" class="join_form" id="join_member">
-							<option value="" selected>--참가자 선택--</option>
-							<%for(User user : list){ %>
-							<option><%=user.getUserName()%>/<%=user.getUserID()%>/<%=user.getUserLevel()%>/<%=user.getUserGender() %></option>
-							<%} %>
-							</select></td>
+							<td  rowspan=3>참가자 명단</td>
+							<td>
+								<script>
+									function btn(){
+										var name = document.getElementById("join_member").value;
+									}
+								</script>
+								<input type=text name="joinMember" id="join_member" >
+								<input type=button name="joinMeberSearch" id="join_member_btn" value="검색" onclick="btn()">
+							
+							</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="join_member" id="join_member_search">
+									
+									
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="join_member" id="join_member_">
+									
+									</div>
+								</td>
 							</tr>
 							<tr class="board_tr" id="notice_nonfix">
 							<td>전달내용</td>
