@@ -82,7 +82,7 @@ public class UserDAO {
 		try {
 			if((id.length() < 8 || id.length() > 15) || string_pattern1(id) == -1)
 				return -1;
-			if((pw.length() != 4) || !Pattern.matches("[0-9]+", pw))
+			if((pw.length() <8) || id.length() > 15 || string_pattern1(pw) == -1)
 				return -2;
 			if(string_pattern2(name) == -1)
 				return -3;
@@ -96,12 +96,20 @@ public class UserDAO {
 		return 1;	// 정상
 	}
 		
-	private int string_pattern1(String str) {	// id
+	private int string_pattern1(String str) {	// id,pw
 		int i;
+		int character=0;
+		int number=0;
+		for(i = 0; i < str.length() && ((Character.isDigit(str.charAt(i)) || str.charAt(i) >= 'a' && str.charAt(i) <= 'z')); i++) {
+			if(Character.isDigit(str.charAt(i))){
+				++number;
+			}
+			if(str.charAt(i) >= 'a' && str.charAt(i) <= 'z') {
+				++character;
+			}
+		};
 		
-		for(i = 0; i < str.length() && ((Character.isDigit(str.charAt(i)) || str.charAt(i) >= 'a' && str.charAt(i) <= 'z')); i++) ;
-		
-		if(i < str.length())
+		if(i < str.length() || number == 0 || character == 0)
 			return -1;
 		else
 			return 0;
@@ -119,16 +127,6 @@ public class UserDAO {
 			return -1;
 		else
 			return 0;
-	}
-	
-	public int check_pw_limit(String pw) {
-		try {
-			if((pw.length() != 4) || !Pattern.matches("[0-9]+", pw))
-				return -1;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return 1;	// 정상
 	}
 	
 	public int check_pw_cmp(User user) {

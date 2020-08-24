@@ -68,19 +68,21 @@
             <!-- 정보를 숨기면서 전송 post -->
             <form method="post" action="registerAction.jsp">
             <div class="login_form">
-				<input type="text" placeholder="아이디 입력" name="userID" maxlength="20">
+				<input type="text" placeholder="아이디 입력" name="userID" maxlength="15">
 				<br>
-				<label class="register_label">ID는 8~15자의 영문 소문자 혹은 숫자만 입력 가능합니다.</label>
+				<label class="register_label">ID는 8~15자의 영문 소문자+숫자만 입력 가능합니다.</label>
 				<br><br>
-				<input type="password" placeholder="비밀번호 입력(숫자 4자리)" name="userPassword" maxlength="4">
+				<input type="password" placeholder="비밀번호 입력" name="userPassword" maxlength="15">
 				<br>
-				<input type="password" placeholder="비밀번호 확인(숫자 4자리)" name="userRePassword" maxlength="4">
+				<label class="register_label">Password는 8~15자의 영문 소문자+숫자만 입력 가능합니다.</label>
+				<br><br>
+				<input type="password" placeholder="비밀번호 확인" name="userRePassword" maxlength="15">
 				<br>
 				<label class="register_label" id="re_password"></label>
 				<input type="text" placeholder="이름 입력" name="userName" maxlength="20">
 				<br>
 				<label class="register_label">실명을 권장합니다. 한글만 가능합니다.</label>
-				<input type="text" placeholder="휴대폰번호 입력(숫자 11자리)" name="userPhone" maxlength="20">
+				<input type="text" placeholder="휴대폰번호 입력(숫자 11자리)" name="userPhone" maxlength="11">
 
 				<br><br>
 				<div class="register_gender-btn" data-toggle="buttons">

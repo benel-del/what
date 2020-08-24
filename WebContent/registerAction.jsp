@@ -42,14 +42,14 @@
     if(userDAO.check_limit(user) == -1){
     	PrintWriter script = response.getWriter();
 	    script.println("<script>");
-	    script.println("alert('아이디는 8~15자의 영문 소문자, 숫자만 사용 가능합니다.')");
+	    script.println("alert('아이디는 8~15자의 영문 소문자+숫자만 사용 가능합니다.')");
 		script.println("history.back()");
 	    script.println("</script>");
     }
     else if(userDAO.check_limit(user) == -2){
     	PrintWriter script = response.getWriter();
 	    script.println("<script>");
-	    script.println("alert('비밀번호는 4자리 숫자로만 설정해주세요.')");
+	    script.println("alert('비밀번호는 8~15자의 영문 소문자+숫자만 사용 가능합니다.')");
 		script.println("history.back()");
 	    script.println("</script>");
     }    
