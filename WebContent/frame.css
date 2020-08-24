@@ -366,10 +366,19 @@ section{
 	width:85%;
 	padding: .5em .3em;
 }
-#join_member{
-	
+#join_member_btn{
+	padding: .5em .3em;
+	width:20%;
+	height: 100%;
+	cursor:pointer;
 }
-
+.join_member_list{
+	border : 1px solid #0F4C81;
+	width:85%;
+	padding: .5em .3em;
+	display: block;
+	margin: 0px auto;
+}
 #join_Content{
 	width:85%;
 	height:100px;
@@ -796,16 +805,79 @@ input[id*="answer"] + label + div p{
 }
 
 
+/* popup */
+#popup{
+	position: relative;
+}
+.popup_container{
+	padding: 5px;
+	margin: 10px;
+	border: 1px solid #0F4C81;
+}
+.member_container{
+	margin: 5px 0px;
+	padding: 10px 10px;
+	width: 100%;
+	height: auto;
+	border: 1px solid #0F4C81;
+}
 
-
-
-
-
-
-
-
-
-
+.search_bar{
+	width: 100%;
+	height: 50px;
+}
+#member_search-btn{
+	float: left;
+	height: 30px;
+	width: 10%;
+	display: block;
+    border:none;
+    background-color: #0F4C81;
+	color:white;
+    cursor: pointer;
+}
+#member_search-bar{
+	float: left;
+	height: 30px;
+	width: 40%;
+	padding: 5px;
+	margin: 0px 5px;
+}
+.search_table{
+	text-align:center;
+	width:100%;
+	border: 1px solid #0F4C81;
+	margin: 5px;
+}
+.search_table thead{
+	background-color: #0F4C81;
+	color:white;
+}
+.search_table tr{
+	height: 35px;
+}
+#member_choice{
+	width: 5%;
+}
+.member_choice-btn{
+    cursor: pointer;
+    font-size: 10px;
+    width: 70%;
+    height: 20px;
+}
+.popup_button{
+	text-align: center;
+}
+.popup_button input{
+	background-color:#0F4C81;
+	margin:20px auto;
+	height:40px;
+	width:80px;
+	color:white;
+	cursor:pointer;
+	font-weight:600;
+	display: inline;
+}
 
 
 
