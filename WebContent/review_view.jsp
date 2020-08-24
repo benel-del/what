@@ -112,7 +112,7 @@
 	            				<td class="view_subtitle">작성자</td>
 	            				<td class="view_content1"><%=bbs_review.getUserID() %></td>
 	            				<td class="view_subtitle">작성일자</td>
-	            				<td class="view_content1"><%=bbs_review.getBbsDate() %></td>
+	            				<td class="view_content1"><%=bbs_review.getBbsDate().substring(0,10) %></td>
             				</tr>
 
             				<tr>
@@ -141,16 +141,6 @@
  
 	    	</div>  
         </section>
-
-        <footer>
-        	<p>
-        	    <span>저자 : </span><br>
-        	    <span>회장 : 전성빈 tel.010-5602-4112</span><br>
-        	    <span>총무 : 정하영 tel.010-9466-9742</span><br>
-        	    <span>경기이사 : 유태혁 tel.010-</span>
-        	    <span>Copyright 2020. 저자. All Rights Reserved.</span>
-        	</p>
-        </footer>
     </div>
 </body>
 </html>

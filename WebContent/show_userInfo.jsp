@@ -122,10 +122,7 @@
        				<tr class="myinfo_userDescription">
        				<th id="myinfo_title" class="table_th1">내 소개</th>
        				<th id="userDescription">
-       					<textarea class="info_textarea" readonly><%
-       					if(user.getUserDescription() != null){
-	       					out.println(user.getUserDescription());
-	       				} else{ out.println("");}%></textarea>
+       					<textarea class="info_textarea" readonly><%if(user.getUserDescription() != null){out.println(user.getUserDescription());} else{ out.println("");}%></textarea>
        				</th>
        				</tr>
 
