@@ -15,6 +15,7 @@ public class User {
 	private int userFirst;
 	private int userSecond;
 	private int userThird;
+	private String userPhone;
 	
 	public String getUserID() {
 		return userID;
@@ -93,5 +94,11 @@ public class User {
 	}
 	public void setUserThird(int userThird) {
 		this.userThird = userThird;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 }

@@ -80,6 +80,7 @@
 				<input type="text" placeholder="이름 입력" name="userName" maxlength="20">
 				<br>
 				<label class="register_label">실명을 권장합니다. 한글만 가능합니다.</label>
+				<input type="text" placeholder="휴대폰번호 입력(숫자 11자리)" name="userPhone" maxlength="20">
 
 				<br><br>
 				<div class="register_gender-btn" data-toggle="buttons">

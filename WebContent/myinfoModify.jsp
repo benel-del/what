@@ -122,6 +122,11 @@
        				<th id="myinfo_title" class="table_th1">성별</th>
        				<th class="table_th2"><%=user.getUserGender() %></th>
        				</tr>
+       				
+       				<tr class="myinfo_userPhone">
+       				<th id="myinfo_title" class="table_th1">연락처</th>
+       				<th class="table_th2"><%=user.getUserPhone() %></th>
+       				</tr>
      				
      				<tr class="myinfo_userLevel">
      				<th id="myinfo_title" class="table_th1">부수</th>

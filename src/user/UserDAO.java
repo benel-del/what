@@ -51,7 +51,7 @@ public class UserDAO {
 	}
 	
 	public int register(User user) {
-		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -62,9 +62,10 @@ public class UserDAO {
 			pstmt.setString(6,  user.getUserType());
 			pstmt.setString(7,  user.getUserDescription());
 			pstmt.setInt(8,  user.getUserRank());
-			pstmt.setInt(9,  user.getUserFirst());
-			pstmt.setInt(10,  user.getUserSecond());
-			pstmt.setInt(11,  user.getUserThird());
+			pstmt.setInt(9,  0);
+			pstmt.setInt(10,  0);
+			pstmt.setInt(11,  0);
+			pstmt.setString(12,  user.getUserPhone());
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -76,6 +77,7 @@ public class UserDAO {
 		String id = user.getUserID();
 		String pw = user.getUserPassword();
 		String name = user.getUserName();
+		String phone = user.getUserPhone();
 		
 		try {
 			if((id.length() < 8 || id.length() > 15) || string_pattern1(id) == -1)
@@ -86,6 +88,8 @@ public class UserDAO {
 				return -3;
 			if(string_pattern3(name) == -1 || string_pattern3(id) == -1)
 				return -4;
+			if((phone.length() != 11)  || !Pattern.matches("[0-9]+", phone))
+				return -5;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -411,6 +415,7 @@ public class UserDAO {
 				user.setUserFirst(rs.getInt(9));
 				user.setUserSecond(rs.getInt(10));
 				user.setUserThird(rs.getInt(11));
+				user.setUserPhone(rs.getString(12));
 				return user;
 			}
 		} catch(Exception e) {
@@ -418,4 +423,39 @@ public class UserDAO {
 		}
 		return null;
 	}
+	
+	public String findID(String userName, String userPhone) {
+		String SQL = "SELECT * FROM USER WHERE userName = ? AND userPhone = ?";	// 실제로 db에 입력할 문자열
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userName);	// ? -> userID
+			pstmt.setString(2,  userPhone);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {	// rs의 결과가 존재한다면
+				if(rs.getString(3).equals(userName) && rs.getString(12).equals(userPhone))
+					return rs.getString(1);	// 아이디찾기 성공
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;	// db 오류
+	}
+	public String findPW(String userID, String userName, String userPhone) {
+		String SQL = "SELECT * FROM USER WHERE userName = ? AND userPhone = ? AND userID = ?";	// 실제로 db에 입력할 문자열
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userName);	// ? -> userID
+			pstmt.setString(2,  userPhone);
+			pstmt.setString(3,  userID);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {	// rs의 결과가 존재한다면
+				if(rs.getString(1).equals(userID)&& rs.getString(3).equals(userName)&& rs.getString(12).equals(userPhone))
+					return rs.getString(2);	// 비번찾기 성공
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;	// db 오류
+	}
+	
 }
