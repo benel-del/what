@@ -22,7 +22,7 @@
 		if(bbsSearch.getSearchWord() == null){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('검색어를 입력하세요.')");
+			script.println("alert('이름을 입력하세요.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}

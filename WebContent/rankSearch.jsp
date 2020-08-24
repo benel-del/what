@@ -132,10 +132,9 @@
         		            ResultSet rs = null;
         		            
         		            try {
-        		                String query = "SELECT * FROM search WHERE searchNo = ?;";
+        		                String query = "SELECT * FROM search WHERE searchType='rank' ORDER BY DESC LIMIT 1;";
         		                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
         		                PreparedStatement pstmt=conn.prepareStatement(query);
-        		                pstmt.setInt(1,  bbsSearchDAO.numbering()-1);
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
         		                	paging += bbsSearchDAO.getCount_rank(rs.getString(4)) / 13;
