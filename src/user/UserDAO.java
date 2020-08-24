@@ -319,6 +319,29 @@ public class UserDAO {
 	}
 	
 	/*rank*/
+	public int countRank() {
+		int i=1;
+		String SQL = "SELECT * FROM USER ORDER BY userFirst DESC, userSecond DESC, userThird DESC, userName ASC;";
+		try {
+			pstmt = conn.prepareStatement(SQL);			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				SQL = "UPDATE USER SET userRank = ? WHERE userID = ?";
+					try {
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setInt(1, i++);
+						pstmt.setString(2, rs.getString(1));
+						pstmt.executeUpdate();
+					} catch(Exception e) {
+						e.printStackTrace();
+					} 
+			}
+			return 1; //성공
+		} catch(Exception e) {
+			e.printStackTrace();
+		}	
+		return -1;
+	}
 	public int getNext() {
 		String SQL="SELECT userRank FROM user ORDER BY userRank ASC;";
 		try {

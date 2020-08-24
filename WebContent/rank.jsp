@@ -87,6 +87,13 @@
             <div class="board_subtitle">랭킹게시판</div>
     	<%
     		UserDAO userDAO = new UserDAO();
+    		if(userDAO.countRank() == -1){
+          	 	PrintWriter script = response.getWriter();
+         		script.println("<script>");
+        		script.println("alert('랭킹게시판 업데이트에 실패하였습니다.')");
+          		script.println("history.back()");
+           		script.println("</script>");
+     	   }
     		ArrayList<User> list = userDAO.getUserRank(pageNumber);
     	%>
     	
