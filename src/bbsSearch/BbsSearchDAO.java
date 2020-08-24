@@ -409,5 +409,8 @@ public class BbsSearchDAO {
 		}
 		return count;
 	}
+	
+	/* member */
+	
 }
 	

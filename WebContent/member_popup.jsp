@@ -1,9 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="bbsSearch.BbsSearch" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
+
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+
+<jsp:useBean id="user" class="user.User" scope="page" />
+<jsp:useBean id="bbsSearch" class="bbsSearch.BbsSearch" scope="page" />
 <!DOCTYPE html>
 
 <html lang="en">
@@ -47,12 +58,13 @@
             ResultSet rs = null;
             
             try {
-                String query = "SELECT * FROM search WHERE searchType='member' ORDER BY DESC LIMIT 1;";
+            	String query = "SELECT * FROM ... WHERE ...;";
                 conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
                 PreparedStatement pstmt=conn.prepareStatement(query);
                 rs = pstmt.executeQuery();
                 if (rs.next()) {
-					list = bbsSearchDAO.getList_rank(pageNumber, rs.getString(4));
+					list2 = method();
+					
     	%>
             <div class="member_container">
            		<div class="search_bar">
@@ -78,7 +90,7 @@
            			<tbody>
            				
            	<%
-       			for(int i=0; i<list2.size(); i++){
+       				for(int i=0; i<list2.size(); i++){
       		%>
       				<tr id="notice_fix">
       					<td id="bbs_level"><%if(list2.get(i).getUserRank() == 0) out.print("-"); else out.print(list2.get(i).getUserRank()); %></td>
@@ -95,10 +107,17 @@
       					</td>
       				</tr>   				
 			<%
-				}
-           		for(int i=0; i<list.size(); i++){
-           			if(list.get(i).getUserID().equals("admin") == false){
-           				%>
+					}
+           		}
+	           	query = "SELECT * FROM search WHERE searchType='member' ORDER BY DESC LIMIT 1;";
+	            conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+	            pstmt=conn.prepareStatement(query);
+	            rs = pstmt.executeQuery();
+	            if (rs.next()) {
+					list = method();
+	           		for(int i=0; i<list.size(); i++){
+	           			if(list.get(i).getUserID().equals("admin") == false){
+	           				%>
            				<tr>
            					<td><%if(list.get(i).getUserRank() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
            					<td><%=list.get(i).getUserName() %></td>
@@ -114,9 +133,32 @@
            					</td>
            				</tr>   				
 				<%
-           			}
-				}
-				%>
+           				}
+					}
+                }
+            }catch (SQLException ex) {
+                out.println(ex.getMessage());
+                ex.printStackTrace();
+            } finally {
+                // 6. 사용한 Statement 종료
+                if (rs != null)
+                    try {
+                        rs.close();
+                    } catch (SQLException ex) {
+                    }
+                if (stmt != null)
+                    try {
+                        stmt.close();
+                    } catch (SQLException ex) {
+                    }
+                // 7. 커넥션 종료
+                if (conn != null)
+                    try {
+                        conn.close();
+                    } catch (SQLException ex) {
+                    }
+            }
+%>
            			</tbody>
            		</table>
     				
