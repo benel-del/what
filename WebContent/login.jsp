@@ -66,9 +66,9 @@
    
                <!--로그인 폼-->
                	<div class="login_form">
-                   <input type="text" placeholder="아이디" name="userID" maxlength="20">
+                   <input type="text" placeholder="아이디" name="userID" maxlength="15">
                    <br>
-                   <input type="password" placeholder="비밀번호" name="userPassword" maxlength="4" />           
+                   <input type="password" placeholder="비밀번호" name="userPassword" maxlength="15" />           
                	</div>
                
                	<input type="submit" class="login_submit-btn" value="로그인" >

@@ -64,25 +64,54 @@
             </ul>
         </div>
 		
-		<section>
+        <section class="container">
 		관리자 페이지<br>
-		1. 모든 글 보기/수정/삭제<br>
-		ex)[공지]게시글제목/활성화여부<br>
-		2. 모든 사용자 보기(showInfo에 공개된 정보만큼만 공개)<br>
-		3. 진행 중인 모임 : 대기자->참가자로 넘기기<br>
-		4. 메인페이지 홍보글 수정<br>
-		5. 
-        </section>
+		<div class="menu">
+        	<input type="checkbox" id="toggle">
+        	<label for="toggle">관리자메뉴</label>
+            <ul id="nav">
+                <li><a href="admin.jsp">게시물 관리</a></li>
+                <li><a href="admin_member_manage.jsp">회원 관리</a></li>
+                <li><a href="admin_join_manage.jsp">입금확인</a></li>
+                <li><a href="admin_ad_manage.jsp">홍보글 수정</a></li>
+            </ul>
+        </div>
+        
+        <!-- 게시판 공통 요소 : class board_ 사용 -->
+            <div class="board_subtitle">
+            	게시물 관리
+            </div>
+            	게시물 수정/삭제/보기
 
-        <footer>
-        	<p>
-        	    <span>저자 : </span><br>
-        	    <span>회장 : 전성빈 tel.010-5602-4112</span><br>
-        	    <span>총무 : 정하영 tel.010-9466-9742</span><br>
-        	    <span>경기이사 : 유태혁 tel.010-</span>
-        	    <span>Copyright 2020. 저자. All Rights Reserved.</span>
-        	</p>
-        </footer>
+            <div class="board_container">
+            	<div class="board_row">
+            	수정/삭제
+            		<table class="board_table">
+            			<thead>
+            				<tr class="board_tr">
+            					<th class="board_thead" id="notice_type">체크박스</th>
+            					<th class="board_thead" id="notice_type">분류</th>
+            					<th class="board_thead" id="notice_type">머릿말</th>
+            					<th class="board_thead" id="notice_title">제목</th>
+            					<th class="board_thead" id="notice_writer">작성자</th>
+            					<th class="board_thead" id="notice_day">등록일자</th>
+            				</tr>
+            			</thead>
+            			<tbody>
+            			<!-- EXAMPLE -->        				
+            				<tr class="board_tr" id="notice_fix">
+            					<td>checkbox</td>
+            					<td>공지</td>
+            					<td>모임</td>
+            					<td>어쩌다리그5회 모임</td>
+            					<td>admin</td>
+            					<td>2020-08-22</td>
+            				</tr>               								
+            			</tbody>
+            		</table>
+            	</div>
+            </div>
+           </section>
     </div>
 </body>
 </html>
