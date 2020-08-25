@@ -111,6 +111,7 @@
             					<th class="board_thead" id="notice_num">no.</th>
             					<th class="board_thead" id="notice_type">머릿말</th>
             					<th class="board_thead" id="notice_title">제목</th>
+            					<th class="board_thead" id="notice_num">진행여부</th>
             					<th class="board_thead" id="notice_writer">작성자</th>
             					<th class="board_thead" id="notice_day">등록일자</th>
             				</tr>
@@ -125,8 +126,9 @@
             				<tr class="board_tr" id="notice_fix">
             					<td><%=list.get(i).getBbsID()%></td>
             					<td><%=list.get(i).getBbsType()%></td>
-            					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a>
-            						<%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0){out.println("[진행중]");} else{out.println("[완료]");}}%></td>
+            					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
+            					<td><div style="color:blue"><%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0){out.println("[진행중]");} else{%></div>
+  						          	 <div style="color:red"><% out.println("[완료]");}}%></div></td>
             					<td><%=list.get(i).getUserID() %></td>
             					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
@@ -139,8 +141,9 @@
                        				<tr class="board_tr">
                        					<td><%=list.get(i).getBbsID()%></td>
                        					<td><%=list.get(i).getBbsType()%></td>
-                       					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a>
-                       					    <%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0 ){out.println("[진행중]");} else{out.println("[완료]");}}%></td>                   
+                       					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>                   
+                       					<td><div style="color:blue"><%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0){out.println("[진행중]");} else{ %></div>
+  						          	 		<div style="color:red"><%out.println("[완료]");}}%></div></td>
                        					<td><%=list.get(i).getUserID() %></td>
                        					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
                        				</tr>   
