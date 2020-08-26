@@ -87,14 +87,14 @@
             <div class="board_subtitle">랭킹게시판</div>
     	<%
     		UserDAO userDAO = new UserDAO();
-    		if(userDAO.countRank() == -1){
+    		if(userDAO.setRank() == -1){
           	 	PrintWriter script = response.getWriter();
          		script.println("<script>");
         		script.println("alert('랭킹게시판 업데이트에 실패하였습니다.')");
           		script.println("history.back()");
            		script.println("</script>");
      	   }
-    		ArrayList<User> list = userDAO.getUserRank(pageNumber);
+    		ArrayList<User> list = userDAO.getRank(pageNumber);
     	%>
     	
             <div class="board_container">
@@ -118,7 +118,7 @@
             			if(list.get(i).getUserID().equals("admin") == false){
             				%>
             				<tr class="board_tr" id="notice_nonfix">
-            					<td><%if(list.get(i).getUserRank() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
+            					<td><%if(list.get(i).getUserFirst() + list.get(i).getUserSecond() + list.get(i).getUserThird() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
             					<td><%=list.get(i).getUserName() %></td>
             					<td><%=list.get(i).getUserLevel() %></td>		
             					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
@@ -137,14 +137,14 @@
             	<!-- 이전/다음 페이지 -->
  				<div class="board_page-move">
             	<%
-            		if(pageNumber > 1){
+            		if(pageNumber != 1){
             	%>
             		<div class="board_page-move-symbol-left">
             			<a href="rank.jsp?pageNumber=<%=pageNumber-1%>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 				<% 
 					}
-            		if(userDAO.nextPage(pageNumber+1)){
+            		if(pageNumber < userDAO.nextPage() / 13 + 1){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="rank.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

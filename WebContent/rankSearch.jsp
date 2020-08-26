@@ -132,7 +132,7 @@
         		            ResultSet rs = null;
         		            
         		            try {
-        		                String query = "SELECT * FROM search WHERE searchType='rank' ORDER BY DESC LIMIT 1;";
+        		                String query = "SELECT * FROM search WHERE searchType='rank' ORDER BY searchNo DESC LIMIT 1;";
         		                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
         		                PreparedStatement pstmt=conn.prepareStatement(query);
         		                rs = pstmt.executeQuery();
@@ -143,7 +143,7 @@
 	            					for(int i=0; i<list.size(); i++){
             				%>          				
             				<tr class="board_tr" id="notice_nonfix">
-            					<td><%if(list.get(i).getUserRank() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
+            					<td><%if(list.get(i).getUserFirst() + list.get(i).getUserSecond() + list.get(i).getUserThird() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
             					<td><%=list.get(i).getUserName() %></td>
             					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
 								<td><%=list.get(i).getUserLevel() %></td>
