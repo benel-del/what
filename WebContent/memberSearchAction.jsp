@@ -19,6 +19,10 @@
 
 <body>
 	<%
+		int bbsID = 0;	
+		if(request.getParameter("bbsID") != null){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -52,7 +56,7 @@
 			else{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.href='member_popup.jsp'");
+				script.println("location.replace='member_popup.jsp?bbsID=" + bbsID + "';");
 				script.println("</script>");
 			}
 		}
