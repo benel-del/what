@@ -4,10 +4,16 @@
 <%@ page import="bbs_join.BbsDAO_join" %>
 <%@ page import="bbs_join.Bbs_join" %>
 <%@ page import="bbs.BbsDAO" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import = "user.User" %>
+<%@ page import="user.User" %>
+<%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="java.util.ArrayList" %>
 
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 
 <!DOCTYPE html>
 
@@ -27,19 +33,25 @@
 		userID = (String) session.getAttribute("userID");
 	}
 
-	int bbsID =0;
+	int bbsID = 0;
 	if(request.getParameter("bbsID") != null){
-		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+		bbsID = Integer.parseInt(request.getParameter("bbsID"));
 	}
-	if(bbsID ==0){
+	if(bbsID == 0){
 		PrintWriter script=response.getWriter();
 		script.println("<script>");
 		script.println("alert('유효하지 않은 글입니다.')");
 		script.println("location.href='index.jsp'");
 		script.println("</script>");
 	}
+	int reset = 0;
+	if(request.getParameter("reset") != null){
+		reset = Integer.parseInt(request.getParameter("reset"));
+	}
+	 
+	 String mem = "";
 	%>
-	
+
     <div id="wrapper">
 
         <br>
@@ -51,27 +63,67 @@
     		script.println("alert('로그인 후 접근 가능합니다.')");
     		script.println("history.back()");
     		script.println("</script>");
-    		} else if(userID.equals("admin") == true) {
-		%>
-			<!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                |
-                <a class="link" href="admin.jsp"> 관리자 페이지</a>
-           </div>
-            <br>		
-        <% 
-           	} else {
-		%>
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                | 
-                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
-           </div>
-            <br>		
-		<% 
-           	}
-       	%>
+    		} 
+        	else{
+        		Class.forName("com.mysql.jdbc.Driver"); 
+            	String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";
+    			String dbID = "root";
+    			String dbPassword = "whatpassword0706!";
+    			ResultSet rs = null;
+                Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+                
+                String query = "SELECT user.team_num FROM (SELECT user.* FROM user_join" + bbsID + " AS user WHERE userID = ?) AS user, bbs_join" + bbsID + " AS bbs WHERE user.team_num = bbs.joinID;";
+                try {
+                	PreparedStatement pstmt=conn.prepareStatement(query);
+                    pstmt.setString(1,  userID);
+                    rs = pstmt.executeQuery();
+    	            if (rs.next()) {
+						if(rs.getInt(1) != 0){
+							PrintWriter script = response.getWriter();
+				    		script.println("<script>");
+				    		script.println("alert('이미 신청하였습니다.')");
+				    		script.println("history.back()");
+				    		script.println("</script>");
+						}
+    	            }
+    	        	if(userID.equals("admin") == true) {
+    	        		%>
+   	        			<!--로그인, 회원가입 버튼-->
+   	                    <div id="service">
+   	                        <a class="link" href="logoutAction.jsp">로그아웃 </a>
+   	                        |
+   	                        <a class="link" href="admin.jsp"> 관리자 페이지</a>
+   	                   </div>
+   	                    <br>		
+   	                <% 
+   	                   	} else {
+   	        		%>
+   	                    <div id="service">
+   	                        <a class="link" href="logoutAction.jsp">로그아웃 </a>
+   	                        | 
+   	                        <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
+   	                   </div>
+   	                    <br>		
+   	        		<% 
+   	                   	}
+   	               	
+                }catch (SQLException ex) {
+                    out.println(ex.getMessage());
+                    ex.printStackTrace();
+                } finally {
+                    if (rs != null)
+                        try {
+                            rs.close();
+                        } catch (SQLException ex) {
+                    }
+                    if (conn != null)
+                        try {
+                            conn.close();
+                        } catch (SQLException ex) {
+                    }
+                }
+        	}
+        %>
     	      	
             <!--사이트 이름-->
             <div id="title">
@@ -97,11 +149,11 @@
     	
             <div class="board_container">
             	<div class="board_row">
-            	    <form method="post" action="joinAction.jsp">
+            	    <form method="post" action="joinAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>">
             	    <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); 
             	       BbsDAO bbsDAO = new BbsDAO();
-            	       UserDAO userDAO = new UserDAO();
-               		   ArrayList<User> list = userDAO.getUserlist();
+            	       BbsSearchDAO searchDAO = new BbsSearchDAO();
+               		   ArrayList<User> list = searchDAO.getList_selectedMember(bbsID);
             	    %>           	            	
             		<table class="board_table">
             			<thead>
@@ -117,12 +169,15 @@
 							<td colspan = "2">(전달사항 입력할 위치임) ex.조원 한 분이 일괄로 신청해 주시기 바랍니다</td>
 							</tr>
 							<tr class="board_tr">
-							<td colspan = "2">*조원들은 반드시 사이트에 가입되어 있어야 합니다.</td>
+							<td colspan = "2">
+								*조원들은 반드시 사이트에 가입되어 있어야 합니다.<br>
+								<%= reset %>
+							</td>
 							</tr>
 							<tr class="board_tr">
 							<td>신청자 연락처</td>
-							<td>
-							<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+							<td class="join_td">
+							<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
 							</td>
 							</tr>
 							<tr class="board_tr">
@@ -132,20 +187,24 @@
 							<tr class="board_tr">
 							<td>참가자</td>
 							<td>
-								<input type=button name="joinMeberSearch" id="join_member_btn" value="검색하기" <% out.print("onclick=\"window.open('member_popup.jsp', 'member_popup', 'width=600, height=700, location=no, status=no, scrollbars=yes');\""); %>>
+								<input type=button name="joinMeberSearch" id="join_member_btn" value="검색하기" onclick="window.open('member_popup.jsp?bbsID=<%=bbsID%>&reset=<%=reset %>', 'member_popup.jsp?bbsID=<%=bbsID%>&reset=<%=reset %>', 'width=600, height=700, location=no, status=no, scrollbars=yes'); <%reset=1;%>">
 							</td>
 							</tr>
 							<tr>
-								<td>참가자 명단</td>
+								<td>참가자 명단<br>(참가자 검색 후 자동 새로고침)</td>
 								
 								<td>
 									<div class="join_member_list">
-					<%
-								for(User user : list)
-									out.print(user.getUserName() + " / " + user.getUserID() + " / " + user.getUserLevel() + " / " + user.getUserGender() + "<br>"); 
-					
+					<%			if(reset == 1){
+									for(User user : list){
+										if(user.getUserID().equals(userID) == false){
+											out.print(user.getUserName() + " / " + user.getUserID() + " / " + user.getUserLevel() + " / " + user.getUserType() + "<br>"); 
+											mem += user.getUserID() + " "; 
+										}
+									}
+								}
       				%>
-									
+									<input type = hidden name = "joinMember" id = "join_member" value = <%=mem %>>
 									</div>
 								</td>
 							</tr>

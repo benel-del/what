@@ -58,7 +58,8 @@ public class BbsDAO {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			int bbsID = getNext();
 			if(bbsType.contentEquals("모임공지")) {
-				getJoin(bbsID);
+				createJoinDB(bbsID);
+				createUserDB(bbsID);
 			}
 			pstmt.setInt(1,  bbsID);
 			pstmt.setString(2,  bbsTitle);
@@ -77,11 +78,26 @@ public class BbsDAO {
 		}
 		return -1; //데이터베이스 오류
 	}	
-	public int getJoin(int bbsID) {
+	public int createJoinDB(int bbsID) {
 		String SQL="CREATE TABLE bbs_join"+bbsID+"(joinID INT, userID VARCHAR(20), userPhone VARCHAR(20), joinPassword VARCHAR(10), joinMember VARCHAR(200), joinContent VARCHAR(2048), moneyCheck INT, PRIMARY KEY(joinID));";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
+	public int createUserDB(int bbsID) {
+		String SQL="CREATE TABLE user_join"+bbsID+"(userID VARCHAR(20), isPart INT, team_num INT, FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE);";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.executeUpdate();
+			
+			SQL = "INSERT INTO user_join"+bbsID+"(userID) SELECT userID FROM user;";
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

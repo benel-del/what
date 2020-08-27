@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import bbs.Bbs;
+import bbs_join.BbsDAO_join;
 import bbs_result.Bbs_result;
 import bbs_review.Bbs_review;
 import user.User;
@@ -411,6 +412,65 @@ public class BbsSearchDAO {
 	}
 	
 	/* member */
+	public ArrayList<User> getList_selectedMember(int bbsID){
+		String SQL = "SELECT user.* FROM user, (SELECT ujoin.* FROM user_join" + bbsID + " AS ujoin WHERE ujoin.team_num = ?) AS ujoin WHERE  user.userID = ujoin.userID ORDER BY user.userName ASC, user.userID ASC;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			BbsDAO_join bbs = new BbsDAO_join();
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1,  bbs.getNext(bbsID));
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
+	public ArrayList<User> getList_Member(int bbsID, String searchWord){
+		String SQL = "SELECT user.*, ujoin.isPart, ujoin.team_num FROM user, user_join" + bbsID + " AS ujoin WHERE user.userID = ujoin.userID AND user.userName LIKE ? ORDER BY user.userName ASC, user.userID ASC;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  "%"+searchWord+"%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				user.setUserFirst(rs.getInt(13));	// user_join00`s isPart
+				user.setUserSecond(rs.getInt(14));	// user_join00`s team_num
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int delete_list(String userID, String searchType) {
+		String SQL = "DELETE FROM search WHERE userID = ? AND searchType = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			pstmt.setString(2,  searchType);
+			return pstmt.executeUpdate();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
 	

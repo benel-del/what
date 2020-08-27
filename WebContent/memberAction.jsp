@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="user.UserDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="user.User" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="user_join.User_join" %>
+<%@ page import="user_join.UserDAO_join" %>
 <%@ page import="bbsSearch.BbsSearch" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="bbsSearch" class="bbsSearch.BbsSearch" scope="page" />
 <jsp:setProperty name="bbsSearch" property="userID"/>
-<jsp:setProperty name="bbsSearch" property="searchWord" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,22 +22,45 @@
 
 <body>
 	<%
-		if(bbsSearch.getSearchWord() == null){
-			PrintWriter script = response.getWriter();
+		int bbsID = 0;	
+		if(request.getParameter("bbsID") != null){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		int reset = 0;	
+		if(request.getParameter("reset") != null){
+			reset = Integer.parseInt(request.getParameter("reset"));
+		}
+		int btn = 0;	
+		if(request.getParameter("btn") != null){
+			btn = Integer.parseInt(request.getParameter("btn"));
+		}
+
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		
+		UserDAO_join userDAO = new UserDAO_join();
+		BbsSearchDAO bbsSearchDAO = new BbsSearchDAO();
+		bbsSearchDAO.delete_list(userID, "member");
+		PrintWriter script = response.getWriter();
+		String url;
+		if(btn != 0){	// 확인
+			url = "join.jsp?bbsID="+bbsID+"&reset=" + (reset + 1);
 			script.println("<script>");
-			script.println("alert('검색어를 입력하세요.')");
-			script.println("history.back()");
+			script.println("opener.location.replace('" + url + "');");
+			script.println("close();");
 			script.println("</script>");
 		}
-		else{
-			String userID = null;
-			if(session.getAttribute("userID") != null){
-				userID = (String) session.getAttribute("userID");
-			}
-			
-			BbsSearchDAO bbsSearchDAO = new BbsSearchDAO();
-
+		else{	// 취소
+			userDAO.delete(bbsID);
+			url = "join.jsp?bbsID="+bbsID+"&reset=" + 0;		
+			script.println("<script>");
+			script.println("opener.location.replace('" + url + "');");
+			script.println("close();");
+			script.println("</script>");
 		}
+		
 
 	%>
 </body>
