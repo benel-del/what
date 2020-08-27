@@ -63,6 +63,15 @@
             <br>		
 		<% 
            	}
+        
+        UserDAO userDAO = new UserDAO();
+		if(userDAO.setRank() == -1){
+      	 	PrintWriter script = response.getWriter();
+     		script.println("<script>");
+    		script.println("alert('랭킹게시판 업데이트에 실패하였습니다.')");
+      		script.println("history.back()");
+       		script.println("</script>");
+ 	   }
        	%>
        	
             <!--사이트 이름-->
@@ -136,7 +145,7 @@
                     <div id="index_notice-btn">
                         <!--참가신청 버튼-->
                         <div class="index_notice-btn">
-                            <a href="join.jsp?bbsID=<%=bbsJoin%>">참가신청하기</a>
+                            <a href="join.jsp?bbsID=<%=bbsJoin%>&reset=0">참가신청하기</a>
                         </div>
 
                         <!--팀 매칭 버튼-->
@@ -163,7 +172,7 @@
             			</thead>          			
             			<tbody>
             			<%
-    					UserDAO userDAO = new UserDAO();
+    					userDAO = new UserDAO();
     					ArrayList<User> list = userDAO.getUserRank_index();
             			for(User user : list){
             				if(user.getUserID().equals("admin") == false){%>

@@ -140,7 +140,7 @@
         		            ResultSet rs = null;
         		            
         		            try {
-        		                String query = "SELECT * FROM search WHERE searchType='result' ORDER BY DESC LIMIT 1;";
+        		                String query = "SELECT * FROM search WHERE searchType='result' ORDER BY searchNo DESC LIMIT 1;";
         		                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
         		                PreparedStatement pstmt=conn.prepareStatement(query);
         		                rs = pstmt.executeQuery();

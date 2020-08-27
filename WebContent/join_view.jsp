@@ -100,26 +100,19 @@
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead">no.</th>
-            					<th class="board_thead" id="rank_name">신청자</th>
+            					<th class="board_thead" id="bbs_num">no.</th>
+            					<th class="board_thead" id="bbs_name">신청자</th>
             					<th class="board_thead">참가자</th>			
             				</tr>
             			</thead>
             			
             			<tbody>
             	<%
-            		if(list.size() == 0){
-            			PrintWriter script=response.getWriter();
-                		script.println("<script>");
-                		script.println("alert('등록된 참가자가 없습니다.')");
-                		script.println("history.back()");
-                		script.println("</script>");
-            		}
             		for(Bbs_join bbs_join : list){%>
             				<tr class="board_tr" id="notice_nonfix">
             					<td><%=bbs_join.getJoinID() %></td>
             					<td><%=bbs_join.getUserID() %></td>
-            					<td><%=bbs_join.getJoinMember() %></td>
+            					<td><%if(list.size() == 1) out.print("-"); else bbs_join.getJoinMember(); %></td>
             				</tr>   				
 						<%}%>
             			</tbody>

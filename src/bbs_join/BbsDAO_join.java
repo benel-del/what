@@ -22,7 +22,7 @@ public class BbsDAO_join {
 		}
 	}	
 	
-	public int getNext(int bbsID) {	// 새 글 작성을 위한 joinId 지정하기
+	public int getNext(int bbsID) {	// 새 팀을 위한 joinId 지정하기
 		String SQL="SELECT joinID FROM bbs_join"+bbsID+" ORDER BY joinID DESC;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -30,7 +30,7 @@ public class BbsDAO_join {
 			if(rs.next()) {
 				return rs.getInt(1)+1;
 			}
-			return 1; //첫 번째 게시물인 경우
+			return 1;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -73,4 +73,5 @@ public class BbsDAO_join {
 		}
 		return list;
 	}
+	
 }

@@ -108,12 +108,12 @@
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead" id="notice_num">no.</th>
-            					<th class="board_thead" id="notice_type">머릿말</th>
-            					<th class="board_thead" id="notice_title">제목</th>
-            					<th class="board_thead" id="notice_num">진행여부</th>
-            					<th class="board_thead" id="notice_writer">작성자</th>
-            					<th class="board_thead" id="notice_day">등록일자</th>
+            					<th class="board_thead" id="bbs_num">no.</th>
+            					<th class="board_thead" id="bbs_type">머릿말</th>
+            					<th class="board_thead" id="bbs_title">제목</th>
+            					<th class="board_thead" id="bbs_num">진행여부</th>
+            					<th class="board_thead" id="bbs_writer">작성자</th>
+            					<th class="board_thead" id="bbs_day">등록일자</th>
             				</tr>
             			</thead>
             			<tbody>

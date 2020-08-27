@@ -394,6 +394,9 @@ section{
 	cursor:pointer;
 	font-weight:600;
 }
+.join_td{
+	width: 60%;
+}
 	
 }
 /* BOARD COMMON */
@@ -472,13 +475,13 @@ section{
 
 /* NOTICE, RESULT, REVIEW 목록보기 */
 #bbs_type{
-	width: 15%;
+	width: 12%;
 }
 #bbs_num{
 	width:8%;
 }
 #bbs_writer{
-	width: 15%;
+	width: 12%;
 }
 #bbs_day{
 	width: 20%;
