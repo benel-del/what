@@ -16,7 +16,9 @@ public class User {
 	private int userSecond;
 	private int userThird;
 	private String userPhone;
-	
+	private int loginCount;
+	private String lastLogin;
+
 	public String getUserID() {
 		return userID;
 	}
@@ -100,5 +102,17 @@ public class User {
 	}
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	public int getLoginCount() {
+		return loginCount;
+	}
+	public void setLoginCount(int loginCount) {
+		this.loginCount = loginCount;
+	}
+	public String getLastLogin() {
+		return lastLogin;
+	}
+	public void setLastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 }

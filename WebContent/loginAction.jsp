@@ -39,6 +39,13 @@
 			script.println("location.href = 'index.jsp'");
 			script.println("</script>");
 		}
+		else if(result == 5){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인을 5회 시도하였습니다. 하루 동안 계정이 잠깁니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
 		else if(result == 0){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

@@ -29,19 +29,76 @@ public class UserDAO {
 		}
 	}
 	
+	public String getDate() {	// 현재 시간 불러오기
+		String SQL="SELECT NOW();";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ""; //데이터베이스 오류
+	}
+	
+	public int compareDate(String lastLogin, String now, String userID) {
+		String SQL = "SELECT DATEDIFF(now, lastLogin);"; //하루 지나면 로그인 가능	
+		try {
+			pstmt = conn.prepareStatement(SQL);			
+			rs = pstmt.executeQuery();
+			if(rs.getInt(1) >= 1) {
+				SQL = "UPDATE USER SET loginCount = 0 WHERE userID = ?;";
+				try {
+					pstmt=conn.prepareStatement(SQL);
+					pstmt.setString(1, userID);
+					pstmt.executeUpdate();						
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				return 1;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
 	// 실제로 로그인을 시도하는 부분
 	public int login(String userID, String userPassword) {
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";	// 실제로 db에 입력할 문자열
+		String SQL = "SELECT * FROM USER WHERE userID = ?;";	// 실제로 db에 입력할 문자열
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);	// ? -> userID
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	// rs의 결과가 존재한다면
-				if(rs.getString(1).equals(userPassword))
-					return 1;	// 로그인 성공
-				else
-					return 0; 	// 로그인 실패 = 비밀번호 불일치
+				if(rs.getInt(13) == 5) {//5회 로그인 시도하면 하루 계정 잠금
+					if(compareDate(rs.getString(14), getDate(), userID) == 0)
+						return 5;
+				}
+				else {
+					if(rs.getString(2).equals(userPassword)) 
+						return 1;	// 로그인 성공
+					else {
+						int count= rs.getInt(13);
+						count++;
+						SQL = "UPDATE USER SET loginCount = ?, lastLogin = ? WHERE userID = ?;";
+						try {
+							pstmt=conn.prepareStatement(SQL);
+							pstmt.setInt(1, count);
+							pstmt.setString(2, getDate());
+							pstmt.setString(3, userID);
+							pstmt.executeUpdate();						
+						} catch(Exception e) {
+							e.printStackTrace();
+						}
+						return 0; 	// 로그인 실패 = 비밀번호 불일치
+					}
+				}
 			}
 			return -1; // userID가 db table에 없음
 		} catch(Exception e) {
@@ -51,7 +108,7 @@ public class UserDAO {
 	}
 	
 	public int register(User user) {
-		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -66,6 +123,8 @@ public class UserDAO {
 			pstmt.setInt(10,  0);
 			pstmt.setInt(11,  0);
 			pstmt.setString(12,  user.getUserPhone());
+			pstmt.setInt(13, 0);
+			pstmt.setString(14, getDate());
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -148,7 +207,7 @@ public class UserDAO {
 
 	public int delete(String userID, String userPassword) {
 		int rt = -1;
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -156,7 +215,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(userPassword)) {
-					SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?";
+					SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1,  userID);
@@ -187,7 +246,7 @@ public class UserDAO {
 	}
 	
 	public int preModify(String userID, String userPassword) {
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -208,7 +267,7 @@ public class UserDAO {
 	
 	public int modify(String userID, String userPassword, String userLevel, String userType, String userDescription) {
 		int rt = -1;
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -216,7 +275,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(userPassword)) {
-					SQL = "UPDATE USER SET userLevel = ?, userType = ?, userDescription = ? WHERE userID = ?";
+					SQL = "UPDATE USER SET userLevel = ?, userType = ?, userDescription = ? WHERE userID = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1, userLevel);
@@ -250,7 +309,7 @@ public class UserDAO {
 	
 	public int modify(String userID, String userPassword, String userNewPassword, String userLevel, String userType, String userDescription) {
 		int rt = -1;
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?";
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -258,7 +317,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(userPassword)) {
-					SQL = "UPDATE USER SET userPassword = ?, userLevel = ?, userType = ?, userDescription = ? WHERE userID = ?";
+					SQL = "UPDATE USER SET userPassword = ?, userLevel = ?, userType = ?, userDescription = ? WHERE userID = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1, userNewPassword);
@@ -326,7 +385,7 @@ public class UserDAO {
 			pstmt = conn.prepareStatement(SQL);			
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				SQL = "UPDATE USER SET userRank = ? WHERE userID = ?";
+				SQL = "UPDATE USER SET userRank = ? WHERE userID = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setInt(1, i++);
