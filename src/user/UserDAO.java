@@ -378,29 +378,58 @@ public class UserDAO {
 	}
 	
 	/*rank*/
-	public int countRank() {
-		int i=1;
-		String SQL = "SELECT * FROM USER ORDER BY userFirst DESC, userSecond DESC, userThird DESC, userName ASC;";
+	public int setRank() {
+		int i = 0;
+		int same = 1;	// 점수가 동일할 시
+		int pre_fir = -1;
+		int pre_sec = -1;
+		int pre_thi = -1;
+		Boolean isFir = true;
+		
+		String SQL = "UPDATE user SET userRank = ? WHERE userRank = 0;";
 		try {
-			pstmt = conn.prepareStatement(SQL);			
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				SQL = "UPDATE USER SET userRank = ? WHERE userID = ?;";
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, nextPage()+1);
+			pstmt.executeUpdate();
+			
+			SQL = "SELECT * FROM user ORDER BY userFirst DESC, userSecond DESC, userThird DESC;";
+			try {
+				pstmt = conn.prepareStatement(SQL);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					SQL = "UPDATE user SET userRank = ? WHERE userID = ?";
+					if(!isFir && (pre_fir == rs.getInt(9) && pre_sec == rs.getInt(10) && pre_thi == rs.getInt(11))) {
+						same ++;
+					}
+					else {
+						i += same;
+						same = 1;
+					}	
 					try {
 						pstmt = conn.prepareStatement(SQL);
-						pstmt.setInt(1, i++);
+						pstmt.setInt(1, i);
 						pstmt.setString(2, rs.getString(1));
 						pstmt.executeUpdate();
 					} catch(Exception e) {
 						e.printStackTrace();
-					} 
+					}
+					if(isFir)
+						isFir = false;
+					pre_fir = rs.getInt(9);
+					pre_sec = rs.getInt(10);
+					pre_thi = rs.getInt(11);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
+			
 			return 1; //성공
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
 		return -1;
-	}
+	}					
+	
 	public int getNext() {
 		String SQL="SELECT userRank FROM user ORDER BY userRank ASC;";
 		try {
@@ -415,7 +444,8 @@ public class UserDAO {
 		}
 		return -1; //데이터베이스 오류
 	}
-	public ArrayList<User> getUserRank(int pageNumber){		
+	
+	public ArrayList<User> getRank(int pageNumber){		
 		String SQL="SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT ?, 12;";
 		ArrayList<User> list = new ArrayList<User>();
 		try {
@@ -438,23 +468,25 @@ public class UserDAO {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		return list;
 	}
 
-	public boolean nextPage(int pageNumber) {
-		String SQL="SELECT * FROM user WHERE userRank > ? ORDER BY userRank ASC LIMIT 12;";
+	public int nextPage() {
+		int count = 0;
+		String SQL="SELECT * FROM user;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				return true;
+				count++;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return count;
 	}
+	
 	/*index rank*/
 	public ArrayList<User> getUserRank_index(){		
 		String SQL="SELECT * FROM user ORDER BY userRank ASC LIMIT 12;";
@@ -477,7 +509,7 @@ public class UserDAO {
 		return list;
 	}
 	
-	public User getuser_rank(String userID) {
+	public User getuser_rank(String userID) {	// for search
 		String SQL="SELECT * FROM user WHERE userID = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
