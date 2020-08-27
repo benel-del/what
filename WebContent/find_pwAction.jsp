@@ -45,7 +45,7 @@
 		if(userPw == null){//계정이 없는 경우
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('계정이 존재하지 않습니다.')");
+			script.println("alert('해당 정보에 일치하는 계정이 존재하지 않습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		} else{

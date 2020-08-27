@@ -122,7 +122,7 @@
         if(result == -1){
            	PrintWriter script = response.getWriter();
             script.println("<script>");
-            script.println("alert('데이터베이스 오류')");
+            script.println("alert('이미 존재하는 아이디입니다.')");
             script.println("history.back()");
             script.println("</script>");
         }
