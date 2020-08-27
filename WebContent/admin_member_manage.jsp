@@ -52,7 +52,7 @@
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
         	<label for="toggle">관리자메뉴</label>
             <ul id="nav">
@@ -65,37 +65,37 @@
 		
         <section class="container">
 		관리자 페이지<br>
-		
         
         <!-- 게시판 공통 요소 : class board_ 사용 -->
             <div class="board_subtitle">
-            	게시물 관리(공지/결과/후기 게시물)
+            	회원 관리
             </div>
-            	게시물 수정/삭제/보기
 
             <div class="board_container">
             	<div class="board_row">
-            	수정/삭제
+            	 로그인 횟수 초기화 / 탈퇴
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="notice_type">체크박스</th>
-            					<th class="board_thead" id="notice_type">분류</th>
-            					<th class="board_thead" id="notice_type">머릿말</th>
-            					<th class="board_thead" id="notice_title">제목</th>
-            					<th class="board_thead" id="notice_writer">작성자</th>
-            					<th class="board_thead" id="notice_day">등록일자</th>
+            					<th class="board_thead" id="notice_type">아이디</th>
+            					<th class="board_thead" id="notice_type">이름</th>
+            					<th class="board_thead" id="notice_title">성별</th>
+            					<th class="board_thead" id="notice_writer">부수</th>
+            					<th class="board_thead" id="notice_day">로그인 횟수</th>
+            					<th class="board_thead" id="notice_day">최근 로그인 날짜</th>
             				</tr>
             			</thead>
             			<tbody>
             			<!-- EXAMPLE -->        				
             				<tr class="board_tr" id="notice_fix">
             					<td>checkbox</td>
-            					<td>공지</td>
-            					<td>모임</td>
-            					<td>어쩌다리그5회 모임</td>
-            					<td>admin</td>
-            					<td>2020-08-22</td>
+            					<td>rlaalstjsoo</td>
+            					<td>김민선</td>
+            					<td>여자</td>
+            					<td>2</td>
+            					<td>로그인횟수</td>
+            					<td>최근 로그인 날짜</td>
             				</tr>               								
             			</tbody>
             		</table>

@@ -68,7 +68,7 @@
                	<div class="login_form">
                    <input type="text" placeholder="이름" name="userName" maxlength="20">
                    <br>
-                   <input type="text" placeholder="휴대폰번호" name="userPhone" maxlength="20" />           
+                   <input type="text" placeholder="이메일" name="userEmail" maxlength="50" />           
                	</div>
                
                	<input type="submit" class="login_submit-btn" value="아이디찾기" >           

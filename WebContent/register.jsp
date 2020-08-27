@@ -82,7 +82,7 @@
 				<input type="text" placeholder="이름 입력" name="userName" maxlength="20">
 				<br>
 				<label class="register_label">실명을 권장합니다. 한글만 가능합니다.</label>
-				<input type="tel" placeholder="휴대폰번호 입력(숫자 11자리)" name="userPhone" maxlength="11" pattern="[0-2]{3}-[0-9]{4}-[0-9]{4}">
+				<input type="text" placeholder="이메일입력" name="userEmail" maxlength="50">
 
 				<br><br>
 				<div class="register_gender-btn" data-toggle="buttons">

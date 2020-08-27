@@ -44,28 +44,20 @@ public class UserDAO {
 		return ""; //데이터베이스 오류
 	}
 	
-	public int compareDate(String lastLogin, String now, String userID) {
-		String SQL = "SELECT DATEDIFF(now, lastLogin);"; //하루 지나면 로그인 가능	
+	public int howmanylogin(String userID) {
+		String SQL = "SELECT loginCount FROM USER WHERE userID = ?;";
 		try {
-			pstmt = conn.prepareStatement(SQL);			
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);// ? -> userID
 			rs = pstmt.executeQuery();
-			if(rs.getInt(1) >= 1) {
-				SQL = "UPDATE USER SET loginCount = 0 WHERE userID = ?;";
-				try {
-					pstmt=conn.prepareStatement(SQL);
-					pstmt.setString(1, userID);
-					pstmt.executeUpdate();						
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-				return 1;
-			}
-		} catch(Exception e) {
+			if(rs.next()) {
+				return rs.getInt(1);
+			}			
+		}  catch(Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return -1; //데이터베이스 오류
 	}
-	
 	
 	// 실제로 로그인을 시도하는 부분
 	public int login(String userID, String userPassword) {
@@ -77,7 +69,6 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	// rs의 결과가 존재한다면
 				if(rs.getInt(13) == 5) {//5회 로그인 시도하면 하루 계정 잠금
-					if(compareDate(rs.getString(14), getDate(), userID) == 0)
 						return 5;
 				}
 				else {
@@ -122,7 +113,7 @@ public class UserDAO {
 			pstmt.setInt(9,  0);
 			pstmt.setInt(10,  0);
 			pstmt.setInt(11,  0);
-			pstmt.setString(12,  user.getUserPhone());
+			pstmt.setString(12,  user.getUserEmail());
 			pstmt.setInt(13, 0);
 			pstmt.setString(14, getDate());
 			return pstmt.executeUpdate();
@@ -136,7 +127,7 @@ public class UserDAO {
 		String id = user.getUserID();
 		String pw = user.getUserPassword();
 		String name = user.getUserName();
-		String phone = user.getUserPhone();
+		//String email = user.getUserEmail();
 		
 		try {
 			if((id.length() < 8 || id.length() > 15) || string_pattern1(id) == -1)
@@ -147,8 +138,6 @@ public class UserDAO {
 				return -3;
 			if(string_pattern3(name) == -1 || string_pattern3(id) == -1)
 				return -4;
-			if((phone.length() != 11)  || !Pattern.matches("[0-9]+", phone))
-				return -5;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -527,7 +516,7 @@ public class UserDAO {
 				user.setUserFirst(rs.getInt(9));
 				user.setUserSecond(rs.getInt(10));
 				user.setUserThird(rs.getInt(11));
-				user.setUserPhone(rs.getString(12));
+				user.setUserEmail(rs.getString(12));
 				return user;
 			}
 		} catch(Exception e) {
@@ -536,15 +525,15 @@ public class UserDAO {
 		return null;
 	}
 	
-	public String findID(String userName, String userPhone) {
-		String SQL = "SELECT * FROM USER WHERE userName = ? AND userPhone = ?";	// 실제로 db에 입력할 문자열
+	public String findID(String userName, String userEmail) {
+		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ?";	// 실제로 db에 입력할 문자열
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);	// ? -> userID
-			pstmt.setString(2,  userPhone);
+			pstmt.setString(2,  userEmail);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	// rs의 결과가 존재한다면
-				if(rs.getString(3).equals(userName) && rs.getString(12).equals(userPhone))
+				if(rs.getString(3).equals(userName) && rs.getString(12).equals(userEmail))
 					return rs.getString(1);	// 아이디찾기 성공
 			}
 		} catch(Exception e) {
@@ -552,16 +541,16 @@ public class UserDAO {
 		}
 		return null;	// db 오류
 	}
-	public String findPW(String userID, String userName, String userPhone) {
-		String SQL = "SELECT * FROM USER WHERE userName = ? AND userPhone = ? AND userID = ?";	// 실제로 db에 입력할 문자열
+	public String findPW(String userID, String userName, String userEmail) {
+		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ? AND userID = ?";	// 실제로 db에 입력할 문자열
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);	// ? -> userID
-			pstmt.setString(2,  userPhone);
+			pstmt.setString(2,  userEmail);
 			pstmt.setString(3,  userID);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	// rs의 결과가 존재한다면
-				if(rs.getString(1).equals(userID)&& rs.getString(3).equals(userName)&& rs.getString(12).equals(userPhone))
+				if(rs.getString(1).equals(userID)&& rs.getString(3).equals(userName)&& rs.getString(12).equals(userEmail))
 					return rs.getString(2);	// 비번찾기 성공
 			}
 		} catch(Exception e) {
@@ -569,5 +558,18 @@ public class UserDAO {
 		}
 		return null;	// db 오류
 	}
-	
+	public String getUserEmail(String userID) {
+		String SQL = "SELECT userEmail FROM USER WHERE userID = ?;";	// 실제로 db에 입력할 문자열
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {	// rs의 결과가 존재한다면
+				return rs.getString(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;	// db 오류
+	}
 }

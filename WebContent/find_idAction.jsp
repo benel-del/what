@@ -5,7 +5,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
 <jsp:setProperty name="user" property="userName" />
-<jsp:setProperty name="user" property="userPhone" />
+<jsp:setProperty name="user" property="userEmail" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +30,7 @@
 		}//로그인 된 사람은 로그인 페이지에 접근할 수 없음
 		
 		UserDAO userDAO = new UserDAO();
-		userID = userDAO.findID(user.getUserName(), user.getUserPhone());
+		userID = userDAO.findID(user.getUserName(), user.getUserEmail());
 		
 		if(userID == null){//계정이 없는 경우
 			PrintWriter script = response.getWriter();

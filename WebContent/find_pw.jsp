@@ -70,7 +70,7 @@
                    <br>
                    <input type="text" placeholder="아이디" name="userID" maxlength="20" />
                    <br>
-                   <input type="text" placeholder="휴대폰번호" name="userPhone" maxlength="20" />           
+                   <input type="text" placeholder="이메일" name="userEmail" maxlength="50" />         
                               
                	</div>
                

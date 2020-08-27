@@ -21,6 +21,10 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	int pageNumber = 1; // 기본페이지
+	if(request.getParameter("pageNumber") != null){
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+	}
 	%>
 	
     <div id="wrapper">

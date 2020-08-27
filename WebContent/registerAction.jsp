@@ -9,9 +9,9 @@
 <jsp:setProperty name="user" property="userRePassword"/>
 <jsp:setProperty name="user" property="userName"/>
 <jsp:setProperty name="user" property="userGender"/>
+<jsp:setProperty name="user" property="userEmail"/>
 <jsp:setProperty name="user" property="userLevel"/>
 <jsp:setProperty name="user" property="userType"/>
-<jsp:setProperty name="user" property="userPhone"/>
 
 
 <!DOCTYPE html>
@@ -64,13 +64,6 @@
     	PrintWriter script = response.getWriter();
 	    script.println("<script>");
 	    script.println("alert('해당 아이디 또는 이름을 사용할 수 없습니다.')");
-		script.println("history.back()");
-	    script.println("</script>");
-    }
-    else if(userDAO.check_limit(user) == -5){
-    	PrintWriter script = response.getWriter();
-	    script.println("<script>");
-	    script.println("alert('휴대폰번호는 11자리 숫자로만 입력해주세요.')");
 		script.println("history.back()");
 	    script.println("</script>");
     }
