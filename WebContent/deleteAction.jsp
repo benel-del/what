@@ -28,7 +28,7 @@
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인 후 이용가능합니다.')");
-		script.println("location.href = 'login.jsp'");
+		script.println("location.replace('login.jsp')");
 		script.println("</script>");
 	} //로그인 안 된 사람은 회원 탈퇴 페이지에 접근할 수 없음
 	else if(userID.equals("admin") == true){

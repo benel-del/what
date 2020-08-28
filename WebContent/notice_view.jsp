@@ -132,7 +132,7 @@
             		
             		<%if(bbs.getBbsType().equals("모임공지") == true && bbs.getBbsComplete() == 0){ 
             			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "&reset=0\" class=\"link\">참가신청</a>");
+            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
             			out.println("</div>");
             		}
             		%>
