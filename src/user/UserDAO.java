@@ -193,6 +193,16 @@ public class UserDAO {
 		else
 			return -1;
 	}
+	
+	public int check_pw_limit(String pw) {
+		try {
+			if((pw.length() != 4) || !Pattern.matches("[0-9]+", pw))
+				return -1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 1;	// 정상
+	}
 
 	public int delete(String userID, String userPassword) {
 		int rt = -1;

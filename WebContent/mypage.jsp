@@ -97,9 +97,9 @@
        				<th class="table_th2"><%=user.getUserGender() %></th>
        				</tr>
        				
-       				<tr class="myinfo_userPhone">
+       				<tr class="myinfo_userEmail">
        				<th id="myinfo_title" class="table_th1">연락처</th>
-       				<th class="table_th2"><%=user.getUserPhone() %></th>
+       				<th class="table_th2"><%=user.getUserEmail() %></th>
        				</tr>
 
        				<tr class="myinfo_userLevel">

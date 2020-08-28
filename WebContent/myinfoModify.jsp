@@ -100,21 +100,21 @@
      				<tr class="myinfo_userPassword">
      				<th id="myinfo_title" class="table_th1">*현재 비밀번호</th>
      				<th class="table_th2">
-     					<input type="password" placeholder="기존의 비밀번호를 입력해주세요" name="userPassword" maxlength="4" /> 
+     					<input type="password" placeholder="기존의 비밀번호를 입력해주세요" name="userPassword" maxlength="15" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
      				<th id="myinfo_title" class="table_th1">비밀번호 변경</th>
      				<th class="table_th2">
-     					<input type="password" placeholder="새 비밀번호를 입력해주세요." name="userNewPassword" maxlength="4" /> 
+     					<input type="password" placeholder="새 비밀번호를 입력해주세요." name="userNewPassword" maxlength="15" /> 
      				</th>
      				</tr>
      				
      				<tr class="myinfo_userPassword">
      				<th id="myinfo_title" class="table_th1">비밀번호 확인</th>
      				<th class="table_th2">
-     					<input type="password" placeholder="새 비밀번호를 다시 입력해주세요" name="userRePassword" maxlength="4" /> 
+     					<input type="password" placeholder="새 비밀번호를 다시 입력해주세요" name="userRePassword" maxlength="15" /> 
      				</th>
      				</tr>
      				
@@ -123,9 +123,9 @@
        				<th class="table_th2"><%=user.getUserGender() %></th>
        				</tr>
        				
-       				<tr class="myinfo_userPhone">
+       				<tr class="myinfo_userEmail">
        				<th id="myinfo_title" class="table_th1">연락처</th>
-       				<th class="table_th2"><%=user.getUserPhone() %></th>
+       				<th class="table_th2"><%=user.getUserEmail() %></th>
        				</tr>
      				
      				<tr class="myinfo_userLevel">
