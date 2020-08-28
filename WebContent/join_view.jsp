@@ -44,7 +44,7 @@
     		PrintWriter script = response.getWriter();
     		script.println("<script>");
     		script.println("alert('로그인 후 접근 가능합니다.')");
-    		script.println("history.back()");
+    		script.println("location.replace('login.jsp')");
     		script.println("</script>");
     		} else if(userID.equals("admin") == true) {
 		%>
@@ -92,7 +92,7 @@
 
     	<%
     		BbsDAO_join bbsDAO_join = new BbsDAO_join();
-    		ArrayList<Bbs_join> list = bbsDAO_join.getJoinMembers(bbsID);
+    		ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
     	%>
     	
             <div class="board_container">
@@ -112,7 +112,7 @@
             				<tr class="board_tr" id="notice_nonfix">
             					<td><%=bbs_join.getJoinID() %></td>
             					<td><%=bbs_join.getUserID() %></td>
-            					<td><%if(list.size() == 1) out.print("-"); else bbs_join.getJoinMember(); %></td>
+            					<td><%if(bbs_join.getJoinMember() == null) out.print("-"); else out.print(bbs_join.getJoinMember()); %></td>
             				</tr>   				
 						<%}%>
             			</tbody>

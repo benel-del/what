@@ -29,7 +29,7 @@
     		PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('로그인 후 접근 가능합니다.')");
-			script.println("history.back()");
+			script.println("location.replace('login.jsp')");
 			script.println("</script>");
 		}
 		else{
@@ -48,13 +48,9 @@
 			} else{
 				BbsDAO_join bbsDAO_join = new BbsDAO_join();
 				int bbsID=Integer.parseInt(request.getParameter("bbsID"));
-				int reset=Integer.parseInt(request.getParameter("reset"));
+
 				UserDAO_join userDAO = new UserDAO_join();
 				userDAO.select(bbsID, userID);
-				
-				if(reset == 0){	// 
-					
-				}
 				
 				int result = bbsDAO_join.getInfo(bbsID, userID, bbs_join.getUserPhone(), bbs_join.getJoinPassword(), bbs_join.getJoinMember(), bbs_join.getJoinContent());
 				if(result == -1){

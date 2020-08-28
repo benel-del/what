@@ -24,24 +24,24 @@
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}
-		String reset = "";	
+		String reset = "0";	
 		if(request.getParameter("reset") != null){
 			reset = (String) request.getParameter("reset");
 		}
-		String type = "";	// select / unselect
+		String type = "0";	// select / unselect
 		if(request.getParameter("type") != null){
 			type = (String) request.getParameter("type");
 		}
-		String id = "";	// selected/unselected userID
+		String id = "0";	// selected/unselected userID
 		if(request.getParameter("id") != null){
 			id = (String) request.getParameter("id");
 		}
 		
 		String url = "member_popup.jsp?bbsID=" + bbsID + "&reset=" + reset;
+		
 		UserDAO_join userDAO = new UserDAO_join();
 		PrintWriter script = response.getWriter();
 		if(type.equals("1") == true){
-			
 			if(userDAO.select(bbsID, id) == -1){
 	            script.println("<script>");
 	            script.println("alert('데이터베이스 오류')");
@@ -50,7 +50,8 @@
 			}
 			else{
 				script.println("<script>");
-				script.println("location.replace('" + url + "');");
+				//script.println("location.href = '" + url + "';");
+				script.println("this.location.replace('" + url + "');");
 				script.println("</script>");
 			}
 		}
@@ -62,9 +63,8 @@
 	            script.println("</script>");
 			}
 			else{
-				url = "member_popup.jsp?bbsID=" + bbsID + "&reset=" + reset;
 				script.println("<script>");
-				script.println("location.replace('" + url + "');");
+				script.println("this.location.replace('" + url + "');");
 				script.println("</script>");
 			}
 		}

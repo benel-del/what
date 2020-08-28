@@ -31,7 +31,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('로그인 후 접근 가능합니다.')");
-			script.println("history.back()");
+			script.println("location.replace('login.jsp')");
 			script.println("</script>");
 		}
 		
@@ -56,7 +56,7 @@
 			else{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.replace='member_popup.jsp?bbsID=" + bbsID + "';");
+				script.println("location.replace('member_popup.jsp?bbsID=" + bbsID + "');");
 				script.println("</script>");
 			}
 		}

@@ -42,24 +42,16 @@
 		
 		UserDAO_join userDAO = new UserDAO_join();
 		BbsSearchDAO bbsSearchDAO = new BbsSearchDAO();
-		bbsSearchDAO.delete_list(userID, "member");
 		PrintWriter script = response.getWriter();
 		String url;
-		if(btn != 0){	// 확인
+		if(btn != 0)	// 확인
 			url = "join.jsp?bbsID="+bbsID+"&reset=" + (reset + 1);
-			script.println("<script>");
-			script.println("opener.location.replace('" + url + "');");
-			script.println("close();");
-			script.println("</script>");
-		}
-		else{	// 취소
-			userDAO.delete(bbsID);
-			url = "join.jsp?bbsID="+bbsID+"&reset=" + 0;		
-			script.println("<script>");
-			script.println("opener.location.replace('" + url + "');");
-			script.println("close();");
-			script.println("</script>");
-		}
+		else	// 취소
+			url = "join.jsp?bbsID="+bbsID;
+		script.println("<script>");
+		script.println("opener.location.replace('" + url + "');");
+		script.println("close();");
+		script.println("</script>");
 		
 
 	%>

@@ -4,9 +4,8 @@
 <%@ page import="bbsSearch.BbsSearch" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="bbs_join.BbsDAO_join" %>
-<%@ page import="user_join.UserDAO_join" %>
+
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.io.PrintWriter" %>
 
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
@@ -42,10 +41,6 @@
 	if(request.getParameter("reset") != null){
 		reset = Integer.parseInt(request.getParameter("reset"));
 	}
-	
-	UserDAO_join user_join = new UserDAO_join();
-	if(reset == 0)
-		user_join.delete(bbsID);
 	%>
 	
     <div id="popup">
@@ -103,9 +98,11 @@
   					<td><%=list2.get(i).getUserID() %></td>           
 					<td><%=list2.get(i).getUserType() %></td>
   					<td>
-    					<form method="post" action="memberChoiceAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset %>&type=&id='">
-    						<input type=button value="취소" id="unselect<%=list2.get(i).getUserID() %>" class="member_choice-btn" onclick="location.replace = 'memberChoiceAction.jsp?bbsID=<%=bbsID %>&type=0&id=<%=list2.get(i).getUserID() %>';">
-    					</form>
+  					<%
+  						out.println("<form method='get'>");
+  						out.println("<input type=button value=\"취소\" id=\"unselect" + list2.get(i).getUserID() + " class=\"member_choice-btn\" onclick=\"location.replace('memberChoiceAction.jsp?bbsID=" + bbsID + "&reset=" + reset + "&id=" + list2.get(i).getUserID() + "')\">");
+            			out.println("</form>");
+            		%>
   					</td>
   				</tr>
   								
@@ -119,27 +116,23 @@
                 pstmt.setString(1,  userID);
                 rs = pstmt.executeQuery();
 	            if (rs.next()) {
-					list = bbsSearchDAO.getList_Member(bbsID, rs.getString(4));
-					BbsDAO_join bbs = new BbsDAO_join();
+	            	BbsDAO_join bbs = new BbsDAO_join();
+					list = bbsSearchDAO.getList_Member(bbsID, rs.getString(4), bbs.getNext(bbsID));
 	           		for(int i=0; i<list.size(); i++){
-	           			if(list.get(i).getUserID().equals("admin") == false || bbs.getNext(bbsID) != list.get(i).getUserSecond()){
+	           			if(list.get(i).getUserID().equals("admin") == false && list.get(i).getUserID().equals(userID) == false){
 	           				%>
            				<tr>
            					<td><%=list.get(i).getUserName() %></td>
            					<td><%=list.get(i).getUserLevel() %></td>
            					<td><%=list.get(i).getUserID() %></td>           
 							<td><%=list.get(i).getUserType() %></td>
-							<% if(list.get(i).getUserFirst() != 1) {	// user_join00`s isPart %>
            					<td>
-            					<form method="post" action="memberChoiceAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset %>&type=1&id=<%=list.get(i).getUserID() %>">
-            						<input type=submit value="선택" id="select<%=list.get(i).getUserID() %>" class="member_choice-btn">
-            					</form>
-            					
-           					</td>
-           					<%}
-							else{%>
-							<td></td>	
-							<%}%>
+           					<% if(list.get(i).getUserFirst() != 1) {	// user_join00`s isPart
+            					out.println("<form method='get'>");
+            					out.println("<input type=button value=\"선택\" id=\"select" + list.get(i).getUserID() + " class=\"member_choice-btn\" onclick=\"location.replace('memberChoiceAction.jsp?bbsID=" + bbsID + "&reset=" + reset + "&type=1&id=" + list.get(i).getUserID() + "')\">");
+            					out.println("</form>");
+            				}%>
+           					</td>	
            				</tr>   				
 				<%
            				}
@@ -172,10 +165,10 @@
            		</table>
     				
    				<div class="popup_button">
-   					<form method="post" action="memberAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>&btn=">
+   					<form method="get">
    					<% int btn = 1, btn2 = 0; %>
-   						<input type=button value="확인" name="do" onclick="location.replace = 'memberAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>&btn=<%=btn %>'">
-   						<input type=button value="취소" name="undo" onclick="location.replace = 'memberAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>&btn=<%=btn2 %>'">
+   						<input type=button value="확인" name="do" onclick="location.replace('memberAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>&btn=<%=btn %>')">
+   						<input type=button value="취소" name="undo" onclick="location.replace('memberAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>&btn=<%=btn2 %>')">
    					</form>
    				</div>
  

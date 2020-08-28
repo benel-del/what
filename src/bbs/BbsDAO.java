@@ -90,7 +90,7 @@ public class BbsDAO {
 	}
 	
 	public int createUserDB(int bbsID) {
-		String SQL="CREATE TABLE user_join"+bbsID+"(userID VARCHAR(20), isPart INT, team_num INT, FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE);";
+		String SQL="CREATE TABLE user_join"+bbsID+"(userID VARCHAR(20), isPart INT default 0, team_num INT default 0, FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.executeUpdate();

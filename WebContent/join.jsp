@@ -5,6 +5,7 @@
 <%@ page import="bbs_join.Bbs_join" %>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="user.User" %>
+<%@ page import="user_join.UserDAO_join" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="java.util.ArrayList" %>
 
@@ -48,7 +49,14 @@
 	if(request.getParameter("reset") != null){
 		reset = Integer.parseInt(request.getParameter("reset"));
 	}
-	 
+	if(reset == 0){
+		UserDAO_join user_join = new UserDAO_join();
+		user_join.delete(bbsID);
+	}
+	
+	BbsSearchDAO searchDAO = new BbsSearchDAO();
+	searchDAO.delete_list(userID, "member");
+	
 	 String mem = "";
 	%>
 
@@ -61,7 +69,7 @@
     		PrintWriter script = response.getWriter();
     		script.println("<script>");
     		script.println("alert('로그인 후 접근 가능합니다.')");
-    		script.println("history.back()");
+    		script.println("location.replace('login.jsp')");
     		script.println("</script>");
     		} 
         	else{
@@ -149,10 +157,9 @@
     	
             <div class="board_container">
             	<div class="board_row">
-            	    <form method="post" action="joinAction.jsp?bbsID=<%=bbsID %>&reset=<%=reset%>">
+            	    <form method="post" action="joinAction.jsp?bbsID=<%=bbsID %>">
             	    <% BbsDAO_join bbsDAO_join = new BbsDAO_join(); 
             	       BbsDAO bbsDAO = new BbsDAO();
-            	       BbsSearchDAO searchDAO = new BbsSearchDAO();
                		   ArrayList<User> list = searchDAO.getList_selectedMember(bbsID);
             	    %>           	            	
             		<table class="board_table">
@@ -171,7 +178,6 @@
 							<tr class="board_tr">
 							<td colspan = "2">
 								*조원들은 반드시 사이트에 가입되어 있어야 합니다.<br>
-								<%= reset %>
 							</td>
 							</tr>
 							<tr class="board_tr">
@@ -196,10 +202,13 @@
 								<td>
 									<div class="join_member_list">
 					<%			if(reset == 1){
-									for(User user : list){
-										if(user.getUserID().equals(userID) == false){
-											out.print(user.getUserName() + " / " + user.getUserID() + " / " + user.getUserLevel() + " / " + user.getUserType() + "<br>"); 
-											mem += user.getUserID() + " "; 
+									for(int i = 0; i < list.size(); i++){
+										if(list.get(i).getUserID().equals(userID) == false){
+											out.print(list.get(i).getUserName() + " / " + list.get(i).getUserID() + " / " + list.get(i).getUserLevel() + " / " + list.get(i).getUserType() + "<br>"); 
+											if(i == 0)
+												mem = list.get(i).getUserID();
+											else
+												mem += "/" + list.get(i).getUserID();
 										}
 									}
 								}

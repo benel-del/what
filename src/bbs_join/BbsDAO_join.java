@@ -55,7 +55,7 @@ public class BbsDAO_join {
 		return -1; //데이터베이스 오류
 	}
 	
-	public ArrayList<Bbs_join> getJoinMembers(int bbsID){		
+	public ArrayList<Bbs_join> getMembers(int bbsID){		
 		String SQL="SELECT * FROM bbs_join"+bbsID+";";
 		ArrayList<Bbs_join> list = new ArrayList<Bbs_join>();
 		try {
