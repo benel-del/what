@@ -118,7 +118,7 @@
             			if(list.get(i).getUserID().equals("admin") == false){
             				%>
             				<tr class="board_tr" id="notice_nonfix">
-            					<td><%if(list.get(i).getUserFirst() + list.get(i).getUserSecond() + list.get(i).getUserThird() == 0) out.print("-"); else out.print(list.get(i).getUserRank()); %></td>
+            					<td><%=list.get(i).getUserRank() %></td>
             					<td><%=list.get(i).getUserName() %></td>
             					<td><%=list.get(i).getUserLevel() %></td>		
             					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
