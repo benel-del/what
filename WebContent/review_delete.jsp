@@ -42,7 +42,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("var result = confirm('이 글을 삭제하시겠습니까?')");
-			script.println("if(result) location.href= \"notice_deleteAction.jsp?bbsID="+bbsID+"\"");
+			script.println("if(result) location.href= \"review_deleteAction.jsp?bbsID="+bbsID+"\"");
 			script.println("else history.back()");
 			script.println("</script>");
 		}

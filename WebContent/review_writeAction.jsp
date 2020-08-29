@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="bbs_review.BbsDAO_review" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import = "java.util.*"%>                         
+<%@ page import = "com.oreilly.servlet.MultipartRequest"%>    
+<%@ page import = "com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="bbs_review" class="bbs_review.Bbs_review" scope="page" />
-<jsp:setProperty name="bbs_review" property="bbsTitle" />
-<jsp:setProperty name="bbs_review" property="bbsContent" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,13 +29,31 @@
 			script.println("</script>");
 		}
 		else{
-			if(bbs_review.getBbsTitle() == null){
+			String uploadPath=request.getRealPath("upload");
+			String bbsTitle = "";
+			String bbsContent = "";
+			String fileName = "";
+			int size = 10*1024*1024; //10MB
+			try{
+			    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"utf-8",new DefaultFileRenamePolicy());
+					
+			  	bbsTitle = multi.getParameter("bbsTitle");
+			    bbsContent=multi.getParameter("bbsContent");
+					
+			    Enumeration files = multi.getFileNames();
+			    String file = (String)files.nextElement();
+			    fileName = multi.getFilesystemName(file);
+
+			}catch(Exception e){
+			    e.printStackTrace();
+			}
+			if(bbsTitle == null){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('제목을 입력해주세요.')");
 				script.println("history.back()");
 				script.println("</script>");
-			} else if(bbs_review.getBbsContent() == null){
+			} else if(bbsContent == null){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('내용을 입력해주세요.')");
@@ -43,7 +61,7 @@
 				script.println("</script>");
 			} else{
 				BbsDAO_review bbsDAO_review = new BbsDAO_review();
-				int result = bbsDAO_review.write(bbs_review.getBbsTitle(), userID, bbs_review.getBbsContent());
+				int result = bbsDAO_review.write(bbsTitle, userID, bbsContent, fileName);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

@@ -3,6 +3,9 @@
 <%@ page import="bbs_review.BbsDAO_review" %>
 <%@ page import="bbs_review.Bbs_review" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import = "java.util.*"%>                         
+<%@ page import = "com.oreilly.servlet.MultipartRequest"%>    
+<%@ page import = "com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
@@ -38,13 +41,31 @@
 			script.println("history.back()");
 			script.println("</script>");
 		} else{
-			if(request.getParameter("bbsTitle") == null || request.getParameter("bbsTitle") == " "){
+			String uploadPath=request.getRealPath("upload");
+			String bbsTitle = "";
+			String bbsContent = "";
+			String fileName = "";
+			int size = 10*1024*1024; //10MB
+			try{
+			    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"utf-8",new DefaultFileRenamePolicy());
+					
+			  	bbsTitle = multi.getParameter("bbsTitle");
+			    bbsContent=multi.getParameter("bbsContent");
+					
+			    Enumeration files = multi.getFileNames();
+			    String file = (String)files.nextElement();
+			    fileName = multi.getFilesystemName(file);
+
+			}catch(Exception e){
+			    e.printStackTrace();
+			}
+			if(bbsTitle == null || bbsTitle == " "){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('제목을 입력해주세요.')");
 				script.println("history.back()");
 				script.println("</script>");
-			} else if(request.getParameter("bbsContent") == null || request.getParameter("bbsContent") == " "){
+			} else if(bbsContent == null || bbsContent == " "){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('내용을 입력해주세요.')");
@@ -53,7 +74,7 @@
 			} else{
 				BbsDAO_review bbsDAO_review = new BbsDAO_review();
 
-				int result = bbsDAO_review.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"));
+				int result = bbsDAO_review.update(bbsID, bbsTitle, bbsContent, fileName);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

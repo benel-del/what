@@ -95,7 +95,7 @@
 
             <div class="write_container">
             	<div class="write_row">
-            	<form method="post" action="review_updateAction.jsp?bbsID=<%=bbsID%>">
+            	<form method="post" action="review_updateAction.jsp?bbsID=<%=bbsID%>" enctype="multipart/form-data">
             		<table class="write_table">
             			<thead>
             				<tr class="write_tr">
@@ -105,7 +105,6 @@
             			
             			<tbody>
             				<tr>
-	            				<td class="space"></td>
 	            				<td>
 	            					<div class="write_subtitle">
 			            				<div class="bbsTitle">
@@ -113,16 +112,23 @@
 			            				</div>
 	            					</div>
 								</td>
-								<td class="space"></td>
             				</tr>
             				<tr>
-            					<td class="space"></td>
             					<td>
             						<div class="bbsContent">
             							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_review.getBbsContent() %></textarea>
             						</div>
             					</td>
-            					<td class="space"></td>
+            				</tr>
+            				
+            				<tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								<input type="file" id="bbs_title" name="fileName" value="<%=bbs_review.getFileName()%>">
+            							</div>
+            						</div>            						
+            					</td>
             				</tr>
  							<tr>
  								<td  colspan="3">

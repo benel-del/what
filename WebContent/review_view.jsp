@@ -117,7 +117,8 @@
 
             				<tr>
 	            				<td class="view_subtitle">내용</td>
-	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><div><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
+	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><div><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %><br>
+	            				<%if(bbs_review.getFileName() != null){%><img style = "height=200px; width:200px;" src="upload/<%=bbs_review.getFileName() %>"><%}else{out.println(""); }%></div></td>
             				</tr>
             			</tbody>
             		</table>

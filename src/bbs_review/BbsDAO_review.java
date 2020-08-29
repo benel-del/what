@@ -52,8 +52,8 @@ public class BbsDAO_review {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent) {
-		String SQL="INSERT INTO bbs_review VALUES(?, ?, ?, ?, ?, ?);";
+	public int write(String bbsTitle, String userID, String bbsContent, String fileName) {
+		String SQL="INSERT INTO bbs_review VALUES(?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -62,6 +62,7 @@ public class BbsDAO_review {
 			pstmt.setString(4,  getDate());
 			pstmt.setString(5,  bbsContent);
 			pstmt.setInt(6,  1);
+			pstmt.setString(7, fileName);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -120,6 +121,7 @@ public class BbsDAO_review {
 				bbs_review.setBbsDate(rs.getString(4));
 				bbs_review.setBbsContent(rs.getString(5));
 				bbs_review.setBbsAvailable(rs.getInt(6));	
+				bbs_review.setFileName(rs.getString(7));
 				return bbs_review;
 			}
 		} catch(Exception e) {
@@ -127,13 +129,14 @@ public class BbsDAO_review {
 		}
 		return null;
 	}
-	public int update(int bbsID, String bbsTitle, String bbsContent) {
-		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ? WHERE bbsID = ?;";
+	public int update(int bbsID, String bbsTitle, String bbsContent, String fileName) {
+		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ?, fileName = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsTitle);
 			pstmt.setString(2,  bbsContent);
-			pstmt.setInt(3, bbsID);
+			pstmt.setString(3,  fileName);
+			pstmt.setInt(4, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

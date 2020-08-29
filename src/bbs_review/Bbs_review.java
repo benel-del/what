@@ -7,6 +7,8 @@ public class Bbs_review {
 	private String bbsDate;
 	private String bbsContent;
 	private int bbsAvailable;
+	private String fileName;
+
 
 	public int getBbsID() {
 		return bbsID;
@@ -43,5 +45,11 @@ public class Bbs_review {
 	}
 	public void setBbsAvailable(int bbsAvailable) {
 		this.bbsAvailable = bbsAvailable;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 }

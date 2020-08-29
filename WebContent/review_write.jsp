@@ -70,7 +70,7 @@
 
             <div class="write_container">
             	<div class="write_row">
-            	<form method="post" action="review_writeAction.jsp">
+            	<form method="post" action="review_writeAction.jsp" enctype="multipart/form-data">
             		<table class="write_table">
             			<thead>
             				<tr class="write_tr">
@@ -95,6 +95,15 @@
             						</div>		
             					</td>	
             				</tr>  
+            				<tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								<input type="file" id="bbs_title" name="fileName">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>
             				<tr>
  								<td  colspan="3">
  									<input type="submit" class="write-btn" value="글쓰기">
