@@ -222,11 +222,13 @@
 
         <footer>
         	<p>
-        	    <span>저자 : </span><br>
-        	    <span>회장 : 전성빈 tel.010-5602-4112</span><br>
-        	    <span>총무 : 정하영 tel.010-9466-9742</span><br>
-        	    <span>경기이사 : 유태혁 tel.010-</span>
-        	    <span>Copyright 2020. 저자. All Rights Reserved.</span>
+        	    <span>임원진</span><br>
+        	    <span>전성빈 tel.010-5602-4112</span><br>
+        	    <span>정하영 tel.010-9466-9742</span><br>
+        	    <span>유태혁 tel.010-</span><br>
+        	    <span>김승현 tel.010-</span><br>
+        	    <span>김민선 tel.010-3018-3568</span><br>
+        	    <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
         	</p>
         </footer>
     </div>

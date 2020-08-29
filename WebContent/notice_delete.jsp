@@ -3,18 +3,9 @@
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="java.io.PrintWriter" %>
-<% request.setCharacterEncoding("UTF-8"); %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/htm; charset=utf-8">
-
-    <title>어쩌다리그</title>
-</head>
-
-<body>
-	<%
+<% 
+		request.setCharacterEncoding("UTF-8"); 
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -48,5 +39,3 @@
 			script.println("</script>");
 		}
 	%>
-</body>
-</html>
