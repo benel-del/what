@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="user.UserDAO" %>
+<%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page"/>
@@ -48,7 +49,7 @@
     }
 	else{
 	    UserDAO userDAO = new UserDAO();
-		int result = userDAO.delete(userID, user.getUserPassword());
+		int result = userDAO.delete(userID, SHA256.getSHA256(user.getUserPassword()));
 		
 		if(result == 1){
 	    	PrintWriter script = response.getWriter();

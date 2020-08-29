@@ -98,6 +98,20 @@ public class UserDAO {
 		return -2;	// db 오류
 	}
 	
+	public int pwHashing(String userPassword, String userID) {
+		String SQL = "UPDATE USER SET userPassword = ? WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userPassword);
+			pstmt.setString(2, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+		
 	public int register(User user) {
 		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
@@ -196,7 +210,7 @@ public class UserDAO {
 	
 	public int check_pw_limit(String pw) {
 		try {
-			if((pw.length() != 4) || !Pattern.matches("[0-9]+", pw))
+			if((pw.length() < 8) || (pw.length() > 15) || string_pattern1(pw)==-1)
 				return -1;
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -551,7 +565,7 @@ public class UserDAO {
 		}
 		return null;	// db 오류
 	}
-	public String findPW(String userID, String userName, String userEmail) {
+	public int findPW(String userID, String userName, String userEmail) {
 		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ? AND userID = ?";	// 실제로 db에 입력할 문자열
 		try {
 			pstmt = conn.prepareStatement(SQL);
@@ -561,12 +575,12 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	// rs의 결과가 존재한다면
 				if(rs.getString(1).equals(userID)&& rs.getString(3).equals(userName)&& rs.getString(12).equals(userEmail))
-					return rs.getString(2);	// 비번찾기 성공
+					return 1;	// 비번찾기 성공
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;	// db 오류
+		return -1;	// db 오류
 	}
 	public String getUserEmail(String userID) {
 		String SQL = "SELECT userEmail FROM USER WHERE userID = ?;";	// 실제로 db에 입력할 문자열

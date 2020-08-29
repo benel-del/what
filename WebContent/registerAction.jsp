@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <%@ page import="user.UserDAO" %>
+<%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page"/>
@@ -128,6 +129,14 @@
         }
         
         else{
+        	String userPassword = user.getUserPassword();
+			int pwhash = userDAO.pwHashing(SHA256.getSHA256(userPassword), user.getUserID());
+        	if(pwhash == 0){
+        		PrintWriter script = response.getWriter();
+              	script.println("<script>");
+                script.println("alert('Password hashing error!')");
+                script.println("</script>"); 
+        	}
 			session.setAttribute("userID", user.getUserID());
            	PrintWriter script = response.getWriter();
           	script.println("<script>");

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
+<%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
@@ -30,7 +31,7 @@
 		}//로그인 된 사람은 로그인 페이지에 접근할 수 없음
 		
 		UserDAO userDAO = new UserDAO();
-		int result = userDAO.login(user.getUserID(), user.getUserPassword());
+		int result = userDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
 		
 		if(result == 1){
 			session.setAttribute("userID", user.getUserID());

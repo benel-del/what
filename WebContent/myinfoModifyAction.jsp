@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="user.UserDAO" %>
+<%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page"/>
@@ -55,13 +56,13 @@
 	}
 	else{
 		if(user.getUserNewPassword() == null)		// 비밀번호 변경 x	-> 부수, 전형
-			result = userDAO.modify(userID, user.getUserPassword(), user.getUserLevel(), user.getUserType(), user.getUserDescription());
+			result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), user.getUserLevel(), user.getUserType(), user.getUserDescription());
 
 		else{	// 비밀번호 변경할 경우
 			if(userDAO.check_pw_limit(user.getUserNewPassword()) == -1){		// 비밀번호 제한 검사
 		    	PrintWriter script = response.getWriter();
 			    script.println("<script>");
-			    script.println("alert('비밀번호는 4자리 숫자로만 설정해주세요.')");
+			    script.println("alert('비밀번호는 8~15자리 영소문자+숫자로만 설정해주세요.')");
 				script.println("history.back()");
 			    script.println("</script>");
 		    }   
@@ -73,7 +74,7 @@
 		       	script.println("</script>");
 			}
 			else
-				result = userDAO.modify(userID, user.getUserPassword(), user.getUserNewPassword(), user.getUserLevel(), user.getUserType(), user.getUserDescription());
+				result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserNewPassword()), user.getUserLevel(), user.getUserType(), user.getUserDescription());
 		}
 		
 		if(result == 1){

@@ -10,6 +10,7 @@
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="util.Gmail" %>
+<%@ page import="util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="user.User" scope="page" />
@@ -40,22 +41,35 @@
 		}//로그인 된 사람은 로그인 페이지에 접근할 수 없음
 		
 		UserDAO userDAO = new UserDAO();
-		String userPw = userDAO.findPW(user.getUserID(), user.getUserName(), user.getUserEmail());
+		int findPW = userDAO.findPW(user.getUserID(), user.getUserName(), user.getUserEmail());
 		
-		if(userPw == null){//계정이 없는 경우
+		String newUserPw = "";
+		for (int i = 0; i < 10; i++) {
+			newUserPw += (char) ((Math.random() * 26) + 97);
+		}
+		
+		
+		if(findPW == -1){//계정이 없는 경우
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('해당 정보에 일치하는 계정이 존재하지 않습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		} else{
+			if(userDAO.pwHashing(SHA256.getSHA256(newUserPw), user.getUserID()) == 0){
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('Password hashing error!')");
+				script.println("history.back()");
+				script.println("</script>");
+			}
 			//emailSendAction
 			String host = "http://localhost:8080/what/";
 			String from = "whatleague@gmail.com";
 			String to = userDAO.getUserEmail(user.getUserID());
 			
 			String subject = "어쩌다리그 : 비밀번호가 전송되었습니다.";
-			String content= user.getUserID() + " 회원님의 비밀번호는 "+userPw+"입니다.";
+			String content= user.getUserID() + " 회원님의 임시비밀번호는 "+newUserPw+"입니다.";
 			
 			Properties p = new Properties();
 			p.put("mail.smtp.user", from);
@@ -93,7 +107,7 @@
 		}
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('해당 메일로 회원님의 비밀번호를 전송하였습니다.')");
+		script.println("alert('해당 메일로 회원님의 임시비밀번호를 발급하였습니다.')");
 		script.println("location.href='login.jsp'");
 		script.println("</script>");
 
