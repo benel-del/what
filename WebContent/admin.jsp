@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<% request.setCharacterEncoding("UTF-8"); %>
+<%@ page import="bbs.BbsDAO"%>
+<%@ page import="bbs.Bbs"%>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 
@@ -17,9 +19,12 @@
 
 	<% //userID 존재 여부
 	String userID = null;
-
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
+	}
+	int pageNumber = 1; // 기본페이지
+	if(request.getParameter("pageNumber") != null){
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
 	%>
 
@@ -48,7 +53,7 @@
        	
              <!--사이트 이름-->
            	<div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
+                <h1><a href="index.jsp">어쩌다 리그-관리자페이지</a></h1>
             </div>
         </header>
 		
@@ -67,50 +72,75 @@
         	<input type="checkbox" id="toggle">
         	<label for="toggle">관리자메뉴</label>
             <ul id="nav">
-                <li><a href="admin.jsp">게시물 관리</a></li>
+                <li><a href="admin.jsp">결과작성</a></li>
                 <li><a href="admin_member_manage.jsp">회원 관리</a></li>
                 <li><a href="admin_join_manage.jsp">입금확인</a></li>
                 <li><a href="admin_ad_manage.jsp">홍보글 수정</a></li>
             </ul>
         </div>
 		
+		 <!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
-		관리자 페이지<br>
-		
-        
-        <!-- 게시판 공통 요소 : class board_ 사용 -->
             <div class="board_subtitle">
-            	게시물 관리(공지/결과/후기 게시물)
+            	결과 작성
+            	<div class="board_write-btn">
+            		<a href="admin_deleteAction">삭제</a>
+            	</div>
             </div>
-            	게시물 수정/삭제/보기
 
             <div class="board_container">
             	<div class="board_row">
-            	수정/삭제
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="notice_type">체크박스</th>
-            					<th class="board_thead" id="notice_type">분류</th>
-            					<th class="board_thead" id="notice_type">머릿말</th>
+            					<th class="board_thead" id= "notice_type">no.</th>
             					<th class="board_thead" id="notice_title">제목</th>
             					<th class="board_thead" id="notice_writer">작성자</th>
-            					<th class="board_thead" id="notice_day">등록일자</th>
+            					<th class="board_thead" id="notice_day">종료일자</th>
             				</tr>
             			</thead>
             			<tbody>
-            			<!-- EXAMPLE -->        				
-            				<tr class="board_tr" id="notice_fix">
-            					<td>checkbox</td>
-            					<td>공지</td>
-            					<td>모임</td>
-            					<td>어쩌다리그5회 모임</td>
-            					<td>admin</td>
-            					<td>2020-08-22</td>
-            				</tr>               								
+            				<%
+            					BbsDAO bbsDAO = new BbsDAO();
+            					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
+            					for(int i=0; i<list.size(); i++){
+            						if(list.get(i).getBbsComplete() == 1){%>
+            						<tr class="board_tr" id="notice_nonfix">
+            							<td>checkbox</td>
+            							<td><%=list.get(i).getBbsID()%></td>
+            							<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
+            							<td><%=list.get(i).getUserID() %></td>
+            							<td><%=list.get(i).getBbsJoindate() %></td>
+            						</tr>    
+            					<%} else{ %>
+            						<tr>
+            							<td style="color:red; weight:700;" colspan="6"><% if(i==list.size()-1){out.println("작성 대기중인 게시글이 없습니다.");}} %></td>
+            						</tr>
+            					<%} %>            								
             			</tbody>
             		</table>
             	</div>
+            	
+            	<div class="board_page-move">
+            	<%
+            		if(pageNumber != 1){
+            	%>
+            		<div class="board_page-move-symbol-left">
+            			<a href="admin.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+					</div>
+				<% 
+					}
+            		if(bbsDAO.nextPage(pageNumber+1)){
+				%>
+					<div class="board_page-move-symbol-right">
+            			<a href="admin.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            		</div>
+            	<%
+            		}
+            	%>
+            	</div>
+            	
             </div>
            </section>
     </div>

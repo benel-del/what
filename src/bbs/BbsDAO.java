@@ -220,6 +220,7 @@ public class BbsDAO {
 		}
 		return -1; //데이터베이스 오류
 	}
+
 	public int delete(int bbsID) {
 		String SQL="UPDATE bbs SET bbsAvailable = 0 WHERE bbsID = ?;";
 		try {
