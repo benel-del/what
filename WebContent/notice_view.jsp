@@ -135,10 +135,6 @@
             			out.println("<div id=\"notice_btn-primary\">");
             			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
             			out.println("</div>");
-            			} else{
-            				out.println("<div id=\"notice_btn-primary\">");
-                			out.println("<a href=\"result_view.jsp?bbsID=" + bbsID + "\" class=\"link\">결과보기</a>");
-                			out.println("</div>");
             			}
             		} 
             		%>

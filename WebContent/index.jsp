@@ -46,8 +46,8 @@
 		%>
 			<!--로그인, 회원가입 버튼-->
             <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 |</a>
-
+                <a class="link" href="logoutAction.jsp">로그아웃 </a>
+  				|
                 <a class="link" href="admin.jsp">관리자 페이지</a>
            </div>
             <br>		
@@ -105,7 +105,9 @@
  	 	      				if(list_notice.get(i).getBbsComplete() == 0 && list_notice.get(i).getBbsType().equals("모임공지") == true && list_notice.get(i).getBbsAvailable() == 1){
  	 	      					break;
  	 	      				}
- 	 	      			}%>
+ 	 	      			}
+ 	 	      			if(i >= 0){
+ 	 	      			%>
                         <table class="index_notice_board"> 
               			<thead>
             				<tr>
@@ -128,11 +130,13 @@
 						    </tr>
 						    <tr>
 						    	<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=list_notice.get(i).getBbsID() %>">요강 자세히 보기 </a></td>
-						    </tr>        					   				
+						    </tr>		          					   				
             			</tbody>
-            		</table>   
+            			
+            		</table>  
+            		<%} else{ out.println("진행중인 모임이 없습니다.");}%> 
                     </div>
-					<%
+					<% 
 						ArrayList<Bbs> list_join = bbsDAO.getList_index();
 						int bbsJoin = 0;
         				for(Bbs bbs : list_join){
