@@ -101,44 +101,9 @@
             				</tr>
             			</thead>
             			<tbody>
-            				<%
-            					BbsDAO bbsDAO = new BbsDAO();
-            					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
-            					for(int i=0; i<list.size(); i++){
-            						if(list.get(i).getBbsComplete() == 1){%>
-            						<tr class="board_tr" id="notice_nonfix">
-            							<td>checkbox</td>
-            							<td><%=list.get(i).getBbsID()%></td>
-            							<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
-            							<td><%=list.get(i).getUserID() %></td>
-            							<td><%=list.get(i).getBbsJoindate() %></td>
-            						</tr>    
-            					<%} else{ %>
-            						<tr>
-            							<td style="color:red; weight:700;" colspan="6"><% if(i==list.size()-1){out.println("작성 대기중인 게시글이 없습니다.");}} %></td>
-            						</tr>
-            					<%} %>            								
+            			          								
             			</tbody>
             		</table>
-            	</div>
-            	
-            	<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
-            		<div class="board_page-move-symbol-left">
-            			<a href="admin.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
-					</div>
-				<% 
-					}
-            		if(bbsDAO.nextPage(pageNumber+1)){
-				%>
-					<div class="board_page-move-symbol-right">
-            			<a href="admin.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
-            		</div>
-            	<%
-            		}
-            	%>
             	</div>
             	
             </div>
