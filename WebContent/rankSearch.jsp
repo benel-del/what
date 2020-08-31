@@ -137,7 +137,8 @@
         		                PreparedStatement pstmt=conn.prepareStatement(query);
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
-        		                	paging += bbsSearchDAO.getCount_rank(rs.getString(4)) / 13;
+        		                	if(pageNumber == 1)
+        		                		paging += bbsSearchDAO.getCount_rank(rs.getString(4)) / 13;
                						list = bbsSearchDAO.getList_rank(pageNumber, rs.getString(4));
                						
 	            					for(int i=0; i<list.size(); i++){
@@ -170,14 +171,14 @@
             		if(pageNumber != 1){
             	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="reviewSearch.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="rankSearch.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 				<% 
 					}
             		if(paging > pageNumber){
 				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="reviewSearch.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="rankSearch.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
             	<%
             		}

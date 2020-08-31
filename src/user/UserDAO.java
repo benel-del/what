@@ -364,12 +364,14 @@ public class UserDAO {
 	}
 	
 	/*team*/
-	public ArrayList<User> getUserlist(){
+	public ArrayList<User> getUserlist(int pageNumber){
 		ArrayList<User> list = new ArrayList<User>();
-		
+		String SQL = "SELECT * FROM user ORDER BY userName LIMIT ?, 12;";
 		try {
-			st = conn.createStatement();
-			rs = st.executeQuery("Select * from user");
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  (pageNumber-1) * 12);
+			
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				User user = new User();

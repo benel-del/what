@@ -778,14 +778,15 @@ input[id*="answer"] + label + div p{
 	.dm_header a:visited{
 		color: #0F4C81;
 	}
+
 /* TEAM */
-#team_search_userLevel{
+#team_search{
 	margin:0 5px;
 	float:right;
 	height:100%;
 	width:100px;
 }
-#notice_search-btn{
+#team_search-btn{
 	float:right;
 	height:100%;
 	width:50px;

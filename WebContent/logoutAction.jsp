@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-
+<%@ page import="bbsSearch.BbsSearchDAO" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -25,11 +25,15 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}//로그인 된 사람은 로그인 페이지에 접근할 수 없음
+		
+		BbsSearchDAO search = new BbsSearchDAO();
+		search.delete_all(userID);
+		
   		session.invalidate();
     
     %>
     
     <script>
-    	location.href = 'index.jsp'</script>
+    	location.replace('index.jsp');</script>
 </body>
 </html>

@@ -473,5 +473,63 @@ public class BbsSearchDAO {
 		}
 		return -1;
 	}
+	
+	/* team */
+	public ArrayList<User> getList_team(int pageNumber, String searchWord){
+		String SQL = "SELECT * FROM USER WHERE userLevel = ? ORDER BY userRank ASC, userName ASC LIMIT ?, 12;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  searchWord);
+			pstmt.setInt(2,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserRank(rs.getInt(8));
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserType(rs.getString(6));
+				user.setUserFirst(rs.getInt(9));
+				user.setUserSecond(rs.getInt(10));
+				user.setUserThird(rs.getInt(11));	
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int getCount_team(String searchWord){
+		int count = 0;
+		String SQL = "SELECT * FROM USER WHERE userLevel = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  searchWord);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+				count ++;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	/* log out */
+	public int delete_all(String userID) {
+		String SQL = "DELETE FROM search WHERE userID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			return pstmt.executeUpdate();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 }
 	
