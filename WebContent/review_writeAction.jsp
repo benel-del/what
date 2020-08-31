@@ -33,6 +33,10 @@
 			String bbsTitle = "";
 			String bbsContent = "";
 			String fileName = "";
+			String fileName1 = "";
+			String fileName2 = "";
+			String fileName3 = "";
+
 			int size = 10*1024*1024; //10MB
 			try{
 			    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"utf-8",new DefaultFileRenamePolicy());
@@ -43,17 +47,24 @@
 			    Enumeration files = multi.getFileNames();
 			    String file = (String)files.nextElement();
 			    fileName = multi.getFilesystemName(file);
+			    String file1 = (String)files.nextElement();
+			    fileName1 = multi.getFilesystemName(file1);			    
+			    String file2 = (String)files.nextElement();
+			    fileName2 = multi.getFilesystemName(file2);			    
+			    String file3 = (String)files.nextElement();
+			    fileName3 = multi.getFilesystemName(file3);
 
 			}catch(Exception e){
 			    e.printStackTrace();
 			}
-			if(bbsTitle == null){
+			
+			if(bbsTitle == null || bbsTitle.equals("") == true || bbsTitle.equals(" ") == true){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('제목을 입력해주세요.')");
 				script.println("history.back()");
 				script.println("</script>");
-			} else if(bbsContent == null){
+			} else if(bbsContent == null || bbsContent.equals("") == true || bbsContent.equals(" ") == true){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('내용을 입력해주세요.')");
@@ -61,7 +72,7 @@
 				script.println("</script>");
 			} else{
 				BbsDAO_review bbsDAO_review = new BbsDAO_review();
-				int result = bbsDAO_review.write(bbsTitle, userID, bbsContent, fileName);
+				int result = bbsDAO_review.write(bbsTitle, userID, bbsContent, fileName, fileName1, fileName2, fileName3);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
