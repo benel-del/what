@@ -52,8 +52,8 @@ public class BbsDAO_review {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int write(String bbsTitle, String userID, String bbsContent, String fileName) {
-		String SQL="INSERT INTO bbs_review VALUES(?, ?, ?, ?, ?, ?, ?);";
+	public int write(String bbsTitle, String userID, String bbsContent, String fileName, String fileName1, String fileName2, String fileName3) {
+		String SQL="INSERT INTO bbs_review VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext());
@@ -62,7 +62,10 @@ public class BbsDAO_review {
 			pstmt.setString(4,  getDate());
 			pstmt.setString(5,  bbsContent);
 			pstmt.setInt(6,  1);
-			pstmt.setString(7, fileName);
+			pstmt.setString(7,  fileName);
+			pstmt.setString(8,  fileName1);
+			pstmt.setString(9,  fileName2);
+			pstmt.setString(10,  fileName3);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -122,6 +125,10 @@ public class BbsDAO_review {
 				bbs_review.setBbsContent(rs.getString(5));
 				bbs_review.setBbsAvailable(rs.getInt(6));	
 				bbs_review.setFileName(rs.getString(7));
+				bbs_review.setFileName1(rs.getString(8));
+				bbs_review.setFileName2(rs.getString(9));
+				bbs_review.setFileName3(rs.getString(10));
+
 				return bbs_review;
 			}
 		} catch(Exception e) {
@@ -129,14 +136,17 @@ public class BbsDAO_review {
 		}
 		return null;
 	}
-	public int update(int bbsID, String bbsTitle, String bbsContent, String fileName) {
-		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ?, fileName = ? WHERE bbsID = ?;";
+	public int update(int bbsID, String bbsTitle, String bbsContent, String fileName, String fileName1, String fileName2, String fileName3) {
+		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ?, fileName = ?, fileName1 = ?, fileName2 = ?, fileName3 = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsTitle);
 			pstmt.setString(2,  bbsContent);
 			pstmt.setString(3,  fileName);
-			pstmt.setInt(4, bbsID);
+			pstmt.setString(4,  fileName1);
+			pstmt.setString(5,  fileName2);
+			pstmt.setString(6,  fileName3);
+			pstmt.setInt(7, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

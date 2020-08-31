@@ -119,17 +119,41 @@
             							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_review.getBbsContent() %></textarea>
             						</div>
             					</td>
-            				</tr>
-            				
+ 							</tr>
             				<tr>
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								<input type="file" id="bbs_title" name="fileName" value="<%=bbs_review.getFileName()%>">
+            								파일명 : <input type="file" id="bbs_title" name="fileName">
             							</div>
             						</div>            						
             					</td>
             				</tr>
+            				<tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName1">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>  <tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName2">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>  <tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName3">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>   
  							<tr>
  								<td  colspan="3">
  									<input type="submit" class="write-btn" value="글 수정">

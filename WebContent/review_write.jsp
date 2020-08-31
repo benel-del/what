@@ -99,11 +99,36 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								<input type="file" id="bbs_title" name="fileName">
+            								파일명 : <input type="file" id="bbs_title" name="fileName">
             							</div>
             						</div>            						
             					</td>
             				</tr>
+            				<tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName1">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>  <tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName2">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>  <tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName3">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>             			
             				<tr>
  								<td  colspan="3">
  									<input type="submit" class="write-btn" value="글쓰기">
