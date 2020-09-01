@@ -4,6 +4,9 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs_join.Bbs_join" %>
 <%@ page import="bbs_join.BbsDAO_join" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="user.User" %>
+
 
 <!DOCTYPE html>
 
@@ -93,6 +96,8 @@
     	<%
     		BbsDAO_join bbsDAO_join = new BbsDAO_join();
     		ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    		UserDAO userDAO = new UserDAO();
+    		ArrayList<User> list_user = userDAO.getUserRank_index();
     	%>
     	
             <div class="board_container">
@@ -112,7 +117,30 @@
             				<tr class="board_tr" id="notice_nonfix">
             					<td><%=bbs_join.getJoinID() %></td>
             					<td><%=bbs_join.getUserID() %></td>
-            					<td><%if(bbs_join.getJoinMember() == null) out.print("-"); else out.print(bbs_join.getJoinMember()); %></td>
+            					<td><%
+            						String[] array=bbs_join.getJoinMember().split("/");
+            						if(bbs_join.getJoinMember() == null){
+            							out.print("-"); 
+            						} else {
+            							for(int i=0; i<array.length; i++){
+            								for(User user : list_user){
+            									if(array[i].equals(user.getUserID()) == true){
+           							%>
+           							<a class="link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>">
+           							<%
+           											out.print(" ");
+            										out.print(user.getUserName());
+            										out.print("(");
+            										out.print(user.getUserID());
+            										out.print(")");
+            						%></a>
+            						<%				out.print(" /");
+            									}				
+            								}
+            							}
+            							
+            						}%>
+            					</td>
             				</tr>   				
 						<%}%>
             			</tbody>
