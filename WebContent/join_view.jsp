@@ -107,7 +107,8 @@
             				<tr class="board_tr">
             					<th class="board_thead" id="bbs_num">no.</th>
             					<th class="board_thead" id="bbs_name">신청자</th>
-            					<th class="board_thead">참가자</th>			
+            					<th class="board_thead">참가자</th>	
+            					<th class="board_thead">입금대기</th>		
             				</tr>
             			</thead>
             			
@@ -139,9 +140,14 @@
             									}				
             								}
             							}
-            							
-            						}%>
+            						%>	
+            						
             					</td>
+            					<td>
+            					<div style="color:blue;"><%if(bbs_join.getMoneyCheck()==0){out.print("입금대기");} else{%></div>	
+            					<div style="color:red;"><%out.print("입금완료");} %> </div>           					
+            					</td>
+            					<%}%>
             				</tr>   				
 						<%}%>
             			</tbody>
