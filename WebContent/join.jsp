@@ -188,7 +188,7 @@
 							</tr>
 							<tr class="board_tr">
 							<td>비밀번호</td>
-							<td><input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="20"></td>
+							<td><input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4"></td>
 							</tr>
 							<tr class="board_tr">
 							<td>참가자</td>
@@ -200,19 +200,21 @@
 								<td>참가자 명단<br>(참가자 검색 후 자동 새로고침)</td>
 								
 								<td>
+									
 									<div class="join_member_list">
-					<%			if(reset == 1){
-									for(int i = 0; i < list.size(); i++){
-										if(list.get(i).getUserID().equals(userID) == false){
-											out.print(list.get(i).getUserName() + " / " + list.get(i).getUserID() + " / " + list.get(i).getUserLevel() + " / " + list.get(i).getUserType() + "<br>"); 
-											if(i == 0)
-												mem = list.get(i).getUserID();
-											else
-												mem += "/" + list.get(i).getUserID();
+									<%			
+									if(reset == 1){
+										for(int i = 0; i < list.size(); i++){
+											if(list.get(i).getUserID().equals(userID) == false){
+												out.print(list.get(i).getUserName() + " / " + list.get(i).getUserID() + " / " + list.get(i).getUserLevel() + " / " + list.get(i).getUserType() + "<br>"); 
+												if(i == 0)
+													mem = list.get(i).getUserID();
+												else
+													mem += "/" + list.get(i).getUserID();
+											}
 										}
 									}
-								}
-      				%>
+      								%>
 									<input type = hidden name = "joinMember" id = "join_member" value = <%=mem %>>
 									</div>
 								</td>
