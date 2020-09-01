@@ -85,7 +85,7 @@
                 	PreparedStatement pstmt=conn.prepareStatement(query);
                     pstmt.setString(1,  userID);
                     rs = pstmt.executeQuery();
-    	            if (rs.next()) {
+    	            /*if (rs.next()) {
 						if(rs.getInt(1) != 0){
 							PrintWriter script = response.getWriter();
 				    		script.println("<script>");
@@ -93,7 +93,7 @@
 				    		script.println("history.back()");
 				    		script.println("</script>");
 						}
-    	            }
+    	            }*/
     	        	if(userID.equals("admin") == true) {
     	        		%>
    	        			<!--로그인, 회원가입 버튼-->

@@ -134,7 +134,8 @@
             										out.print(user.getUserID());
             										out.print(")");
             						%></a>
-            						<%				out.print(" /");
+            						<%				if(i < array.length-1)
+            											out.print(" /");
             									}				
             								}
             							}
