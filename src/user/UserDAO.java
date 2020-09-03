@@ -98,6 +98,20 @@ public class UserDAO {
 		return -2;	// db 오류
 	}
 	
+	public int loginSuccess(String userID) {
+		String SQL = "UPDATE USER SET loginCount = ? WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public int pwHashing(String userPassword, String userID) {
 		String SQL = "UPDATE USER SET userPassword = ? WHERE userID = ?;";
 		try {

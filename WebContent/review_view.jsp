@@ -118,10 +118,10 @@
             				<tr>
 	            				<td class="view_subtitle">내용</td>
 	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><div><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %><br>
-	            				<%if(bbs_review.getFileName() != null){%><img style = "height=200px; width:200px;" src="upload/<%=bbs_review.getFileName() %>"><%}else{out.println(""); }%><br>
-	            				<%if(bbs_review.getFileName1() != null){%><img style = "height=200px; width:200px;" src="upload/<%=bbs_review.getFileName1() %>"><%}else{out.println(""); }%><br>
-	            				<%if(bbs_review.getFileName2() != null){%><img style = "height=200px; width:200px;" src="upload/<%=bbs_review.getFileName2() %>"><%}else{out.println(""); }%><br>
-	            				<%if(bbs_review.getFileName3() != null){%><img style = "height=200px; width:200px;" src="upload/<%=bbs_review.getFileName3() %>"><%}else{out.println(""); }%></div></td>
+	            				<%if(bbs_review.getFileName() != null){%><img src="upload/<%=bbs_review.getFileName() %>"><%}else{out.println(""); }%><br>
+	            				<%if(bbs_review.getFileName1() != null){%><img src="upload/<%=bbs_review.getFileName1() %>"><%}else{out.println(""); }%><br>
+	            				<%if(bbs_review.getFileName2() != null){%><img src="upload/<%=bbs_review.getFileName2() %>"><%}else{out.println(""); }%><br>
+	            				<%if(bbs_review.getFileName3() != null){%><img src="upload/<%=bbs_review.getFileName3() %>"><%}else{out.println(""); }%></div></td>
             				</tr>
             			</tbody>
             		</table>

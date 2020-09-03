@@ -34,6 +34,7 @@
 		int result = userDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
 		
 		if(result == 1){
+			int loginSuccess = userDAO.loginSuccess(user.getUserID());
 			session.setAttribute("userID", user.getUserID());
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
