@@ -132,7 +132,7 @@
            											out.print(" ");
             										out.print(user.getUserName());
             										out.print("(");
-            										out.print(user.getUserID());
+            										out.print(user.getUserLevel());
             										out.print(")");
             						%></a>
             						<%				if(i < array.length-1)

@@ -104,6 +104,27 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
+	public int createResult(int bbsID, String bbsTitle, String userID) {
+		String SQL = "INSERT INTO bbs_result VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setInt(1,  bbsID);
+			pstmt.setString(2,  bbsTitle);
+			pstmt.setString(3,  userID);
+			pstmt.setString(4,  getDate());
+			pstmt.setString(5,  "");
+			pstmt.setInt(6,  1);
+			pstmt.setString(7,  "");
+			pstmt.setString(8,  "");
+			pstmt.setString(9,  "");
+
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
 	public ArrayList<Bbs> getList_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지';";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();

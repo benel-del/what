@@ -66,6 +66,7 @@ public class BbsDAO_join {
 				bbs_join.setJoinID(rs.getInt(1));
 				bbs_join.setUserID(rs.getString(2));
 				bbs_join.setJoinMember(rs.getString(5));
+				bbs_join.setMoneyCheck(rs.getInt(7));
 				list.add(bbs_join);
 			}
 		} catch(Exception e) {

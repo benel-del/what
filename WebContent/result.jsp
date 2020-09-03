@@ -91,7 +91,7 @@
         <section class="container">
             <div class="board_subtitle">
             	결과게시판
-            	<% try{
+            	<!-- <% try{
             		if(userID.equals("admin") == true){
             			out.println("<div class=\"board_write-btn\">");
             			out.println("<a href=\"result_write.jsp\">글쓰기</a>");
@@ -99,7 +99,7 @@
             		}
            		} catch(Exception e){
            			e.printStackTrace();
-           		}%>
+           		}%> -->
             </div>
 
             <div class="board_container">

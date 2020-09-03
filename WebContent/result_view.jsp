@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import= "java.io.PrintWriter" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="bbs_result.Bbs_result" %>
 <%@ page import="bbs_result.BbsDAO_result" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="user.User" %>
 
 <!DOCTYPE html>
 
@@ -33,6 +36,8 @@
 		script.println("</script>");
 	}
 	Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
+	UserDAO userDAO = new UserDAO();
+	ArrayList<User> list_user = userDAO.getUserRank_index();
 	%>
 	
     <div id="wrapper">
@@ -116,21 +121,66 @@
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">우승</td>
-	            				<td colspan="3" class="content1"><% if(bbs_result.getBbsFirst() != null){
-	            					out.println(bbs_result.getBbsFirst().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
-	            					} else {out.println("");}%></td>
+	            				<td colspan="3" class="content1">
+	            				<% if(bbs_result.getBbsFirst() != null){
+	            					String[] array=bbs_result.getBbsFirst().split("/");
+	            					for(int i=0; i<array.length; i++){
+										for(User user : list_user){
+											if(array[i].equals(user.getUserID()) == true){
+												out.print(" ");
+				            					out.print(user.getUserName());
+				            					out.print("(");
+				            					out.print(user.getUserLevel());
+				            					out.print(")");
+				            					if(i < array.length-1)
+				            						out.print(" /");
+											}
+										}
+									}
+	            				} else {out.println("");}%>
+	            				</td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">준우승</td>
-	            				<td colspan="3" class="content1"><% if(bbs_result.getBbsSecond() != null){
-	            					out.println(bbs_result.getBbsSecond().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
-	            					} else {out.println("");}%></td>
+	            				<td colspan="3" class="content1">
+	            				<% if(bbs_result.getBbsFirst() != null){
+	            					String[] array=bbs_result.getBbsSecond().split("/");
+	            					for(int i=0; i<array.length; i++){
+										for(User user : list_user){
+											if(array[i].equals(user.getUserID()) == true){
+												out.print(" ");
+				            					out.print(user.getUserName());
+				            					out.print("(");
+				            					out.print(user.getUserLevel());
+				            					out.print(")");
+				            					if(i < array.length-1)
+				            						out.print(" /");
+											}
+										}
+									}
+	            				} else {out.println("");}%>
+							</td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">3위</td>
-	            				<td colspan="3" class="view_content1"><% if(bbs_result.getBbsThird() != null){
-	            					out.println(bbs_result.getBbsThird().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
-	            					} else {out.println("");}%></td>
+	            				<td colspan="3" class="view_content1">
+	            				<% if(bbs_result.getBbsFirst() != null){
+	            					String[] array=bbs_result.getBbsThird().split("/");
+	            					for(int i=0; i<array.length; i++){
+										for(User user : list_user){
+											if(array[i].equals(user.getUserID()) == true){
+												out.print(" ");
+				            					out.print(user.getUserName());
+				            					out.print("(");
+				            					out.print(user.getUserLevel());
+				            					out.print(")");
+				            					if(i < array.length-1)
+				            						out.print(" /");
+											}
+										}
+									}
+	            				} else {out.println("");}%>
+	            				</td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">내용</td>

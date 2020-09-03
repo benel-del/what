@@ -2,7 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
 <%@ page import = "bbs_result.Bbs_result" %>
-<%@ page import = "bbs_result.BbsDAO_result" %> 
+<%@ page import = "bbs_result.BbsDAO_result" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bbs_join.Bbs_join" %>
+<%@ page import="bbs_join.BbsDAO_join" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="user.User" %> 
 <!DOCTYPE html>
 
 <html lang="en">
@@ -92,6 +97,13 @@
             <div class="board_subtitle">
             	결과게시판
             </div>
+            
+            <%
+    		BbsDAO_join bbsDAO_join = new BbsDAO_join();
+    		ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    		UserDAO userDAO = new UserDAO();
+    		ArrayList<User> list_user = userDAO.getUserRank_index();
+    		%>
 
             <div class="write_container">
             	<div class="write_row">
@@ -115,29 +127,98 @@
             				</tr>
             				<tr>
             					<td>
-            						<div class="bbs_Result">
-            							<textarea id="bbs_first" placeholder="1위" name="bbsFirst" maxlength="100"><% if(bbs_result.getBbsFirst() != null){out.println(bbs_result.getBbsFirst());} else {out.println("");} %></textarea>	
+            						<div class="bbs_result">
+            							<select name="bbsFirst">
+											<option value='' selected>-- 1위 --</option>
+											<%for(Bbs_join bbs_join : list){
+            									if(bbs_join.getMoneyCheck() == 1){
+            										String[] array=bbs_join.getJoinMember().split("/");
+            	    
+           									%>
+	  										 <option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsFirst().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
+	  										 <%for(int i=0; i<array.length; i++){
+	  											 for(User user : list_user){
+	  											 	if(array[i].equals(user.getUserID()) == true){
+	  											 		out.print(" ");
+	  				            						out.print(user.getUserName());
+	  				            						out.print("(");
+	  				            						out.print(user.getUserLevel());
+	  				            						out.print(")");
+	  				            						if(i < array.length-1)
+	  				            							out.print(" /");
+	  											 	}
+	  											 }
+	  										 }%>
+	  										 </option>
+	  										 <%}}%>								 	
+										</select>            						
+									</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_result">
+            						<select name="bbsSecond">
+											<option value='' selected>-- 2위 --</option>
+											<%for(Bbs_join bbs_join : list){
+            									if(bbs_join.getMoneyCheck() == 1){
+            										String[] array=bbs_join.getJoinMember().split("/");
+            	    
+           									%>
+	  										 <option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsSecond().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
+	  										 <%for(int i=0; i<array.length; i++){
+	  											 for(User user : list_user){
+	  											 	if(array[i].equals(user.getUserID()) == true){
+	  											 		out.print(" ");
+	  				            						out.print(user.getUserName());
+	  				            						out.print("(");
+	  				            						out.print(user.getUserLevel());
+	  				            						out.print(")");
+	  				            						if(i < array.length-1)
+	  				            							out.print(" /");
+	  											 	}
+	  											 }
+	  										 }%>
+	  										 </option>
+	  										 <%}}%>								 	
+										</select>
+            						</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_result">
+            						<select name="bbsThird">
+											<option value='' selected>-- 3위 --</option>
+											<%for(Bbs_join bbs_join : list){
+            									if(bbs_join.getMoneyCheck() == 1){
+            										String[] array=bbs_join.getJoinMember().split("/");
+            	    
+           									%>
+	  										 <option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsThird().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
+	  										 <%for(int i=0; i<array.length; i++){
+	  											 for(User user : list_user){
+	  											 	if(array[i].equals(user.getUserID()) == true){
+	  											 		out.print(" ");
+	  				            						out.print(user.getUserName());
+	  				            						out.print("(");
+	  				            						out.print(user.getUserLevel());
+	  				            						out.print(")");
+	  				            						if(i < array.length-1)
+	  				            							out.print(" /");
+	  											 	}
+	  											 }
+	  										 }%>
+	  										 </option>
+	  										 <%}}%>								 	
+										</select>
             						</div>
             					</td>
             				</tr>
             				<tr>
             					<td>
             						<div class="bbs_Result">
-            							<textarea id="bbs_second" placeholder="2위" name="bbsSecond" maxlength="100"><% if(bbs_result.getBbsSecond() != null){out.println(bbs_result.getBbsSecond());} else {out.println("");} %></textarea>	
-            						</div>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td>
-            						<div class="bbs_Result">
-            							<textarea id="bbs_third" placeholder="3위" name="bbsThird" maxlength="100"><% if(bbs_result.getBbsThird() != null){out.println(bbs_result.getBbsThird());} else {out.println("");}%></textarea>	
-            						</div>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td>
-            						<div class="bbs_Result">
-            							<textarea id="bbs_contents" placeholder="기타" name="bbsContent" maxlength="2048"><% if(bbs_result.getBbsContent() != null){out.println(bbs_result.getBbsContent());} else {out.println("");}%></textarea>	
+            							<textarea id="bbs_content" placeholder="기타" name="bbsContent" maxlength="2048"><% if(bbs_result.getBbsContent() != null){out.println(bbs_result.getBbsContent());} else {out.println("");}%></textarea>	
             						</div>
             					</td>
             				</tr>

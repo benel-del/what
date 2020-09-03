@@ -46,7 +46,6 @@
 				script.println("</script>");
 			} else{
 				BbsDAO_result bbsDAO_result = new BbsDAO_result();
-
 				int result = bbsDAO_result.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsFirst"), request.getParameter("bbsSecond"), request.getParameter("bbsThird"));
 				if(result == -1){
 					PrintWriter script = response.getWriter();

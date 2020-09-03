@@ -155,6 +155,7 @@ public class BbsDAO_result {
 		}
 		return -1; //데이터베이스 오류
 	}
+	
 	public int delete(int bbsID) {
 		String SQL="UPDATE bbs_result SET bbsAvailable = 0 WHERE bbsID = ?;";
 		try {

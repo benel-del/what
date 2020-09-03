@@ -1,6 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import = "java.io.PrintWriter" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.io.PrintWriter" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bbs_join.Bbs_join" %>
+<%@ page import="bbs_join.BbsDAO_join" %>
+<%@ page import="user.UserDAO" %>
+<%@ page import="user.User" %>
     
 <!DOCTYPE html>
 
@@ -23,6 +27,17 @@
 		script.println("<script>");
 		script.println("alert('관리자만 접근 가능합니다.')");
 		script.println("history.back()");
+		script.println("</script>");
+	}
+	int bbsID =0;
+	if(request.getParameter("bbsID") != null){
+		bbsID=Integer.parseInt(request.getParameter("bbsID"));
+	}
+	if(bbsID ==0){
+		PrintWriter script=response.getWriter();
+		script.println("<script>");
+		script.println("alert('페이지를 찾을 수 없습니다.')");
+		script.println("location.href='index.jsp'");
 		script.println("</script>");
 	}
 	%>
@@ -68,7 +83,13 @@
             <div class="board_subtitle">
             	결과게시판
             </div>
-
+			
+			<%
+    		BbsDAO_join bbsDAO_join = new BbsDAO_join();
+    		ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    		UserDAO userDAO = new UserDAO();
+    		ArrayList<User> list_user = userDAO.getUserRank_index();
+    		%>
             <div class="write_container">
             	<div class="write_row">
             	<form method="post" action="result_writeAction.jsp">
@@ -91,29 +112,101 @@
             				</tr>
             				<tr>
             					<td>
-            						<div class="bbs_Result">
-            							<textarea id="bbs_first" placeholder="1위 이름" name="bbsFirst" maxlength="2048"></textarea>	
+            						<div class="bbs_result">
+            							<select name="bbsFirst">
+											<option value='' selected>-- 선택 --</option>
+											
+            								<%for(Bbs_join bbs_join : list){
+            									if(bbs_join.getMoneyCheck() == 1){
+            										String[] array=bbs_join.getJoinMember().split("/");
+            	    
+           									%>
+	  										 <option value=<%=bbs_join.getJoinMember()%>>
+	  										 <%for(int i=0; i<array.length; i++){
+	  											 for(User user : list_user){
+	  											 	if(array[i].equals(user.getUserID()) == true){
+	  											 		out.print(" ");
+	  				            						out.print(user.getUserName());
+	  				            						out.print("(");
+	  				            						out.print(user.getUserLevel());
+	  				            						out.print(")");
+	  				            						if(i < array.length-1)
+	  				            							out.print(" /");
+	  											 	}
+	  											 }
+	  										 }%>
+	  										 </option>
+	  										 <%}}%>									 	
+										</select>            						
+									</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_result">
+            						<select name="bbsSecond">
+											<option value='' selected>-- 선택 --</option>
+											
+            								<%for(Bbs_join bbs_join : list){
+            									if(bbs_join.getMoneyCheck() == 1){
+            										String[] array=bbs_join.getJoinMember().split("/");
+            	    
+           									%>
+	  										 <option value=<%=bbs_join.getJoinMember()%>>
+	  										 <%for(int i=0; i<array.length; i++){
+	  											 for(User user : list_user){
+	  											 	if(array[i].equals(user.getUserID()) == true){
+	  											 		out.print(" ");
+	  				            						out.print(user.getUserName());
+	  				            						out.print("(");
+	  				            						out.print(user.getUserLevel());
+	  				            						out.print(")");
+	  				            						if(i < array.length-1)
+	  				            							out.print(" /");
+	  											 	}
+	  											 }
+	  										 }%>
+	  										 </option>
+	  										 <%}}%>									 	
+										</select>
+            						</div>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<div class="bbs_result">
+            						<select name="bbsThird">
+											<option value='' selected>-- 선택 --</option>
+											
+            								<%for(Bbs_join bbs_join : list){
+            									if(bbs_join.getMoneyCheck() == 1){
+            										String[] array=bbs_join.getJoinMember().split("/");
+            	    
+           									%>
+	  										 <option value=<%=bbs_join.getJoinMember()%>>
+	  										 <%for(int i=0; i<array.length; i++){
+	  											 for(User user : list_user){
+	  											 	if(array[i].equals(user.getUserID()) == true){
+	  											 		out.print(" ");
+	  				            						out.print(user.getUserName());
+	  				            						out.print("(");
+	  				            						out.print(user.getUserLevel());
+	  				            						out.print(")");
+	  				            						if(i < array.length-1)
+	  				            							out.print(" /");
+	  											 	}
+	  											 }
+	  										 }%>
+	  										 </option>
+	  										 <%}}%>									 	
+										</select>
             						</div>
             					</td>
             				</tr>
             				<tr>
             					<td>
             						<div class="bbs_Result">
-            							<textarea id="bbs_second" placeholder="2위 이름" name="bbsSecond" maxlength="2048"></textarea>	
-            						</div>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td>
-            						<div class="bbs_Result">
-            							<textarea id="bbs_third" placeholder="3위 이름" name="bbsThird" maxlength="2048"></textarea>	
-            						</div>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td>
-            						<div class="bbs_Result">
-            							<textarea id="bbs_contents" placeholder="내용" name="bbsContent" maxlength="2048"></textarea>	
+            							<textarea id="bbs_content" placeholder="내용" name="bbsContent" maxlength="2048"></textarea>	
             						</div>
             					</td>
             				</tr>
