@@ -141,9 +141,10 @@
         		            ResultSet rs = null;
         		            
         		            try {
-        		                String query = "SELECT * FROM search WHERE searchType='notice' ORDER BY searchNo DESC LIMIT 1;";
+        		                String query = "SELECT * FROM search WHERE searchType='notice' AND userID = ? ORDER BY searchNo DESC LIMIT 1;";
         		                conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
         		                PreparedStatement pstmt=conn.prepareStatement(query);
+        		                pstmt.setString(1,  userID);
         		                rs = pstmt.executeQuery();
         		                if (rs.next()) {
 	           						if(rs.getString(3).equals("title") == true){
