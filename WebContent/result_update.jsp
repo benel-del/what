@@ -7,20 +7,20 @@
 <%@ page import="bbs_join.Bbs_join" %>
 <%@ page import="bbs_join.BbsDAO_join" %>
 <%@ page import="user.UserDAO" %>
-<%@ page import="user.User" %> 
+<%@ page import="user.User" %>
+ 
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
 
 <body>
-<% //userID 존재 여부
+	<% //userID 존재 여부
 	String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
@@ -55,7 +55,6 @@
 	%>
 	
     <div id="wrapper">
-
         <br>
         <header>
         <%
@@ -78,31 +77,28 @@
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+          			<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
-        <br>
+		<br>
 
-	<!-- 게시판 공통 요소 : class board_ 사용 -->
-	
+		<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
-            <div class="board_subtitle">
-            	결과게시판
-            </div>
+            <div class="board_subtitle">결과게시판</div>
             
             <%
-    		BbsDAO_join bbsDAO_join = new BbsDAO_join();
-    		ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
-    		UserDAO userDAO = new UserDAO();
-    		ArrayList<User> list_user = userDAO.getUserRank_index();
+    			BbsDAO_join bbsDAO_join = new BbsDAO_join();
+    			ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    			UserDAO userDAO = new UserDAO();
+    			ArrayList<User> list_user = userDAO.getUserRank_index();
     		%>
 
             <div class="write_container">
@@ -130,27 +126,33 @@
             						<div class="bbs_result">
             							<select name="bbsFirst">
 											<option value='' selected>-- 1위 --</option>
-											<%for(Bbs_join bbs_join : list){
+											<%
+											for(Bbs_join bbs_join : list){
             									if(bbs_join.getMoneyCheck() == 1){
             										String[] array=bbs_join.getJoinMember().split("/");
             	    
            									%>
-	  										 <option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsFirst().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
-	  										 <%for(int i=0; i<array.length; i++){
-	  											 for(User user : list_user){
-	  											 	if(array[i].equals(user.getUserID()) == true){
-	  											 		out.print(" ");
-	  				            						out.print(user.getUserName());
-	  				            						out.print("(");
-	  				            						out.print(user.getUserLevel());
-	  				            						out.print(")");
-	  				            						if(i < array.length-1)
-	  				            							out.print(" /");
-	  											 	}
-	  											 }
-	  										 }%>
-	  										 </option>
-	  										 <%}}%>								 	
+	  										<option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsFirst().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
+	  										<%
+	  										 		for(int i=0; i<array.length; i++){
+	  											 		for(User user : list_user){
+	  											 			if(array[i].equals(user.getUserID()) == true){
+	  											 				out.print(" ");
+	  				            								out.print(user.getUserName());
+	  				            								out.print("(");
+	  				            								out.print(user.getUserLevel());
+	  				            								out.print(")");
+	  				            								if(i < array.length-1)
+	  				            									out.print(" /");
+	  											 			}	
+	  													 }
+	  										 		}
+	  										%>
+	  										</option>
+	  										<%
+	  										 	}
+            								}
+            								%>								 	
 										</select>            						
 									</div>
             					</td>
@@ -160,27 +162,33 @@
             						<div class="bbs_result">
             						<select name="bbsSecond">
 											<option value='' selected>-- 2위 --</option>
-											<%for(Bbs_join bbs_join : list){
+											<%
+											for(Bbs_join bbs_join : list){
             									if(bbs_join.getMoneyCheck() == 1){
             										String[] array=bbs_join.getJoinMember().split("/");
             	    
            									%>
 	  										 <option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsSecond().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
-	  										 <%for(int i=0; i<array.length; i++){
-	  											 for(User user : list_user){
-	  											 	if(array[i].equals(user.getUserID()) == true){
-	  											 		out.print(" ");
-	  				            						out.print(user.getUserName());
-	  				            						out.print("(");
-	  				            						out.print(user.getUserLevel());
-	  				            						out.print(")");
-	  				            						if(i < array.length-1)
-	  				            							out.print(" /");
-	  											 	}
-	  											 }
-	  										 }%>
-	  										 </option>
-	  										 <%}}%>								 	
+	  										 <%
+	  										 		for(int i=0; i<array.length; i++){
+	  											 		for(User user : list_user){
+	  											 			if(array[i].equals(user.getUserID()) == true){
+	  											 				out.print(" ");
+	  				            								out.print(user.getUserName());
+	  				            								out.print("(");
+	  				            								out.print(user.getUserLevel());
+	  				            								out.print(")");
+	  				            								if(i < array.length-1)
+	  				            									out.print(" /");
+	  											 			}
+	  													 }
+	  												 }
+	  										%>
+	  										</option>
+	  										<%
+            									}
+            								}
+            								%>								 	
 										</select>
             						</div>
             					</td>
@@ -190,27 +198,33 @@
             						<div class="bbs_result">
             						<select name="bbsThird">
 											<option value='' selected>-- 3위 --</option>
-											<%for(Bbs_join bbs_join : list){
+											<%
+											for(Bbs_join bbs_join : list){
             									if(bbs_join.getMoneyCheck() == 1){
             										String[] array=bbs_join.getJoinMember().split("/");
             	    
            									%>
 	  										 <option value=<%=bbs_join.getJoinMember()%> <% if(bbs_result.getBbsThird().equals(bbs_join.getJoinMember()) == true) out.print("selected");%>>
-	  										 <%for(int i=0; i<array.length; i++){
-	  											 for(User user : list_user){
-	  											 	if(array[i].equals(user.getUserID()) == true){
-	  											 		out.print(" ");
-	  				            						out.print(user.getUserName());
-	  				            						out.print("(");
-	  				            						out.print(user.getUserLevel());
-	  				            						out.print(")");
-	  				            						if(i < array.length-1)
-	  				            							out.print(" /");
-	  											 	}
-	  											 }
-	  										 }%>
+	  										 <%
+	  										 		for(int i=0; i<array.length; i++){
+	  											 		for(User user : list_user){
+	  											 			if(array[i].equals(user.getUserID()) == true){
+	  											 				out.print(" ");
+	  				            								out.print(user.getUserName());
+	  				            								out.print("(");
+	  				            								out.print(user.getUserLevel());
+	  				            								out.print(")");
+	  				            								if(i < array.length-1)
+	  				            									out.print(" /");
+	  											 			}
+	  											 		}
+	  										 		}
+	  										 %>
 	  										 </option>
-	  										 <%}}%>								 	
+	  										 <%
+	  											}
+            								}
+            								%>								 	
 										</select>
             						</div>
             					</td>
@@ -229,11 +243,8 @@
  							</tr>
             			</tbody>
             		</table>
-            		
-            		
             		</form>
             	</div>
- 
 	    	</div>  
         </section>
     </div>

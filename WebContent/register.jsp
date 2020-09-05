@@ -1,23 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
 
 <body>
 	<% //userID 존재 여부
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
 	%>
     <div id="wrapper">
         <br>
@@ -44,25 +43,25 @@
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
         </header>
-         <div class="menu">
+        
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+          			<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
-        
+		<br>
+		
         <section class="container">
-        <!-- 로그인된 회원들은 페이지에 접속할 수 없도록 해야함 -->
-        
-        
-        <div class="login_page">
+        	<div class="login_page">
+            
             <div class="login_header">
-                <a href="register.jsp">회원가입 페이지</a>
+            	<a href="register.jsp">회원가입 페이지</a>
             </div>
             
             <!-- 정보를 숨기면서 전송 post -->
@@ -116,14 +115,12 @@
 	  					<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
 					</select>
 				<br><br>
-					<!-- 내 소개.. -->
-				
+									
 				<input type="submit" class="login_submit-btn" value="회원가입">
 				<br>
 			</div>
             </form>
-        </div>
-
+        	</div>
         </section>
 
         <footer>
@@ -131,8 +128,7 @@
         	    <span>임원진</span><br>
         	    <span>전성빈 tel.010-5602-4112</span><br>
         	    <span>정하영 tel.010-9466-9742</span><br>
-        	    <span>유태혁 tel.010-</span><br>
-        	    <span>김승현 tel.010-</span><br>
+        	    <span>김승현 tel.010-2749-1557</span><br>
         	    <span>김민선 tel.010-3018-3568</span><br>
         	    <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
         	</p>

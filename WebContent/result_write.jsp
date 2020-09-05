@@ -7,17 +7,17 @@
 <%@ page import="user.User" %>
     
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
 
 <body>
-<% //userID 존재 여부
+	<% //userID 존재 여부
 	String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
@@ -43,7 +43,6 @@
 	%>
 	
     <div id="wrapper">
-
         <br>
         <header>
         <%
@@ -66,29 +65,28 @@
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+          			<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
+		<br>
 
-	<!-- 게시판 공통 요소 : class board_ 사용 -->	
+		<!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
-            <div class="board_subtitle">
-            	결과게시판
-            </div>
+            <div class="board_subtitle">결과게시판</div>
 			
 			<%
-    		BbsDAO_join bbsDAO_join = new BbsDAO_join();
-    		ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
-    		UserDAO userDAO = new UserDAO();
-    		ArrayList<User> list_user = userDAO.getUserRank_index();
+    			BbsDAO_join bbsDAO_join = new BbsDAO_join();
+    			ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    			UserDAO userDAO = new UserDAO();
+    			ArrayList<User> list_user = userDAO.getUserRank_index();
     		%>
             <div class="write_container">
             	<div class="write_row">
@@ -116,27 +114,33 @@
             							<select name="bbsFirst">
 											<option value='' selected>-- 선택 --</option>
 											
-            								<%for(Bbs_join bbs_join : list){
+            								<%
+            								for(Bbs_join bbs_join : list){
             									if(bbs_join.getMoneyCheck() == 1){
             										String[] array=bbs_join.getJoinMember().split("/");
             	    
            									%>
-	  										 <option value=<%=bbs_join.getJoinMember()%>>
-	  										 <%for(int i=0; i<array.length; i++){
-	  											 for(User user : list_user){
-	  											 	if(array[i].equals(user.getUserID()) == true){
-	  											 		out.print(" ");
-	  				            						out.print(user.getUserName());
-	  				            						out.print("(");
-	  				            						out.print(user.getUserLevel());
-	  				            						out.print(")");
-	  				            						if(i < array.length-1)
-	  				            							out.print(" /");
-	  											 	}
-	  											 }
-	  										 }%>
-	  										 </option>
-	  										 <%}}%>									 	
+	  										<option value=<%=bbs_join.getJoinMember()%>>
+	  										<%
+	  										 		for(int i=0; i<array.length; i++){
+	  													 for(User user : list_user){
+	  											 			if(array[i].equals(user.getUserID()) == true){
+	  											 				out.print(" ");
+	  				            								out.print(user.getUserName());
+	  				            								out.print("(");
+	  				            								out.print(user.getUserLevel());
+	  				            								out.print(")");
+	  				            								if(i < array.length-1)
+	  				            									out.print(" /");
+	  											 			}
+	  													 }
+	  										 		}
+	  										%>
+	  										</option>
+	  										<%
+	  										 	}
+            								}
+            								%>									 	
 										</select>            						
 									</div>
             					</td>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -12,15 +11,6 @@
 <jsp:setProperty name="bbs" property="bbsJoinplace" />
 <jsp:setProperty name="bbs" property="bbsComplete" />
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/htm; charset=utf-8">
-
-    <title>어쩌다리그</title>
-</head>
-
-<body>
 	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
@@ -70,7 +60,4 @@
 				}
 			}
 		}
-
 	%>
-</body>
-</html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>
 <%@ page import="bbs_review.BbsDAO_review" %>
 <%@ page import="bbs_review.Bbs_review" %>
@@ -20,12 +19,11 @@
 <jsp:setProperty name="user" property="userID" />
 
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
@@ -44,65 +42,62 @@
 	%>
 	
     <div id="wrapper">
-
         <br>
         <header>
         <%
         	if(userID == null){
         %>
-            <!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="login.jsp">로그인 </a>
                 |
                 <a class="link" href="register.jsp">회원가입</a>
             </div>
-            <br>
         <% 
            	} else if(userID.equals("admin") == true) {
 		%>
-			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
 				|
                 <a class="link" href="admin.jsp">관리자 페이지</a>
            </div>
-            <br>		
         <% 
            	} else {
 		%>
-			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
                 |
                 <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
            </div>
-            <br>		
 		<% 
            	}
        	%>
+       		<br>
+       		
             <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+          			<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
+		<br>
 
-	<!-- 게시판 공통 요소 : class board_ 사용 -->
+		<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
             <div class="board_subtitle">
             	후기게시판
-            	<% try{
+            	<% 
+            	try{
             		if(userID.equals("admin") == true){
             			out.println("<div class=\"board_write-btn\">");
             			out.println("<a href=\"review_write.jsp\">글쓰기</a>");
@@ -110,7 +105,8 @@
             		}
            		} catch(Exception e){
            			e.printStackTrace();
-           		}%>
+           		}
+           		%>
             </div>
 
             <div class="board_container">
@@ -175,8 +171,6 @@
             	
             	
             	<!-- 이전/다음 페이지 -->
-            	
-            	
             	<div class="board_page-move">
             	<%
             		if(pageNumber != 1){
@@ -244,8 +238,7 @@
         	    <span>임원진</span><br>
         	    <span>전성빈 tel.010-5602-4112</span><br>
         	    <span>정하영 tel.010-9466-9742</span><br>
-        	    <span>유태혁 tel.010-</span><br>
-        	    <span>김승현 tel.010-</span><br>
+        	    <span>김승현 tel.010-2749-1557</span><br>
         	    <span>김민선 tel.010-3018-3568</span><br>
         	    <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
         	</p>

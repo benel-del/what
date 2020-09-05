@@ -73,18 +73,18 @@
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+          			<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
-        <br>
+		<br>
 
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
 	

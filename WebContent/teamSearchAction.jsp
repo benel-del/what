@@ -1,21 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbsSearch.BbsSearch" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <jsp:useBean id="bbsSearch" class="bbsSearch.BbsSearch" scope="page" />
 <jsp:setProperty name="bbsSearch" property="searchWord" />
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link rel="stylesheet" type="text/css" href="frame.css">
-    <title>¾îÂ¼´Ù¸®±×</title>
-</head>
-<body>
 	<%
 	String userID = null;
 	if(session.getAttribute("userID") != null){
@@ -28,7 +17,7 @@
 	if(result == -1){
 		PrintWriter script = response.getWriter();
         script.println("<script>");
-        script.println("alert('µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù')");
+        script.println("alert('ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜')");
         script.println("history.back()");
         script.println("</script>");
 	}
@@ -37,10 +26,5 @@
 		script.println("<script>");
 		script.println("location.replace('team.jsp?pageNumber=1');");
 		script.println("</script>");
-	}
-	
+	}	
 	%>
-
-
-</body>
-</html>

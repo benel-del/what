@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
 <%@ page import = "bbs.Bbs" %>
 <%@ page import = "bbs.BbsDAO" %> 
@@ -9,54 +8,53 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
 
 <body>
-<% //userID 존재 여부
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	if(userID == null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('로그인 후 이용가능합니다.')");
-		script.println("location.replace('login.jsp')");
-		script.println("</script>");
-	}
+	<% //userID 존재 여부
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		if(userID == null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인 후 이용가능합니다.')");
+			script.println("location.replace('login.jsp')");
+			script.println("</script>");
+		}
 	
-	int bbsID = 0;
-	if(request.getParameter("bbsID") != null){
-		bbsID = Integer.parseInt(request.getParameter("bbsID"));
-	}
-	if(bbsID == 0){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('유효하지 않은 글입니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
-	Bbs bbs = new BbsDAO().getBbs(bbsID);
-	if(!userID.equals(bbs.getUserID())){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('수정 권한이 없습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
+		int bbsID = 0;
+		if(request.getParameter("bbsID") != null){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		Bbs bbs = new BbsDAO().getBbs(bbsID);
+		if(!userID.equals(bbs.getUserID())){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('수정 권한이 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
 	%>
 	
     <div id="wrapper">
-
         <br>
         <header>
         <%
@@ -79,30 +77,27 @@
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+          			<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
-        <br>
-
-	<!-- 게시판 공통 요소 : class board_ 사용 -->
-	
+		<br>
+		
+		<!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
-            <div class="board_subtitle">
-            	공지게시판
-            </div>
+            <div class="board_subtitle">공지게시판 </div>
 
             <div class="write_container">
             	<div class="write_row">
-            	<form method="post" action="notice_updateAction.jsp?bbsID=<%=bbsID%>">
-            		<table class="write_table">
+            		<form method="post" action="notice_updateAction.jsp?bbsID=<%=bbsID%>">
+            			<table class="write_table">
             			<thead>
             				<tr class="write_tr">
             					<th colspan="3" class="write_title">글수정</th>
@@ -114,49 +109,49 @@
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-			            					<%
-			            				Class.forName("com.mysql.jdbc.Driver"); 
-			            				String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
-			            				String dbID = "root";
-			            				String dbPassword = "whatpassword0706!";
-			            			    Connection conn = null;
-			            			    Statement stmt = null;
-			            			    ResultSet rs = null;
-			            			    BbsDAO bbsDAO = new BbsDAO();
-			            			    try {
-			            			        String query = "select * from bbs where bbsID='"+bbsID+"'";
-			            			        conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			            			        stmt = conn.createStatement();
-			            			        rs = stmt.executeQuery(query);
-			            			        while (rs.next()) {
+			            				<%
+			            					Class.forName("com.mysql.jdbc.Driver"); 
+			            					String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
+			            					String dbID = "root";
+			            					String dbPassword = "whatpassword0706!";
+			            			   	 	Connection conn = null;
+			            			   	 	Statement stmt = null;
+			            			   		ResultSet rs = null;
+			            			    	BbsDAO bbsDAO = new BbsDAO();
+			            			    	try {
+			            			        	String query = "select * from bbs where bbsID='"+bbsID+"'";
+			            			        	conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
+			            			        	stmt = conn.createStatement();
+			            			        	rs = stmt.executeQuery(query);
+			            			        	while (rs.next()) {
 			            				%>
 			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); else if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)
 			            					
 			            					<input type="checkbox" id="bbs_fix" name="bbsComplete" value=1 <% if(rs.getInt(11) == 1) out.print("checked"); %>/> 완료
 			            				<%
-							                }
-							            } catch (SQLException ex) {
-							                out.println(ex.getMessage());
-							                ex.printStackTrace();
-							            } finally {
-							                // 6. 사용한 Statement 종료
-							                if (rs != null)
-							                    try {
-							                        rs.close();
-							                    } catch (SQLException ex) {
-							                    }
-							                if (stmt != null)
-							                    try {
-							                        stmt.close();
-							                    } catch (SQLException ex) {
-							                    }
-							                // 7. 커넥션 종료
-							                if (conn != null)
-							                    try {
-							                        conn.close();
-							                    } catch (SQLException ex) {
-							                    }
-							            }
+							                	}
+							            	} catch (SQLException ex) {
+							                	out.println(ex.getMessage());
+							                	ex.printStackTrace();
+							           	 	} finally {
+							                	// 6. 사용한 Statement 종료
+							                	if (rs != null)
+							                    	try {
+							                        	rs.close();
+							                    	} catch (SQLException ex) {
+							                    	}
+							                	if (stmt != null)
+							                    	try {
+							                        	stmt.close();
+							                    	} catch (SQLException ex) {
+							                    	}
+							                	// 7. 커넥션 종료
+							                	if (conn != null)
+							                    	try {
+							                        	conn.close();
+							                    	} catch (SQLException ex) {
+							                    	}
+							           	 	}
 							       		%>   
 		            					</div>
 			            				<div class="bbsType">
@@ -198,12 +193,9 @@
  								</td>
  							</tr>
             			</tbody>
-            		</table>
-            		
-            		
+            			</table>
             		</form>
             	</div>
- 
 	    	</div>  
         </section>
 
@@ -212,8 +204,7 @@
         	    <span>임원진</span><br>
         	    <span>전성빈 tel.010-5602-4112</span><br>
         	    <span>정하영 tel.010-9466-9742</span><br>
-        	    <span>유태혁 tel.010-</span><br>
-        	    <span>김승현 tel.010-</span><br>
+        	    <span>김승현 tel.010-2749-1557</span><br>
         	    <span>김민선 tel.010-3018-3568</span><br>
         	    <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
         	</p>

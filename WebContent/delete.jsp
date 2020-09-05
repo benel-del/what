@@ -1,13 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="user.UserDAO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="user" class="user.User" scope="page" />
-<jsp:setProperty name="user" property="userID" />
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,19 +13,17 @@
 </head>
 
 <body>
-
-	<% //userID 존재 여부
-	String userID = null;
-
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
+	<%  //userID 존재 여부
+		String userID = null;
+		if(session.getAttribute("userID") != null){ 
+			userID = (String) session.getAttribute("userID"); //get session of userID who logins
+		}
 	%>
 	
     <div id="wrapper">
-        <br>
+    	<br>
         <header>
-       <%
+       	<%  // only users who logined can use 'delete' page ('admin' cannot delete its account)
         	if(userID == null){
 	            PrintWriter script = response.getWriter();
 				script.println("<script>");
@@ -43,7 +38,7 @@
     			script.println("</script>");
            	} else{
 		%>
-            <!--로그인, 회원가입 버튼-->
+            <!--로그아웃, 마이페이지 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃</a>
                 |
@@ -57,43 +52,38 @@
             </div>
         </header>
 
-         <div class="menu">
+        <div class="menu">
         	<input type="checkbox" id="toggle">
-        	<label for="toggle">메뉴</label>
-            <ul id="nav">
-                <li><a href="notice.jsp">공지사항</a></li>
-                <li><a href="result.jsp">결과게시판</a></li>
-                <li><a href="rank.jsp">랭킹게시판</a></li>
-                <li><a href="review.jsp">후기게시판</a></li>
-                <li><a href="faq.jsp">FAQ</a></li>
-            </ul>
+        		<label for="toggle">메뉴</label>
+           	 		<ul id="nav">
+                		<li><a href="notice.jsp">공지사항</a></li>
+                		<li><a href="result.jsp">결과게시판</a></li>
+                		<li><a href="rank.jsp">랭킹게시판</a></li>
+                		<li><a href="review.jsp">후기게시판</a></li>
+                		<li><a href="faq.jsp">FAQ</a></li>
+            		</ul>
         </div>
-        <br>
+		<br>
 
         <section class="container">
-        
            <div class="login_page">
-              <form method="post" action="deleteAction.jsp">
-              
-               <div class="dm_header">
+              <form method="post" action="deleteAction.jsp">              
+               	<div class="dm_header">
                    <a href="delete.jsp">회원 탈퇴 페이지</a>
-               </div>
+               	</div>
+               	<br>
                
-   				<br>
-               <!--로그인 폼-->
+               <!--회원탈퇴 폼-->
                <div class="login_form">
 					<label class="login_label">탈퇴하려면 비밀번호를 입력해주세요.</label>
 					<br><br>
-                   <input type="password" placeholder="비밀번호 입력" name="userPassword" maxlength="20">
+                   	<input type="password" placeholder="비밀번호 입력" name="userPassword" maxlength="20">
 					<br>                      
                </div>
-               
                <br>
                <input type="submit" class="login_submit-btn" value="탈퇴하기" >
-
-           </form>
-               
-           </div>
+           	</form>      
+          </div>
            
         </section>
         <% 
@@ -102,15 +92,14 @@
 
        <footer>
         	<p>
-        		<span>임원진</span><br>
+        		<span>[임원진]</span><br>
         	    <span>전성빈 tel.010-5602-4112</span><br>
         	    <span>정하영 tel.010-9466-9742</span><br>
-        	    <span>유태혁 tel.010-</span><br>
-        	    <span>김승현 tel.010-</span><br>
+        	    <span>김승현 tel.010-2749-1557</span><br>
         	    <span>김민선 tel.010-3018-3568</span><br>
         	    <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
         	</p>
-        </footer>
+       </footer>
     </div>
 </body>
 </html>

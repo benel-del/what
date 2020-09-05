@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
@@ -10,15 +9,6 @@
 <jsp:useBean id="bbsSearch" class="bbsSearch.BbsSearch" scope="page" />
 <jsp:setProperty name="bbsSearch" property="userID"/>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/htm; charset=utf-8">
-
-    <title>어쩌다리그</title>
-</head>
-
-<body>
 	<%
 		int bbsID = 0;	
 		if(request.getParameter("bbsID") != null){
@@ -70,5 +60,3 @@
 		}
 
 	%>
-</body>
-</html>

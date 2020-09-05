@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="bbs_review.BbsDAO_review" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import = "java.util.*"%>                         
@@ -7,15 +6,6 @@
 <%@ page import = "com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/htm; charset=utf-8">
-
-    <title>어쩌다리그</title>
-</head>
-
-<body>
 	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
@@ -89,5 +79,3 @@
 		}
 
 	%>
-</body>
-</html>
