@@ -167,4 +167,25 @@ public class BbsDAO_result {
 		}
 		return -1; //데이터베이스 오류
 	}	
+	
+	public ArrayList<Bbs_result> updateRank() {
+		String SQL="SELECT * FROM bbs_result;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_result bbs_result = new Bbs_result();
+				bbs_result.setBbsAvailable(rs.getInt(6));
+				bbs_result.setBbsFirst(rs.getString(7));
+				bbs_result.setBbsSecond(rs.getString(8));
+				bbs_result.setBbsThird(rs.getString(9));
+
+				list.add(bbs_result);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

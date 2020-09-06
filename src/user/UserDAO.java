@@ -612,4 +612,56 @@ public class UserDAO {
 		}
 		return null;	// db 오류
 	}
+	
+	public int resetRank(String userID) {
+		String SQL = "UPDATE USER SET userFirst=0, userSecond=0, userThird=0 WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int updateFirst(String userID, int userFirst) {
+		String SQL = "UPDATE USER SET userFirst=? WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, userFirst);
+			pstmt.setString(2, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int updateSecond(String userID, int userSecond) {
+		String SQL = "UPDATE USER SET userSecond=? WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, userSecond);
+			pstmt.setString(2, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int updateThird(String userID, int userThird) {
+		String SQL = "UPDATE USER SET userThird=? WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, userThird);
+			pstmt.setString(2, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
