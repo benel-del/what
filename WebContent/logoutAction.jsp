@@ -20,7 +20,6 @@
 		script.println("</script>");
 	}//로그인 안한 사람은 로그아웃 페이지에 접근할 수 없음
 		
-	
 	//admin이 로그아웃 할 때마다 ranking update
 	if(userID.equals("admin")==true){
 		
@@ -44,6 +43,7 @@
 		//available == 1인 모든 결과게시물에 접근
 		//만약 first가 존재하면, 해당 내용 읽어서 '/' 구분된 userID 읽음
 		//user_rank에서 해당 ID의 정보를 update함
+		
 		for(Bbs_result bbs_result : list){
 			if(bbs_result.getBbsAvailable() == 1){
 				String[] array1=null;
@@ -68,10 +68,8 @@
 				
 				for(int i=0; i<size; i++){ //한 회의 리그에 대해서는 전부 팀원의 수가 같기 때문에 배열 1개의 길이만 따져도 됨
 					for(User user : list_user){
-						if(array1[i].equals(user.getUserID()) == true){
-							int count = user.getUserFirst();
-							++count;
-							int updateFirst = userDAO.updateFirst(array1[i], count);
+						if(array1[i].equals(user.getUserID()) == true){							
+							int updateFirst = userDAO.updateFirst(array1[i]);
 							if(updateFirst == -1){
 								PrintWriter script = response.getWriter();
 								script.println("<script>");
@@ -80,9 +78,8 @@
 								script.println("</script>");
 							}
 						} else if(array2[i].equals(user.getUserID()) == true){
-							int count = user.getUserSecond();
-							++count;
-							int updateSecond = userDAO.updateSecond(array2[i], count);
+							
+							int updateSecond = userDAO.updateSecond(array2[i]);
 							if(updateSecond == -1){
 								PrintWriter script = response.getWriter();
 								script.println("<script>");
@@ -90,10 +87,9 @@
 								script.println("history.back()");
 								script.println("</script>");
 							}
-						} else if(array3[i].equals(user.getUserID()) == true){
-							int count = user.getUserThird();
-							++count;
-							int updateThird = userDAO.updateThird(array3[i], count);
+						} else	if(array3[i].equals(user.getUserID()) == true){
+							
+							int updateThird = userDAO.updateThird(array3[i]);
 							if(updateThird == -1){
 								PrintWriter script = response.getWriter();
 								script.println("<script>");

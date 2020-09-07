@@ -625,12 +625,11 @@ public class UserDAO {
 		}
 		return -1;
 	}
-	public int updateFirst(String userID, int userFirst) {
-		String SQL = "UPDATE USER SET userFirst=? WHERE userID = ?;";
+	public int updateFirst(String userID) {
+		String SQL = "UPDATE USER SET userFirst=userFirst+1 WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, userFirst);
-			pstmt.setString(2, userID);
+			pstmt.setString(1, userID);
 			pstmt.executeUpdate();
 			return 1;
 		} catch(Exception e) {
@@ -638,12 +637,11 @@ public class UserDAO {
 		}
 		return -1;
 	}
-	public int updateSecond(String userID, int userSecond) {
-		String SQL = "UPDATE USER SET userSecond=? WHERE userID = ?;";
+	public int updateSecond(String userID) {
+		String SQL = "UPDATE USER SET userSecond=userSecond+1 WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, userSecond);
-			pstmt.setString(2, userID);
+			pstmt.setString(1, userID);
 			pstmt.executeUpdate();
 			return 1;
 		} catch(Exception e) {
@@ -651,12 +649,11 @@ public class UserDAO {
 		}
 		return -1;
 	}
-	public int updateThird(String userID, int userThird) {
-		String SQL = "UPDATE USER SET userThird=? WHERE userID = ?;";
+	public int updateThird(String userID) {
+		String SQL = "UPDATE USER SET userThird=userThird+1 WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, userThird);
-			pstmt.setString(2, userID);
+			pstmt.setString(1, userID);
 			pstmt.executeUpdate();
 			return 1;
 		} catch(Exception e) {
