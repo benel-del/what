@@ -21,55 +21,11 @@
 	
     <div id="wrapper">
         <br>
-        <header>
-        	<!-- 로그인/회원가입 버튼 -->
-        <%
-  			if(userID == null){
-  		%>
-  			<div id = "service">
-  				<a class="link" href = "login.jsp">로그인</a>
-  				|
-  				<a class="link" href = "register.jsp">회원가입</a>
-  			</div>
-  		<% 
-  			} else if(userID.equals("admin") == true) {
-  		%>
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                |
-                <a class="link" href="admin.jsp"> 관리자 페이지</a>
-           	</div>
-        <% 
-           	} else {
-		%>
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                | 
-                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
-           	</div>
-		<% 
-           	}
-       	%>
-			<br>
-		
-            <!--사이트 이름-->
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
-
-         <div class="menu">
-        	<input type="checkbox" id="toggle">
-        		<label for="toggle">메뉴</label>
-            		<ul id="nav">
-               			<li><a href="notice.jsp">공지사항</a></li>
-                		<li><a href="result.jsp">결과게시판</a></li>
-                		<li><a href="rank.jsp">랭킹게시판</a></li>
-                		<li><a href="review.jsp">후기게시판</a></li>
-                		<li><a href="faq.jsp">FAQ</a></li>
-            		</ul>
-        </div>
-        <br>
+        <!-- header -->
+		<%@ include file="header.jsp" %>
+	
+        <!-- menu -->
+		<%@ include file="menubar.jsp" %>
 
         <section class="container">
         <div class="board_subtitle">FAQ</div>
