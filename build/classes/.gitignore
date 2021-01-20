@@ -1,8 +1,8 @@
-/bbs_review/
-/bbs_result/
 /bbs/
-/bbs_join/
-/upload/
 /bbsSearch/
+/bbs_join/
+/bbs_result/
+/bbs_review/
 /user/
-/user_rank/
+/user_join/
+/util/
