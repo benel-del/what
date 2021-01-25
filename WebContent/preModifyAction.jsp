@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -12,20 +13,15 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	
+	/* 로그인 안 된 사람은 회원 탈퇴 페이지에 접근할 수 없다 */
 	if(userID == null){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인 후 이용가능합니다.')");
 		script.println("location.replace('login.jsp')");
 		script.println("</script>");
-	} //로그인 안 된 사람은 회원 탈퇴 페이지에 접근할 수 없음
-	else if(userID.equals("admin") == true){
-   		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('관리자는 접근 불가.')");
-		script.println("history.back()");
-		script.println("</script>");
-   	}
+	}	
 	
 	if(user.getUserPassword() == null){
 	    PrintWriter script = response.getWriter();

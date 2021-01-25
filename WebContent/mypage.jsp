@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.User" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -9,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
     <title>어쩌다리그</title>
 </head>
@@ -32,39 +33,29 @@
     			script.println("alert('로그인 후 접근 가능합니다.')");
     			script.println("location.replace('login.jsp')");
     			script.println("</script>");
-    		} else if(userID.equals("admin") == true) {
+    		}  else {
 		%>
-			<!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                |
-                <a class="link" href="admin.jsp"> 관리자 페이지</a>
-           </div>
-        <% 
-           	} else {
-		%>
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                | 
-                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
-           </div>
+        	<div id="service">
+            	<a class="link" href="logoutAction.jsp">로그아웃 </a>
+            	| 
+            	<a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
+       		</div>   
 		<% 
            	}
        	%>
        		<br>
        		
-            <!--사이트 이름-->
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
+        	<!--사이트 이름-->
+        	<div id="title">
+        		<h1><a href="index.jsp">어쩌다 리그</a></h1>
+        	</div>
         </header>
 
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
-		
-		
+				
 		<%
-		User user = new UserDAO().getuser_rank(userID);
+			User user = new UserDAO().getuser_rank(userID);
        	%>
         <section class="container">
        		<div class="mypage_contents">
@@ -85,18 +76,13 @@
        				</tr>
        				
        				<tr class="myinfo_userEmail">
-       					<th id="myinfo_title" class="table_th1">연락처</th>
+       					<th id="myinfo_title" class="table_th1">이메일</th>
        					<th class="table_th2"><%=user.getUserEmail() %></th>
        				</tr>
 
        				<tr class="myinfo_userLevel">
        					<th id="myinfo_title" class="table_th1">부수</th>
        					<th class="table_th2"><%=user.getUserLevel() %></th>
-       				</tr>
-
-       				<tr class="myinfo_userType">
-       					<th id="myinfo_title" class="table_th1">전형</th>
-       					<th class="table_th2"><%=user.getUserType() %></th>
        				</tr>
 
        				<tr class="myinfo_userDescription">

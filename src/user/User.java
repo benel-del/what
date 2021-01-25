@@ -4,20 +4,17 @@ public class User {
 
 	private String userID;
 	private String userPassword;
-	private String userNewPassword;	//password 蹂�寃쎌떆�뿉留� �궗�슜
+	private String userNewPassword;	//password 확인
 	private String userRePassword;
 	private String userName;
 	private String userGender;
 	private String userLevel;
-	private String userType;
 	private String userDescription;
 	private int userRank;
 	private int userFirst;
 	private int userSecond;
 	private int userThird;
 	private String userEmail;
-	private int loginCount;
-	private String lastLogin;
 
 	public String getUserID() {
 		return userID;
@@ -61,12 +58,6 @@ public class User {
 	public void setUserLevel(String userLevel) {
 		this.userLevel = userLevel;
 	}
-	public String getUserType() {
-		return userType;
-	}
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
 	public String getUserDescription() {
 		return userDescription;
 	}
@@ -103,16 +94,5 @@ public class User {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public int getLoginCount() {
-		return loginCount;
-	}
-	public void setLoginCount(int loginCount) {
-		this.loginCount = loginCount;
-	}
-	public String getLastLogin() {
-		return lastLogin;
-	}
-	public void setLastLogin(String lastLogin) {
-		this.lastLogin = lastLogin;
-	}
+	
 }

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.User" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -32,26 +33,19 @@
 				script.println("alert('로그인 후 이용 가능합니다.')");
 				script.println("location.replace('login.jsp')");
 				script.println("</script>");
-           	} else if(userID.equals("admin") == true){
-             	PrintWriter script = response.getWriter();
-      			script.println("<script>");
-      			script.println("alert('관리자는 접근 불가합니다.')");
-      			script.println("history.back()");
-      			script.println("</script>");
            	} else {
 		%>
-			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
                 |
-                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
+                <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
            </div>
             <br>		
 		<% 
            	}
        	%>	
             
-             <!--사이트 이름-->
+            <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
@@ -59,8 +53,7 @@
 
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
-		
-		
+			
         <%
 			User user = new UserDAO().getuser_rank(userID);
        	%>
@@ -111,8 +104,10 @@
        					</tr>
        				
        					<tr class="myinfo_userEmail">
-       						<th id="myinfo_title" class="table_th1">연락처</th>
-       						<th class="table_th2"><%=user.getUserEmail() %></th>
+       						<th id="myinfo_title" class="table_th1">이메일</th>
+       						<th class="table_th2">
+       							<input type="email" name="userEmail" value="<%=user.getUserEmail()%>">
+       						</th>
        					</tr>
      				
      					<tr class="myinfo_userLevel">
@@ -130,20 +125,6 @@
 	  								<option value='5' <% if(user.getUserLevel().equals("5")) out.print("selected"); %>>5</option>
 	  								<option value='6' <% if(user.getUserLevel().equals("6")) out.print("selected"); %>>6</option>
 	  								<option value='7' <% if(user.getUserLevel().equals("7")) out.print("selected"); %>>7</option>
-								</select>
-     						</th>
-     					</tr>
-     				
-     					<tr class="myinfo_userType">
-     						<th id="myinfo_title" class="table_th1">전형</th>
-     						<th class="table_th2">
-     							<select name="userType">
-	  								<option value='오른손잡이 / 드라이브 전형' <% if(user.getUserType().equals("오른손잡이 / 드라이브 전형")) out.print("selected"); %>>오른손잡이 / 드라이브 전형</option>
-	  								<option value='왼손잡이 / 드라이브 전형' <% if(user.getUserType().equals("왼손잡이 / 드라이브 전형")) out.print("selected"); %>>왼손잡이 / 드라이브 전형</option>
-	  								<option value='오른손잡이 / 스트로크 전형' <% if(user.getUserType().equals("오른손잡이 / 스트로크 전형")) out.print("selected"); %>>오른손잡이 / 스트로크 전형</option>
-	  								<option value='왼손잡이 / 스트로크 전형' <% if(user.getUserType().equals("왼손잡이 / 스트로크 전형")) out.print("selected"); %>>왼손잡이 / 스트로크 전형</option>
-	  								<option value='오른손잡이 / 수비수 전형' <% if(user.getUserType().equals("오른손잡이 / 수비수 전형")) out.print("selected"); %>>오른손잡이 / 수비수 전형</option>
-	  								<option value='왼손잡이 / 수비수 전형' <% if(user.getUserType().equals("왼손잡이 / 수비수 전형")) out.print("selected"); %>>왼손잡이 / 수비수 전형</option>
 								</select>
      						</th>
      					</tr>

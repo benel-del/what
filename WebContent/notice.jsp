@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 공지게시판 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
@@ -18,14 +20,25 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<% 
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		int pageNumber = 1; // 기본페이지
+		int pageNumber = 1;
 		if(request.getParameter("pageNumber") != null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+		/* 게시판 업데이트!
+		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
+		*/
+		BbsDAO bbsDAO = new BbsDAO();
+		if(bbsDAO.updateBbsComplete() == -1){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('게시판 업데이트에 실패하였습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
 		}
 	%>
 	
@@ -37,11 +50,12 @@
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
 
-		<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
             <div class="board_subtitle">
             	공지게시판
-            	<% try{
+            <% 
+            	/* 관리자는 공지 쓰기 가능 */
+            	try{
             		if(userID.equals("admin") == true){
             			out.println("<div class=\"board_write-btn\">");
             			out.println("<a href=\"notice_write.jsp\">글쓰기</a>");
@@ -49,7 +63,8 @@
             		}
            		} catch(Exception e){
            			e.printStackTrace();
-           		}%>
+           		}
+           	%>
             </div>
 
             <div class="board_container">
@@ -67,7 +82,6 @@
             			</thead>
             			<tbody>
             				<%
-            					BbsDAO bbsDAO = new BbsDAO();
             					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 1){

@@ -24,26 +24,16 @@
 	int result = userDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
 		
 	if(result == 1){
-		int loginSuccess = userDAO.loginSuccess(user.getUserID());
 		session.setAttribute("userID", user.getUserID());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
 	}
-	else if(result == 5){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('로그인 5회 시도로 계정이 잠금처리 되었습니다.')");
-		script.println("alert('로그인을 원하시면 관리자에게 문의해주세요.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
 	else if(result == 0){
-		int loginCount = userDAO.howmanylogin(user.getUserID());
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('비밀번호가 틀립니다."+loginCount+"/5')");
+		script.println("alert('비밀번호가 틀립니다.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}

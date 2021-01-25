@@ -38,6 +38,19 @@ public class BbsDAO {
 		return ""; //데이터베이스 오류
 	}
 	
+	/* '모임공지'이면서 '모임 날짜'가 이미 지난 게시물의 경우 bbsComplete를 1로 세팅 */
+	public int updateBbsComplete() {
+		String SQL="UPDATE bbs SET bbsComplete = 1 WHERE date_format(?, '%Y-%m-%d') > date(bbsJoindate);";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,  getDate());
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
 	/* bbsID 지정 - 새 글 작성 시 몇 번째 게시글인지 표기하는데 필요 */
  	public int getNext() {
 		String SQL="SELECT bbsID FROM BBS ORDER BY bbsID DESC;";
@@ -175,16 +188,7 @@ public class BbsDAO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/* n회 어쩌다 모임 전용 참가신청 db 생성 */
 	public int createJoinDB(int bbsID) {
 		String SQL="CREATE TABLE bbs_join"+bbsID+"(joinID INT, userID VARCHAR(20), userPhone VARCHAR(20), joinPassword VARCHAR(10), joinMember VARCHAR(200), joinContent VARCHAR(2048), moneyCheck INT, PRIMARY KEY(joinID));";
 		try {
@@ -196,6 +200,7 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
+	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
 	public int createUserDB(int bbsID) {
 		String SQL="CREATE TABLE user_join"+bbsID+"(userID VARCHAR(20), isPart INT default 0, team_num INT default 0, FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE);";
 		try {
@@ -211,27 +216,7 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	public int createResult(int bbsID, String bbsTitle, String userID) {
-		String SQL = "INSERT INTO bbs_result VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
-		try {
-			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  bbsID);
-			pstmt.setString(2,  bbsTitle);
-			pstmt.setString(3,  userID);
-			pstmt.setString(4,  getDate());
-			pstmt.setString(5,  "");
-			pstmt.setInt(6,  1);
-			pstmt.setString(7,  "");
-			pstmt.setString(8,  "");
-			pstmt.setString(9,  "");
-
-			return pstmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1; //데이터베이스 오류
-	}
-	
+	/* index.jsp에서 가장 최근 출력할 모임공지 정보 */
 	public ArrayList<Bbs> getList_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지';";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
@@ -259,6 +244,7 @@ public class BbsDAO {
 		return list;
 	}
 	
+	/* notice.jsp에서 출력할 게시물 목록에 대한 정보 */
 	public ArrayList<Bbs> getList(int pageNumber){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();

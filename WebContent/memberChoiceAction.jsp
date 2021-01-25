@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
@@ -40,7 +41,6 @@
 			}
 			else{
 				script.println("<script>");
-				//script.println("location.href = '" + url + "';");
 				script.println("this.location.replace('" + url + "');");
 				script.println("</script>");
 			}

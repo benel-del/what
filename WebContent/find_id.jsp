@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 아이디찾기 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
     
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -22,7 +24,8 @@
         <br>
         <header>
         	<%
-        		if(userID != null){ //이미 로그인한 사용자는 'id찾기'페이지에 접근할 수 없음
+        		/* 이미 로그인된 사람은 id찾기를 할 수 없음 */
+        		if(userID != null){
         			PrintWriter script=response.getWriter();
 					script.println("<script>");
 					script.println("alert('이미 로그인하였습니다.')");

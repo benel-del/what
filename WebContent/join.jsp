@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 참가신청 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
 <%@ page import="bbs_join.BbsDAO_join" %>
 <%@ page import="bbs_join.Bbs_join" %>
@@ -7,12 +9,12 @@
 <%@ page import="user_join.UserDAO_join" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
+<%@ page import="java.sql.SQLException"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.Connection"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -158,18 +160,6 @@
 								<td colspan = "2">*조원들은 반드시 사이트에 가입되어 있어야 합니다.<br></td>
 							</tr>
 							<tr class="board_tr">
-								<td>신청자 연락처</td>
-								<td class="join_td">
-									<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
-								</td>
-							</tr>
-							<tr class="board_tr">
-								<td>비밀번호</td>
-								<td>
-									<input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
-								</td>
-							</tr>
-							<tr class="board_tr">
 								<td>참가자</td>
 							<td>
 								<input type=button name="joinMeberSearch" id="join_member_btn" value="검색하기" onclick="window.open('member_popup.jsp?bbsID=<%=bbsID%>&reset=<%=reset %>', 'member_popup.jsp?bbsID=<%=bbsID%>&reset=<%=reset %>', 'width=600, height=700, location=no, status=no, scrollbars=yes'); <%reset=1;%>">
@@ -182,18 +172,25 @@
 									<%			
 										if(reset == 1){
 											for(int i = 0; i < list.size(); i++){
-												if(list.get(i).getUserID().equals(userID) == false){
-													out.print(list.get(i).getUserName() + " / " + list.get(i).getUserID() + " / " + list.get(i).getUserLevel() + " / " + list.get(i).getUserType() + "<br>"); 
-													if(i == 0)
-														mem = list.get(i).getUserID();
-													else
-														mem += "/" + list.get(i).getUserID();
-												}
+												out.print(list.get(i).getUserName() + "(" + list.get(i).getUserID() + "/" + list.get(i).getUserLevel() + "부)<br>"); 
+												mem += list.get(i).getUserID() + " ";
 											}
 										}
       								%>
 										<input type = hidden name = "joinMember" id = "join_member" value = <%=mem %>>
 									</div>
+								</td>
+							</tr>
+							<tr class="board_tr">
+								<td>신청자 연락처</td>
+								<td class="join_td">
+									<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
+								</td>
+							</tr>
+							<tr class="board_tr">
+								<td>비밀번호</td>
+								<td>
+									<input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
 								</td>
 							</tr>
 							<tr class="board_tr">

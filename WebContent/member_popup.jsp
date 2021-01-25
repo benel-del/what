@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="bbsSearch.BbsSearch" %>
@@ -27,7 +28,7 @@
 </head>
 
 <body onresize="parent.resizeTo(600,700)" onload="parent.resizeTo(600,700)">
-    <% //userID 존재 여부
+    <%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -48,7 +49,6 @@
         <br>
         <header></header>
 
-		<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="popup_container">
             <div class="board_subtitle">팀원 찾기</div>
             <div class="member_container">
@@ -65,8 +65,7 @@
            					<th id="bbs_name">이름</th>
            					<th id="bbs_level">부수</th>            			
            					<th id="bbs_name">아이디</th>
-           					<th id="bbs_level">전형</th>
-           					<th id="member_choice"></th> 					
+           					<th id="member_choice">선택</th> 					
            				</tr>
            			</thead>
            			<tbody>
@@ -86,14 +85,12 @@
            	 			try {
 							list2 = bbsSearchDAO.getList_selectedMember(bbsID);
    							for(int i=0; i<list2.size(); i++){
-   								if(list2.get(i).getUserID().equals(userID) == false){
   					%>
   				
   						<tr id="notice_fix">
   							<td><%=list2.get(i).getUserName() %></td>
   							<td><%=list2.get(i).getUserLevel() %></td>		
   							<td><%=list2.get(i).getUserID() %></td>           
-							<td><%=list2.get(i).getUserType() %></td>
   							<td>
   							<%
   								out.println("<form method='get'>");
@@ -104,7 +101,6 @@
   						</tr>
   								
 					<%
-   								}
 							}
    				
    							String query = "SELECT * FROM search WHERE searchType='member' AND userID = ? ORDER BY searchNo DESC LIMIT 1;";
@@ -116,14 +112,12 @@
 	            				BbsDAO_join bbs = new BbsDAO_join();
 								list = bbsSearchDAO.getList_Member(bbsID, rs.getString(4), bbs.getNext(bbsID));
 	           					for(int i=0; i<list.size(); i++){
-	           						if(list.get(i).getUserID().equals("admin") == false && list.get(i).getUserID().equals(userID) == false){
 	           		%>
            				<tr>
            					<td><%=list.get(i).getUserName() %></td>
            					<td><%=list.get(i).getUserLevel() %></td>
-           					<td><%=list.get(i).getUserID() %></td>           
-							<td><%=list.get(i).getUserType() %></td>
-           					<td>
+           					<td><%=list.get(i).getUserID() %></td> 
+           					<td>          
            					<% 
            						if(list.get(i).getUserFirst() != 1) {	// user_join00`s isPart
             						out.println("<form method='get'>");
@@ -131,17 +125,15 @@
             						out.println("</form>");
             					}
             				%>
-           					</td>	
+            				</td>
            				</tr>   				
 				<%
-           						}
 							}
                 		}
             		}catch (SQLException ex) {
                 		out.println(ex.getMessage());
                		 	ex.printStackTrace();
             		} finally {
-                		// 6. 사용한 Statement 종료
                 		if (rs != null)
                     		try {
                        		 	rs.close();
@@ -152,7 +144,6 @@
                         		stmt.close();
                     		} catch (SQLException ex) {
                     		}
-                		// 7. 커넥션 종료
                 		if (conn != null)
                     		try {
                         		conn.close();

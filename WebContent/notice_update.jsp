@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 글 수정 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
 <%@ page import = "bbs.Bbs" %>
 <%@ page import = "bbs.BbsDAO" %> 
@@ -16,6 +18,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" type="text/css" href="frame.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script>
+	$(function() {
+   	 	$( "#bbs_joinDate" ).datepicker({
+   	 	dateFormat: "yy-mm-dd"
+   	 	});
+   	 })
+   	 </script>
     <title>어쩌다리그</title>
 </head>
 
@@ -80,7 +92,6 @@
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
 		
-		<!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">공지게시판 </div>
 
@@ -162,10 +173,10 @@
             						<div class="join_input">
             							* 모임 공지만<br>
             							모임 일시: 
-	            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50">
+	            						<input type="date" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50" value="<%=bbs.getBbsJoindate() %>">
 	            						<br>
 	            						모임 장소:
-	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
+	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50" value=<%=bbs.getBbsJoinplace() %>>
             						</div>
             					</div>
             					</td>

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -8,28 +9,23 @@
 <jsp:setProperty name="user" property="userNewPassword"/>
 <jsp:setProperty name="user" property="userRePassword"/>
 <jsp:setProperty name="user" property="userLevel"/>
-<jsp:setProperty name="user" property="userType"/>
 <jsp:setProperty name="user" property="userDescription"/>
+<jsp:setProperty name="user" property="userEmail"/>
 
 <%
     String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
+	
+	/* 로그인 안 된 사람은 이 페이지에 접근할 수 없음 */
 	if(userID == null){
         PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인 후 이용가능합니다.')");
 		script.println("location.replace('login.jsp')");
 		script.println("</script>");
-	} //로그인 된 사람은 회원가입 페이지에 접근할 수 없음
-	else if(userID.equals("admin") == true){
-   		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('관리자는 접근 불가.')");
-		script.println("history.back()");
-		script.println("</script>");
-   	}
+	}
 	
     UserDAO userDAO = new UserDAO();
 	int result = -1;
@@ -42,11 +38,11 @@
 	    script.println("</script>");
 	}
 	else{
-		if(user.getUserNewPassword() == null)		// 비밀번호 변경 x	-> 부수, 전형
-			result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), user.getUserLevel(), user.getUserType(), user.getUserDescription());
+		if(user.getUserNewPassword() == null) // 비밀번호 변경 x	-> 부수, 전형
+			result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());
 
-		else{	// 비밀번호 변경할 경우
-			if(userDAO.check_pw_limit(user.getUserNewPassword()) == -1){		// 비밀번호 제한 검사
+		else{// 비밀번호 변경할 경우
+			if(userDAO.check_pw_limit(user.getUserNewPassword()) == -1){// 비밀번호 제한 검사
 		    	PrintWriter script = response.getWriter();
 			    script.println("<script>");
 			    script.println("alert('비밀번호는 8~15자리 영소문자+숫자로만 설정해주세요.')");
@@ -61,7 +57,7 @@
 		       	script.println("</script>");
 			}
 			else
-				result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserNewPassword()), user.getUserLevel(), user.getUserType(), user.getUserDescription());
+				result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserNewPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());
 		}
 		
 		if(result == 1){

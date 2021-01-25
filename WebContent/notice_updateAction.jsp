@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="bbs.BbsDAO" %>
 <%@ page import="bbs.Bbs" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -65,29 +66,10 @@
 					script.println("history.back()");
 					script.println("</script>");
 				} else{
-					if(bbsComplete == 1 && request.getParameter("bbsType").equals("모임공지") == true){
-						int createResult = bbsDAO.createResult(bbsID, request.getParameter("bbsTitle"), userID);
-						if(createResult == -1){
-							PrintWriter script = response.getWriter();
-							script.println("<script>");
-							script.println("alert('결과게시판이 생성에 실패하였습니다.')");
-							script.println("location.href='notice.jsp'");
-							script.println("</script>");
-						}
-						else{
-							PrintWriter script = response.getWriter();
-							script.println("<script>");
-							script.println("alert('결과게시판이 생성되었습니다. 해당 모임의 결과를 작성해주세요.')");
-							script.println("location.href='result_update.jsp?bbsID="+bbsID+"'");
-							script.println("</script>");
-						}
-					}
-					else{
-						PrintWriter script = response.getWriter();
-						script.println("<script>");
-						script.println("location.href='notice.jsp'");
-						script.println("</script>");
-					}
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("location.href='notice.jsp'");
+					script.println("</script>");
 				}
 			}
 		}

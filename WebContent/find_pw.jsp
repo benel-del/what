@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 비밀번호 찾기 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
     
 <!DOCTYPE html>
@@ -21,7 +23,8 @@
     <div id="wrapper">
         <br>
         <header>
-        	<%
+        <%
+        	/* 이미 로그인된 사람은 비번 찾기를 할 수 없음 */
         	if(userID != null){
         		PrintWriter script=response.getWriter();
 				script.println("<script>");
@@ -29,7 +32,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			}
-			%>
+		%>
             <!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="login.jsp">로그인</a>

@@ -24,7 +24,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
                 |
-                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
+                <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
            </div>
 		<% 
            	}

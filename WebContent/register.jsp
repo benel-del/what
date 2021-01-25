@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 회원가입 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 
 <!DOCTYPE html>
@@ -71,14 +73,13 @@
 				<input type="text" placeholder="이름 입력" name="userName" maxlength="20">
 				<br>
 				<label class="register_label">실명을 권장합니다. 한글만 가능합니다.</label>
-				<input type="text" placeholder="이메일입력" name="userEmail" maxlength="50">
-
-				<br><br>
+				<input type="email" placeholder="이메일 입력" name="userEmail" maxlength="50">
+				<br>
+				<br>
 				<div class="register_gender-btn" data-toggle="buttons">
 					<input type="radio" name="userGender" autocomplete="off" value="남자" checked><label>남자</label> 
 					<input type="radio" name="userGender" autocomplete="off" value="여자" ><label>여자</label>
 				</div>
-				
 				<br>
 					<select name="userLevel">
 						<option value='' selected>-- 부수 --</option>
@@ -93,16 +94,6 @@
   						<option value='5'>5</option>
   						<option value='6'>6</option>
   						<option value='7'>7</option>
-					</select>
-				<br><br>
-					<select name="userType">
-						<option value='' selected>-- 전형 --</option>
-	  					<option value='오른손잡이 / 드라이브 전형'>오른손잡이 / 드라이브 전형</option>
-	  					<option value='왼손잡이 / 드라이브 전형'>왼손잡이 / 드라이브 전형</option>
-	  					<option value='오른손잡이 / 스트로크 전형'>오른손잡이 / 스트로크 전형</option>
-	  					<option value='왼손잡이 / 스트로크 전형'>왼손잡이 / 스트로크 전형</option>
-	  					<option value='오른손잡이 / 수비수 전형'>오른손잡이 / 수비수 전형</option>
-	  					<option value='왼손잡이 / 수비수 전형'>왼손잡이 / 수비수 전형</option>
 					</select>
 				<br><br>
 									

@@ -384,7 +384,6 @@ public class BbsSearchDAO {
 				user.setUserName(rs.getString(3));
 				user.setUserGender(rs.getString(4));
 				user.setUserLevel(rs.getString(5));
-				user.setUserType(rs.getString(6));
 				user.setUserFirst(rs.getInt(9));
 				user.setUserSecond(rs.getInt(10));
 				user.setUserThird(rs.getInt(11));	
@@ -411,7 +410,8 @@ public class BbsSearchDAO {
 		return count;
 	}
 	
-	/* member */
+	/* join
+	 * 참가 신청 - 참가자로 등록할 member 명단을 list로 받아옴(join.jsp) */
 	public ArrayList<User> getList_selectedMember(int bbsID){
 		String SQL = "SELECT user.* FROM user, (SELECT ujoin.* FROM user_join" + bbsID + " AS ujoin WHERE ujoin.team_num = ?) AS ujoin WHERE  user.userID = ujoin.userID ORDER BY user.userName ASC, user.userID ASC;";
 		ArrayList<User> list = new ArrayList<User>();
@@ -426,7 +426,6 @@ public class BbsSearchDAO {
 				user.setUserName(rs.getString(3));
 				user.setUserGender(rs.getString(4));
 				user.setUserLevel(rs.getString(5));
-				user.setUserType(rs.getString(6));
 				list.add(user);
 			}
 		} catch(Exception e) {
@@ -449,9 +448,6 @@ public class BbsSearchDAO {
 				user.setUserName(rs.getString(3));
 				user.setUserGender(rs.getString(4));
 				user.setUserLevel(rs.getString(5));
-				user.setUserType(rs.getString(6));
-				user.setUserFirst(rs.getInt(15));	// user_join00`s isPart
-				user.setUserSecond(rs.getInt(16));	// user_join00`s team_num
 				list.add(user);
 			}
 		} catch(Exception e) {
@@ -485,15 +481,14 @@ public class BbsSearchDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				User user = new User();
-				user.setUserRank(rs.getInt(8));
+				user.setUserRank(rs.getInt(7));
 				user.setUserID(rs.getString(1));
 				user.setUserName(rs.getString(3));
 				user.setUserGender(rs.getString(4));
 				user.setUserLevel(rs.getString(5));
-				user.setUserType(rs.getString(6));
-				user.setUserFirst(rs.getInt(9));
-				user.setUserSecond(rs.getInt(10));
-				user.setUserThird(rs.getInt(11));	
+				user.setUserFirst(rs.getInt(8));
+				user.setUserSecond(rs.getInt(9));
+				user.setUserThird(rs.getInt(10));	
 				list.add(user);
 			}
 		} catch(Exception e) {

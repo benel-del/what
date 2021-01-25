@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -59,7 +59,7 @@
         	<div id="service">
                <a class="link" href="logoutAction.jsp">로그아웃 </a>
                | 
-               <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
+               <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
         	</div>
 		<% 
            	}
