@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
-<%@ page import = "user.User" %>
+<%@ page import="user.User" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -15,9 +15,8 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 	String userID = null;
-
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
