@@ -226,7 +226,7 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	/* index.jsp에서 가장 최근 출력할 모임공지 정보 */
+	/* index.jsp에서 noticeInfo(모임공지) 출력 */
 	public Bbs noticeInfo_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지' ORDER BY bbsJoindate ASC LIMIT 1;";
 		try {
@@ -236,15 +236,9 @@ public class BbsDAO {
 				Bbs bbs = new Bbs();
 				bbs.setBbsID(rs.getInt(1));
 				bbs.setBbsTitle(rs.getString(2));
-				bbs.setUserID(rs.getString(3));
-				bbs.setBbsDate(rs.getString(4));
 				bbs.setBbsContent(rs.getString(5));
-				bbs.setBbsAvailable(rs.getInt(6));	
-				bbs.setBbsType(rs.getString(7));
-				bbs.setBbsFix(rs.getInt(8));
 				bbs.setBbsJoindate(rs.getString(9));
 				bbs.setBbsJoinplace(rs.getString(10));
-				bbs.setBbsComplete(rs.getInt(11));
 				return bbs;
 			}
 		} catch(Exception e) {
@@ -252,6 +246,46 @@ public class BbsDAO {
 		}
 		return null;
 	}
+	
+	/* index.jsp에서 notice(모임공지) 리스트 출력 */
+	public ArrayList<Bbs> notice1_index(){
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsType='모임공지' ORDER BY bbsID DESC LIMIT 5;";
+		ArrayList<Bbs> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/* index.jsp에서 notice(일반공지) 리스트 출력 */
+	public ArrayList<Bbs> notice2_index(){
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsType='일반공지' ORDER BY bbsID DESC LIMIT 5;";
+		ArrayList<Bbs> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+
 	
 	/* notice.jsp에서 출력할 게시물 목록에 대한 정보 */
 	public ArrayList<Bbs> getList(int pageNumber){

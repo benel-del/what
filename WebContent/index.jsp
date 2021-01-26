@@ -15,6 +15,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="frame.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$('#notice1_table').show();
+		$('#notice2_table').hide();
+		
+		$('#notice1').click(function(){
+			$('#notice2_table').hide();
+			$('#notice1_table').show();
+		});
+		$('#notice2').click(function(){
+			$('#notice1_table').hide();
+			$('#notice2_table').show();
+		});
+	});
+	</script>
     <title>어쩌다리그</title>
 </head>
 
@@ -109,7 +125,39 @@
                 </div>
 
                 <div id="index_notice">
-                    <div class="index_title">공지사항</div>   	
+                    <div class="index_title"><a class="link" href="notice.jsp">공지사항</a></div>   	
+                		<input type="button" value="모임공지" id="notice1">
+                		<input type="button" value="일반공지" id="notice2">    		
+                		    		
+                		<table id="notice1_table"> 
+              				<tbody>
+              				<%
+        						ArrayList<Bbs> list_notice1 = bbsDAO.notice1_index();
+        						for(int i=0; i<list_notice1.size(); i++){
+ 	 	      				%>
+ 	 	      					<tr>
+            						<td><a href="notice_view.jsp?bbsID=<%=list_notice1.get(i).getBbsID()%>"><%=list_notice1.get(i).getBbsTitle() %></a></td>
+            					</tr>
+            				<%
+        						}
+            				%>
+              				</tbody>
+              			</table>
+              			
+              			<table id="notice2_table"> 
+              				<tbody>
+              				<%
+        						ArrayList<Bbs> list_notice2 = bbsDAO.notice2_index();
+        						for(int i=0; i<list_notice2.size(); i++){
+ 	 	      				%>
+ 	 	      					<tr>
+            						<td><a href="notice_view.jsp?bbsID=<%=list_notice2.get(i).getBbsID()%>"><%=list_notice2.get(i).getBbsTitle() %></a></td>
+            					</tr>
+            				<%
+        						}
+            				%>
+              				</tbody>
+              			</table>
                 </div>
 
                 <div id="index_rank">
