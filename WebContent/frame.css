@@ -168,7 +168,7 @@ section
 #index_top
 {
 	width: 100%;
-	height: 500px;
+	height: 650px;
 	margin: 5px 0px;
 }
 
@@ -216,6 +216,7 @@ section
 	display:inline-block;
 	cursor:pointer;
 }
+    
     #index_notice-btn a:link {
         background-color: #0F4C81;
         color: white;
@@ -229,7 +230,8 @@ section
         color: #92A8D1;
     }
     
-.index_notice_board{
+.index_notice_board
+{
 	margin:5px auto;
 	text-align:center;
 	width:100%;
@@ -237,23 +239,28 @@ section
 	padding:10px 10px;
 }
 
-.index_notice_board thead{
+.index_notice_board thead
+{
 	background-color: #0F4C81;
 	text-align: center;
 	color: white;
 	height:20px;
 }
-.index_notice_board td{
+.index_notice_board td
+{
 	height:15px;
 }
-.index_notice_subtitle{
+
+.index_notice_subtitle
+{
 	text-align:center;
 	color:white;
 	background-color: #0F4C81;
 	width:10%;
 }
 
-#notice_more{
+#notice_more
+{
 	background-color:#0F4C81;
 	color:white;
 	width:100%;
@@ -261,21 +268,26 @@ section
 	height:20px;
 }
 
-#index_notice{
-	width:27%;
-	height:100%;
-	float:left;
-	margin:0px 0px;
+/* index 공지사항 */
+#index_notice
+{
+	width:34%;
+	height:30%;
+	float:right;
+	margin:0px 0px 3px 0px;
 	padding:20px 20px;
 	border-radius:0.4em;
 	border:1px solid #0F4C81;
 }
-#index_rank{
-	width:35%;
-	height:100%;
-	float:left;
+
+/* index 랭킹 */
+#index_rank
+  {
+	width:34%;
+	height:69%;
+	float:right;
 	padding:20px 20px;
-	margin:0px 5px;
+	margin:3px 0px 0px 0px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;	
 }
@@ -292,13 +304,16 @@ section
 	height:30px;
 }
 
-#index_bottom{
+#index_bottom
+{
 	width:100%;
-	height:500px;
+	height:300px;
 	margin: 5px 0px;
 }
-#index_shop{
-	width:35%;
+
+#index_shop
+{
+	width:30%;
 	height:100%;
 	float:left;
 	margin:0px 5px;
@@ -306,26 +321,34 @@ section
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
-	.index_shop img{
-		margin:10px 10px;
-		height:32%;
-		width:85%;
-	}
-#index_youtube{
-	width:62.5%;
+
+.index_shop img
+{
+	margin:10px 10px;
+	height:70%;
+	width:85%;
+}
+
+#index_youtube
+{
+	width:69%;
 	height:100%;
-	float:left;
+	float:right;
 	margin: 0px 0px;
 	padding:20px 20px;
 	border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
-	#index_youtube iframe{
-		margin: 2px 10px;
-		height: 40%;
-		width:93%;
-	}	
-#index_TBAL-avi{
+
+#index_youtube iframe
+{
+	margin: 2px 10px;
+	height: 80%;
+	width:95%;
+}	
+
+#index_TBAL-avi
+{
 	height:85%;
 	width:47%;
 	float:left;
@@ -333,7 +356,9 @@ section
 	padding:20px 20px;
 	border:1px dashed #0F4C81;
 }
-#index_FROM-avi {
+
+#index_FROM-avi 
+{
     height: 85%;
     width: 47%;
     float: right;
@@ -342,7 +367,9 @@ section
     border: 1px dashed #0F4C81;
 }
 
-/* LOGIN */
+/* *********************************************************
+** login.jsp
+************************************************************/
 .login_page{
 	margin:25px auto;
 	width:95%;
