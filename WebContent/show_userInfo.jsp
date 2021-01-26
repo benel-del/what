@@ -98,11 +98,6 @@
        				<th class="table_th2"><%=user.getUserLevel() %></th>
        				</tr>
 
-       				<tr class="myinfo_userType">
-       				<th id="myinfo_title" class="table_th1">전형</th>
-       				<th class="table_th2"><%=user.getUserType() %></th>
-       				</tr>
-
        				<tr class="myinfo_userDescription">
        				<th id="myinfo_title" class="table_th1">내 소개</th>
        				<th id="userDescription">

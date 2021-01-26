@@ -118,7 +118,6 @@
             					<th class="board_thead" id="team_userGender">성별</th>
             					<th class="board_thead" id="team_userLevel">부수</th>
             					<th class="board_thead" id="bbs_name">아이디</th>
-            					<th class="board_thead" id="team_userType">전형</th>
             					<th class="board_thead" id="team_userDescription">소개</th>
             				</tr>
             			</thead>
@@ -151,9 +150,6 @@
             					<td><%=user.getUserGender() %></td>
 								<td><%=user.getUserLevel() %></td>
             					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>           
-            					<td><%if(user.getUserType()!=null){
-            						out.println(user.getUserType());
-            					} else{ out.println("");}%></td>
             					<td><%if(user.getUserDescription()!=null){
             						out.println(user.getUserDescription());
             					} else{ out.println("");}%></td>
@@ -175,10 +171,7 @@
 		            					<td><%=user.getUserName() %></td>
 		            					<td><%=user.getUserGender() %></td>
 										<td><%=user.getUserLevel() %></td>
-		            					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>           
-		            					<td><%if(user.getUserType()!=null){
-            									out.println(user.getUserType());
-            								} else{ out.println("");}%></td>
+		            					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>
             							<td><%if(user.getUserDescription()!=null){
             									out.println(user.getUserDescription());
             								} else{ out.println("");}%></td>
