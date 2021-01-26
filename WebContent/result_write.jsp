@@ -26,7 +26,7 @@
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('관리자만 접근 가능합니다.')");
-		script.println("history.back()");
+		script.println("location.href='index.jsp");
 		script.println("</script>");
 	}
 	int bbsID =0;

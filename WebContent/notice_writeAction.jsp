@@ -46,6 +46,13 @@
 					script.println("history.back()");
 					script.println("</script>");
 				}
+				if(bbsDAO.check(bbs.getBbsJoindate()) == -1){
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('모임일자는 숫자와 '-'기호만 가능합니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+				}
 				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix(), bbs.getBbsJoindate(), bbs.getBbsJoinplace());
 				if(result == -1){
 					PrintWriter script = response.getWriter();

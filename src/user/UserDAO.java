@@ -401,7 +401,7 @@ public class UserDAO {
 				rs = pstmt.executeQuery();
 				while(rs.next()) {
 					SQL = "UPDATE user SET userRank = ? WHERE userID = ?";
-					if(!isFir && (pre_fir == rs.getInt(9) && pre_sec == rs.getInt(10) && pre_thi == rs.getInt(11))) {
+					if(!isFir && (pre_fir == rs.getInt(8) && pre_sec == rs.getInt(9) && pre_thi == rs.getInt(10))) {
 						same ++;
 					}
 					else {
@@ -418,9 +418,9 @@ public class UserDAO {
 					}
 					if(isFir)
 						isFir = false;
-					pre_fir = rs.getInt(9);
-					pre_sec = rs.getInt(10);
-					pre_thi = rs.getInt(11);
+					pre_fir = rs.getInt(8);
+					pre_sec = rs.getInt(9);
+					pre_thi = rs.getInt(10);
 				}
 			} catch(Exception e) {
 				e.printStackTrace();

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class BbsDAO {
 	private Connection conn;
@@ -103,12 +104,21 @@ public class BbsDAO {
 			pstmt.setString(9, bbsJoindate);
 			pstmt.setString(10, bbsJoinplace);
 			pstmt.setInt(11, 0);
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			return 0;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return -1; //데이터베이스 오류
-	}	
+	}
+	
+	/* 게시글 작성 - 모임 일자 검사 */
+	public int check(String str) {
+		if(Pattern.matches("[가-힣a-zA-Z]+", str))
+			return -1;
+		else
+			return 0;
+	}
 	
  	/* 게시글 수정 */
 	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace, int bbsComplete) {
@@ -173,7 +183,7 @@ public class BbsDAO {
 	
 	/* 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
 	public boolean nextPage(int pageNumber) {
-		String SQL="SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
+		String SQL="SELECT * FROM BBS WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext() - (pageNumber - 1) * 12);
@@ -190,7 +200,7 @@ public class BbsDAO {
 	
 	/* n회 어쩌다 모임 전용 참가신청 db 생성 */
 	public int createJoinDB(int bbsID) {
-		String SQL="CREATE TABLE bbs_join"+bbsID+"(joinID INT, userID VARCHAR(20), userPhone VARCHAR(20), joinPassword VARCHAR(10), joinMember VARCHAR(200), joinContent VARCHAR(2048), moneyCheck INT, PRIMARY KEY(joinID));";
+		String SQL="CREATE TABLE bbs_join"+bbsID+"(joinID INT, userID VARCHAR(20) NOT NULL, userPhone VARCHAR(20) NOT NULL, joinPassword VARCHAR(10) NOT NULL, joinMember VARCHAR(200), joinContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, PRIMARY KEY(joinID), FOREIGN KEY(userID) REFERENCES user(userID);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();
@@ -202,7 +212,7 @@ public class BbsDAO {
 	
 	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
 	public int createUserDB(int bbsID) {
-		String SQL="CREATE TABLE user_join"+bbsID+"(userID VARCHAR(20), isPart INT default 0, team_num INT default 0, FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE);";
+		String SQL="CREATE TABLE user_join"+bbsID+"(userID VARCHAR(20) NOT NULL, isPart INT default 0 NOT NULL, team_num INT default 0, FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.executeUpdate();
