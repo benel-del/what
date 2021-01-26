@@ -103,7 +103,7 @@
             						<div class="join_input">
             							* 모임 공지만<br>
             							모임 일시: 
-	            						<input type="text" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate">
+	            						<input type="date" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate">
 	            						<br>
 	            						모임 장소:
 	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
