@@ -36,7 +36,7 @@
 	}
 	Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
 	UserDAO userDAO = new UserDAO();
-	ArrayList<User> list_user = userDAO.getUserRank_index();
+	ArrayList<User> list_user = userDAO.getUserlist(1);
 	%>
 	
     <div id="wrapper">

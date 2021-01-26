@@ -46,7 +46,7 @@
           		script.println("history.back()");
            		script.println("</script>");
      	   }
-    		ArrayList<User> list = userDAO.getRank(pageNumber);
+    		ArrayList<User> list = userDAO.getUserlist(pageNumber);
     	%>
     	
             <div class="board_container">

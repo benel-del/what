@@ -88,7 +88,7 @@
     			BbsDAO_join bbsDAO_join = new BbsDAO_join();
     			ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
     			UserDAO userDAO = new UserDAO();
-    			ArrayList<User> list_user = userDAO.getUserRank_index();
+    			ArrayList<User> list_user = userDAO.getUserlist(1);
     		%>
 
             <div class="write_container">
