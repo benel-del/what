@@ -112,7 +112,7 @@
 	            						<div class="bbsFix">
 			            				<%
 			            					Class.forName("com.mysql.jdbc.Driver"); 
-			            					String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
+			            					String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
 			            					String dbID = "root";
 			            					String dbPassword = "whatpassword0706!";
 			            			   	 	Connection conn = null;

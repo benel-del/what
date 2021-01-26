@@ -76,7 +76,7 @@
     					ArrayList<User> list2;	// 선택 리스트
     		
     					Class.forName("com.mysql.jdbc.Driver"); 
-        				String dbURL = "jdbc:mysql://localhost:3307/what?serverTimezone=Asia/Seoul&useSSL=false";
+        				String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";
 						String dbID = "root";
 						String dbPassword = "whatpassword0706!";
            			 	Connection conn = null;
