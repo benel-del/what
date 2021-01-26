@@ -2,7 +2,7 @@ package user_join;
 
 public class User_join {
 	int bbsID;
-	int userID;
+	String userID;
 	int isPart;
 	int team_num;
 	
@@ -12,10 +12,10 @@ public class User_join {
 	public void setBbsID(int bbsID) {
 		this.bbsID = bbsID;
 	}
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 	public int getIsPart() {
