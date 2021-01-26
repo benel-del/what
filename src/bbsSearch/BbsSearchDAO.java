@@ -11,6 +11,7 @@ import bbs_join.BbsDAO_join;
 import bbs_result.Bbs_result;
 import bbs_review.Bbs_review;
 import user.User;
+import user_join.User_join;
 
 public class BbsSearchDAO {
 	private Connection conn;
@@ -434,20 +435,18 @@ public class BbsSearchDAO {
 		return list;
 	}
 	
-	public ArrayList<User> getList_Member(int bbsID, String searchWord, int team_num){
-		String SQL = "SELECT user.*, ujoin.isPart, ujoin.team_num FROM user, user_join" + bbsID + " AS ujoin WHERE user.userID = ujoin.userID AND user.userName LIKE ? AND NOT ujoin.team_num = ? ORDER BY user.userName ASC, user.userID ASC;";
-		ArrayList<User> list = new ArrayList<User>();
+	public ArrayList<User_join> getList_Member(int bbsID, String searchWord, int team_num){
+		String SQL = "SELECT ujoin.userID, ujoin.isPart FROM user, user_join" + bbsID + " AS ujoin WHERE user.userID = ujoin.userID AND user.userName LIKE ? AND NOT ujoin.team_num = ? ORDER BY user.userName ASC, user.userID ASC;";
+		ArrayList<User_join> list = new ArrayList<User_join>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  "%"+searchWord+"%");
 			pstmt.setInt(2,  team_num);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				User user = new User();
+				User_join user = new User_join();
 				user.setUserID(rs.getString(1));
-				user.setUserName(rs.getString(3));
-				user.setUserGender(rs.getString(4));
-				user.setUserLevel(rs.getString(5));
+				user.setIsPart(rs.getInt(15));
 				list.add(user);
 			}
 		} catch(Exception e) {

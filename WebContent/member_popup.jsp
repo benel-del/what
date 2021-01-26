@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
+<%@ page import="user_join.User_join" %>
 <%@ page import="bbsSearch.BbsSearch" %>
 <%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="bbs_join.BbsDAO_join" %>
@@ -71,7 +72,7 @@
            			<tbody>
     				<%
     					BbsSearchDAO bbsSearchDAO = new BbsSearchDAO();
-    					ArrayList<User> list;	// 검색 리스트
+    					ArrayList<User_join> list;	// 검색 리스트
     					ArrayList<User> list2;	// 선택 리스트
     		
     					Class.forName("com.mysql.jdbc.Driver"); 
@@ -79,6 +80,7 @@
 						String dbID = "root";
 						String dbPassword = "whatpassword0706!";
            			 	Connection conn = null;
+           			 	PreparedStatement pstmt;
           			  	Statement stmt = null;
             			ResultSet rs = null;
             
@@ -105,25 +107,31 @@
    				
    							String query = "SELECT * FROM search WHERE searchType='member' AND userID = ? ORDER BY searchNo DESC LIMIT 1;";
 	           				conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                			PreparedStatement pstmt=conn.prepareStatement(query);
+	           				pstmt=conn.prepareStatement(query);
                			 	pstmt.setString(1,  userID);
                 			rs = pstmt.executeQuery();
 	            			if (rs.next()) {
 	            				BbsDAO_join bbs = new BbsDAO_join();
 								list = bbsSearchDAO.getList_Member(bbsID, rs.getString(4), bbs.getNext(bbsID));
 	           					for(int i=0; i<list.size(); i++){
+	           						query = "SELECT * FROM user WHERE userID = ?;";
+	           						pstmt=conn.prepareStatement(query);
+	                   			 	pstmt.setString(1,  list.get(i).getUserID());
+	                   			 	rs = pstmt.executeQuery();
+	                   			 	if (rs.next()) {
 	           		%>
            				<tr>
-           					<td><%=list.get(i).getUserName() %></td>
-           					<td><%=list.get(i).getUserLevel() %></td>
-           					<td><%=list.get(i).getUserID() %></td> 
+           					<td><%=rs.getString(3) %></td>
+           					<td><%=rs.getString(5) %></td>
+           					<td><%=rs.getString(1) %></td> 
            					<td>          
            					<% 
-           						if(list.get(i).getUserFirst() != 1) {	// user_join00`s isPart
-            						out.println("<form method='get'>");
-            						out.println("<input type=button value=\"선택\" id=\"select" + list.get(i).getUserID() + " class=\"member_choice-btn\" onclick=\"location.replace('memberChoiceAction.jsp?bbsID=" + bbsID + "&reset=" + reset + "&type=1&id=" + list.get(i).getUserID() + "')\">");
-            						out.println("</form>");
-            					}
+	           						if(list.get(i).getIsPart() != 1) {	// user_join00`s isPart
+	            						out.println("<form method='get'>");
+	            						out.println("<input type=button value=\"선택\" id=\"select" + list.get(i).getUserID() + " class=\"member_choice-btn\" onclick=\"location.replace('memberChoiceAction.jsp?bbsID=" + bbsID + "&reset=" + reset + "&type=1&id=" + list.get(i).getUserID() + "')\">");
+	            						out.println("</form>");
+	            					}
+                   			 	}
             				%>
             				</td>
            				</tr>   				
