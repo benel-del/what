@@ -1,0 +1,100 @@
+create database what;
+
+use what;
+
+create table user(
+	userID varchar(20) not null,
+	userPassword varchar(100) not null,
+	userName varchar(20) not null,
+	userGender varchar(20) not null,
+	userLevel varchar(20) not null,
+	userDescription varchar(200),
+	userRank int default 0,
+	userFirst int default 0,
+	userSecond int default 0,
+	userThird int default 0,
+	userEmail varchar(30),
+	PRIMARY KEY(userID)
+);
+
+insert into user values("admin", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "admin", "mi", "-", "", 0, 0, 0, 0, "Admin@do.c");
+
+create table bbs(
+	bbsID int,
+	bbsTitle varchar(50) not null,
+	userID varchar(20) not null,
+	bbsDate datetime not null,
+	bbsContent varchar(2048) not null,
+	bbsAvailable int default 1 not null,
+	bbsType varchar(20) not null,
+	bbsFix int not null,
+	bbsJoindate varchar(50),
+	bbsJoinplace varchar(50),
+	bbsComplete int default 0,
+	PRIMARY KEY(bbsID),
+	FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
+create table user_join(
+	userID varchar(20) not null,
+	isPart int default 0 not null,
+	team_num int default 0,
+	FOREIGN KEY(bbsID) REFERENCES bbs(bbsID),
+	FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
+create table bbs_join(
+	joinID int,
+	userID varchar(20) not null,
+	userPhone varchar(20) not null,
+	joinPassword varchar(10) not null,
+	joinMember varchar(200),
+	joinContent varchar(2048),
+	moneyCheck int default 0 not null,
+	PRIMARY KEY(joinID),
+	FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
+create table bbs_result(
+	bbsID int,
+	bbsTitle varchar(50) not null,
+	userID varchar(20) not null,
+	bbsDate datetime not null,
+	bbsContent varchar(2048) not null,
+	bbsAvailable int default 1 not null,
+	bbsFirst varchar(200),
+	bbsSecond varchar(200),
+	bbsThird varchar(200),
+	PRIMARY KEY(bbsID),
+	FOREIGN KEY(userID) REFERENCES user(userID),
+	FOREIGN KEY(bbsFirst) REFERENCES user(userID),
+	FOREIGN KEY(bbsSecond) REFERENCES user(userID),
+	FOREIGN KEY(bbsThird) REFERENCES user(userID)
+);
+
+create table bbs_review(
+	bbsID int,
+	bbsTitle varchar(50) not null,
+	userID varchar(20) not null,
+	bbsDate datetime not null,
+	bbsContent varchar(2048) not null,
+	bbsAvailable int default 1 not null,
+	fileName varchar(50),
+	fileName1 varchar(50),
+	fileName2 varchar(50),
+	fileName3 varchar(50),
+	PRIMARY KEY(bbsID),
+	FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
+create table search(
+	userID varchar(20) not null,
+	searchType varchar(20) not null,
+	searchOption varchar(20),
+	searchWord varchar(50) not null,
+	searchNo int,
+	PRIMARY KEY(searchNo),
+	FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
+String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";
