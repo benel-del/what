@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 메인 페이지  -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="bbs.Bbs" %>
@@ -30,14 +32,14 @@
         <%@ include file="header.jsp" %>
         
         <%
-       		UserDAO userDAO = new UserDAO();
+       		/*UserDAO userDAO = new UserDAO();
 			if(userDAO.setRank() == -1){
       	 		PrintWriter script = response.getWriter();
      			script.println("<script>");
     			script.println("alert('랭킹게시판 업데이트에 실패하였습니다.')");
       			script.println("history.back()");
        			script.println("</script>");
- 	  		}
+ 	  		}*/
        	%>
 
         <!-- menu -->
@@ -45,83 +47,69 @@
 
         <section>
             <div id="index_top">
-                <div id="index_notice">
+                <div id="index_noticeInfo">
                     <!--모임공지-->
                     <div id="index_notice-inform">
-                        <div class="index_title"><a class="link" href = "notice_view.jsp">모임 공지</a></div>
+                        <div class="index_title">모임 공지</div>
                         <%
                         	BbsDAO bbsDAO = new BbsDAO();
-        					ArrayList<Bbs> list_notice = bbsDAO.getList_index();
-        					int i;	
- 	 	      				for(i=list_notice.size()-1; i>=0; i--){
- 	 	      					if(list_notice.get(i).getBbsComplete() == 0 && list_notice.get(i).getBbsType().equals("모임공지") == true && list_notice.get(i).getBbsAvailable() == 1){
- 	 	      						break;
- 	 	      					}
- 	 	      				}
- 	 	      				if(i >= 0){
+        					Bbs noticeInfo = bbsDAO.noticeInfo_index();
+        					int bbsJoin=0;
+        					if(noticeInfo != null){
+        						bbsJoin = noticeInfo.getBbsID();
  	 	      			%>
                         <table class="index_notice_board"> 
               				<thead>
             					<tr>
-            						<th class="index_notice_th" colspan="2"><%=list_notice.get(i).getBbsTitle() %></th>
+            						<th class="index_notice_th" colspan="2"><%=noticeInfo.getBbsTitle() %></th>
             					</tr>
             				</thead>          			
             				<tbody>
             					<tr>
             						<td class="index_notice_subtitle">일시</td>
-            						<td class="index_notice_content"><%=list_notice.get(i).getBbsJoindate() %></td>
+            						<td class="index_notice_content"><%=noticeInfo.getBbsJoindate() %></td>
             					</tr>
             					<tr>
             						<td class="index_notice_subtitle">장소</td>
-									<td class="index_notice_content"><%=list_notice.get(i).getBbsJoinplace() %></td>
+									<td class="index_notice_content"><%=noticeInfo.getBbsJoinplace() %></td>
 						    	</tr>
 						    	<tr>
 						    		<td class="index_notice_subtitle">요강</td>
 						    		<td class="index_notice_content">
 						    		<%
-						    			if(list_notice.get(i).getBbsContent().length() > 55){out.println(list_notice.get(i).getBbsContent().substring(0,55).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>")); 
+						    			if(noticeInfo.getBbsContent().length() > 55){out.println(noticeInfo.getBbsContent().substring(0,55).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>")); 
 						    		%>
 						    		...
 						    		<%
-						    			} else{out.println(list_notice.get(i).getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));} 
+						    			} else{out.println(noticeInfo.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));} 
 						    		%>
 						    		</td>
 						    	</tr>
 						   	 	<tr>
-						    		<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=list_notice.get(i).getBbsID() %>">요강 자세히 보기 </a></td>
+						    		<td colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=noticeInfo.getBbsID() %>">요강 자세히 보기 </a></td>
 						    	</tr>		          					   				
             				</tbody>
-            			</table>  
+            			</table>            			
             			<%
             				} else{ out.println("진행중인 모임이 없습니다.");}
             			%> 
-                    </div>
-					
-					<% 
-						ArrayList<Bbs> list_join = bbsDAO.getList_index();
-						int bbsJoin = 0;
-        				for(Bbs bbs : list_join){
-        					if(bbs.getBbsType().equals("모임공지") == true && bbs.getBbsComplete() == 0){
-        						bbsJoin = bbs.getBbsID();
-        					}
-        				}
-        			%>
-        			
+                    </div> 
+                    
                     <div id="index_notice-btn">
-                        <!--참가신청 버튼-->
-                        <div class="index_notice-btn">
-                            <a href="join.jsp?bbsID=<%=bbsJoin%>">참가신청하기</a>
-                        </div>
+                        	<!--참가신청 버튼-->
+                        	<div class="index_notice-btn">
+                           		<a href="join.jsp?bbsID=<%=bbsJoin%>">참가신청하기</a>
+                        	</div>
 
-                        <!--팀 매칭 버튼-->
-                        <div class="index_notice-btn">
-                            <a href="team.jsp">팀원찾기</a>
-                        </div>
-                    </div>
+                        	<!--팀 매칭 버튼-->
+                        	<div class="index_notice-btn">
+                            	<a href="team.jsp">팀원찾기</a>
+                        	</div>
+                    	</div>                
                 </div>
 
-                <div id="index_inform">
-                    <div class="index_title">홍보글</div>   	
+                <div id="index_notice">
+                    <div class="index_title">공지사항</div>   	
                 </div>
 
                 <div id="index_rank">
@@ -136,19 +124,19 @@
             			</thead>          			
             			<tbody>
             			<%
-    						userDAO = new UserDAO();
+    						/*userDAO = new UserDAO();
     						ArrayList<User> list = userDAO.getUserlist(1);
             				for(User user : list){
-            					if(user.getUserID().equals("admin") == false){
+            					if(user.getUserID().equals("admin") == false){*/
             			%>
             				<tr>
-            					<td><%if(user.getUserRank() == 0) out.print("-"); else out.print(user.getUserRank()); %></td>
-            					<td><%=user.getUserName() %></td>
-								<td><%=user.getUserLevel() %></td>
+            					<td><%//if(user.getUserRank() == 0) out.print("-"); else out.print(user.getUserRank()); %></td>
+            					<td><%//=user.getUserName() %></td>
+								<td><%//=user.getUserLevel() %></td>
             				</tr>   				
 						<%
-								}
-            				}
+								//}
+            				//}
             			%>
             			</tbody>
             			</table>     
@@ -171,16 +159,10 @@
                     <div class="index_title">탁구강좌 보러가기</div>
                     <div id="index_TBAL-avi">
                         <a class="link" href="https://www.youtube.com/playlist?list=PL8nQm58dOh1hD9mVtoeMI8Ni3pL94fUFH" target="_blank">▶ 윤홍균's 따라잡기</a>
-                        <br><br>
-                        <iframe src="https://www.youtube.com/embed/1NRnjmixGIg"></iframe>
-                        <iframe src="https://www.youtube.com/embed/GOc43m2ke5g"></iframe>
                     </div>
 
                     <div id="index_FROM-avi">
                         <a class="link" href="https://www.youtube.com/playlist?list=PL-XIrIGMCEwlnM-W34it_o8vIsS-qZZ5K" target="_blank">▶ HOW TO PINGPONG</a>
-                        <br><br>
-                        <iframe src="https://www.youtube.com/embed/HszbKMS46GI"></iframe>
-                        <iframe src="https://www.youtube.com/embed/xwkbNEzCeVU"></iframe>
                     </div>
                 </div>
             </div>

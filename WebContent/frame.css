@@ -1,66 +1,96 @@
-/* RESET_COMMON */
-*{
+/* *********************************************************
+** RESET_COMMON 
+************************************************************/
+*
+{
 	margin: 0;
 	padding : 0;
 	box-sizing: border-box;
 }
-ul{ /*앞에 동그라미같은거 없앰*/	
+
+ul
+{ /*앞에 동그라미같은거 없앰*/	
 	list-style: none;
 }
-a{ /*링크 밑줄 없앰*/
+
+a
+{ /*링크 밑줄 없앰*/
 	text-decoration:none;
 }
-#wrapper{
+
+#wrapper
+{
 	position:relative;
 	min-height:100%;
 	max-width: 1024px;
 	margin:0 auto;
 	padding-bottom:130px;
 }
-.link{
+
+.link
+{
     color: #0F4C81;
 }
-.link:link{ /*'link' 클래스에 연결된 상태일 때*/
+
+.link:link
+{ /*'link' 클래스에 연결된 상태일 때*/
 	background-color:none;
     color: #0F4C81;
 }
-.link:visited { /*'link' 클래스에 방문한 적이 있을 때*/
+
+.link:visited 
+{ /*'link' 클래스에 방문한 적이 있을 때*/
     background-color: none;
     color: #0F4C81;
 }
-.link:hover:not(.active) {/*'link' 클래스에 마우스 커서 올려놨을 때 */
+
+.link:hover:not(.active) 
+{/*'link' 클래스에 마우스 커서 올려놨을 때 */
     border-radius: 0.4em;
     color: #92A8D1;
 }
 
-/* HEADER */
-header{
+/* *********************************************************
+** HEADER
+************************************************************/
+header
+{
 	position:relative;
 	width:100%;
 }
-	header h1{
-		font-size:50px;
-		margin: 15px auto;
-	}
-#title{ /* 사이트 제목 */
+header h1
+{
+	font-size:50px;
+	margin: 15px auto;
+}
+
+#title
+{ /* 사이트 제목 */
 	position:relative;
 	text-align:center !important;
 	font-size:20px;
     color: #0F4C81;
 }
-    #title a:link {
-        background-color: none;
-        color: #0F4C81;
-    }
-    #title a:visited {
-        background-color: none;
-        color: #0F4C81;
-    }
-    #title a:hover:not(.active) {
-        background-color: none;
-        color: #0F4C81;
-    }
-#service{ /*로그인&회원가입 버튼*/
+    
+#title a:link {
+    background-color: none;
+    color: #0F4C81;
+}
+
+#title a:visited 
+{
+    background-color: none;
+    color: #0F4C81;
+}
+
+#title a:hover:not(.active) 
+{
+    background-color: none;
+    color: #0F4C81;
+}
+
+#service
+{/*로그인&회원가입 버튼*/
 	position:absolute;
 	right:0px;
 	margin:2px 2px;
@@ -69,8 +99,11 @@ header{
 	font-weight:600;
 }
 
-/* FOOTER */
-footer{
+/* *********************************************************
+** FOOTER
+************************************************************/
+footer
+{
 	width:100%;
 	height:130px;
 	bottom:0px;
@@ -82,75 +115,99 @@ footer{
 	color:white;
 }
 
-/* MENU */
-.menu{
+/* *********************************************************
+** MENU
+************************************************************/
+.menu
+{
 	height:50px;
 	width:100%;
 	text-align:center;
     background-color:#0F4C81;
 }
-	.menu label{
-		display:none;
-	}
-	.menu input{
-		display:none;
-	}
-	.menu li{
-		display:inline;
-	}
-		 .menu li a:hover{
-            background-color: white;
-            color: #0F4C81;
-        }
-	.menu a {
-        display: inline-block;
-        line-height:50px;
-        width: 140px;
-        padding: 0 15px;
-        color: white;
-        font-size:17px;
-        font-weight:700;
-    }
+
+.menu label
+{
+	display:none;
+}
+.menu input
+{
+	display:none;
+}
+.menu li
+{
+	display:inline;
+}
+.menu li a:hover
+{
+    background-color: white;
+    color: #0F4C81;
+}
+
+.menu a 
+{
+    display: inline-block;
+    line-height:50px;
+    width: 140px;
+    padding: 0 15px;
+    color: white;
+    font-size:17px;
+    font-weight:700;
+}
 
 /* SECTION_COMMON */
-section{
+section
+{
 	min-height:900px;
 	margin: 20px 0px;
 }
 
-/* INDEX */
-.index_title{
+/* *********************************************************
+** index.jsp
+************************************************************/
+#index_top
+{
+	width: 100%;
+	height: 500px;
+	margin: 5px 0px;
+}
+
+.index_title
+{
 	font-size:20px;
 	font-weight:600;
 	color:#0f4c81;
 }
-#index_top{
-	width:100%;
-	height: 610px;
-	margin: 5px 0px;
-}
-#index_notice{
-	width:35%;
-	height:100%;
-	float:left;
+
+#index_noticeInfo
+{
+	width: 65%;
+	height: 100%;
+	float: left;
 	margin: 0px 5px;
-	padding:10px 10px;
+	padding: 10px 10px;
     border-radius: 0.4em;
     border: 1px solid #0F4C81;
 }
-#index_notice-inform{
-	height:80%;
-	border:1px dashed #0F4C81;
-	padding:10px 10px;
+
+#index_notice-inform
+{
+	height: 75%;
+	border: 1px dashed #0F4C81;
+	padding: 10px 10px;
 }
-.index_notice-btn{
+
+.index_notice-btn
+{
     background-color: #0F4C81;
     border-radius: 1em;
     width: 200px;
     padding: 10px 0;
     margin: 10px auto;
 }
-#index_notice-btn a{
+
+#index_notice-btn a
+{
 	margin:0px auto;
 	height:25px;
 	width:100%;
@@ -204,7 +261,7 @@ section{
 	height:20px;
 }
 
-#index_inform{
+#index_notice{
 	width:27%;
 	height:100%;
 	float:left;

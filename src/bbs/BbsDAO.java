@@ -217,9 +217,8 @@ public class BbsDAO {
 	}
 	
 	/* index.jsp에서 가장 최근 출력할 모임공지 정보 */
-	public ArrayList<Bbs> getList_index(){
-		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지';";
-		ArrayList<Bbs> list = new ArrayList<Bbs>();
+	public Bbs noticeInfo_index(){
+		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지' ORDER BY bbsJoindate ASC LIMIT 1;";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -236,12 +235,12 @@ public class BbsDAO {
 				bbs.setBbsJoindate(rs.getString(9));
 				bbs.setBbsJoinplace(rs.getString(10));
 				bbs.setBbsComplete(rs.getInt(11));
-				list.add(bbs);
+				return bbs;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return null;
 	}
 	
 	/* notice.jsp에서 출력할 게시물 목록에 대한 정보 */
