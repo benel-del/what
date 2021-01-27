@@ -172,19 +172,19 @@
             			</thead>          			
             			<tbody>
             			<%
-    						/*userDAO = new UserDAO();
-    						ArrayList<User> list = userDAO.getUserlist(1);
+    						UserDAO userDAO = new UserDAO();
+    						ArrayList<User> list = userDAO.getUserRank_index();
             				for(User user : list){
-            					if(user.getUserID().equals("admin") == false){*/
+            					if(user.getUserID().equals("admin") == false){
             			%>
             				<tr>
-            					<td><%//if(user.getUserRank() == 0) out.print("-"); else out.print(user.getUserRank()); %></td>
-            					<td><%//=user.getUserName() %></td>
-								<td><%//=user.getUserLevel() %></td>
+            					<td><%=user.getUserRank() %></td>
+            					<td><%=user.getUserName() %></td>
+								<td><%=user.getUserLevel() %></td>
             				</tr>   				
 						<%
-								//}
-            				//}
+								}
+            				}
             			%>
             			</tbody>
             			</table>     

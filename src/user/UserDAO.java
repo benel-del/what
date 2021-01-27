@@ -367,9 +367,28 @@ public class UserDAO {
 			}
 			return list;
 	}
-	
-	
-	
+		
+	/* index페이지 rank 불러오기 */
+	public ArrayList<User> getUserRank_index(){		
+		String SQL="SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT 9;";
+		ArrayList<User> list = new ArrayList<User>();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserRank(rs.getInt(7));
+				user.setUserName(rs.getString(3));
+				user.setUserLevel(rs.getString(5));
+
+				list.add(user);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	
 	
@@ -448,6 +467,7 @@ public class UserDAO {
 		return -1; //데이터베이스 오류
 	}
 
+	/* 랭킹게시판 다음 페이지 */
 	public int nextPage() {
 		int count = 0;
 		String SQL="SELECT * FROM user;";

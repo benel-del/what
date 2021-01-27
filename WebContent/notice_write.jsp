@@ -1,3 +1,4 @@
+<!-- 공지게시판 글쓰기 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
@@ -14,12 +15,24 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-	<script>
+	<script>	
+	/* 모임날짜 : 달력으로 선택 */
 	$(function() {
    	 	$( "#bbs_joinDate" ).datepicker({
    	 	dateFormat: "yy-mm-dd"
    	 	});
    	 })
+   	 
+   	 /* 일반공지일 때는 join_input 입력 필요없음 - 안보이게 하기 */
+   	 function changeSelect(){
+		var sel = document.getElementById("bbsType");
+		var selVal = sel.options[sel.selectedIndex].value;
+		if(selVal == '모임공지'){
+			$("#join_input").show();
+		} else{
+			$("#join_input").hide();
+		}
+	}
    	 </script>
     <title>어쩌다리그</title>
 </head>
@@ -86,7 +99,7 @@
 			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
-			            					<select name="bbsType">
+			            					<select id = "bbsType" name="bbsType" onchange = "changeSelect()">
 				  								<option value='일반공지'>일반공지</option>
 				  								<option value='모임공지' selected>모임공지</option>
 											</select>
@@ -99,7 +112,7 @@
             				</tr>
             				<tr>
             					<td>
-            					<div class="write_subtitle">
+            					<div class="write_subtitle" id="join_input">
             						<div class="join_input">
             							* 모임 공지만<br>
             							모임 일시: 

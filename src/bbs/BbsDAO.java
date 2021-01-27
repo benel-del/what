@@ -41,7 +41,7 @@ public class BbsDAO {
 	
 	/* '모임공지'이면서 '모임 날짜'가 이미 지난 게시물의 경우 bbsComplete를 1로 세팅 */
 	public int updateBbsComplete() {
-		String SQL="UPDATE bbs SET bbsComplete = 1 WHERE date_format(?, '%Y-%m-%d') > date(bbsJoindate);";
+		String SQL="UPDATE bbs SET bbsComplete = 1 WHERE bbsType='모임공지' AND date_format(?, '%Y-%m-%d') > date(bbsJoindate);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  getDate());
@@ -113,12 +113,12 @@ public class BbsDAO {
 	}
 	
 	/* 게시글 작성 - 모임 일자 검사 */
-	public int check(String str) {
+	/*public int check(String str) {
 		if(Pattern.matches("[가-힣a-zA-Z]+", str))
 			return -1;
 		else
 			return 0;
-	}
+	}*/
 	
  	/* 게시글 수정 */
 	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace, int bbsComplete) {

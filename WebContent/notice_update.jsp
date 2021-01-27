@@ -27,6 +27,28 @@
    	 	dateFormat: "yy-mm-dd"
    	 	});
    	 })
+   	
+   	 /* 글 수정 화면 로딩 시 */
+   	 window.onload = function(){
+		var sel = document.getElementById("bbsType");
+		var selVal = sel.options[sel.selectedIndex].value;
+		if(selVal == '모임공지'){
+			$("#join_input").show();
+		} else{
+			$("#join_input").hide();
+		}
+	}
+   	 
+   	 /* 일반공지일 때는 join_input 입력 필요없음 - 안보이게 하기 */
+   	function changeSelect(){
+		var sel = document.getElementById("bbsType");
+		var selVal = sel.options[sel.selectedIndex].value;
+		if(selVal == '모임공지'){
+			$("#join_input").show();
+		} else{
+			$("#join_input").hide();
+		}
+	}
    	 </script>
     <title>어쩌다리그</title>
 </head>
@@ -156,7 +178,7 @@
 							       		%>   
 		            					</div>
 			            				<div class="bbsType">
-			            					<select name="bbsType">
+			            					<select name="bbsType" id="bbsType" onchange = "changeSelect()">
 				  								<option value='일반공지' <%if(bbs.getBbsType().equals("일반공지") == true) out.print("selected"); %>>일반공지</option>
 				  								<option value='모임공지' <%if(bbs.getBbsType().equals("모임공지") == true) out.print("selected"); %>>모임공지</option>
 											</select>
@@ -169,7 +191,7 @@
             				</tr>
             				<tr>
             					<td>
-            					<div class="write_subtitle">
+            					<div class="write_subtitle" id="join_input">
             						<div class="join_input">
             							* 모임 공지만<br>
             							모임 일시: 
