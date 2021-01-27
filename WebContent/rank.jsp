@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.User" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="java.util.ArrayList" %>
@@ -11,16 +12,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script type="text/javascript"> 
+    /* 검색 기능 */
+    $(document).ready(function(){ 
+    	$('#bbs_search-btn').click(function(){
+    		var key = $('#bbs_search-bar').val();
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
+    		$(temp).parent().show();
+    	})
+    })
+    </script>
+
     <title>어쩌다리그</title>
 </head>
 
 <body>
-    <% //userID 존재 여부
+    <% 
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		int pageNumber = 1; // 기본페이지
+		int pageNumber = 1;
 		if(request.getParameter("pageNumber") != null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		}
@@ -34,21 +48,9 @@
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
 
-		<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
             <div class="board_subtitle">랭킹게시판</div>
-    	<%
-    		UserDAO userDAO = new UserDAO();
-    		if(userDAO.setRank() == -1){
-          	 	PrintWriter script = response.getWriter();
-         		script.println("<script>");
-        		script.println("alert('랭킹게시판 업데이트에 실패하였습니다.')");
-          		script.println("history.back()");
-           		script.println("</script>");
-     	   }
-    		ArrayList<User> list = userDAO.getUserlist(pageNumber);
-    	%>
-    	
+            
             <div class="board_container">
             	<div class="board_row">
             		<table class="board_table">
@@ -66,6 +68,8 @@
             			
             			<tbody>
             	<%
+            		UserDAO userDAO = new UserDAO();
+        			ArrayList<User> list = userDAO.getUserlist(pageNumber);
             		for(int i=0; i<list.size(); i++){
             			if(list.get(i).getUserID().equals("admin") == false){
             	%>
@@ -107,17 +111,13 @@
             	</div>
             	
      			<!-- 검색 바 -->
-     			<form method="post" action="rankSearchAction.jsp">
-		            <div class="board_search">	            	
-	   	        		<input id="bbs_search-btn" type="submit" value="검색">
-	   	        	
-	   	        		<input id="bbs_search-bar" type="text" placeholder="이름을 입력해주세요" name="searchWord" maxlength="30">
-		            </div>		           
-	            </form>
+		        <div class="board_search">	            	
+	   	        	<input id="bbs_search-btn" type="button" value="검색">
+	   	        	<input id="bbs_search-bar" type="text" placeholder="이름을 입력해주세요" maxlength="30">
+		        </div>		           
 	            
 	    	</div>  
         </section>
-
     </div>
     
 </body>
