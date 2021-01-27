@@ -16,6 +16,31 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <link rel="stylesheet" type="text/css" href="frame.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script type="text/javascript"> 
+    /* 검색 기능 */
+    $(document).ready(function(){ 
+    	function search() {
+    		var option = $("#bbs_search-option option:selected").val();
+    		var key = $('#bbs_search-bar').val();
+    		$(".board_table > tbody > tr").hide();
+    		var temp;
+    		if(option == "title")
+    			temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
+    		else if(option == "head")
+    			temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
+    		else if(option == "ing"){
+    			temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
+    		}
+    		$(temp).parent().show();
+    	}
+    	$('#bbs_search-btn').click(function(){ search();})
+    	$('#bbs_search-bar').keydown(function(key){
+    		if(key.keyCode == 13)
+    			search();
+    	})
+    })
+    </script>
     <title>어쩌다리그</title>
 </head>
 
@@ -139,18 +164,15 @@
             	</div>
             	
      			<!-- 검색 바 -->
-		            <div class="board_search">	            	
-	   	        		<input id="bbs_search-btn" type="button" value="검색">
-	   	        	
-	   	        		<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="50">
-	
-	   	        		<select name="searchOption" id="bbs_search-option">
-	    	        		<option value='title'>제목</option>
-	    	        		<option value='title_content'>제목 + 내용</option>
-	    	        		<option value='content'>내용</option>
-	    	        	</select>
-		            </div> 
-	            
+	            <div class="board_search">	            	
+   	        		<input id="bbs_search-btn" type="button" value="검색">
+   	        		<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="30">
+   	        		<select id="bbs_search-option">
+    	        		<option value='title'>제목</option>
+    	        		<option value='head'>머릿말</option>
+    	        		<option value='ing'>진행여부</option>
+    	        	</select>
+	            </div>  
 	    	</div>  
         </section>
 

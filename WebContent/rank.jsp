@@ -16,11 +16,24 @@
     <script type="text/javascript"> 
     /* 검색 기능 */
     $(document).ready(function(){ 
-    	$('#bbs_search-btn').click(function(){
+    	function search() {
+    		var option = $("#bbs_search-option option:selected").val();
     		var key = $('#bbs_search-bar').val();
     		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
+    		var temp;
+    		if(option == "name")
+    			temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
+    		else if(option == "level")
+    			temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
+    		else if(option == "id"){
+    			temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
+    		}
     		$(temp).parent().show();
+    	}
+    	$('#bbs_search-btn').click(function(){ search();})
+    	$('#bbs_search-bar').keydown(function(key){
+    		if(key.keyCode == 13)
+    			search();
     	})
     })
     </script>
@@ -113,7 +126,12 @@
      			<!-- 검색 바 -->
 		        <div class="board_search">	            	
 	   	        	<input id="bbs_search-btn" type="button" value="검색">
-	   	        	<input id="bbs_search-bar" type="text" placeholder="이름을 입력해주세요" maxlength="30">
+	   	        	<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="30">
+		        	<select id="bbs_search-option">
+    	        		<option value='name'>이름</option>
+    	        		<option value='level'>부수</option>
+    	        		<option value='id'>아이디</option>
+    	        	</select>
 		        </div>		           
 	            
 	    	</div>  

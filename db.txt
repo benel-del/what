@@ -86,15 +86,3 @@ create table bbs_review(
 	PRIMARY KEY(bbsID),
 	FOREIGN KEY(userID) REFERENCES user(userID)
 );
-
-create table search(
-	userID varchar(20) not null,
-	searchType varchar(20) not null,
-	searchOption varchar(20),
-	searchWord varchar(50) not null,
-	searchNo int,
-	PRIMARY KEY(searchNo),
-	FOREIGN KEY(userID) REFERENCES user(userID)
-);
-
-String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";
