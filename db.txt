@@ -14,6 +14,9 @@ create table user(
 	userSecond int default 0,
 	userThird int default 0,
 	userEmail varchar(30),
+	userAvailable int default 1 not null, //회원탈퇴시 0으로 업데이트
+	userRegdate datetime not null, //회원가입 날짜
+	userLogdate datetime not null, //최근 로그인 날짜
 	PRIMARY KEY(userID)
 );
 

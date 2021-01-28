@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
     <script type="text/javascript">
 	$(document).ready(function(){
+		/* 공지사항 - 일반공지/모임공지 버튼 클릭 이벤트 */
 		$('#notice1_table').show();
 		$('#notice2_table').hide();
 		
@@ -46,17 +47,6 @@
         <br>
         <!-- header -->
         <%@ include file="header.jsp" %>
-        
-        <%
-       		/*UserDAO userDAO = new UserDAO();
-			if(userDAO.setRank() == -1){
-      	 		PrintWriter script = response.getWriter();
-     			script.println("<script>");
-    			script.println("alert('랭킹게시판 업데이트에 실패하였습니다.')");
-      			script.println("history.back()");
-       			script.println("</script>");
- 	  		}*/
-       	%>
 
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
