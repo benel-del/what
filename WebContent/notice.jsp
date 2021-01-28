@@ -75,18 +75,6 @@
         <section class="container">
             <div class="board_subtitle">
             	공지게시판
-            <% 
-            	/* 관리자는 공지 쓰기 가능 */
-            	try{
-            		if(userID.equals("admin") == true){
-            			out.println("<div class=\"board_write-btn\">");
-            			out.println("<a href=\"notice_write.jsp\">글쓰기</a>");
-            			out.println("</div>");
-            		}
-           		} catch(Exception e){
-           			e.printStackTrace();
-           		}
-           	%>
             </div>
 
             <div class="board_container">

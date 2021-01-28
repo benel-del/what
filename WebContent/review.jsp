@@ -60,15 +60,6 @@
         <section class="container">
             <div class="board_subtitle">
             	후기게시판
-            	<% try{
-            		if(userID.equals("admin") == true){
-            			out.println("<div class=\"board_write-btn\">");
-            			out.println("<a href=\"review_write.jsp\">글쓰기</a>");
-            			out.println("</div>");
-            		}
-           		} catch(Exception e){
-           			e.printStackTrace();
-           		}%>
             </div>
 
             <div class="board_container">
