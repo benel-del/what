@@ -127,7 +127,7 @@
      			<!-- 검색 바 -->
 	            <div class="board_search">	            	
    	        		<input id="bbs_search-btn" type="button" value="검색">
-   	        		<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="30">
+   	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
    	        		<!-- 
    	        		<select id="bbs_search-option">
     	        		<option value='title'>제목</option>

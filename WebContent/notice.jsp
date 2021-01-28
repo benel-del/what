@@ -21,19 +21,16 @@
     /* 검색 기능 */
     $(document).ready(function(){ 
     	function search() {
-    		var option = $("#bbs_search-option option:selected").val();
     		var key = $('#bbs_search-bar').val();
     		$(".board_table > tbody > tr").hide();
+    		//$(".board_page-move-symbol-left").hide();
+    		//$(".board_page-move-symbol-right").hide();
     		var temp;
-    		if(option == "title")
-    			temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
-    		else if(option == "head")
-    			temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
-    		else if(option == "ing"){
-    			temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
-    		}
+    		temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
     		$(temp).parent().show();
     	}
+		
+		/* enter 기능 */
     	$('#bbs_search-btn').click(function(){ search();})
     	$('#bbs_search-bar').keydown(function(key){
     		if(key.keyCode == 13)
@@ -125,7 +122,7 @@
             					}
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 0){
-           							%>          				
+           					%>          				
                        				<tr class="board_tr">
                        					<td><%=list.get(i).getBbsID()%></td>
                        					<td><%=list.get(i).getBbsType()%></td>
@@ -135,14 +132,14 @@
                        					<td><%=list.get(i).getUserID() %></td>
                        					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
                        				</tr>   
-                       				<%
+                       		<%
            							}
             					}	
             				%>				
             			</tbody>
             		</table>
             	</div>
-            	
+            	            	
             	<!-- 이전/다음 페이지 -->
             	<div class="board_page-move">
             	<%
@@ -166,12 +163,12 @@
      			<!-- 검색 바 -->
 	            <div class="board_search">	            	
    	        		<input id="bbs_search-btn" type="button" value="검색">
-   	        		<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="30">
-   	        		<select id="bbs_search-option">
+   	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
+   	        		<!-- <select id="bbs_search-option">
     	        		<option value='title'>제목</option>
     	        		<option value='head'>머릿말</option>
     	        		<option value='ing'>진행여부</option>
-    	        	</select>
+    	        	</select>-->
 	            </div>  
 	    	</div>  
         </section>

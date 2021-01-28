@@ -25,9 +25,6 @@
     			temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
     		else if(option == "level")
     			temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
-    		else if(option == "id"){
-    			temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
-    		}
     		$(temp).parent().show();
     	}
     	$('#bbs_search-btn').click(function(){ search();})
@@ -130,7 +127,6 @@
 		        	<select id="bbs_search-option">
     	        		<option value='name'>이름</option>
     	        		<option value='level'>부수</option>
-    	        		<option value='id'>아이디</option>
     	        	</select>
 		        </div>		           
 	            
