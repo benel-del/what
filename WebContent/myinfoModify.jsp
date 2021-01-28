@@ -1,3 +1,4 @@
+<!-- 내정보 수정 페이지 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
@@ -16,7 +17,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -28,6 +29,7 @@
         <header>
         <%
         	if(userID == null){
+        		//로그인 한 사람만 접근 가능
 	            PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('로그인 후 이용 가능합니다.')");
@@ -55,7 +57,7 @@
 		<%@ include file="menubar.jsp" %>
 			
         <%
-			User user = new UserDAO().getuser_rank(userID);
+			User user = new UserDAO().getuserInfo(userID);
        	%>
         <section class="container">
        		<form method="post" action="myinfoModifyAction.jsp">
@@ -150,7 +152,15 @@
        					<tr class="myinfo_userThird">
        						<th id="myinfo_title" class="table_th1">3위</th>
        						<th class="table_th2"><%=user.getUserThird() %>회</th>
-       					</tr>     					
+       					</tr> 
+       					<tr class="myinfo_userRegdate">
+       						<th id="myinfo_title" class="table_th1">가입날짜</th>
+       						<th class="table_th2"><%=user.getUserRegdate() %></th>
+       					</tr>
+       					<tr class="myinfo_userLogdate">
+       						<th id="myinfo_title" class="table_th1">최근 로그인</th>
+       						<th class="table_th2"><%=user.getUserLogdate() %></th>
+       					</tr>    					
      				</table>     		
         			<br>
                

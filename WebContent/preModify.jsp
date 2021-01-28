@@ -1,3 +1,4 @@
+<!-- 내정보 수정_전 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<% 
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -29,6 +30,7 @@
         <header>
         <%
         	if(userID == null){
+        		//로그인 한 사람만 접근 가능
 	            PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('로그인 후 이용 가능합니다.')");
@@ -36,7 +38,6 @@
 				script.println("</script>");
            	} else {
 		%>
-			<!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
                 |
@@ -61,7 +62,7 @@
               	<form method="post" action="preModifyAction.jsp">
               
                	<div class="dm_header">
-                   	<a href="modify.jsp">회원 정보 수정</a>
+                   	<a href="preModify.jsp">회원 정보 수정</a>
                	</div>
    				<br><br>
    				

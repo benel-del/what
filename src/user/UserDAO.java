@@ -49,7 +49,7 @@ public class UserDAO {
 ***********************************************************************************/	
 	/* login - loginAction.jsp */
 	public int login(String userID, String userPassword) {
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
+		String SQL = "SELECT userPassword FROM USER WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -87,7 +87,7 @@ public class UserDAO {
 	
 	/* findID(아이디찾기) - find_idAction.jsp */
 	public String findID(String userName, String userEmail) {
-		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ?;";
+		String SQL = "SELECT * FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);
@@ -105,7 +105,7 @@ public class UserDAO {
 	
 	/* findPW(비밀번호 찾기) - find_pwAction.jsp */
 	public int findPW(String userID, String userName, String userEmail) {
-		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ? AND userID = ?;";	// 실제로 db에 입력할 문자열
+		String SQL = "SELECT * FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ? AND userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);	
@@ -124,7 +124,7 @@ public class UserDAO {
 	
 	/* getUserEmail(임시 비번 전송할 이메일 찾아오기) - find_pwAction.jsp */
 	public String getUserEmail(String userID) {
-		String SQL = "SELECT userEmail FROM USER WHERE userID = ?;";
+		String SQL = "SELECT userEmail FROM USER WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -245,52 +245,41 @@ public class UserDAO {
 	
 	
 /* *********************************************************************************
-* 계정 삭제
+ * 마이페이지
 ***********************************************************************************/
-	public int delete(String userID, String userPassword) {
-		int rt = -1;
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
+	/* getUserInfo - mypage.jsp & myinfoModify.jsp */
+	public User getuserInfo(String userID) {	
+		String SQL="SELECT * FROM user WHERE userID = ?";
 		try {
-			pstmt = conn.prepareStatement(SQL);
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
-			
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getString(1).equals(userPassword)) {
-					SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?;";
-					try {
-						pstmt = conn.prepareStatement(SQL);
-						pstmt.setString(1,  userID);
-						pstmt.setString(2,  userPassword);
-						pstmt.executeUpdate();
-						
-						rt = 1;	// 탈퇴 성공
-					} catch(Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-							if(rs!=null)	rs.close();
-							if(pstmt!=null)	pstmt.close();
-							if(conn!=null)	conn.close();
-						} catch(Exception e2) {
-							e2.printStackTrace();
-						}
-					}
-				}	
-				else
-					rt = 0; 	// 비밀번호 불일치
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserDescription(rs.getString(6));
+				user.setUserRank(rs.getInt(7));
+				user.setUserFirst(rs.getInt(8));
+				user.setUserSecond(rs.getInt(9));
+				user.setUserThird(rs.getInt(10));
+				user.setUserEmail(rs.getString(11));
+				user.setUserRegdate(rs.getString(13));
+				user.setUserLogdate(rs.getString(14));
+				return user;
 			}
-		} catch(Exception e3) {
-			e3.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-		
-		return rt;
+		return null;
 	}
 	
 /* *********************************************************************************
 * 회원정보 수정
 ***********************************************************************************/
-	/* 회원정보 수정하기 전에 본인확인 - 비번 확인 */
+	/* preModify(비번으로 본인확인) - preModifyAction.jsp */
 	public int preModify(String userID, String userPassword) {
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
@@ -303,15 +292,15 @@ public class UserDAO {
 				if(rs.getString(1).equals(userPassword))
 					return 1;
 				else
-					return 0; 	// 비밀번호 불일치
+					return 0; 	
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -2;	// db 오류
+		return -2;
 	}
-	
-	/* 회원 정보 수정 */
+		
+	/* modify(회원 정보 수정) - myinfoModifyAction.jsp */
 	public int modify(String userID, String userPassword, String userNewPassword, String userLevel, String userDescription, String userEmail) {
 		int rt = -1;
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
@@ -354,8 +343,8 @@ public class UserDAO {
 		
 		return rt;
 	}
-	
-	/* 회원 정보 수정 - 새로운 패스워드 설정 시 제한조건 확인 */
+		
+	/* check_pw_limit(회원 정보 수정 - 새로운 패스워드 설정 시 제한조건 확인) - myinfoModifyAction.jsp */
 	public int check_pw_limit(String pw) {
 		try {
 			if((pw.length() < 8) || (pw.length() > 15) || string_pattern1(pw)==-1)
@@ -365,6 +354,51 @@ public class UserDAO {
 		}
 		return 1;	// 정상
 	}
+	
+/* *********************************************************************************
+* 계정 삭제
+***********************************************************************************/
+	public int delete(String userID, String userPassword) {
+		int rt = -1;
+		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString(1).equals(userPassword)) {
+					SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?;";
+					try {
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1,  userID);
+						pstmt.setString(2,  userPassword);
+						pstmt.executeUpdate();
+						
+						rt = 1;	// 탈퇴 성공
+					} catch(Exception e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							if(rs!=null)	rs.close();
+							if(pstmt!=null)	pstmt.close();
+							if(conn!=null)	conn.close();
+						} catch(Exception e2) {
+							e2.printStackTrace();
+						}
+					}
+				}	
+				else
+					rt = 0; 	// 비밀번호 불일치
+			}
+		} catch(Exception e3) {
+			e3.printStackTrace();
+		}
+		
+		return rt;
+	}
+	
+
 	
 
 /* *********************************************************************************
@@ -403,9 +437,7 @@ public class UserDAO {
 			return list;
 	}
 		
-/* *******************************************************************
-* getUserRank_index - index.jsp
-* *******************************************************************/
+	/* getUserRank_index - index.jsp */
 	public ArrayList<User> getUserRank_index(){		
 		String SQL="SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT 9;";
 		ArrayList<User> list = new ArrayList<User>();
