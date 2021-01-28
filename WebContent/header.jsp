@@ -16,7 +16,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
   				|
-                <a class="link" href="admin.jsp">관리자 페이지</a>
+                <a class="link" href="admin_page/admin.jsp">관리자 페이지</a>
            </div>
         <% 
            	} else {
