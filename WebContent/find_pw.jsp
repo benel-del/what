@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<% 
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -24,8 +24,8 @@
         <br>
         <header>
         <%
-        	/* 이미 로그인된 사람은 비번 찾기를 할 수 없음 */
         	if(userID != null){
+        		//로그인 한 사람 접근 불가
         		PrintWriter script=response.getWriter();
 				script.println("<script>");
 				script.println("alert('이미 로그인하였습니다.')");
@@ -33,7 +33,6 @@
 				script.println("</script>");
 			}
 		%>
-            <!--로그인, 회원가입 버튼-->
             <div id="service">
                 <a class="link" href="login.jsp">로그인</a>
                 |
@@ -62,7 +61,7 @@
                    		<br>
                    		<input type="text" placeholder="아이디" name="userID" maxlength="20" />
                    		<br>
-                   		<input type="text" placeholder="이메일" name="userEmail" maxlength="50" />                    
+                   		<input type="email" placeholder="이메일" name="userEmail" maxlength="50" />                    
                		</div>
                
                		<input type="submit" class="login_submit-btn" value="비밀번호찾기" >           

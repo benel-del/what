@@ -1,4 +1,6 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<!-- 로그인 페이지 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
     
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -23,6 +25,7 @@
         <header>
         	<%
         		if(userID != null){
+        			//로그인 한 사람 접근 불가
         			PrintWriter script=response.getWriter();
 					script.println("<script>");
 					script.println("alert('이미 로그인하였습니다.')");
@@ -54,7 +57,7 @@
                    		<a href="login.jsp">로그인 페이지</a>
                		</div>
    
-               <!--로그인 폼-->
+              		<!--로그인 폼-->
                		<div class="login_form">
                    		<input type="text" placeholder="아이디" name="userID" maxlength="15">
                    		<br>

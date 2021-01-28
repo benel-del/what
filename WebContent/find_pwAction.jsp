@@ -23,9 +23,8 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	
-	/* 로그인 된 사람은 'pw찾기' 페이지에 접근할 수 없음 */
 	if(userID != null){
+		//로그인 한 사람 접근 불가
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('이미 로그인이 되어있습니다.')");
@@ -36,12 +35,14 @@
 	UserDAO userDAO = new UserDAO();
 	int findPW = userDAO.findPW(user.getUserID(), user.getUserName(), user.getUserEmail());
 		
+	//임시비밀번호 랜덤으로 설정
 	String newUserPw = "";
 	for (int i = 0; i < 10; i++) {
 		newUserPw += (char) ((Math.random() * 26) + 97);
 	}
 		
-	if(findPW == -1){//계정이 없는 경우
+	if(findPW == -1){
+		//계정이 없는 경우
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('해당 정보에 일치하는 계정이 존재하지 않습니다.')");

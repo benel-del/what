@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -23,16 +23,16 @@
     <div id="wrapper">
         <br>
         <header>
-        	<%
+        <%
         	if(userID != null){
+        		//로그인 한 사람 접근 불가
         		PrintWriter script=response.getWriter();
 				script.println("<script>");
 				script.println("alert('이미 로그인하였습니다.')");
 				script.println("history.back()");
 				script.println("</script>");
 			}
-			%>
-            <!--로그인, 회원가입 버튼-->
+		%>
             <div id="service">
                 <a class="link" href="login.jsp">로그인 </a>
                 |
@@ -56,7 +56,6 @@
             	<a href="register.jsp">회원가입 페이지</a>
             </div>
             
-            <!-- 정보를 숨기면서 전송 post -->
             <form method="post" action="registerAction.jsp">
             <div class="login_form">
 				<input type="text" placeholder="아이디 입력" name="userID" maxlength="15">

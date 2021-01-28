@@ -106,12 +106,17 @@
                         	<div class="index_notice-btn">
                            		<a href="join.jsp?bbsID=<%=bbsJoin%>">참가신청하기</a>
                         	</div>
-
+                        	
+                        	<!-- 참가자확인 버튼 -->
+							<div class="index_notice-btn">
+                           		<a href="join_view.jsp?bbsID=<%=bbsJoin%>">참가자확인</a>
+                        	</div>
+                        	
                         	<!--팀 매칭 버튼-->
                         	<div class="index_notice-btn">
-                            	<a href="team.jsp">팀원찾기</a>
+                            	<a href="team.jsp?bbsID=<%=bbsJoin%>">팀원찾기</a>
                         	</div>
-                    	</div>                
+                    </div>                
                 </div>
 
                 <div id="index_notice">
@@ -166,6 +171,7 @@
     						ArrayList<User> list = userDAO.getUserRank_index();
             				for(User user : list){
             					if(user.getUserID().equals("admin") == false){
+            						//관리자는 랭킹에 포함하지 않음
             			%>
             				<tr>
             					<td><%=user.getUserRank() %></td>

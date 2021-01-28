@@ -226,7 +226,9 @@ public class BbsDAO {
 		return -1; //데이터베이스 오류
 	}
 	
-	/* index.jsp에서 noticeInfo(모임공지) 출력 */
+/* *******************************************************************
+* noticeInfo_index - index.jsp
+* *******************************************************************/
 	public Bbs noticeInfo_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지' ORDER BY bbsJoindate ASC LIMIT 1;";
 		try {
@@ -247,7 +249,10 @@ public class BbsDAO {
 		return null;
 	}
 	
-	/* index.jsp에서 notice(모임공지) 리스트 출력 */
+	
+/* *******************************************************************
+* notice1_index - index.jsp
+* *******************************************************************/
 	public ArrayList<Bbs> notice1_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsType='모임공지' ORDER BY bbsID DESC LIMIT 5;";
 		ArrayList<Bbs> list = new ArrayList<>();
@@ -265,8 +270,10 @@ public class BbsDAO {
 		}
 		return list;
 	}
-	
-	/* index.jsp에서 notice(일반공지) 리스트 출력 */
+
+/* *******************************************************************
+* notice2_index - index.jsp
+* *******************************************************************/
 	public ArrayList<Bbs> notice2_index(){
 		String SQL = "SELECT * FROM BBS WHERE bbsAvailable = 1 AND bbsType='일반공지' ORDER BY bbsID DESC LIMIT 5;";
 		ArrayList<Bbs> list = new ArrayList<>();

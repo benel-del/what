@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import = "util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -13,22 +14,33 @@
 		userID = (String) session.getAttribute("userID");
 	}
 	if(userID != null){
+		//로그인 한 사람 접근불가
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('이미 로그인이 되어있습니다.')");
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
-	}//로그인 된 사람은 로그인 페이지에 접근할 수 없음
+	}
 		
 	UserDAO userDAO = new UserDAO();
 	int result = userDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
-		
+	
 	if(result == 1){
-		session.setAttribute("userID", user.getUserID());
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("location.href = 'index.jsp'");
-		script.println("</script>");
+		int logDate = userDAO.updateLastLogin(user.getUserID()); //가장 최근 로그인 날짜 업데이트
+		if(logDate == 1){
+			session.setAttribute("userID", user.getUserID());
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("location.href = 'index.jsp'");
+			script.println("</script>");
+		}
+		else{
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인 날짜 업데이트 실패')");
+			script.println("location.href = 'index.jsp'");
+			script.println("</script>");
+		}	
 	}
 	else if(result == 0){
 		PrintWriter script = response.getWriter();

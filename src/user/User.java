@@ -15,6 +15,9 @@ public class User {
 	private int userSecond;
 	private int userThird;
 	private String userEmail;
+	private int userAvailable;
+	private String userRegdate;
+	private String userLogdate;
 
 	public String getUserID() {
 		return userID;
@@ -93,6 +96,24 @@ public class User {
 	}
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
+	}
+	public int getUserAvailable() {
+		return userAvailable;
+	}
+	public void setUserAvailable(int userAvailable) {
+		this.userAvailable = userAvailable;
+	}
+	public String getUserRegdate() {
+		return userRegdate;
+	}
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
+	}
+	public String getUserLogdate() {
+		return userLogdate;
+	}
+	public void setUserLogdate(String userLogdate) {
+		this.userLogdate = userLogdate;
 	}
 	
 }

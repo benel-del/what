@@ -18,8 +18,8 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	/* 이미 로그인한 사람은 회원가입 페이지에 접근할 수 없음 */
 	if(userID != null){
+		//로그인 한 사람 접근 불가
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('이미 로그인이 되어있습니다.')");

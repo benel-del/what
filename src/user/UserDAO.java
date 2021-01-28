@@ -29,7 +29,25 @@ public class UserDAO {
 		}
 	}
 	
-	/* 로그인 */
+	/* 현재시간 불러오기 */
+	public String getDate() {
+		String SQL="SELECT NOW();";
+		try {
+			PreparedStatement pstmt=conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			} 
+		}catch(Exception e) {
+				e.printStackTrace();
+		}
+		return ""; //데이터베이스 오류
+	}
+	
+/* *********************************************************************************
+* 로그인
+***********************************************************************************/	
+	/* login - loginAction.jsp */
 	public int login(String userID, String userPassword) {
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
@@ -38,82 +56,95 @@ public class UserDAO {
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	
-				//해당 아이디가 존재할 경우
 				if(rs.getString(1).equals(userPassword)) {
-					//비밀번호가 일치하는 경우
-					return 1;	// 로그인 성공
-				} 
+					return 1;	
+				}
 				else { 
-					//비밀번호가 일치하지 않는 경우
-					return 0; 	// 로그인 실패 - 비밀번호 불일치
+					return 0; 	
 				}
 			}
-			return -1; //로그인실패 - userID가 db table에 없음
+			return -1; 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -2;	//로그인 실패 - db 오류
+		return -2;
 	}
 	
-	/* 아이디 찾기 */
-	public String findID(String userName, String userEmail) {
-		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ?";	// 실제로 db에 입력할 문자열
+	/* updateLastLogin - loginAction.jsp */
+	public int updateLastLogin(String userID) {
+		String SQL = "UPDATE USER SET userLogdate = ? WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  userName);	// ? -> userID
+			pstmt.setString(1, getDate().substring(0,11));
+			pstmt.setString(2, userID);
+			pstmt.executeUpdate();
+			return 1;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	/* findID(아이디찾기) - find_idAction.jsp */
+	public String findID(String userName, String userEmail) {
+		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ?;";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userName);
 			pstmt.setString(2,  userEmail);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {	// rs의 결과가 존재한다면
+			if(rs.next()) {	
 				if(rs.getString(3).equals(userName) && rs.getString(11).equals(userEmail))
-					return rs.getString(1);	// 아이디찾기 성공
+					return rs.getString(1);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;	// db 오류
+		return null;
 	}
 	
-	/* 비밀번호 찾기 */
+	/* findPW(비밀번호 찾기) - find_pwAction.jsp */
 	public int findPW(String userID, String userName, String userEmail) {
-		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ? AND userID = ?";	// 실제로 db에 입력할 문자열
+		String SQL = "SELECT * FROM USER WHERE userName = ? AND userEmail = ? AND userID = ?;";	// 실제로 db에 입력할 문자열
 		try {
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  userName);	// ? -> userID
+			pstmt.setString(1,  userName);	
 			pstmt.setString(2,  userEmail);
 			pstmt.setString(3,  userID);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {	// rs의 결과가 존재한다면
+			if(rs.next()) {	
 				if(rs.getString(1).equals(userID)&& rs.getString(3).equals(userName)&& rs.getString(11).equals(userEmail))
-					return 1;	// 비번찾기 성공
+					return 1;	
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1;	// db 오류
+		return -1;
 	}
 	
-	/* 비밀번호 찾기 - 임시 비번 전송할 이메일 찾아오기 */
+	/* getUserEmail(임시 비번 전송할 이메일 찾아오기) - find_pwAction.jsp */
 	public String getUserEmail(String userID) {
-		String SQL = "SELECT userEmail FROM USER WHERE userID = ?;";	// 실제로 db에 입력할 문자열
+		String SQL = "SELECT userEmail FROM USER WHERE userID = ?;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {	// rs의 결과가 존재한다면
+			if(rs.next()) {	
 				return rs.getString(1);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;	// db 오류
+		return null;
 	}
 	
 	
 /* *********************************************************************************
  * 회원가입	
  ***********************************************************************************/
+	/* register - registerAction.jsp */
 	public int register(User user) {
-		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -127,14 +158,17 @@ public class UserDAO {
 			pstmt.setInt(9,  0);
 			pstmt.setInt(10,  0);
 			pstmt.setString(11, user.getUserEmail());
-			return pstmt.executeUpdate(); //회원가입 성공
+			pstmt.setInt(12, 1);
+			pstmt.setString(13, getDate().substring(0,11));
+			pstmt.setString(14, getDate().substring(0,11));
+			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1;	//회원가입 실패 - db 오류
+		return -1;
 	}
 	
-	/* 비밀번호 저장시 해싱을 통해 암호화 */
+	/* pwHashing(비밀번호 저장시 해싱을 통해 암호화) - find_pwAction.jsp & registerAction.jsp */
 	public int pwHashing(String userPassword, String userID) {
 		String SQL = "UPDATE USER SET userPassword = ? WHERE userID = ?;";
 		try {
@@ -149,28 +183,29 @@ public class UserDAO {
 		return 0;
 	}
 	
-	/* 회원가입 시 아이디/비밀번호/이름 조건 확인 
-	 * : 아이디, 비번은 8~15자, 알파벳 소문자+숫자로만 설정 가능 
-	 * : 이름은 한글로만 입력 가능 */
+	/* check_limit - registerAction.jsp */
 	public int check_limit(User user) {
 		String id = user.getUserID();
 		String pw = user.getUserPassword();
 		String name = user.getUserName();
 		
 		try {
+			/* 아이디 조건 : 영문소문자 + 숫자  혼합 8~15자
+			 * 비번 조건 : 영문소문자 + 숫자  혼합 8~15자
+			 * 이름 조건 : 한글  */
 			if((id.length() < 8 || id.length() > 15) || string_pattern1(id) == -1)
-				return -1; //id 조건 불일치
+				return -1;
 			if((pw.length() <8) || id.length() > 15 || string_pattern1(pw) == -1)
-				return -2; //pw 조건 불일치
+				return -2;
 			if(string_pattern2(name) == -1)
-				return -3; //name 조건 불일치
+				return -3;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return 1;	//조건 모두 일치
 	}
 	
-	/* str(ID, PW)이 영문소문자 + 숫자로만 구성된 경우 0반환, 그렇지 않을 경우 -1 반환 */
+	/* str(ID, PW)이 영문소문자 + 숫자로만 구성된 경우 0반환, 그렇지 않을 경우 -1 반환  - UserDAO.java*/
 	private int string_pattern1(String str) {
 		int i;
 		int character=0; //str에 포함된 영소문자 개수
@@ -192,7 +227,7 @@ public class UserDAO {
 			return 0;
 	}
 	
-	/* 사용자 이름이 한글로 이루어진 경우 0반환, 그렇지 않을 경우 -1반환 */
+	/* 사용자 이름이 한글로 이루어진 경우 0반환, 그렇지 않을 경우 -1반환 - UserDAO.java */
 	private int string_pattern2(String str) {
 		if(Pattern.matches("[가-힣]+", str))
 			return 0;
@@ -200,7 +235,7 @@ public class UserDAO {
 			return -1;
 	}
 	
-	/* 비밀번호 - 비밀번호 확인 일치 여부 */	
+	/* check_pw_cmp(비밀번호 - 비밀번호 확인 일치 여부) - registerAction.jsp */	
 	public int check_pw_cmp(String pw, String re_pw) {
 		if(pw.equals(re_pw) == true)
 			return 1;
@@ -368,7 +403,9 @@ public class UserDAO {
 			return list;
 	}
 		
-	/* index페이지 rank 불러오기 */
+/* *******************************************************************
+* getUserRank_index - index.jsp
+* *******************************************************************/
 	public ArrayList<User> getUserRank_index(){		
 		String SQL="SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT 9;";
 		ArrayList<User> list = new ArrayList<User>();
