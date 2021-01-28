@@ -1,28 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="bbsSearch.BbsSearchDAO" %>
-<%@ page import="bbs_result.BbsDAO_result"%>
-<%@ page import="bbs_result.Bbs_result"%>
-<%@ page import="java.util.*" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="user.User" %>
 
 <%
 	String userID = null;
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	//로그인 안한 사람은 로그아웃 페이지에 접근할 수 없음
 	if(userID == null){
+		//로그인 한 사람만 접근 가능
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인 되어있지 않습니다.')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
+	
+	session.invalidate();
 		
-	//admin이 로그아웃 할 때마다 ranking update
+	PrintWriter script = response.getWriter();
+	script.println("<script>");
+	script.println("location.href = 'index.jsp'");
+	script.println("</script>");
+		
+	//
 	/*if(userID.equals("admin")==true){
 		
 		BbsDAO_result bbsDAO_result = new BbsDAO_result();
@@ -105,14 +106,8 @@
 			}
 		}
 	}
-	*/		
+			
 	BbsSearchDAO search = new BbsSearchDAO();
-	search.delete_all(userID);	
-  	
-  	session.invalidate();
-  	  		
-	PrintWriter script = response.getWriter();
-	script.println("<script>");
-	script.println("location.href = 'index.jsp'");
-	script.println("</script>");
+	search.delete_all(userID);
+	*/ 	
  %>

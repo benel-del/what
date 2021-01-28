@@ -115,7 +115,7 @@
             		if(bbs.getBbsType().equals("모임공지") == true){
             			if(bbs.getBbsComplete() == 0){
             			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
+            			out.println("<a href=\"join_write.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
             			out.println("</div>");
             			}
             			else{
@@ -128,7 +128,7 @@
             	<%
             		if(bbs.getBbsType().equals("모임공지")==true){
             			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join_view.jsp?bbsID=" + bbsID + "\" class=\"link\">참가자 명단 보기</a>");
+            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가자 명단 보기</a>");
             			out.println("</div>");
             		}
             	%>

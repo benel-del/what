@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class BbsDAO_join {
 	private Connection conn;	// db에 접근하게 해주는 객체
 	private ResultSet rs;	// 정보 담는 객체
+	private PreparedStatement pstmt;
 	
 	public BbsDAO_join() { 
 		try {
@@ -22,6 +23,7 @@ public class BbsDAO_join {
 		}
 	}	
 	
+	/* getNext - BbsDAO_join.java */
 	public int getNext(int bbsID) {	// 새 팀을 위한 joinId 지정하기
 		String SQL="SELECT joinID FROM bbs_join"+bbsID+" ORDER BY joinID DESC;";
 		try {
@@ -34,7 +36,7 @@ public class BbsDAO_join {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1; //데이터베이스 오류
+		return -1;
 	}
 	
 	public int getInfo(int bbsID, String userID, String userPhone, String joinPassword, String joinMember, String joinContent) {
@@ -55,8 +57,9 @@ public class BbsDAO_join {
 		return -1; //데이터베이스 오류
 	}
 	
+	/* getMembers(참가자 명단 목록) - join.jsp */
 	public ArrayList<Bbs_join> getMembers(int bbsID){		
-		String SQL="SELECT * FROM bbs_join"+bbsID+";";
+		String SQL="SELECT * FROM bbs_join" + bbsID + ";";
 		ArrayList<Bbs_join> list = new ArrayList<Bbs_join>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -73,6 +76,30 @@ public class BbsDAO_join {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	/* getJoinView(참가자 명단 자세히 보기) - join_view.jsp */
+	public Bbs_join getJoinView(int bbsID, int joinID){		
+		String SQL="SELECT * FROM bbs_join" + bbsID + " WHERE joinID=?;";
+
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  joinID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_join bbs_join = new Bbs_join();
+				bbs_join.setJoinID(rs.getInt(1));
+				bbs_join.setUserID(rs.getString(2));
+				bbs_join.setUserPhone(rs.getString(3));
+				bbs_join.setJoinPassword(rs.getString(4));
+				bbs_join.setJoinMember(rs.getString(5));
+				bbs_join.setJoinContent(rs.getString(6));
+				return bbs_join;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

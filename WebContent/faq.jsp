@@ -1,7 +1,11 @@
+<!-- FAQ 보기 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-    
+<%@ page import="bbs_faq.BbsDAO_faq" %>
+<%@ page import="bbs_faq.Bbs_faq" %>
+<%@ page import="java.util.ArrayList" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +17,7 @@
 </head>
 
 <body>
-    <% //userID 존재 여부
+    <%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -29,61 +33,24 @@
 		<%@ include file="menubar.jsp" %>
 
         <section class="container">
-        <div class="board_subtitle">FAQ</div>
+        	<div class="board_subtitle">FAQ</div>
         
-        <div class="faq_accordion">
-        <!-- dropdown -->
-            <input type="checkbox" id="answer01">
-            <label for="answer01">Q1. 부수 기준이 어떻게 되나요?</label>
-            <div>
-            <p>*오픈부수가 있는 경우
-            	<table id="faq_table">
-    	        	<tr>
-        		    	<td>오픈부수</td>
-        		    	<td>선수부/챔부</td>
-        		    	<td>오픈1부</td>
-        		    	<td>오픈2부</td>
-        		    	<td>오픈3부</td>
-        		    	<td>오픈4부</td>
-        		    	<td>오픈5부</td>
-        		    	<td>오픈6부</td>
-        		    </tr>
-            		<tr>
-            			<td>어쩌다 부수</td>
-            			<td>-3부</td>
-            			<td>-2부</td>
-            			<td>-1부</td>
-            			<td>0부</td>
-            			<td>1부</td>
-            			<td>2부</td>
-            			<td>3부</td>
-            		</tr>
-            	</table>
-            <p>*오픈부수가 없는 경우 : 대학연맹부수 적용
-            	<table id="faq_table">
-    	        	<tr>
-        		    	<td>대학부수</td>
-        		    	<td>남자1부</td>
-        		    	<td>남자2부</td>
-        		    	<td>남자3부</td>
-        		    	<td>남자신입생부</td>
-        		    	<td>여자부</td>
-        		    	<td>여자신입생부</td>
-        		    </tr>
-            		<tr>
-            			<td>어쩌다 부수</td>
-            			<td>4부</td>
-            			<td>5부</td>
-            			<td>6부</td>
-            			<td>7부</td>
-            			<td>7부</td>
-            			<td>8부</td>
-            		</tr>
-            	</table>
-            <p style="color:red;">*남자 최하부수 : 6부 / 여자 최하부수 : 7부</p>
-            <br>
-        	</div>
-                        
+        	<div class="faq_accordion">
+       		 <%
+				BbsDAO_faq bbsDAO = new BbsDAO_faq();
+        		ArrayList<Bbs_faq> list = bbsDAO.getList();
+				for(int i=0; i<list.size(); i++){
+      	 	 %>
+            	<input type="checkbox" id="answer01">
+            	<label for="answer01"><%=list.get(i).getBbsTitle() %></label>        
+            	<div>          
+           			<p><%=list.get(i).getBbsContent() %></p>
+        		</div>
+        	<%
+				}
+       	 	%>   
+       	 	</div>
+        <!-- 
             <input type="checkbox" id="answer02">                      
             <label for="answer02">Q2. 모임 참여에 나이제한이 있나요? / 대학생들만 나올 수 있나요?</label>
             <div>
@@ -123,7 +90,8 @@
             <p>2. 뒷풀이<br>
             	경기가 모두 종료되면 모임 참가자들끼리 뒷풀이를 진행하고 있습니다.<br>
             	뒷풀이 참여는 자유이며, '1차 뒷풀이'의 경우 뒷풀이 참여 인원을 대상으로 n분의 1 계산을 진행하니 참고해주세요!</div>
-       	    </div>     		
+       	    </div>    
+       	      --> 		
        	</section>
 
     </div>

@@ -1,3 +1,4 @@
+<!-- 회원탈퇴 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -14,7 +15,7 @@
 </head>
 
 <body>
-	<%  //userID 존재 여부
+	<%  
 		String userID = null;
 		if(session.getAttribute("userID") != null){ 
 			userID = (String) session.getAttribute("userID"); //get session of userID who logins
@@ -24,8 +25,9 @@
     <div id="wrapper">
     	<br>
         <header>
-       	<%  // only users who logined can use 'delete' page ('admin' cannot delete its account)
+       	<% 
         	if(userID == null){
+        		//로그인 한 사람만 접근 가능
 	            PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('로그인 후 이용가능합니다.')");

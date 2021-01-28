@@ -89,3 +89,13 @@ create table bbs_review(
 	PRIMARY KEY(bbsID),
 	FOREIGN KEY(userID) REFERENCES user(userID)
 );
+
+create table bbs_faq(
+	bbsID int,
+	bbsTitle varchar(2048) not null,
+	userID varchar(20) not null,
+	bbsDate datetime not null,
+	bbsContent varchar(2048) not null,
+	bbsAvailable int default 1 not null,
+	PRIMARY KEY(bbsID),
+);

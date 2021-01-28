@@ -247,9 +247,9 @@ public class UserDAO {
 /* *********************************************************************************
  * 마이페이지
 ***********************************************************************************/
-	/* getUserInfo - mypage.jsp & myinfoModify.jsp */
+	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp */
 	public User getuserInfo(String userID) {	
-		String SQL="SELECT * FROM user WHERE userID = ?";
+		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -356,8 +356,9 @@ public class UserDAO {
 	}
 	
 /* *********************************************************************************
-* 계정 삭제
+* 회원 탈퇴
 ***********************************************************************************/
+	/* delete(회원탈퇴) - deleteAction.jsp */
 	public int delete(String userID, String userPassword) {
 		int rt = -1;
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
@@ -368,7 +369,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(userPassword)) {
-					SQL = "DELETE FROM USER WHERE userID = ? AND userPassword = ?;";
+					SQL = "UPDATE USER SET userAvailable=0 WHERE userID = ? AND userPassword = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1,  userID);
@@ -397,17 +398,14 @@ public class UserDAO {
 		
 		return rt;
 	}
-	
-
-	
 
 /* *********************************************************************************
-* 랭킹
+* 랭킹게시판
 ***********************************************************************************/	
-	/* user 전체 목록 20명씩 불러오기(랭크순 + 이름순) */
+	/* getUserList(랭크순 + 이름순) - rank.jsp */
 	public ArrayList<User> getUserlist(int pageNumber){
 		ArrayList<User> list = new ArrayList<User>();
-		String SQL = "SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT ?, 20;";
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 ORDER BY userRank ASC, userName ASC LIMIT ?, 20;";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1,  (pageNumber-1) * 20);
@@ -416,7 +414,6 @@ public class UserDAO {
 			
 			while(rs.next()) {
 				User user = new User();
-				
 				user.setUserID(rs.getString(1));
 				user.setUserName(rs.getString(3));
 				user.setUserGender(rs.getString(4));
@@ -427,7 +424,8 @@ public class UserDAO {
 				user.setUserSecond(rs.getInt(9));
 				user.setUserThird(rs.getInt(10));
 				user.setUserEmail(rs.getString(11));
-				
+				user.setUserRegdate(rs.getString(13));
+				user.setUserLogdate(rs.getString(14));
 				list.add(user);
 			}
 			} catch(Exception e) {
@@ -439,7 +437,7 @@ public class UserDAO {
 		
 	/* getUserRank_index - index.jsp */
 	public ArrayList<User> getUserRank_index(){		
-		String SQL="SELECT * FROM user ORDER BY userRank ASC, userName ASC LIMIT 9;";
+		String SQL="SELECT * FROM user WHERE userAvailable=1 ORDER BY userRank ASC, userName ASC LIMIT 9;";
 		ArrayList<User> list = new ArrayList<User>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
@@ -459,7 +457,9 @@ public class UserDAO {
 		return list;
 	}
 	
-	
+/* *********************************************************************************
+* 모임게시판 - 참가자명단
+***********************************************************************************/	
 	
 	
 	

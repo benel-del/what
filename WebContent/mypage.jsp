@@ -112,11 +112,11 @@
        				</tr>
        				<tr class="myinfo_userRegdate">
        					<th id="myinfo_title" class="table_th1">가입날짜</th>
-       					<th class="table_th2"><%=user.getUserRegdate() %></th>
+       					<th class="table_th2"><%=user.getUserRegdate().substring(0,11) %></th>
        				</tr>
        				<tr class="myinfo_userLogdate">
        					<th id="myinfo_title" class="table_th1">최근 로그인</th>
-       					<th class="table_th2"><%=user.getUserLogdate() %></th>
+       					<th class="table_th2"><%=user.getUserLogdate().substring(0,11) %></th>
        				</tr>
         		</table>
         		

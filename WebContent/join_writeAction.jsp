@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="bbs_join.BbsDAO_join" %>
 <%@ page import="user_join.UserDAO_join" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -51,7 +52,7 @@
 			} else{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.replace='join_view.jsp?bbsID="+bbsID+"'");
+				script.println("location.replace='join.jsp?bbsID="+bbsID+"'");
 				script.println("</script>");
 			}
 		}

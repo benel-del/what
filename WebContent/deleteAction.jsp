@@ -12,8 +12,8 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	/* 로그인 안 된 사람은 회원탈퇴 페이지에 접근할 수 없음 */
 	if(userID == null){
+		//로그인 한 사람만 접근 가능
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인 후 이용가능합니다.')");

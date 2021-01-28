@@ -104,12 +104,12 @@
                     <div id="index_notice-btn">
                         	<!--참가신청 버튼-->
                         	<div class="index_notice-btn">
-                           		<a href="join.jsp?bbsID=<%=bbsJoin%>">참가신청하기</a>
+                           		<a href="join_write.jsp?bbsID=<%=bbsJoin%>">참가신청하기</a>
                         	</div>
                         	
                         	<!-- 참가자확인 버튼 -->
 							<div class="index_notice-btn">
-                           		<a href="join_view.jsp?bbsID=<%=bbsJoin%>">참가자확인</a>
+                           		<a href="join.jsp?bbsID=<%=bbsJoin%>">참가자확인</a>
                         	</div>
                         	
                         	<!--팀 매칭 버튼-->

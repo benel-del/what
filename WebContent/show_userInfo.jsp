@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- 회원정보 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.User" %>
 <%@ page import="java.io.PrintWriter" %>
@@ -16,60 +18,28 @@
 
 <body>
 	<%
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	String userInfo = null;
-	if(request.getParameter("userID") != null){
-		userInfo = request.getParameter("userID");
-	}
-	if(userInfo == null){
-		PrintWriter script=response.getWriter();
-		script.println("<script>");
-		script.println("alert('유효하지 않은 정보입니다.')");
-		script.println("location.href='rank.jsp'");
-		script.println("</script>");
-	}
-	User user = new UserDAO().getuser_rank(userInfo);
-
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		String userInfo = null;
+		if(request.getParameter("userID") != null){
+			userInfo = request.getParameter("userID");
+		}
+		if(userInfo == null){
+			PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 정보입니다.')");
+			script.println("location.href='rank.jsp'");
+			script.println("</script>");
+		}
+		User user = new UserDAO().getuserInfo(userInfo);
 	%>
 
     <div id="wrapper">
         <br>
-        <header>
-        <%
-        	if(userID == null){
-            PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인 후 이용 가능합니다.')");
-			script.println("location.replace('login.jsp')");
-			script.println("</script>");
-           	} else if(userID.equals("admin") == true) {
-		%>
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-				|
-                <a class="link" href="admin.jsp">관리자 페이지</a>
-           </div>
-        <% 
-           	} else {
-		%>
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                |
-                <a class="link" href="mypage.jsp?userID=<%=userID %>">마이페이지</a>
-           </div>
-		<% 
-           	}
-       	%>
-       		<br>
-       	
-            <!--사이트 이름-->
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
+        <!-- header -->
+        <%@ include file="header.jsp" %>
 
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
@@ -120,7 +90,6 @@
        				<th id="myinfo_title" class="table_th1">3위</th>
        				<th class="table_th2"><%=user.getUserThird() %>회</th>
        				</tr>
-
         		</table>
         	<a class=link href="rank.jsp">목록</a>
         	</div>
