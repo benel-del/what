@@ -75,6 +75,21 @@ create table bbs_result(
 	FOREIGN KEY(bbsThird) REFERENCES user(userID)
 );
 
+create table bbs_review(
+	bbsID int,
+	bbsTitle varchar(50) not null,
+	userID varchar(20) not null,
+	bbsDate datetime not null,
+	bbsContent varchar(2048) not null,
+	bbsAvailable int default 1 not null,
+	fileName varchar(50),
+	fileName1 varchar(50),
+	fileName2 varchar(50),
+	fileName3 varchar(50),
+	PRIMARY KEY(bbsID),
+	FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
 create table bbs_faq(
 	bbsID int,
 	bbsTitle varchar(2048) not null,
