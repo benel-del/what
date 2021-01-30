@@ -39,18 +39,21 @@ public class BbsDAO_join {
 		return -1;
 	}
 	
+	/* getInfo - join_wrtieAction.jsp */
 	public int getInfo(int bbsID, String userID, String userPhone, String joinPassword, String joinMember, String joinContent) {
 		String SQL="INSERT INTO bbs_join"+bbsID+" VALUES(?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext(bbsID));
+			int joinID = getNext(bbsID);
+			pstmt.setInt(1,  joinID);
 			pstmt.setString(2,  userID);
 			pstmt.setString(3,  userPhone);
 			pstmt.setString(4,  joinPassword);
 			pstmt.setString(5,  joinMember);
 			pstmt.setString(6, joinContent);
 			pstmt.setInt(7,  0);
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			return joinID;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

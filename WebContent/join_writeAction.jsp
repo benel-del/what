@@ -39,22 +39,33 @@
 		} else{
 			BbsDAO_join bbsDAO_join = new BbsDAO_join();
 			int bbsID=Integer.parseInt(request.getParameter("bbsID"));
-
-			UserDAO_join userDAO = new UserDAO_join();
-			userDAO.select(bbsID, userID);
+			UserDAO_join userDAO_join = new UserDAO_join();
 				
-			int result = bbsDAO_join.getInfo(bbsID, userID, bbs_join.getUserPhone(), bbs_join.getJoinPassword(), bbs_join.getJoinMember(), bbs_join.getJoinContent());
-			if(result == -1){
+			int joinID = bbsDAO_join.getInfo(bbsID, userID, bbs_join.getUserPhone(), bbs_join.getJoinPassword(), bbs_join.getJoinMember(), bbs_join.getJoinContent());
+			if(joinID == -1){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('참가 신청에 실패하였습니다.')");
+				script.println("alert('bbs_join 등록에 실패하였습니다.')");
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("location.replace='join.jsp?bbsID="+bbsID+"'");
-				script.println("</script>");
+				String[] member = bbs_join.getJoinMember().split("<br>");
+				for(int i=0; i<member.length; i++){
+					int result_user = userDAO_join.write(bbsID, joinID, member[i]);
+					if(result_user == -1){
+						PrintWriter script = response.getWriter();
+						script.println("<script>");
+						script.println("alert('user_join 등록에 실패하였습니다.')");
+						script.println("history.back()");
+						script.println("</script>");
+					}
+					else{
+						PrintWriter script = response.getWriter();
+						script.println("<script>");
+						script.println("location.replace='join.jsp?bbsID="+bbsID+"'");
+						script.println("</script>");
+					}	
+				}						
 			}
 		}
 	}

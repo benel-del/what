@@ -141,6 +141,7 @@
 									<tbody>
 									<%
 										for(User user : user_list){
+											/* user_join에서 isPart = 1인 대상들은 표시하지 않음 */
 									%>	
 										<tr class="search_board_tr">
 											<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>

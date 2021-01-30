@@ -29,7 +29,7 @@ public class UserDAO {
 		}
 	}
 	
-	/* 현재시간 불러오기 */
+	/* 현재시간 불러오기 - UserDAO.java */
 	public String getDate() {
 		String SQL="SELECT NOW();";
 		try {
@@ -247,7 +247,7 @@ public class UserDAO {
 /* *********************************************************************************
  * 마이페이지
 ***********************************************************************************/
-	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp & join.jsp*/
+	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp & join.jsp & join_view.jsp*/
 	public User getuserInfo(String userID) {	
 		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?";
 		try {
@@ -472,6 +472,7 @@ public class UserDAO {
 				User user = new User();
 				user.setUserID(rs.getString(1));
 				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
 				user.setUserLevel(rs.getString(5));
 				list.add(user);
 			}
@@ -487,6 +488,7 @@ public class UserDAO {
 	
 	
 	
+	/* 랭킹 기능 - 관리자가 result 등록 시 업데이트 */
 	/* 랭킹게시판 업데이트 */
 	public int setRank() {
 		int i = 0;

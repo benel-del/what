@@ -42,6 +42,7 @@ create table user_join(
 	userID varchar(20) not null,
 	isPart int default 0 not null,
 	team_num int default 0,
+	PRIMARY KEY(usreID),
 	FOREIGN KEY(bbsID) REFERENCES bbs(bbsID),
 	FOREIGN KEY(userID) REFERENCES user(userID)
 );
