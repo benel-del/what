@@ -2,19 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
-<%@ page import="bbs_join.BbsDAO_join" %>
-<%@ page import="bbs_join.Bbs_join" %>
 <%@ page import="bbs.BbsDAO" %>
+<%@ page import="user.UserDAO" %>
 <%@ page import="user.User" %>
-<%@ page import="user_join.UserDAO_join" %>
-<%@ page import="bbsSearch.BbsSearchDAO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.sql.SQLException"%>
-<%@ page import="java.sql.DriverManager"%>
-<%@ page import="java.sql.ResultSet"%>
-<%@ page import="java.sql.Statement"%>
-<%@ page import="java.sql.PreparedStatement"%>
-<%@ page import="java.sql.Connection"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +14,45 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script type="text/javascript"> 
+    /* 검색 기능 */
+    $(document).ready(function(){ 
+    	$(".search_board > tbody > tr").hide();    	
+    	$("#join_search-btn").click(function() {
+    		var key = $('#join_search-bar').val();
+        	$(".search_board > tbody > tr").hide();
+    		if(key != ""){
+    		var temp;
+    		temp = $(".search_board > tbody > tr > td:nth-child(2n+2):contains('"+key+"')");
+    		$(temp).parent().show();
+    		}
+    	});
+	
+    });
+    
+    function memberList(){//checked list를 mem변수에 string으로 저장
+    	var mem="";
+    	$("input:checkbox[name=joinCheck]:checked").each(function(){
+    		mem += $(this).val() + "<br>";
+    	}); 
+    	return mem;
+    }
+    function join_click(){ //'명단확인' 버튼 클릭 시 참가자명단 update 	
+    	document.getElementById('join_member_list').innerHTML=memberList();
+    }
+    
+    function submit_click(){//'참가신청' 버튼 클릭 시 joinMember의 value값 저장
+    	document.getElementById('joinMember').value=memberList();
+    }
+	
+    </script>
+    
     <title>어쩌다리그</title>
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<%
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -44,20 +69,7 @@
 			script.println("location.href='index.jsp'");
 			script.println("</script>");
 		}
-	
-		int reset = 0;
-		if(request.getParameter("reset") != null){
-			reset = Integer.parseInt(request.getParameter("reset"));
-		}
-		if(reset == 0){
-			UserDAO_join user_join = new UserDAO_join();
-			user_join.delete(bbsID);
-		}
-	
-		BbsSearchDAO searchDAO = new BbsSearchDAO();
-		searchDAO.delete_list(userID, "member");
-	
-		String mem = "";
+		String member;
 	%>
 
     <div id="wrapper">
@@ -71,56 +83,12 @@
     			script.println("location.replace('login.jsp')");
     			script.println("</script>");
     		} 
-        	else{
-        		Class.forName("com.mysql.jdbc.Driver"); 
-            	String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";
-    			String dbID = "root";
-    			String dbPassword = "whatpassword0706!";
-    			ResultSet rs = null;
-                Connection conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-                
-                String query = "SELECT user.team_num FROM (SELECT user.* FROM user_join" + bbsID + " AS user WHERE userID = ?) AS user, bbs_join" + bbsID + " AS bbs WHERE user.team_num = bbs.joinID;";
-                try {
-                	PreparedStatement pstmt=conn.prepareStatement(query);
-                    pstmt.setString(1,  userID);
-                    rs = pstmt.executeQuery();
-    	            
-    	        	if(userID.equals("admin") == true) {
-		%>
-   	        			<!--로그인, 회원가입 버튼-->
-   	                    <div id="service">
-   	                        <a class="link" href="logoutAction.jsp">로그아웃 </a>
-   	                        |
-   	                        <a class="link" href="admin.jsp"> 관리자 페이지</a>
-   	                   </div>
-   	    <% 
-   	                   	} else {
-   	    %>
-   	                    <div id="service">
-   	                        <a class="link" href="logoutAction.jsp">로그아웃 </a>
-   	                        | 
-   	                        <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
-   	                   </div>
-   	    <% 
-   	                   }
-   	               	
-                }catch (SQLException ex) {
-                    out.println(ex.getMessage());
-                    ex.printStackTrace();
-                } finally {
-                    if (rs != null)
-                        try {
-                            rs.close();
-                        } catch (SQLException ex) {
-                    }
-                    if (conn != null)
-                        try {
-                            conn.close();
-                        } catch (SQLException ex) {
-                    }
-                }
-        	}
         %>
+   	        <div id="service">
+   	        	<a class="link" href="logoutAction.jsp">로그아웃 </a>
+   	        	| 
+   	        	<a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
+   	        </div>
         	<br>
     	      	
             <!--사이트 이름-->
@@ -132,17 +100,16 @@
         <!-- menu -->
 		<%@ include file="menubar.jsp" %>
 
-        <!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">참가신청</div>
     	
             <div class="board_container">
             	<div class="board_row">
-            	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>">
+            	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>" onsubmit="submit_click()">
             	    <% 
-            	    	BbsDAO_join bbsDAO_join = new BbsDAO_join(); 
             	       	BbsDAO bbsDAO = new BbsDAO();
-               		   	ArrayList<User> list = searchDAO.getList_selectedMember(bbsID);
+            	    	UserDAO userDAO = new UserDAO();
+            	    	ArrayList<User> user_list = userDAO.getUserList_join();
             	    %>           	            	
             			<table class="board_table">
             			<thead>
@@ -162,45 +129,64 @@
 							<tr class="board_tr">
 								<td>참가자</td>
 							<td>
-								<input type=button name="joinMeberSearch" id="join_member_btn" value="검색하기" onclick="window.open('member_popup.jsp?bbsID=<%=bbsID%>&reset=<%=reset %>', 'member_popup.jsp?bbsID=<%=bbsID%>&reset=<%=reset %>', 'width=600, height=700, location=no, status=no, scrollbars=yes'); <%reset=1;%>">
+								<input type="text" id="join_search-bar" placeholder="이름을 입력해주세요.">
+								<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색하기">
+								<table class="search_board">
+									<thead>
+										<tr class="search_board_tr">
+											<th>체크</th>
+											<th>이름/부수(아이디)</th>
+										</tr>
+									</thead>
+									<tbody>
+									<%
+										for(User user : user_list){
+									%>	
+										<tr class="search_board_tr">
+											<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>
+											<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
+										</tr>
+									<%		
+										}
+									%>
+									</tbody>
+								</table>
 							</td>
 							</tr>
 							<tr>
 								<td>참가자 명단<br>(참가자 검색 후 자동 새로고침)</td>
 								<td>
 									<div class="join_member_list">
-									<%			
-										if(reset == 1){
-											for(int i = 0; i < list.size(); i++){
-												out.print(list.get(i).getUserName() + "(" + list.get(i).getUserID() + "/" + list.get(i).getUserLevel() + "부)<br>"); 
-												mem += list.get(i).getUserID() + " ";
-											}
-										}
-      								%>
-										<input type = hidden name = "joinMember" id = "join_member" value = <%=mem %>>
+										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인">
+										<input type="hidden" name="joinMember" id="joinMember" value="">
+										<p id="join_member_list">위에서 checked된 member list를 이 부분에 띄움(jQuery)</p>
 									</div>
 								</td>
 							</tr>
+							
 							<tr class="board_tr">
 								<td>신청자 연락처</td>
 								<td class="join_td">
 									<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
 								</td>
 							</tr>
+							
 							<tr class="board_tr">
 								<td>비밀번호</td>
 								<td>
 									<input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
 								</td>
 							</tr>
+							
 							<tr class="board_tr">
 								<td>전달내용</td>
 								<td>
 									<textarea id="join_Content" placeholder="참가 관련 전달내용 기재" name="joinContent" maxlength="2048"></textarea>
 								</td>
 							</tr>
+							
 							<tr>
- 								<td  colspan="3">
+ 								<td  colspan="2">
  									<input type="submit" class="join-btn" value="참가신청">
  								</td>
  							</tr>

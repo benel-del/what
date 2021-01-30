@@ -5,6 +5,8 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="bbs_join.Bbs_join" %>
 <%@ page import="bbs_join.BbsDAO_join" %>
+<%@ page import="user.User" %>
+<%@ page import="user.UserDAO" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +32,7 @@
 		if(bbsID ==0){
 			PrintWriter script=response.getWriter();
 			script.println("<script>");
-			script.println("alert('페이지를 찾을 수 없습니다.')");
+			script.println("alert('유효하지 않은 게시물입니다.')");
 			script.println("location.href='index.jsp'");
 			script.println("</script>");
 		}
@@ -49,11 +51,13 @@
 
     		<%
     			BbsDAO_join bbsDAO_join = new BbsDAO_join();
+    			UserDAO userDAO = new UserDAO();
     			ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
     		%>
     	
             <div class="board_container">
             	<div class="board_row">
+            		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
             		<table class="board_table">
             		<thead>
             			<tr class="board_tr">
@@ -73,8 +77,24 @@
             		%>
             			<tr class="board_tr" id="notice_nonfix">
             				<td><%=bbs_join.getJoinID() %></td>
-            				<td><%=bbs_join.getUserID() %></td>
-            				<td><%=bbs_join.getJoinMember()%></td>
+            				<td>
+            				<%
+            					User userName = userDAO.getuserInfo(bbs_join.getUserID());
+	            				out.print(userName.getUserName()+"("+userName.getUserID()+")");	
+	            			%>
+	            			</td>
+            				<td>
+            				<%
+            					String[] mem = bbs_join.getJoinMember().split("<br>");
+            					
+            					for(int i=0; i<mem.length; i++){
+            						if(mem[i] != null){
+            							User user = userDAO.getuserInfo(mem[i]);
+            							out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
+            						}
+            					}
+            				%>
+            				</td>
             				<!-- <td><%//bbs_join.getLevelSum() %> </td> -->
             				<td>
             					<div style="color:blue;">

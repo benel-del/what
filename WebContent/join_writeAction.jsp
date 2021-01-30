@@ -16,6 +16,7 @@
 		userID = (String) session.getAttribute("userID");
 	}
 	if(userID == null){
+		//로그인 한 사람만 접근 가능
     	PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('로그인 후 접근 가능합니다.')");

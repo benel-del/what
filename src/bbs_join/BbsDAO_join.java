@@ -59,7 +59,7 @@ public class BbsDAO_join {
 	
 	/* getMembers(참가자 명단 목록) - join.jsp */
 	public ArrayList<Bbs_join> getMembers(int bbsID){		
-		String SQL="SELECT * FROM bbs_join" + bbsID + ";";
+		String SQL="SELECT * FROM bbs_join" + bbsID + " ORDER BY joinID DESC;";
 		ArrayList<Bbs_join> list = new ArrayList<Bbs_join>();
 		try {
 			PreparedStatement pstmt=conn.prepareStatement(SQL);

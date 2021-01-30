@@ -23,17 +23,17 @@ create table user(
 insert into user values("admin", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "admin", "mi", "-", "", 0, 0, 0, 0, "Admin@do.c");
 
 create table bbs(
-	bbsID int,
-	bbsTitle varchar(50) not null,
-	userID varchar(20) not null,
-	bbsDate datetime not null,
-	bbsContent varchar(2048) not null,
-	bbsAvailable int default 1 not null,
-	bbsType varchar(20) not null,
-	bbsFix int not null,
-	bbsJoindate varchar(50),
-	bbsJoinplace varchar(50),
-	bbsComplete int default 0,
+	bbsID int,                           //공지게시물ID
+	bbsTitle varchar(50) not null, //공지게시물 제목
+	userID varchar(20) not null,   //게시물 작성자ID
+	bbsDate datetime not null,   //게시물 게시날짜
+	bbsContent varchar(2048) not null, //게시물 내용
+	bbsAvailable int default 1 not null, //게시물 삭제여부(0이면 삭제된 게시물)
+	bbsType varchar(20) not null, //공지게시물 종류(일반공지/모임공지)
+	bbsFix int not null,              //중요공지 등록여부(1이면 중요공지)
+	bbsJoindate varchar(50),       //'모임공지'일 경우 해당 모임날짜
+	bbsJoinplace varchar(50),     //'모임공지'일 경우 해당 모임장소
+	bbsComplete int default 0,   //'모임공지'일 경우 해당 모임 완료여부(1이면 완료)
 	PRIMARY KEY(bbsID),
 	FOREIGN KEY(userID) REFERENCES user(userID)
 );
@@ -73,21 +73,6 @@ create table bbs_result(
 	FOREIGN KEY(bbsFirst) REFERENCES user(userID),
 	FOREIGN KEY(bbsSecond) REFERENCES user(userID),
 	FOREIGN KEY(bbsThird) REFERENCES user(userID)
-);
-
-create table bbs_review(
-	bbsID int,
-	bbsTitle varchar(50) not null,
-	userID varchar(20) not null,
-	bbsDate datetime not null,
-	bbsContent varchar(2048) not null,
-	bbsAvailable int default 1 not null,
-	fileName varchar(50),
-	fileName1 varchar(50),
-	fileName2 varchar(50),
-	fileName3 varchar(50),
-	PRIMARY KEY(bbsID),
-	FOREIGN KEY(userID) REFERENCES user(userID)
 );
 
 create table bbs_faq(

@@ -247,7 +247,7 @@ public class UserDAO {
 /* *********************************************************************************
  * 마이페이지
 ***********************************************************************************/
-	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp */
+	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp & join.jsp*/
 	public User getuserInfo(String userID) {	
 		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?";
 		try {
@@ -460,8 +460,27 @@ public class UserDAO {
 /* *********************************************************************************
 * 모임게시판 - 참가자명단
 ***********************************************************************************/	
-	
-	
+	/* getUserList_join(참가신청페이지에서 참가자명단 search할 때 userlist 불러오기) - join_write.jsp */
+	public ArrayList<User> getUserList_join(){
+		ArrayList<User> list = new ArrayList<User>();
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 AND userID!='admin';";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserLevel(rs.getString(5));
+				list.add(user);
+			}
+			} catch(Exception e) {
+				System.out.println("getUserlist fail");
+			} finally {
+			}
+			return list;
+	}
 	
 	
 	

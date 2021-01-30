@@ -4,6 +4,8 @@
 <%@ page import ="java.io.PrintWriter" %>   
 <%@ page import="bbs_join.BbsDAO_join" %>
 <%@ page import="bbs_join.Bbs_join" %>
+<%@ page import="user.User" %>
+<%@ page import="user.UserDAO" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +41,7 @@
 		}
 		BbsDAO_join bbsDAO = new BbsDAO_join(); 
 		Bbs_join bbs = bbsDAO.getJoinView(bbsID, joinID);
+		UserDAO userDAO = new UserDAO();
 	%>
 
     <div id="wrapper">
@@ -78,7 +81,12 @@
        		    <table class="myinfo_table">
        				<tr>
        					<th id="myinfo_title" class="table_th1">신청자</th>
-       					<th class="table_th2"><%=bbs.getUserID() %></th>
+       					<th class="table_th2">
+       					<%
+       						User userName = userDAO.getuserInfo(bbs.getUserID());
+       						out.print(userName.getUserName()+"("+userName.getUserID()+")");
+       					%>
+       					</th>
        				</tr>
        				<tr>
        					<th id="myinfo_title" class="table_th1">신청자연락처</th>
@@ -86,11 +94,30 @@
        				</tr>
        				<tr>
        					<th id="myinfo_title" class="table_th1">참가자 명단</th>
-       					<th class="table_th2"><%=bbs.getJoinMember() %></th>
+       					<th class="table_th2">
+       					<%
+    						String[] mem = bbs.getJoinMember().split("<br>");
+    					
+    						for(int i=0; i<mem.length; i++){
+    							if(mem[i] != null){
+    								User user = userDAO.getuserInfo(mem[i]);
+    								out.println(user.getUserName()+"/"+user.getUserLevel()+" ("+user.getUserID()+")<br>");
+    							}
+    						}
+    					%>
+       				</th>
        				</tr>
        				<tr>
        					<th id="myinfo_title" class="table_th1">건의사항</th>
-       					<th class="table_th2"><%=bbs.getJoinContent() %></th>
+       					<th class="table_th2">
+       					<%
+       						if(bbs.getJoinContent() != null){
+       							out.print(bbs.getJoinContent());
+       						} else{
+       							out.print("");
+       						}
+       					%>
+       					</th>
        				</tr>
         		</table>     			
             </div>
