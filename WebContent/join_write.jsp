@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
 <%@ page import="bbs.BbsDAO" %>
+<%@ page import="user_join.UserDAO_join" %>
 <%@ page import="user.UserDAO" %>
 <%@ page import="user.User" %>
 <%@ page import="java.util.ArrayList" %>
@@ -140,15 +141,18 @@
 									</thead>
 									<tbody>
 									<%
+										UserDAO_join userDAO_join = new UserDAO_join();
 										for(User user : user_list){
 											/* user_join에서 isPart = 1인 대상들은 표시하지 않음 */
+											if(userDAO_join.userJoin(bbsID, user.getUserID()) != 1){
 									%>	
 										<tr class="search_board_tr">
 											<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>
 											<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
 										</tr>
-									<%		
-										}
+									<%	
+											}
+										}	
 									%>
 									</tbody>
 								</table>
