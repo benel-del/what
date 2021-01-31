@@ -1,6 +1,3 @@
 eclipse.preferences.version=1
-encoding//src/bbs/BbsDAO.java=UTF-8
-encoding//src/bbs_result/BbsDAO_result.java=UTF-8
-encoding//src/bbs_review/BbsDAO_review.java=UTF-8
-encoding//src/user/User.java=UTF-8
-encoding//src/user/UserDAO.java=UTF-8
+encoding//src/DB/BbsDAO_result.java=UTF-8
+encoding//src/DB/BbsDAO_review.java=UTF-8

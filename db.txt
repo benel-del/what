@@ -1,9 +1,9 @@
 create database what;
-
 use what;
 
+/* 회원가입시 데이터 추가 */
 create table user(
-	userID varchar(20) not null,
+	userID varchar(20) PRIMARY KEY,
 	userPassword varchar(100) not null,
 	userName varchar(20) not null,
 	userGender varchar(20) not null,
@@ -13,19 +13,17 @@ create table user(
 	userFirst int default 0,
 	userSecond int default 0,
 	userThird int default 0,
-	userEmail varchar(30),
+	userEmail varchar(30) UNIQUE KEY,
 	userAvailable int default 1 not null, //회원탈퇴시 0으로 업데이트
 	userRegdate datetime not null, //회원가입 날짜
-	userLogdate datetime not null, //최근 로그인 날짜
-	PRIMARY KEY(userID)
+	userLogdate datetime not null //최근 로그인 날짜
 );
 
-insert into user values("admin", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "admin", "mi", "-", "", 0, 0, 0, 0, "Admin@do.c");
-
-create table bbs(
-	bbsID int,                           //공지게시물ID
+/* 공지 글 작성시 데이터 추가 - 공지 글 리스트 */
+create table noticeList(
+	bbsID int auto_increment PRIMARY KEY,		//공지게시물ID
 	bbsTitle varchar(50) not null, //공지게시물 제목
-	userID varchar(20) not null,   //게시물 작성자ID
+	writer varchar(20) not null,   //게시물 작성자ID
 	bbsDate datetime not null,   //게시물 게시날짜
 	bbsContent varchar(2048) not null, //게시물 내용
 	bbsAvailable int default 1 not null, //게시물 삭제여부(0이면 삭제된 게시물)
@@ -34,69 +32,81 @@ create table bbs(
 	bbsJoindate varchar(50),       //'모임공지'일 경우 해당 모임날짜
 	bbsJoinplace varchar(50),     //'모임공지'일 경우 해당 모임장소
 	bbsComplete int default 0,   //'모임공지'일 경우 해당 모임 완료여부(1이면 완료)
-	PRIMARY KEY(bbsID),
-	FOREIGN KEY(userID) REFERENCES user(userID)
+	FOREIGN KEY(writer) REFERENCES user(userID) ON UPDATE CASCADE
 );
 
-create table user_join(
-	userID varchar(20) not null,
-	isPart int default 0 not null,
-	team_num int default 0,
-	PRIMARY KEY(usreID),
-	FOREIGN KEY(bbsID) REFERENCES bbs(bbsID),
-	FOREIGN KEY(userID) REFERENCES user(userID)
-);
-
-create table bbs_join(
-	joinID int,
-	userID varchar(20) not null,
-	userPhone varchar(20) not null,
-	joinPassword varchar(10) not null,
-	joinMember varchar(200),
-	joinContent varchar(2048),
+/* 모임공지 작성시 자동 생성, 참가 신청시 데이터 추가 - 모임의 참가팀 명단 */
+create table join00_teamList(
+	teamID int auto_increment PRIMARY KEY,
+	teamLeader varchar(20) not null,
+	leaderPhone varchar(20) not null,
+	teamPassword varchar(10) not null,
+	teamMember varchar(200),
+	teamContent varchar(2048),
 	moneyCheck int default 0 not null,
-	PRIMARY KEY(joinID),
-	FOREIGN KEY(userID) REFERENCES user(userID)
+	FOREIGN KEY(teamLeader) REFERENCES user(userID)
 );
 
-create table bbs_result(
-	bbsID int,
-	bbsTitle varchar(50) not null,
+/* 모임공지 작성시 자동 생성 - 전체 사용자의 모임 참여 여부 */
+create table join00_userList(
 	userID varchar(20) not null,
-	bbsDate datetime not null,
-	bbsContent varchar(2048) not null,
-	bbsAvailable int default 1 not null,
-	bbsFirst varchar(200),
-	bbsSecond varchar(200),
-	bbsThird varchar(200),
-	PRIMARY KEY(bbsID),
+	userAvailable int default 1 not null,
+	isPart int default 0 not null,
+	teamID int default 0,
 	FOREIGN KEY(userID) REFERENCES user(userID),
-	FOREIGN KEY(bbsFirst) REFERENCES user(userID),
-	FOREIGN KEY(bbsSecond) REFERENCES user(userID),
-	FOREIGN KEY(bbsThird) REFERENCES user(userID)
+	FOREIGN KEY(userAvailable) REFERENCES user(userAvailable) ON UPDATE CASCADE,
+	FOREIGN KEY(teamID) REFERENCES join00_teamList(teamID) ON DELETE CASCADE
 );
 
-create table bbs_review(
-	bbsID int,
+/* 결과게시판 글 리스트 */
+create table resultList(
+	bbsID int auto_increment PRIMARY KEY,
 	bbsTitle varchar(50) not null,
-	userID varchar(20) not null,
+	writer varchar(20) not null,
 	bbsDate datetime not null,
 	bbsContent varchar(2048) not null,
 	bbsAvailable int default 1 not null,
-	fileName varchar(50),
+	placeFirst varchar(200),
+	placeSecond varchar(200),
+	placeThird varchar(200),
+	FOREIGN KEY(writer) REFERENCES user(userID),
+	FOREIGN KEY(placeFirst) REFERENCES user(userID),
+	FOREIGN KEY(placeSecond) REFERENCES user(userID),
+	FOREIGN KEY(placeThird) REFERENCES user(userID)
+);
+
+/* 후기게시판 글 리스트 */
+create table reviewList(
+	create table reviewList(
+	bbsID int auto_increment PRIMARY KEY,
+	bbsTitle varchar(50) not null,
+	writer varchar(20) not null,
+	bbsDate datetime not null,
+	bbsContent varchar(2048) not null,
+	bbsAvailable int default 1 not null,
 	fileName1 varchar(50),
 	fileName2 varchar(50),
 	fileName3 varchar(50),
-	PRIMARY KEY(bbsID),
-	FOREIGN KEY(userID) REFERENCES user(userID)
+	fileName4 varchar(50),
+	FOREIGN KEY(writer) REFERENCES user(userID)
 );
 
-create table bbs_faq(
-	bbsID int,
+/* faq 글 작성시 데이터 추가 - faq 글 리스트 */
+create table faqList(
+	bbsID int auto_increment PRIMARY KEY,
 	bbsTitle varchar(2048) not null,
-	userID varchar(20) not null,
+	writer varchar(20) not null,
 	bbsDate datetime not null,
 	bbsContent varchar(2048) not null,
 	bbsAvailable int default 1 not null,
-	PRIMARY KEY(bbsID),
+	FOREIGN KEY(writer) REFERENCES user(userID)
 );
+
+
+insert into user values("admin", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "admin", "mi", "-", "", 0, 0, 0, 0, "Admin@do.c", 1, 0, 0);	// pw: admin1111
+insert into user values("test", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "테스트", "남", "3", "", 0, 0, 0, 0, "test@do.c", 1, 0, 0);
+insert into user values("test1", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "테스트, "남", "1", "", 0, 0, 0, 0, "test1@do.c", 1, 0, 0);
+insert into user values("test2", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "가가가", "여", "0", "", 0, 0, 0, 0, "test2@do.c", 1, 0, 0);
+insert into user values("test3", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "나다라", "여", "-1", "", 0, 0, 0, 0, "test3@do.c", 1, 0, 0);
+insert into user values("test4", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "모로호", "여", "2", "", 0, 0, 0, 0, "test4@do.c", 1, 0, 0);
+insert into user values("test5", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "배바벼", "남", "-2", "", 0, 0, 0, 0, "test5@do.c", 1, 0, 0);
