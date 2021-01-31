@@ -53,7 +53,13 @@
 					script.println("alert('글쓰기에 실패하였습니다.')");
 					script.println("history.back()");
 					script.println("</script>");
-				} else{
+				} else if(result == -2){
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('모임게시판 생성에 실패하였습니다.')");
+					script.println("history.back()");
+					script.println("</script>");
+				}else{
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("location.href='notice.jsp'");
