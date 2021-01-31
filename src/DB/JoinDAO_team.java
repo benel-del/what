@@ -8,12 +8,27 @@ public class JoinDAO_team extends DbAccess{
 		super();
 	}	
 	
+	public int getNext_join(String table) {
+		String SQL="SELECT * FROM " + table + " ORDER BY teamID DESC;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1)+1; //가장 최근 게시물의 bbsID + 1 반환
+			}
+			return 1; //첫 번째 게시물인 경우 1을 반환
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
 	/* getInfo - join_wrtieAction.jsp */
 	public int getInfo(int bbsID, String teamLeader, String leaderPhone, String teamPassword, String teamMember, String teamContent) {
 		String SQL="INSERT INTO join"+bbsID+"_team VALUES(?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			int teamID = getNext("join"+bbsID+"_team");
+			int teamID = getNext_join("join"+bbsID+"_team");
 			pstmt.setInt(1,  teamID);
 			pstmt.setString(2,  teamLeader);
 			pstmt.setString(3,  leaderPhone);

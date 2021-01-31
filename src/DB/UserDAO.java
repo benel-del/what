@@ -374,7 +374,7 @@ public class UserDAO extends DbAccess{
 		String SQL = "SELECT * FROM user WHERE userAvailable = 1 ORDER BY userRank ASC, userName ASC LIMIT ?, 20;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber-1) * 20);
+			pstmt.setInt(1,  (pageNumber-1) * 20+1);
 			
 			rs = pstmt.executeQuery();
 			
