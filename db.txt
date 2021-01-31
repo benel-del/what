@@ -36,7 +36,7 @@ create table bbs_notice(
 );
 
 /* 모임공지 작성시 자동 생성, 참가 신청시 데이터 추가 - 모임의 참가팀 명단 */
-create table join00_teamList(
+create table join00_team(
 	teamID int auto_increment PRIMARY KEY,
 	teamLeader varchar(20) not null,
 	leaderPhone varchar(20) not null,
@@ -48,14 +48,14 @@ create table join00_teamList(
 );
 
 /* 모임공지 작성시 자동 생성 - 전체 사용자의 모임 참여 여부 */
-create table join00_userList(
+create table join00_user(
 	userID varchar(20) not null,
 	userAvailable int default 1 not null,
 	isPart int default 0 not null,
 	teamID int default 0,
 	FOREIGN KEY(userID) REFERENCES user(userID),
 	FOREIGN KEY(userAvailable) REFERENCES user(userAvailable) ON UPDATE CASCADE,
-	FOREIGN KEY(teamID) REFERENCES join00_teamList(teamID) ON DELETE CASCADE
+	FOREIGN KEY(teamID) REFERENCES join00_team(teamID) ON DELETE CASCADE
 );
 
 /* 결과게시판 글 리스트 */

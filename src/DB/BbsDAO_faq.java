@@ -28,7 +28,7 @@ public class BbsDAO_faq extends DbAccess{
 	
 	/* getList - faq.jsp */
 	public ArrayList<Bbs_faq> getList(){
-		String SQL = "SELECT * FROM bbs_faq WHERE bbsAvailable = 1 ORDER BY bbsID DESC;";
+		String SQL = "SELECT bbsID, bbsTitle, bbsContent FROM bbs_faq WHERE bbsAvailable = 1 ORDER BY bbsID DESC;";
 		ArrayList<Bbs_faq> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -37,7 +37,7 @@ public class BbsDAO_faq extends DbAccess{
 				Bbs_faq bbs = new Bbs_faq();
 				bbs.setBbsID(rs.getInt(1));
 				bbs.setBbsTitle(rs.getString(2));
-				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsContent(rs.getString(3));
 				list.add(bbs);
 			}
 		} catch(Exception e) {
