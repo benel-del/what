@@ -94,6 +94,18 @@ public class JoinDAO_user extends DbAccess{
 		return -1;
 	}
 	
+	/* join_updateAction.jsp */
+	public int update_delete(int bbsID, int teamID) {
+		String SQL = "UPDATE join"+bbsID+"_user SET isPart=0, teamID=0 WHERE teamID="+teamID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	/*public int unselect(int bbsID, String id) {
 		BbsDAO_join bbs = new BbsDAO_join();
 		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, teamID = 0 WHERE teamID = ? AND userID = ?;";

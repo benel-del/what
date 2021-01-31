@@ -195,25 +195,19 @@
        							User userName = userDAO.getuserInfo(join_team.getTeamLeader());
        							out.print(userName.getUserName()+"("+userName.getUserID()+")");
        						%>
-							</td>
-						</tr>
-							
-						<tr class="board_tr">
-							<td>신청자연락처</td>
-							<td>
-								<input type="text" name="leaderPhone" value="<%=join_team.getLeaderPhone() %>">
+       						<input type="hidden" name="teamLeader" value="<%=join_team.getTeamLeader() %>">
 							</td>
 						</tr>
 
 						<tr class="board_tr">
 							<td>신청자 연락처</td>
 							<td>
-								<input type="text" name="leaderPhone" value="<%=join_team.getLeaderPhone() %>">
+								<input type="tel" class="join_form" id="user_Phone" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}" value="<%=join_team.getLeaderPhone() %>">
 							</td>
 						</tr>
 						
 						<tr class="board_tr">
-							<td>신청자연락처</td>
+							<td>건의사항</td>
 							<td>
 								<input type="text" name="teamContent" value="<%=join_team.getTeamContent() %>">
 							</td>
@@ -222,7 +216,7 @@
 						<tr class="board_tr">
 							<td>비밀번호</td>
 							<td>
-								<input type="text" name="teamPassword" value="<%=join_team.getTeamPassword() %>">
+								<input type="text" name="teamPassword">
 							</td>
 						</tr>
 						<tr>

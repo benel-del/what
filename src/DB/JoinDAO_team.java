@@ -88,4 +88,48 @@ public class JoinDAO_team extends DbAccess{
 		}
 		return null;
 	}
+	
+	/* join_updateAction.jsp - 업데이트 시 비밀번호 일치여부 확인 */
+	public int check_joinPW(int bbsID, int teamID, String password) {
+		String SQL="SELECT teamPassword FROM join"+bbsID+"_team WHERE teamID="+teamID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getString(1).contentEquals(password))
+					return 1;
+				else return 0;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
+	/* join_updateAction.jsp */
+	public int update(int bbsID, int teamID, String member, String phone, String content) {
+		String SQL = "UPDATE join"+bbsID+"_team SET teamMember=?, leaderPhone=?, teamContent=? WHERE teamID="+teamID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, member);
+			pstmt.setString(2, phone);
+			pstmt.setString(3, content);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	/* join_deleteAction.jsp */
+	public int delete(int bbsID, int teamID) {
+		String SQL = "DELETE FROM join"+bbsID+"_team WHERE teamID="+teamID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
