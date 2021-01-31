@@ -67,6 +67,33 @@ public class JoinDAO_user extends DbAccess{
 		return -1;
 	}
 	
+	/* join_update.jsp */
+	public int userJoin_update(int bbsID, int teamID, String userID) {
+		String SQL = "SELECT isPart, teamID FROM join" + bbsID + "_user WHERE userID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {	
+				if(rs.getInt(1) == 1 && rs.getInt(2) != teamID) {
+					//참가신청되었는데 다른 팀원인 경우
+					return 1;	
+				} 
+				else if(rs.getInt(1) == 1 && rs.getInt(2) == teamID) {
+					//참가신청되었는데 teamID에 속한 경우
+					return 2;
+				}
+				else {
+					//참가신청 안된 경우
+					return 0; 	
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	/*public int unselect(int bbsID, String id) {
 		BbsDAO_join bbs = new BbsDAO_join();
 		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, teamID = 0 WHERE teamID = ? AND userID = ?;";
