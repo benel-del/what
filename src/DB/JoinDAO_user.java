@@ -9,13 +9,13 @@ public class JoinDAO_user extends DbAccess{
 	
 	/* write(참가신청) - join_writeAction.jsp */
 	public int write(int bbsID, int teamID, String userID) {
-		String SQL="SELECT userID FROM join" + bbsID + "_userList WHERE userID = ?;";
+		String SQL="SELECT userID FROM join" + bbsID + "_user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	
-				SQL="UPDATE join" + bbsID + "_userList SET isPart=1, teamID=? WHERE userID = ?;";
+				SQL="UPDATE join" + bbsID + "_user SET isPart=1, teamID=? WHERE userID = ?;";
 				try {
 					pstmt=conn.prepareStatement(SQL);
 					pstmt.setInt(1,  teamID);
@@ -27,7 +27,7 @@ public class JoinDAO_user extends DbAccess{
 				}
 			}
 			else {	// JOIN 참가자 등록시, join00_userList에 해당 userID가 없는 경우 = 공지 생성보다 늦게 회원가입 한 경우
-				SQL="INSERT INTO join" + bbsID + "_userList VALUES(?, ?, ?, ?);";
+				SQL="INSERT INTO join" + bbsID + "_user VALUES(?, ?, ?, ?);";
 				try {
 					pstmt=conn.prepareStatement(SQL);
 					pstmt.setString(1,  userID);
@@ -48,7 +48,7 @@ public class JoinDAO_user extends DbAccess{
 	
 	/* 해당 유저의 참가여부 return - team.jsp */
 	public int userJoin(int bbsID, String userID) {
-		String SQL = "SELECT isPart FROM join" + bbsID + "_userList WHERE userID = ?;";
+		String SQL = "SELECT isPart FROM join" + bbsID + "_user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);			
