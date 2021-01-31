@@ -29,8 +29,8 @@ create table noticeList(
 	bbsAvailable int default 1 not null, //게시물 삭제여부(0이면 삭제된 게시물)
 	bbsType varchar(20) not null, //공지게시물 종류(일반공지/모임공지)
 	bbsFix int not null,              //중요공지 등록여부(1이면 중요공지)
-	bbsJoindate varchar(50),       //'모임공지'일 경우 해당 모임날짜
-	bbsJoinplace varchar(50),     //'모임공지'일 경우 해당 모임장소
+	bbsJoindate varchar(20),       //'모임공지'일 경우 해당 모임날짜
+	bbsJoinplace varchar(20),     //'모임공지'일 경우 해당 모임장소
 	bbsComplete int default 0,   //'모임공지'일 경우 해당 모임 완료여부(1이면 완료)
 	FOREIGN KEY(writer) REFERENCES user(userID) ON UPDATE CASCADE
 );
