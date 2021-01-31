@@ -7,13 +7,13 @@
 <%@ page import="javax.mail.internet.MimeMessage" %>
 <%@ page import="javax.mail.Session" %>
 <%@ page import="javax.mail.Authenticator" %>
-<%@ page import="user.UserDAO" %>
+<%@ page import="DB.UserDAO" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="util.Gmail" %>
 <%@ page import="util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="user" class="user.User" scope="page" />
+<jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userName" />
 <jsp:setProperty name="user" property="userEmail" />
 <jsp:setProperty name="user" property="userID" />

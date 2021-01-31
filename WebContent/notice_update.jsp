@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "bbs.Bbs" %>
-<%@ page import = "bbs.BbsDAO" %> 
+<%@ page import = "DB.Bbs_notice" %>
+<%@ page import = "DB.BbsDAO_notice" %> 
 
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.DriverManager"%>
@@ -23,7 +23,7 @@
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script>
 	$(function() {
-   	 	$( "#bbs_joinDate" ).datepicker({
+   	 	$( "#join_teamDate" ).datepicker({
    	 	dateFormat: "yy-mm-dd"
    	 	});
    	 })
@@ -78,8 +78,8 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Bbs bbs = new BbsDAO().getBbs(bbsID);
-		if(!userID.equals(bbs.getUserID())){
+		Bbs_notice bbs_notice = new BbsDAO_notice().getBbs(bbsID);
+		if(!userID.equals(bbs_notice.getWriter())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");
@@ -140,7 +140,7 @@
 			            			   	 	Connection conn = null;
 			            			   	 	Statement stmt = null;
 			            			   		ResultSet rs = null;
-			            			    	BbsDAO bbsDAO = new BbsDAO();
+			            			    	BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
 			            			    	try {
 			            			        	String query = "select * from bbs where bbsID='"+bbsID+"'";
 			            			        	conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
@@ -148,7 +148,7 @@
 			            			        	rs = stmt.executeQuery(query);
 			            			        	while (rs.next()) {
 			            				%>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); else if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); else if (bbsDAO_notice.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO_notice.fixNumber()%>/10)
 			            					
 			            					<input type="checkbox" id="bbs_fix" name="bbsComplete" value=1 <% if(rs.getInt(11) == 1) out.print("checked"); %>/> 완료
 			            				<%
@@ -179,12 +179,12 @@
 		            					</div>
 			            				<div class="bbsType">
 			            					<select name="bbsType" id="bbsType" onchange = "changeSelect()">
-				  								<option value='일반공지' <%if(bbs.getBbsType().equals("일반공지") == true) out.print("selected"); %>>일반공지</option>
-				  								<option value='모임공지' <%if(bbs.getBbsType().equals("모임공지") == true) out.print("selected"); %>>모임공지</option>
+				  								<option value='일반공지' <%if(bbs_notice.getBbsType().equals("일반공지") == true) out.print("selected"); %>>일반공지</option>
+				  								<option value='모임공지' <%if(bbs_notice.getBbsType().equals("모임공지") == true) out.print("selected"); %>>모임공지</option>
 											</select>
 			            				</div>
 			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs.getBbsTitle() %>">
+			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs_notice.getBbsTitle() %>">
 			            				</div>
 	            					</div>
 								</td>
@@ -195,10 +195,10 @@
             						<div class="join_input">
             							* 모임 공지만<br>
             							모임 일시: 
-	            						<input type="date" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate" maxlength="50" value="<%=bbs.getBbsJoindate() %>">
+	            						<input type="date" id="join_teamDate" placeholder="모임일시" name="bbsJoindate" maxlength="50" value="<%=bbs_notice.getBbsJoindate() %>">
 	            						<br>
 	            						모임 장소:
-	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50" value=<%=bbs.getBbsJoinplace() %>>
+	            						<input type="text" id="join_teamPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50" value=<%=bbs_notice.getBbsJoinplace() %>>
             						</div>
             					</div>
             					</td>
@@ -206,7 +206,7 @@
             				<tr>
             					<td>
             						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs.getBbsContent() %></textarea>
+            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_notice.getBbsContent() %></textarea>
             						</div>
             					</td>
             				</tr>

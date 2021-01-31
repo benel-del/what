@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="bbs.BbsDAO" %>
-<%@ page import="bbs.Bbs" %>
+<%@ page import="DB.BbsDAO_notice" %>
+<%@ page import="DB.Bbs_notice" %>
 <%@ page import="java.io.PrintWriter" %>
 
 <% 
@@ -20,8 +20,8 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Bbs bbs = new BbsDAO().getBbs(bbsID);
-		if(userID == null || !userID.equals(bbs.getUserID())){
+		Bbs_notice bbs_notice = new BbsDAO_notice().getBbs(bbsID);
+		if(userID == null || !userID.equals(bbs_notice.getWriter())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");
@@ -29,9 +29,9 @@
 			script.println("</script>");
 		} else{
 			
-				BbsDAO bbsDAO = new BbsDAO();
+				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
 				
-				int result = bbsDAO.delete(bbsID);
+				int result = bbsDAO_notice.delete("bbs_notice", bbsID);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

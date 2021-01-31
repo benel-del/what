@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-<%@ page import="bbs.Bbs" %>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="DB.Bbs_notice" %>
+<%@ page import="DB.BbsDAO_notice" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,7 @@
 			script.println("location.href='notice.jsp'");
 			script.println("</script>");
 		}
-		Bbs bbs = new BbsDAO().getBbs(bbsID);
+		Bbs_notice bbs_notice = new BbsDAO_notice().getBbs(bbsID);
 	%>
 	
     <div id="wrapper">
@@ -85,35 +85,35 @@
             			<thead>
             				<tr>
             					<td class="view_subtitle">제목</td>
-            					<td colspan="3" class="view_title">[<%=bbs.getBbsType() %>] <%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
+            					<td colspan="3" class="view_title">[<%=bbs_notice.getBbsType() %>] <%=bbs_notice.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></td>
             				</tr>
             			</thead>    			
             			<tbody>
             				<tr>
             					<td class="view_subtitle">작성자</td>
-	            				<td class="view_content1"><%=bbs.getUserID() %></td>
+	            				<td class="view_content1"><%=bbs_notice.getWriter() %></td>
 	            				<td class="view_subtitle">작성일자</td>
-	            				<td class="view_content1"><%=bbs.getBbsDate().substring(0, 10) %></td>
+	            				<td class="view_content1"><%=bbs_notice.getBbsDate().substring(0, 10) %></td>
             				</tr>
             				
-            				<%if(bbs.getBbsType().equals("모임공지") == true) { %>           				
+            				<%if(bbs_notice.getBbsType().equals("모임공지") == true) { %>           				
             				<tr>
             					<td class="view_subtitle">모임날짜</td>
-	            				<td class="view_content1"><%if(bbs.getBbsJoindate() == null) out.print(""); else out.print(bbs.getBbsJoindate()); %></td>
+	            				<td class="view_content1"><%if(bbs_notice.getBbsJoindate() == null) out.print(""); else out.print(bbs_notice.getBbsJoindate()); %></td>
 	            				<td class="view_subtitle">모임장소</td>
-	            				<td class="view_content1"><%if(bbs.getBbsJoinplace() == null) out.print(""); else out.print(bbs.getBbsJoinplace()); %></td>
+	            				<td class="view_content1"><%if(bbs_notice.getBbsJoinplace() == null) out.print(""); else out.print(bbs_notice.getBbsJoinplace()); %></td>
             				</tr>
             				<%} %>
             				<tr>
             					<td class="view_subtitle">내용</td>
-	            				<td colspan="3" class="view_content2"><div><%=bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
+	            				<td colspan="3" class="view_content2"><div><%=bbs_notice.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></div></td>
             				</tr>
             			</tbody>
             		</table>
             		
             	<%
-            		if(bbs.getBbsType().equals("모임공지") == true){
-            			if(bbs.getBbsComplete() == 0){
+            		if(bbs_notice.getBbsType().equals("모임공지") == true){
+            			if(bbs_notice.getBbsComplete() == 0){
             			out.println("<div id=\"notice_btn-primary\">");
             			out.println("<a href=\"join_write.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
             			out.println("</div>");
@@ -126,7 +126,7 @@
             		} 
             	%>
             	<%
-            		if(bbs.getBbsType().equals("모임공지")==true){
+            		if(bbs_notice.getBbsType().equals("모임공지")==true){
             			out.println("<div id=\"notice_btn-primary\">");
             			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가자 명단 보기</a>");
             			out.println("</div>");
@@ -137,7 +137,7 @@
             			<a href="notice.jsp" class="link">글 목록 </a>
             		
             			<%
-            				if(userID != null && userID.equals(bbs.getUserID())){
+            				if(userID != null && userID.equals(bbs_notice.getWriter())){
             					out.println("/");
             					out.println("<a href = \"notice_update.jsp?bbsID=" + bbsID + "\" class=\"link\"> 수정 </a>");
             					out.println("/");

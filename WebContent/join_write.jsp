@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
-<%@ page import="bbs.BbsDAO" %>
-<%@ page import="user_join.UserDAO_join" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="user.User" %>
+<%@ page import="DB.BbsDAO_notice" %>
+<%@ page import="DB.JoinDAO_user" %>
+<%@ page import="DB.UserDAO" %>
+<%@ page import="DB.User" %>
 <%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
@@ -43,8 +43,8 @@
     	document.getElementById('join_member_list').innerHTML=memberList();
     }
     
-    function submit_click(){//'참가신청' 버튼 클릭 시 joinMember의 value값 저장
-    	document.getElementById('joinMember').value=memberList();
+    function submit_click(){//'참가신청' 버튼 클릭 시 teamMember의 value값 저장
+    	document.getElementById('teamMember').value=memberList();
     }
 	
     </script>
@@ -108,7 +108,7 @@
             	<div class="board_row">
             	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>" onsubmit="submit_click()">
             	    <% 
-            	       	BbsDAO bbsDAO = new BbsDAO();
+            	       	BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
             	    	UserDAO userDAO = new UserDAO();
             	    	ArrayList<User> user_list = userDAO.getUserList_join();
             	    %>           	            	
@@ -116,7 +116,7 @@
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="join_title" colspan="2">
-            						<input type="hidden" name="bbsID" value="<%=bbsID %>"><%=bbsDAO.getBbs(bbsID).getBbsTitle() %>
+            						<input type="hidden" name="bbsID" value="<%=bbsID %>"><%=bbsDAO_notice.getBbs(bbsID).getBbsTitle() %>
             					</th>
             				</tr>
             			</thead>
@@ -141,10 +141,10 @@
 									</thead>
 									<tbody>
 									<%
-										UserDAO_join userDAO_join = new UserDAO_join();
+										JoinDAO_user joinDAO_user = new JoinDAO_user();
 										for(User user : user_list){
-											/* user_join에서 isPart = 1인 대상들은 표시하지 않음 */
-											if(userDAO_join.userJoin(bbsID, user.getUserID()) != 1){
+											/* join_user에서 isPart = 1인 대상들은 표시하지 않음 */
+											if(joinDAO_user.userJoin(bbsID, user.getUserID()) != 1){
 									%>	
 										<tr class="search_board_tr">
 											<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>
@@ -163,7 +163,7 @@
 								<td>
 									<div class="join_member_list">
 										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인">
-										<input type="hidden" name="joinMember" id="joinMember" value="">
+										<input type="hidden" name="teamMember" id="teamMember" value="">
 										<p id="join_member_list">위에서 checked된 member list를 이 부분에 띄움(jQuery)</p>
 									</div>
 								</td>
@@ -172,21 +172,21 @@
 							<tr class="board_tr">
 								<td>신청자 연락처</td>
 								<td class="join_td">
-									<input type="tel" class="join_form" id="user_Phone" name = "userPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
+									<input type="tel" class="join_form" id="user_Phone" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
 								<td>비밀번호</td>
 								<td>
-									<input type="password" class="join_form" id="join_Password" name="joinPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
+									<input type="password" class="join_form" id="join_Password" name="teamPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
 								<td>전달내용</td>
 								<td>
-									<textarea id="join_Content" placeholder="참가 관련 전달내용 기재" name="joinContent" maxlength="2048"></textarea>
+									<textarea id="join_Content" placeholder="참가 관련 전달내용 기재" name="teamContent" maxlength="2048"></textarea>
 								</td>
 							</tr>
 							

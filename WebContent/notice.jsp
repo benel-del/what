@@ -2,11 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>
-<%@ page import="bbs.BbsDAO" %>
-<%@ page import="bbs.Bbs" %>
+<%@ page import="DB.BbsDAO_notice" %>
+<%@ page import="DB.Bbs_notice" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="user.UserDAO" %>
-<jsp:useBean id="user" class="user.User" scope="page" />
+<%@ page import="DB.UserDAO" %>
+<jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
 <!DOCTYPE html>
@@ -54,8 +54,8 @@
 		/* 게시판 업데이트!
 		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
 		*/
-		BbsDAO bbsDAO = new BbsDAO();
-		if(bbsDAO.updateBbsComplete() == -1){
+		BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
+		if(bbsDAO_notice.updateBbsComplete() == -1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('게시판 업데이트에 실패하였습니다.')");
@@ -92,7 +92,7 @@
             			</thead>
             			<tbody>
             				<%
-            					ArrayList<Bbs> list = bbsDAO.getList(pageNumber);
+            					ArrayList<Bbs_notice> list = bbsDAO_notice.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 1){
             				%>          				
@@ -102,7 +102,7 @@
             					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
             					<td><div style="color:blue"><%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0){out.println("[진행중]");} else{%></div>
   						          	 <div style="color:red"><% out.println("[완료]");}}%></div></td>
-            					<td><%=list.get(i).getUserID() %></td>
+            					<td><%=list.get(i).getWriter() %></td>
             					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
@@ -117,7 +117,7 @@
                        					<td><a href="notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>                   
                        					<td><div style="color:blue"><%if(list.get(i).getBbsType().equals("모임공지")==true){if(list.get(i).getBbsComplete() == 0){out.println("[진행중]");} else{ %></div>
   						          	 		<div style="color:red"><%out.println("[완료]");}}%></div></td>
-                       					<td><%=list.get(i).getUserID() %></td>
+                       					<td><%=list.get(i).getWriter() %></td>
                        					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
                        				</tr>   
                        		<%
@@ -138,7 +138,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO.nextPage(pageNumber+1)){
+            		if(bbsDAO_notice.nextPage("bbs_notice", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="notice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

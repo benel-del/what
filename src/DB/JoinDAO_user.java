@@ -74,7 +74,7 @@ public class JoinDAO_user extends DbAccess{
 	
 	/*public int unselect(int bbsID, String id) {
 		BbsDAO_join bbs = new BbsDAO_join();
-		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, team_num = 0 WHERE team_num = ? AND userID = ?;";
+		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, teamID = 0 WHERE teamID = ? AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1,  bbs.getNext(bbsID));
@@ -88,7 +88,7 @@ public class JoinDAO_user extends DbAccess{
 	
 	public int delete(int bbsID) {
 		BbsDAO_join bbs = new BbsDAO_join();
-		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, team_num = 0 WHERE team_num = ?;";
+		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, teamID = 0 WHERE teamID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1,  bbs.getNext(bbsID));

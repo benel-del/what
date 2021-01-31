@@ -3,10 +3,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="bbs_join.Bbs_join" %>
-<%@ page import="bbs_join.BbsDAO_join" %>
-<%@ page import="user.User" %>
-<%@ page import="user.UserDAO" %>
+<%@ page import="DB.Join_team" %>
+<%@ page import="DB.JoinDAO_team" %>
+<%@ page import="DB.User" %>
+<%@ page import="DB.UserDAO" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,9 +50,8 @@
             <div class="board_subtitle">참가자 명단</div>
 
     		<%
-    			BbsDAO_join bbsDAO_join = new BbsDAO_join();
     			UserDAO userDAO = new UserDAO();
-    			ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
     		%>
     	
             <div class="board_container">
@@ -73,19 +72,19 @@
             			
             		<tbody>
             		<%
-            			for(Bbs_join bbs_join : list){
+            			for(Join_team join_team : list){
             		%>
             			<tr class="board_tr" id="notice_nonfix">
-            				<td><%=bbs_join.getJoinID() %></td>
+            				<td><%=join_team.getTeamID() %></td>
             				<td>
             				<%
-            					User userName = userDAO.getuserInfo(bbs_join.getUserID());
+            					User userName = userDAO.getuserInfo(join_team.getTeamLeader());
 	            				out.print(userName.getUserName()+"("+userName.getUserID()+")");	
 	            			%>
 	            			</td>
             				<td>
             				<%
-            					String[] mem = bbs_join.getJoinMember().split("<br>");
+            					String[] mem = join_team.getTeamMember().split("<br>");
             					
             					for(int i=0; i<mem.length; i++){
             						if(mem[i] != null){
@@ -95,11 +94,11 @@
             					}
             				%>
             				</td>
-            				<!-- <td><%//bbs_join.getLevelSum() %> </td> -->
+            				<!-- <td><%//join_team.getLevelSum() %> </td> -->
             				<td>
             					<div style="color:blue;">
             					<%
-            						if(bbs_join.getMoneyCheck()==0){
+            						if(join_team.getMoneyCheck()==0){
             							out.print("대기");
             						} else{
             					%>
@@ -111,13 +110,13 @@
             					%> 
             					</div>           					
             				</td>
-            				<!-- <td><%//bbs_join.getJoindate() %> </td> -->
+            				<!-- <td><%//join_team.getJoindate() %> </td> -->
             				<td>
             				<% 
-            					if(bbs_join.getUserID().equals(userID)){
+            					if(join_team.getTeamLeader().equals(userID)){
             						//신청자 본인인 경우
             				%>
-            					<a href="join_view.jsp?bbsID=<%=bbsID %>&joinID=<%=bbs_join.getJoinID() %>">참가내역보기</a>
+            					<a href="join_view.jsp?bbsID=<%=bbsID %>&teamID=<%=join_team.getTeamID() %>">참가내역보기</a>
             				<%
             					}
             				%>

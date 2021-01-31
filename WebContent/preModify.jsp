@@ -1,10 +1,10 @@
 <!-- 내정보 수정_전 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
-<%@ page import="user.UserDAO" %>
+<%@ page import="DB.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="user" class="user.User" scope="page" />
+<jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
 <!DOCTYPE html>

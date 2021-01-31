@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>   
-<%@ page import="bbs_join.BbsDAO_join" %>
-<%@ page import="bbs_join.Bbs_join" %>
-<%@ page import="user.User" %>
-<%@ page import="user.UserDAO" %>
+<%@ page import="DB.JoinDAO_team" %>
+<%@ page import="DB.Join_team" %>
+<%@ page import="DB.User" %>
+<%@ page import="DB.UserDAO" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,19 +28,18 @@
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}	
-		int joinID = 0;
-		if(request.getParameter("joinID") != null){
-			joinID = Integer.parseInt(request.getParameter("joinID"));
+		int teamID = 0;
+		if(request.getParameter("teamID") != null){
+			teamID = Integer.parseInt(request.getParameter("teamID"));
 		}
-		if(bbsID == 0 || joinID == 0){
+		if(bbsID == 0 || teamID == 0){
 			PrintWriter script=response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 게시물입니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		BbsDAO_join bbsDAO = new BbsDAO_join(); 
-		Bbs_join bbs = bbsDAO.getJoinView(bbsID, joinID);
+		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
 		UserDAO userDAO = new UserDAO();
 	%>
 
@@ -48,7 +47,7 @@
         <br>
         <header>
         <%
-        	if(userID == null || userID.equals(bbs.getUserID()) == false){
+        	if(userID == null || userID.equals(join_team.getTeamLeader()) == false){
         		//신청자 본인만 열람 가능
     			PrintWriter script = response.getWriter();
     			script.println("<script>");
@@ -83,20 +82,20 @@
        					<th id="myinfo_title" class="table_th1">신청자</th>
        					<th class="table_th2">
        					<%
-       						User userName = userDAO.getuserInfo(bbs.getUserID());
+       						User userName = userDAO.getuserInfo(join_team.getTeamLeader());
        						out.print(userName.getUserName()+"("+userName.getUserID()+")");
        					%>
        					</th>
        				</tr>
        				<tr>
        					<th id="myinfo_title" class="table_th1">신청자연락처</th>
-       					<th class="table_th2"><%=bbs.getUserPhone() %></th>
+       					<th class="table_th2"><%=join_team.getLeaderPhone() %></th>
        				</tr>
        				<tr>
        					<th id="myinfo_title" class="table_th1">참가자 명단</th>
        					<th class="table_th2">
        					<%
-    						String[] mem = bbs.getJoinMember().split("<br>");
+    						String[] mem = join_team.getTeamMember().split("<br>");
     					
     						for(int i=0; i<mem.length; i++){
     							if(mem[i] != null){
@@ -111,8 +110,8 @@
        					<th id="myinfo_title" class="table_th1">건의사항</th>
        					<th class="table_th2">
        					<%
-       						if(bbs.getJoinContent() != null){
-       							out.print(bbs.getJoinContent());
+       						if(join_team.getTeamContent() != null){
+       							out.print(join_team.getTeamContent());
        						} else{
        							out.print("");
        						}
@@ -123,9 +122,9 @@
             </div>
             <a class=link href="join.jsp?bbsID=<%=bbsID%>">목록</a>
             |
-            <a class=link href="join_update.jsp?bbsID=<%=bbsID%>&joinID=<%=joinID%>">수정</a>
+            <a class=link href="join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">수정</a>
             |
-            <a class=link href="join_delete.jsp?bbsID=<%=bbsID%>&joinID=<%=joinID%>">삭제</a>
+            <a class=link href="join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">삭제</a>
             
         </section>
     </div>  

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="DB.BbsDAO_notice" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="bbs" class="bbs.Bbs" scope="page" />
+<jsp:useBean id="bbs" class="DB.Bbs_notice" scope="page" />
 <jsp:setProperty name="bbs" property="bbsTitle" />
 <jsp:setProperty name="bbs" property="bbsContent" />
 <jsp:setProperty name="bbs" property="bbsType" />
@@ -38,15 +38,15 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				BbsDAO bbsDAO = new BbsDAO();
-				if(bbsDAO.fixNumber() + bbs.getBbsFix() > 10){
+				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
+				if(bbsDAO_notice.fixNumber() + bbs.getBbsFix() > 10){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");
 					script.println("history.back()");
 					script.println("</script>");
 				}
-				int result = bbsDAO.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix(), bbs.getBbsJoindate(), bbs.getBbsJoinplace());
+				int result = bbsDAO_notice.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix(), bbs.getBbsJoindate(), bbs.getBbsJoinplace());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

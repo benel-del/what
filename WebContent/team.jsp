@@ -1,9 +1,9 @@
 <!-- 팀원찾기 페이지 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
-<%@ page import="user.User" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="user_join.UserDAO_join" %>
+<%@ page import="DB.User" %>
+<%@ page import="DB.UserDAO" %>
+<%@ page import="DB.JoinDAO_user" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
 
@@ -84,7 +84,6 @@
             			<tbody>
             			<%	    	
             				UserDAO userDAO = new UserDAO();
-            				UserDAO_join userDAO_join = new UserDAO_join();
             				ArrayList<User> list = userDAO.getUserList_join();
 							for(User user : list){
 		            	%>      				  	
@@ -95,7 +94,7 @@
 		            			<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>
             					<td>
             					<%
-            						if(userDAO_join.userJoin(bbsID, user.getUserID()) == 1){
+            						if(new JoinDAO_user().userJoin(bbsID, user.getUserID()) == 1){
             							out.print("참가신청완료");            				
             						}else{
             							out.print("");

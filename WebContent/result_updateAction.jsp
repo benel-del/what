@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="bbs_result.BbsDAO_result" %>
-<%@ page import="bbs_result.Bbs_result" %>
+<%@ page import="DB.BbsDAO_result" %>
+<%@ page import="DB.Bbs_result" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -21,7 +21,7 @@
 			script.println("</script>");
 		}
 		Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
-		if(userID == null || !userID.equals(bbs_result.getUserID())){
+		if(userID == null || !userID.equals(bbs_result.getWriter())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");
@@ -36,7 +36,7 @@
 				script.println("</script>");
 			} else{
 				BbsDAO_result bbsDAO_result = new BbsDAO_result();
-				int result = bbsDAO_result.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsFirst"), request.getParameter("bbsSecond"), request.getParameter("bbsThird"));
+				int result = bbsDAO_result.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("placeFirst"), request.getParameter("placeSecond"), request.getParameter("placeThird"));
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

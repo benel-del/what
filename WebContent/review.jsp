@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>
-<%@ page import="bbs_review.BbsDAO_review" %>
-<%@ page import="bbs_review.Bbs_review" %>
+<%@ page import="DB.BbsDAO_review" %>
+<%@ page import="DB.Bbs_review" %>
 <%@ page import="java.util.ArrayList" %>
     
-<%@ page import="user.UserDAO" %>
-<jsp:useBean id="user" class="user.User" scope="page" />
+<%@ page import="DB.UserDAO" %>
+<jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
 <!DOCTYPE html>
@@ -82,7 +82,7 @@
             				<tr class="board_tr">
             					<td><%=list.get(i).getBbsID()%></td>
             					<td><a href="review_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
-            					<td><%=list.get(i).getUserID() %></td>
+            					<td><%=list.get(i).getWriter() %></td>
             					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
@@ -105,7 +105,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO_review.nextPage(pageNumber+1)){
+            		if(bbsDAO_review.nextPage("bbs_review", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="review.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "bbs_review.Bbs_review" %>
-<%@ page import = "bbs_review.BbsDAO_review" %> 
+<%@ page import = "DB.Bbs_review" %>
+<%@ page import = "DB.BbsDAO_review" %> 
 <!DOCTYPE html>
 
 <html lang="en">
@@ -40,7 +40,7 @@
 		script.println("</script>");
 	}
 	Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
-	if(!userID.equals(bbs_review.getUserID())){
+	if(!userID.equals(bbs_review.getWriter())){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('수정 권한이 없습니다.')");
@@ -113,20 +113,12 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName">
+            								파일명 : <input type="file" id="bbs_title" name="fileName1">
             							</div>
             						</div>            						
             					</td>
             				</tr>
             				<tr>
-            					<td>
-            						<div class="write_subtitle">
-       		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName1">
-            							</div>
-            						</div>            						
-            					</td>
-            				</tr>  <tr>
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
@@ -139,6 +131,14 @@
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
             								파일명 : <input type="file" id="bbs_title" name="fileName3">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>  <tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName4">
             							</div>
             						</div>            						
             					</td>

@@ -75,7 +75,7 @@ public class BbsDAO_review extends DbAccess{
 		return null;
 	}
 	public int update(int bbsID, String bbsTitle, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
-		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ?, fileName = ?, fileName1 = ?, fileName2 = ?, fileName3 = ? WHERE bbsID = ?;";
+		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ?, fileName1 = ?, fileName2 = ?, fileName3 = ?, fileName4 = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsTitle);

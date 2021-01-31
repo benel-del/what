@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-<%@ page import="bbs_faq.BbsDAO_faq" %>
-<%@ page import="bbs_faq.Bbs_faq" %>
+<%@ page import="DB.BbsDAO_faq" %>
+<%@ page import="DB.Bbs_faq" %>
 <%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>

@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "bbs.Bbs" %>
-<%@ page import = "bbs.BbsDAO" %> 
+<%@ page import = "DB.Bbs_notice" %>
+<%@ page import = "DB.BbsDAO_notice" %> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,7 @@
 	<script>	
 	/* 모임날짜 : 달력으로 선택 */
 	$(function() {
-   	 	$( "#bbs_joinDate" ).datepicker({
+   	 	$( "#join_teamDate" ).datepicker({
    	 	dateFormat: "yy-mm-dd"
    	 	});
    	 })
@@ -95,8 +95,8 @@
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-	            						<% BbsDAO bbsDAO = new BbsDAO(); %>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO.fixNumber()%>/10)  			            					
+	            						<% BbsDAO_notice bbsDAO_notice = new BbsDAO_notice(); %>
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO_notice.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO_notice.fixNumber()%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
 			            					<select id = "bbsType" name="bbsType" onchange = "changeSelect()">
@@ -116,10 +116,10 @@
             						<div class="join_input">
             							* 모임 공지만<br>
             							모임 일시: 
-	            						<input type="date" id="bbs_joinDate" placeholder="모임일시" name="bbsJoindate">
+	            						<input type="date" id="join_teamDate" placeholder="모임일시" name="bbsJoindate">
 	            						<br>
 	            						모임 장소:
-	            						<input type="text" id="bbs_joinPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
+	            						<input type="text" id="join_teamPlace" placeholder="모임장소" name="bbsJoinplace" maxlength="50">
             						</div>
             					</div>
             					</td>

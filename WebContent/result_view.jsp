@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import= "java.io.PrintWriter" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="bbs_result.Bbs_result" %>
-<%@ page import="bbs_result.BbsDAO_result" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="user.User" %>
+<%@ page import="DB.Bbs_result" %>
+<%@ page import="DB.BbsDAO_result" %>
+<%@ page import="DB.UserDAO" %>
+<%@ page import="DB.User" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +96,7 @@
             			<tbody>
             				<tr>
 	            				<td class="view_subtitle">작성자</td>
-	            				<td class="view_content1"><%=bbs_result.getUserID() %></td>
+	            				<td class="view_content1"><%=bbs_result.getWriter() %></td>
 	            				<td class="view_subtitle">작성일자</td>
 	            				<td class="view_content1"><%=bbs_result.getBbsDate().substring(0,10) %></td>
             				</tr>
@@ -104,8 +104,8 @@
 	            				<td class="view_subtitle">우승</td>
 	            				<td colspan="3" class="content1">
 	            				<% 
-	            				if(bbs_result.getBbsFirst() != null){
-	            					String[] array=bbs_result.getBbsFirst().split("/");
+	            				if(bbs_result.getPlaceFirst() != null){
+	            					String[] array=bbs_result.getPlaceFirst().split("/");
 	            					for(int i=0; i<array.length; i++){
 										for(User user : list_user){
 											if(array[i].equals(user.getUserID()) == true){
@@ -127,8 +127,8 @@
 	            				<td class="view_subtitle">준우승</td>
 	            				<td colspan="3" class="content1">
 	            				<% 
-	            				if(bbs_result.getBbsFirst() != null){
-	            					String[] array=bbs_result.getBbsSecond().split("/");
+	            				if(bbs_result.getPlaceSecond() != null){
+	            					String[] array=bbs_result.getPlaceSecond().split("/");
 	            					for(int i=0; i<array.length; i++){
 										for(User user : list_user){
 											if(array[i].equals(user.getUserID()) == true){
@@ -150,8 +150,8 @@
 	            				<td class="view_subtitle">3위</td>
 	            				<td colspan="3" class="view_content1">
 	            				<% 
-	            				if(bbs_result.getBbsFirst() != null){
-	            					String[] array=bbs_result.getBbsThird().split("/");
+	            				if(bbs_result.getPlaceThird() != null){
+	            					String[] array=bbs_result.getPlaceThird().split("/");
 	            					for(int i=0; i<array.length; i++){
 										for(User user : list_user){
 											if(array[i].equals(user.getUserID()) == true){
@@ -182,7 +182,7 @@
             		<a href="result.jsp" class="link">글 목록 </a>
             		
             		<%
-            			if(userID != null && userID.equals(bbs_result.getUserID())){
+            			if(userID != null && userID.equals(bbs_result.getWriter())){
             		%>
             			/
             			<a href = "result_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>

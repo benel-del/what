@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="java.io.PrintWriter" %>
-<%@ page import="bbs_result.BbsDAO_result" %>
-<%@ page import="bbs_result.Bbs_result" %>
+<%@ page import="DB.BbsDAO_result" %>
+<%@ page import="DB.Bbs_result" %>
 <%@ page import="java.util.ArrayList" %>
-    
-<%@ page import="user.UserDAO" %>
-<jsp:useBean id="user" class="user.User" scope="page" />
+<%@ page import="DB.UserDAO" %>
+<jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
 <!DOCTYPE html>
@@ -82,7 +81,7 @@
             				<tr class="board_tr">
             					<td><%=list.get(i).getBbsID()%></td>
             					<td><a href="result_view.jsp?bbsID=<%=list.get(i).getBbsID()%>" class="link"><%=list.get(i).getBbsTitle()%></a></td>
-            					<td><%=list.get(i).getUserID() %></td>
+            					<td><%=list.get(i).getWriter() %></td>
             					<td><%=list.get(i).getBbsDate().substring(0,10) %></td>
             				</tr>   
             				<%
@@ -105,7 +104,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO_result.nextPage(pageNumber+1)){
+            		if(bbsDAO_result.nextPage("bbs_result", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="result.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

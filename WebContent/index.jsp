@@ -1,10 +1,10 @@
 <!-- 메인 페이지  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
-<%@ page import="user.User" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="bbs.Bbs" %>
-<%@ page import="bbs.BbsDAO" %>
+<%@ page import="DB.User" %>
+<%@ page import="DB.UserDAO" %>
+<%@ page import="DB.Bbs_notice" %>
+<%@ page import="DB.BbsDAO_notice" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
 
@@ -58,8 +58,8 @@
                     <div id="index_notice-inform">
                         <div class="index_title">모임 공지</div>
                         <%
-                        	BbsDAO bbsDAO = new BbsDAO();
-        					Bbs noticeInfo = bbsDAO.noticeInfo_index();
+                        	BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
+                        	Bbs_notice noticeInfo = bbsDAO_notice.noticeInfo_index();
         					int bbsJoin=0;
         					if(noticeInfo != null){
         						bbsJoin = noticeInfo.getBbsID();
@@ -127,7 +127,7 @@
                 		<table id="notice1_table"> 
               				<tbody>
               				<%
-        						ArrayList<Bbs> list_notice1 = bbsDAO.notice1_index();
+        						ArrayList<Bbs_notice> list_notice1 = new BbsDAO_notice().notice_index("모임공지");
         						for(int i=0; i<list_notice1.size(); i++){
  	 	      				%>
  	 	      					<tr>
@@ -142,7 +142,7 @@
               			<table id="notice2_table"> 
               				<tbody>
               				<%
-        						ArrayList<Bbs> list_notice2 = bbsDAO.notice2_index();
+        						ArrayList<Bbs_notice> list_notice2 = new BbsDAO_notice().notice_index("일반공지");
         						for(int i=0; i<list_notice2.size(); i++){
  	 	      				%>
  	 	      					<tr>

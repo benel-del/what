@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="bbs_review.BbsDAO_review" %>
-<%@ page import="bbs_review.Bbs_review" %>
+<%@ page import="DB.BbsDAO_review" %>
+<%@ page import="DB.Bbs_review" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -14,7 +14,7 @@
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}
 		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
-		if(userID == null || !userID.equals(bbs_review.getUserID())){
+		if(userID == null || !userID.equals(bbs_review.getWriter())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");

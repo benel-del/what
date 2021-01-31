@@ -91,20 +91,12 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName">
+            								파일명 : <input type="file" id="bbs_title" name="fileName1">
             							</div>
             						</div>            						
             					</td>
             				</tr>
             				<tr>
-            					<td>
-            						<div class="write_subtitle">
-       		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName1">
-            							</div>
-            						</div>            						
-            					</td>
-            				</tr>  <tr>
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
@@ -117,6 +109,14 @@
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
             								파일명 : <input type="file" id="bbs_title" name="fileName3">
+            							</div>
+            						</div>            						
+            					</td>
+            				</tr>  <tr>
+            					<td>
+            						<div class="write_subtitle">
+       		  							<div class="bbsTitle">            							
+            								파일명 : <input type="file" id="bbs_title" name="fileName4">
             							</div>
             						</div>            						
             					</td>

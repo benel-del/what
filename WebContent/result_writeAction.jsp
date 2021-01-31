@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="bbs_result.BbsDAO_result" %>
+<%@ page import="DB.BbsDAO_result" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="bbs_result" class="bbs_result.Bbs_result" scope="page" />
+<jsp:useBean id="bbs_result" class="DB.Bbs_result" scope="page" />
 <jsp:setProperty name="bbs_result" property="bbsTitle" />
 <jsp:setProperty name="bbs_result" property="bbsContent" />
-<jsp:setProperty name="bbs_result" property="bbsFirst" />
-<jsp:setProperty name="bbs_result" property="bbsSecond" />
-<jsp:setProperty name="bbs_result" property="bbsThird" />
+<jsp:setProperty name="bbs_result" property="placeFirst" />
+<jsp:setProperty name="bbs_result" property="placeSecond" />
+<jsp:setProperty name="bbs_result" property="placeThird" />
 
 
 	<%
@@ -31,7 +31,7 @@
 				script.println("</script>");
 			} else{
 				BbsDAO_result bbsDAO_result = new BbsDAO_result();
-				int result = bbsDAO_result.write(bbs_result.getBbsTitle(), userID, bbs_result.getBbsContent(), bbs_result.getBbsFirst(), bbs_result.getBbsSecond(), bbs_result.getBbsThird());
+				int result = bbsDAO_result.write(bbs_result.getBbsTitle(), userID, bbs_result.getBbsContent(), bbs_result.getPlaceFirst(), bbs_result.getPlaceSecond(), bbs_result.getPlaceThird());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
-<%@ page import="bbs_join.BbsDAO_join" %>
-<%@ page import="user_join.UserDAO_join" %>
+<%@ page import="DB.JoinDAO_team" %>
+<%@ page import="DB.JoinDAO_user" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="bbs_join" class="bbs_join.Bbs_join" scope="page" />
-<jsp:setProperty name="bbs_join" property="userPhone" />
-<jsp:setProperty name="bbs_join" property="joinPassword" />
-<jsp:setProperty name="bbs_join" property="joinMember" />
-<jsp:setProperty name="bbs_join" property="joinContent" />
+<jsp:useBean id="join_team" class="DB.Join_team" scope="page" />
+<jsp:setProperty name="join_team" property="leaderPhone" />
+<jsp:setProperty name="join_team" property="teamPassword" />
+<jsp:setProperty name="join_team" property="teamMember" />
+<jsp:setProperty name="join_team" property="teamContent" />
 
 <%
 	String userID = null;
@@ -24,38 +24,36 @@
 		script.println("</script>");
 	}
 	else{
-		if(bbs_join.getUserPhone() == null){
+		if(join_team.getLeaderPhone() == null){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('신청자 연락처를 입력해주세요.')");
 			script.println("history.back()");
 			script.println("</script>");
-		} else if(bbs_join.getJoinPassword() == null){
+		} else if(join_team.getTeamPassword() == null){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('참가등록 비밀번호를 입력해주세요.')");
 			script.println("history.back()");
 			script.println("</script>");
 		} else{
-			BbsDAO_join bbsDAO_join = new BbsDAO_join();
 			int bbsID=Integer.parseInt(request.getParameter("bbsID"));
-			UserDAO_join userDAO_join = new UserDAO_join();
 				
-			int joinID = bbsDAO_join.getInfo(bbsID, userID, bbs_join.getUserPhone(), bbs_join.getJoinPassword(), bbs_join.getJoinMember(), bbs_join.getJoinContent());
-			if(joinID == -1){
+			int teamID = new JoinDAO_team().getInfo(bbsID, userID, join_team.getLeaderPhone(), join_team.getTeamPassword(), join_team.getTeamMember(), join_team.getTeamContent());
+			if(teamID == -1){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('bbs_join 등록에 실패하였습니다.')");
+				script.println("alert('join_team 등록에 실패하였습니다.')");
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				String[] member = bbs_join.getJoinMember().split("<br>");
+				String[] member = join_team.getTeamMember().split("<br>");
 				for(int i=0; i<member.length; i++){
-					int result_user = userDAO_join.write(bbsID, joinID, member[i]);
+					int result_user = new JoinDAO_user().write(bbsID, teamID, member[i]);
 					if(result_user == -1){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("alert('user_join 등록에 실패하였습니다.')");
+						script.println("alert('join_user 등록에 실패하였습니다.')");
 						script.println("history.back()");
 						script.println("</script>");
 					}

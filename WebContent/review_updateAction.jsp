@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="bbs_review.BbsDAO_review" %>
-<%@ page import="bbs_review.Bbs_review" %>
+<%@ page import="DB.BbsDAO_review" %>
+<%@ page import="DB.Bbs_review" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import = "java.util.*"%>                         
 <%@ page import = "com.oreilly.servlet.MultipartRequest"%>    
@@ -25,7 +25,7 @@
 			script.println("</script>");
 		}
 		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
-		if(userID == null || !userID.equals(bbs_review.getUserID())){
+		if(userID == null || !userID.equals(bbs_review.getWriter())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");
@@ -35,10 +35,10 @@
 			String uploadPath=request.getRealPath("upload");
 			String bbsTitle = "";
 			String bbsContent = "";
-			String fileName = "";
 			String fileName1 = "";
 			String fileName2 = "";
 			String fileName3 = "";
+			String fileName4 = "";
 
 			int size = 10*1024*1024; //10MB
 			try{
@@ -48,14 +48,14 @@
 			    bbsContent=multi.getParameter("bbsContent");
 					
 			    Enumeration files = multi.getFileNames();
-			    String file = (String)files.nextElement();
-			    fileName = multi.getFilesystemName(file);
 			    String file1 = (String)files.nextElement();
-			    fileName1 = multi.getFilesystemName(file1);			    
+			    fileName1 = multi.getFilesystemName(file1);
 			    String file2 = (String)files.nextElement();
 			    fileName2 = multi.getFilesystemName(file2);			    
 			    String file3 = (String)files.nextElement();
-			    fileName3 = multi.getFilesystemName(file3);
+			    fileName3 = multi.getFilesystemName(file3);			    
+			    String file4 = (String)files.nextElement();
+			    fileName4 = multi.getFilesystemName(file4);
 
 			}catch(Exception e){
 			    e.printStackTrace();
@@ -76,7 +76,7 @@
 			} else{
 				BbsDAO_review bbsDAO_review = new BbsDAO_review();
 
-				int result = bbsDAO_review.update(bbsID, bbsTitle, bbsContent, fileName, fileName1, fileName2, fileName3);
+				int result = bbsDAO_review.update(bbsID, bbsTitle, bbsContent, fileName1, fileName2, fileName3, fileName4);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

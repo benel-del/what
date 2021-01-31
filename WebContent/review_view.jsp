@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import= "java.io.PrintWriter" %>
-<%@ page import="bbs_review.Bbs_review" %>
-<%@ page import="bbs_review.BbsDAO_review" %>
+<%@ page import="DB.Bbs_review" %>
+<%@ page import="DB.BbsDAO_review" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +91,7 @@
             			<tbody>           		
             				<tr>
 	            				<td class="view_subtitle">작성자</td>
-	            				<td class="view_content1"><%=bbs_review.getUserID() %></td>
+	            				<td class="view_content1"><%=bbs_review.getWriter() %></td>
 	            				<td class="view_subtitle">작성일자</td>
 	            				<td class="view_content1"><%=bbs_review.getBbsDate().substring(0,10) %></td>
             				</tr>
@@ -99,10 +99,10 @@
             				<tr>
 	            				<td class="view_subtitle">내용</td>
 	            				<td colspan="3" class="view_content2" style="min-height:200px; text-align:left;"><div><%=bbs_review.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %><br>
-	            				<%if(bbs_review.getFileName() != null){%><img src="upload/<%=bbs_review.getFileName() %>"><%}else{out.println(""); }%><br>
 	            				<%if(bbs_review.getFileName1() != null){%><img src="upload/<%=bbs_review.getFileName1() %>"><%}else{out.println(""); }%><br>
 	            				<%if(bbs_review.getFileName2() != null){%><img src="upload/<%=bbs_review.getFileName2() %>"><%}else{out.println(""); }%><br>
-	            				<%if(bbs_review.getFileName3() != null){%><img src="upload/<%=bbs_review.getFileName3() %>"><%}else{out.println(""); }%></div></td>
+	            				<%if(bbs_review.getFileName3() != null){%><img src="upload/<%=bbs_review.getFileName3() %>"><%}else{out.println(""); }%><br>
+	            				<%if(bbs_review.getFileName4() != null){%><img src="upload/<%=bbs_review.getFileName4() %>"><%}else{out.println(""); }%></div></td>
             				</tr>
             			</tbody>
             		</table>
@@ -111,7 +111,7 @@
             		<a href="review.jsp" class="link">글 목록 </a>
             		
             		<%
-            			if(userID != null && userID.equals(bbs_review.getUserID())){
+            			if(userID != null && userID.equals(bbs_review.getWriter())){
             		%>
             			/
             			<a href = "review_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>

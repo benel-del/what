@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="bbs_join.Bbs_join" %>
-<%@ page import="bbs_join.BbsDAO_join" %>
-<%@ page import="user.UserDAO" %>
-<%@ page import="user.User" %>
+<%@ page import="DB.Join_team" %>
+<%@ page import="DB.JoinDAO_team" %>
+<%@ page import="DB.UserDAO" %>
+<%@ page import="DB.User" %>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -73,8 +73,7 @@
             <div class="board_subtitle">결과게시판</div>
 			
 			<%
-    			BbsDAO_join bbsDAO_join = new BbsDAO_join();
-    			ArrayList<Bbs_join> list = bbsDAO_join.getMembers(bbsID);
+    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
     			UserDAO userDAO = new UserDAO();
     			ArrayList<User> list_user = userDAO.getUserlist(1);
     		%>
@@ -101,16 +100,16 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
-            							<select name="bbsFirst">
+            							<select name="placeFirst">
 											<option value='' selected>-- 선택 --</option>
 											
             								<%
-            								for(Bbs_join bbs_join : list){
-            									if(bbs_join.getMoneyCheck() == 1){
-            										String[] array=bbs_join.getJoinMember().split("/");
+            								for(Join_team join_team : list){
+            									if(join_team.getMoneyCheck() == 1){
+            										String[] array=join_team.getTeamMember().split("/");
             	    
            									%>
-	  										<option value=<%=bbs_join.getJoinMember()%>>
+	  										<option value=<%=join_team.getTeamMember()%>>
 	  										<%
 	  										 		for(int i=0; i<array.length; i++){
 	  													 for(User user : list_user){
@@ -138,15 +137,15 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
-            						<select name="bbsSecond">
+            						<select name="placeSecond">
 											<option value='' selected>-- 선택 --</option>
 											
-            								<%for(Bbs_join bbs_join : list){
-            									if(bbs_join.getMoneyCheck() == 1){
-            										String[] array=bbs_join.getJoinMember().split("/");
+            								<%for(Join_team join_team : list){
+            									if(join_team.getMoneyCheck() == 1){
+            										String[] array=join_team.getTeamMember().split("/");
             	    
            									%>
-	  										 <option value=<%=bbs_join.getJoinMember()%>>
+	  										 <option value=<%=join_team.getTeamMember()%>>
 	  										 <%for(int i=0; i<array.length; i++){
 	  											 for(User user : list_user){
 	  											 	if(array[i].equals(user.getUserID()) == true){
@@ -169,15 +168,15 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
-            						<select name="bbsThird">
+            						<select name="placeThird">
 											<option value='' selected>-- 선택 --</option>
 											
-            								<%for(Bbs_join bbs_join : list){
-            									if(bbs_join.getMoneyCheck() == 1){
-            										String[] array=bbs_join.getJoinMember().split("/");
+            								<%for(Join_team join_team : list){
+            									if(join_team.getMoneyCheck() == 1){
+            										String[] array=join_team.getTeamMember().split("/");
             	    
            									%>
-	  										 <option value=<%=bbs_join.getJoinMember()%>>
+	  										 <option value=<%=join_team.getTeamMember()%>>
 	  										 <%for(int i=0; i<array.length; i++){
 	  											 for(User user : list_user){
 	  											 	if(array[i].equals(user.getUserID()) == true){
