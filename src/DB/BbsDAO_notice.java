@@ -21,7 +21,7 @@ public class BbsDAO_notice extends DbAccess{
 		return -1; //데이터베이스 오류
 	}
 	
- 	/* 중요게시글 상단 고정 여부 */
+ 	/* notice_update.jsp - 중요게시글 상단 고정 여부 */
  	public int fixNumber() {
 		int count = 0;
 		String SQL = "SELECT bbsID FROM bbs_notice WHERE bbsAvailable = 1 AND bbsFix = 1";

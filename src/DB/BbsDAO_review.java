@@ -9,7 +9,7 @@ public class BbsDAO_review extends DbAccess{
 	}	
 	
 	public int write(String bbsTitle, String writer, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
-		String SQL="INSERT INTO bbs_review(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable, fileName1, fileName2, fileName3, fileName4) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String SQL="INSERT INTO bbs_review(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable, fileName1, fileName2, fileName3, fileName4) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  bbsTitle);

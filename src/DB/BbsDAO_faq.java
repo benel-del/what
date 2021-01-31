@@ -10,15 +10,14 @@ public class BbsDAO_faq extends DbAccess{
 	
 	/* faq ¿€º∫ */
 	public int write(String bbsTitle, String writer, String bbsContent) {
-		String SQL="INSERT INTO bbs_faq VALUES(?, ?, ?, ?, ?, ?);";
+		String SQL="INSERT INTO bbs_faq(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable) VALUES(?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext("bbs_faq"));
-			pstmt.setString(2,  bbsTitle);
-			pstmt.setString(3,  writer);
-			pstmt.setString(4,  getDate());
-			pstmt.setString(5,  bbsContent);
-			pstmt.setInt(6,  1);
+			pstmt.setString(1,  bbsTitle);
+			pstmt.setString(2,  writer);
+			pstmt.setString(3,  getDate());
+			pstmt.setString(4,  bbsContent);
+			pstmt.setInt(5,  1);
 			pstmt.executeUpdate();
 			return 0;
 		} catch(Exception e) {

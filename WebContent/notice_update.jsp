@@ -5,12 +5,6 @@
 <%@ page import = "DB.Bbs_notice" %>
 <%@ page import = "DB.BbsDAO_notice" %> 
 
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,6 +80,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
+		int fixNumber = new BbsDAO_notice().fixNumber();
 	%>
 	
     <div id="wrapper">
@@ -132,50 +127,8 @@
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-			            				<%
-			            					Class.forName("com.mysql.jdbc.Driver"); 
-			            					String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
-			            					String dbID = "root";
-			            					String dbPassword = "whatpassword0706!";
-			            			   	 	Connection conn = null;
-			            			   	 	Statement stmt = null;
-			            			   		ResultSet rs = null;
-			            			    	BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-			            			    	try {
-			            			        	String query = "select * from bbs where bbsID='"+bbsID+"'";
-			            			        	conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			            			        	stmt = conn.createStatement();
-			            			        	rs = stmt.executeQuery(query);
-			            			        	while (rs.next()) {
-			            				%>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(rs.getInt(8) == 1) out.print("checked"); else if (bbsDAO_notice.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO_notice.fixNumber()%>/10)
-			            					
-			            					<input type="checkbox" id="bbs_fix" name="bbsComplete" value=1 <% if(rs.getInt(11) == 1) out.print("checked"); %>/> 완료
-			            				<%
-							                	}
-							            	} catch (SQLException ex) {
-							                	out.println(ex.getMessage());
-							                	ex.printStackTrace();
-							           	 	} finally {
-							                	// 6. 사용한 Statement 종료
-							                	if (rs != null)
-							                    	try {
-							                        	rs.close();
-							                    	} catch (SQLException ex) {
-							                    	}
-							                	if (stmt != null)
-							                    	try {
-							                        	stmt.close();
-							                    	} catch (SQLException ex) {
-							                    	}
-							                	// 7. 커넥션 종료
-							                	if (conn != null)
-							                    	try {
-							                        	conn.close();
-							                    	} catch (SQLException ex) {
-							                    	}
-							           	 	}
-							       		%>   
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(bbs_notice.getBbsFix() == 1) out.print("checked"); else if (fixNumber >= 10) out.print("disabled=false"); %>/> 중요공지(<%=fixNumber%>/10)
+			            					<input type="checkbox" id="bbs_fix" name="bbsComplete" value=1 <% if(bbs_notice.getBbsComplete() == 1) out.print("checked"); %>/> 완료 
 		            					</div>
 			            				<div class="bbsType">
 			            					<select name="bbsType" id="bbsType" onchange = "changeSelect()">

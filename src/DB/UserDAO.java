@@ -524,25 +524,17 @@ public class UserDAO extends DbAccess{
 		return count;
 	}
 	
-	/* 해당 user의 정보 불러오기 */
-	public User getuser_rank(String userID) {	// for search
-		String SQL="SELECT * FROM user WHERE userID = ?";
+	/* result_view.jsp - 해당 user의 정보 불러오기 */
+	public User getUser(String userID) {
+		String SQL="SELECT userName, userLevel FROM user WHERE userID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				User user = new User();
-				user.setUserRank(rs.getInt(8));
-				user.setUserID(rs.getString(1));
-				user.setUserName(rs.getString(3));
-				user.setUserGender(rs.getString(4));
-				user.setUserLevel(rs.getString(5));
-				user.setUserDescription(rs.getString(6));
-				user.setUserFirst(rs.getInt(8));
-				user.setUserSecond(rs.getInt(9));
-				user.setUserThird(rs.getInt(10));
-				user.setUserEmail(rs.getString(11));
+				user.setUserName(rs.getString(1));
+				user.setUserLevel(rs.getString(2));
 				return user;
 			}
 		} catch(Exception e) {

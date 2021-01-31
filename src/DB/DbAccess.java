@@ -41,10 +41,9 @@ public class DbAccess {
 	
 	/* 새 글 작성 시 몇 번째 게시글인지 표기하는데 필요 */
  	public int getNext(String table) {
-		String SQL="SELECT * FROM ?;";
+		String SQL="SELECT * FROM " + table + " ORDER BY bbsID DESC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  table);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt(1)+1; //가장 최근 게시물의 bbsID + 1 반환
@@ -58,11 +57,10 @@ public class DbAccess {
  	
 	/* 게시글 삭제 */
 	public int delete(String table, int bbsID) {
-		String SQL="UPDATE ? SET bbsAvailable = 0 WHERE bbsID = ?;";
+		String SQL="UPDATE " + table + " SET bbsAvailable = 0 WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  table);
-			pstmt.setInt(2, bbsID);
+			pstmt.setInt(1, bbsID);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -72,11 +70,10 @@ public class DbAccess {
 	
 	/* 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
 	public boolean nextPage(String table, int pageNumber) {
-		String SQL="SELECT bbsID FROM ? WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
+		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  table);
-			pstmt.setInt(2,  getNext(table) - (pageNumber - 1) * 12);
+			pstmt.setInt(1,  getNext(table) - (pageNumber - 1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				return true;
