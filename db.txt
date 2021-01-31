@@ -14,24 +14,24 @@ create table user(
 	userSecond int default 0,
 	userThird int default 0,
 	userEmail varchar(30) UNIQUE KEY,
-	userAvailable int default 1 not null, 
-	userRegdate datetime not null, 
-	userLogdate datetime not null
+	userAvailable int default 1 not null, //회원탈퇴시 0으로 업데이트
+	userRegdate datetime not null, //회원가입 날짜
+	userLogdate datetime not null //최근 로그인 날짜
 );
 
 /* 공지 글 작성시 데이터 추가 - 공지 글 리스트 */
-create table bbs_notice(
-	bbsID int auto_increment PRIMARY KEY,		
-	bbsTitle varchar(50) not null, 
-	writer varchar(20) not null,   
-	bbsDate datetime not null,  
-	bbsContent varchar(2048) not null, 
-	bbsAvailable int default 1 not null, 
-	bbsType varchar(20) not null, 
-	bbsFix int not null,            
-	bbsJoindate varchar(20),     
-	bbsJoinplace varchar(20),    
-	bbsComplete int default 0,   
+create table noticeList(
+	bbsID int auto_increment PRIMARY KEY,		//공지게시물ID
+	bbsTitle varchar(50) not null, //공지게시물 제목
+	writer varchar(20) not null,   //게시물 작성자ID
+	bbsDate datetime not null,   //게시물 게시날짜
+	bbsContent varchar(2048) not null, //게시물 내용
+	bbsAvailable int default 1 not null, //게시물 삭제여부(0이면 삭제된 게시물)
+	bbsType varchar(20) not null, //공지게시물 종류(일반공지/모임공지)
+	bbsFix int not null,              //중요공지 등록여부(1이면 중요공지)
+	bbsJoindate varchar(20),       //'모임공지'일 경우 해당 모임날짜
+	bbsJoinplace varchar(20),     //'모임공지'일 경우 해당 모임장소
+	bbsComplete int default 0,   //'모임공지'일 경우 해당 모임 완료여부(1이면 완료)
 	FOREIGN KEY(writer) REFERENCES user(userID) ON UPDATE CASCADE
 );
 
@@ -59,7 +59,7 @@ create table join00_userList(
 );
 
 /* 결과게시판 글 리스트 */
-create table bbs_result(
+create table resultList(
 	bbsID int auto_increment PRIMARY KEY,
 	bbsTitle varchar(50) not null,
 	writer varchar(20) not null,
@@ -76,7 +76,8 @@ create table bbs_result(
 );
 
 /* 후기게시판 글 리스트 */
-create table bbs_review(
+create table reviewList(
+	create table reviewList(
 	bbsID int auto_increment PRIMARY KEY,
 	bbsTitle varchar(50) not null,
 	writer varchar(20) not null,
@@ -91,7 +92,7 @@ create table bbs_review(
 );
 
 /* faq 글 작성시 데이터 추가 - faq 글 리스트 */
-create table bbs_faq(
+create table faqList(
 	bbsID int auto_increment PRIMARY KEY,
 	bbsTitle varchar(2048) not null,
 	writer varchar(20) not null,

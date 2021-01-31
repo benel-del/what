@@ -42,10 +42,9 @@ public class BbsDAO_notice extends DbAccess{
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			int bbsID = getNext("bbs_notice");
-			if(bbsType.equals("모임공지")) {
-				if(createTeamListDB(bbsID)==-1 || createUserListDB(bbsID) == -1) {
-					return -2; //모임게시판 생성 실패
-				}
+			if(bbsType.contentEquals("모임공지")) {
+				createTeamListDB(bbsID);
+				createUserListDB(bbsID);
 			}
 			pstmt.setInt(1,  bbsID);
 			pstmt.setString(2,  bbsTitle);
@@ -116,7 +115,7 @@ public class BbsDAO_notice extends DbAccess{
 
 	/* n회 어쩌다 모임 전용 참가신청 db 생성 */
 	public int createTeamListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_teamList(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, FOREIGN KEY(teamLeader) REFERENCES user(userID));";
+		String SQL="CREATE TABLE join"+bbsID+"_teamList(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, FOREIGN KEY(teamLeader) REFERENCES user(userID);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();
@@ -128,7 +127,7 @@ public class BbsDAO_notice extends DbAccess{
 	
 	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
 	public int createUserListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_userList(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0, FOREIGN KEY(userID) REFERENCES user(userID), FOREIGN KEY(userAvailable) REFERENCES user(userAvailable) ON UPDATE CASCADE, FOREIGN KEY(teamID) REFERENCES join"+bbsID+"_teamList(teamID) ON DELETE CASCADE);";
+		String SQL="CREATE TABLE join"+bbsID+"_userList(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0, FOREIGN KEY (userID) REFERENCES user(userID), FOREIGN KEY(userAvailable) REFERENCES user(userAvailable) ON UPDATE CASCADE, FOREIGN KEY(teamID) REFERENCES join00_teamList(teamID) ON DELETE CASCADE);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.executeUpdate();
