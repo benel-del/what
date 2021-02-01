@@ -55,9 +55,7 @@ create table join00_user(
 	userAvailable int default 1 not null,
 	isPart int default 0 not null,
 	teamID int default 0,
-	FOREIGN KEY(userID) REFERENCES user(userID),
-	FOREIGN KEY(userAvailable) REFERENCES user(userAvailable) ON UPDATE CASCADE,
-	FOREIGN KEY(teamID) REFERENCES join00_team(teamID) ON DELETE CASCADE
+	FOREIGN KEY(userID, userAvailable) REFERENCES user(userID, userAvailable) ON UPDATE CASCADE
 );
 
 /* 결과게시판 글 리스트 */
@@ -124,4 +122,4 @@ INSERT INTO bbs_notice VALUES(4, "tㅁㄴㅇㄹt", "admin", "2020-02-02 01:02:02
 INSERT INTO bbs_notice VALUES(5, "ㅁㄴㅇㄹt", "admin", "2020-02-02 01:02:02", "dfiopadf x", 1, "모임공지", "1", "2021-02-02 01:34:02", "ㅇㄹㄴㅇㄹㄷd", 0);
 INSERT INTO bbs_notice VALUES(6, "ㅁㄴㅇㄹt", "admin", "2020-02-02 01:02:02", "dfiopadf x", 1, "모임공지", "1", "2021-02-02 01:34:02", "ㅇㄹㄴㅇㄹㄷd", 0);
 
-alter table user add unique kye(userid, userAvailable);
+alter table user add unique key(userid, userAvailable);

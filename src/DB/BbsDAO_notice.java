@@ -128,12 +128,12 @@ public class BbsDAO_notice extends DbAccess{
 	
 	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
 	public int createUserListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0);";
+		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0, FOREIGN KEY(userID, userAvailable) REFERENCES user(userID, userAvailable) ON UPDATE CASCADE);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.executeUpdate();
 			
-			SQL = "INSERT INTO join"+bbsID+"_user(userID) SELECT userID FROM user WHERE userAvailable=1;";
+			SQL = "INSERT INTO join"+bbsID+"_user(userID, userAvailable) SELECT userID, userAvailable FROM user WHERE userAvailable=1;";
 			pstmt=conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
