@@ -14,6 +14,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="frame.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script type="text/javascript"> 
+    /* 검색 기능 */
+    $(document).ready(function(){   	
+    	$("#team_search-btn").click(function() {
+    		var key = $('#team_search').val();
+        	$(".board_table > tbody > tr").hide();
+    		if(key != ""){
+    			var temp;
+    			temp = $(".board_table > tbody > tr > td:nth-child(5n+3):contains('"+key+"')");
+    			$(temp).parent().show();
+    		}
+    	});
+	
+    });
+    </script>
     <title>어쩌다리그</title>
 </head>
 
@@ -48,9 +64,8 @@
             <div class="board_subtitle">팀원 찾기</div>
             
             <!-- 검색 바 -->
-   			<form method="post" action="teamSearchAction.jsp">
 	            <div class="board_search">	            	
-   	        		<input id="team_search-btn" type="submit" value="검색">
+   	        		<input id="team_search-btn" type="button" value="검색">
    	        		
    	        		<select name="searchWord" id="team_search">
     	        		<option value='null'>--부수--</option>
@@ -67,10 +82,11 @@
     	        		<option value='7'>7</option>
    	        		</select>
    	        	</div>
-            </form>
 
             <div class="board_container">
             	<div class="board_row">
+            		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
+            		<input type="button" onclick="location.href='join.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">

@@ -10,7 +10,7 @@ public class BbsDAO_notice extends DbAccess{
 	
 	/* '모임공지'이면서 '모임 날짜'가 이미 지난 게시물의 경우 bbsComplete를 1로 세팅 */
 	public int updateBbsComplete() {
-		String SQL="UPDATE bbs_notice SET bbsComplete = 1 WHERE bbsType='모임공지' AND date_format(?, '%Y-%m-%d') > date(bbsJoindate);";
+		String SQL="UPDATE bbs_notice SET bbsComplete = 1 WHERE bbsType='모임공지' AND ? > bbsJoindate;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  getDate());
@@ -128,14 +128,14 @@ public class BbsDAO_notice extends DbAccess{
 	
 	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
 	public int createUserListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0, FOREIGN KEY (userID) REFERENCES user(userID), FOREIGN KEY(userAvailable) REFERENCES user(userAvailable) ON UPDATE CASCADE, FOREIGN KEY(teamID) REFERENCES join"+bbsID+"_team(teamID) ON DELETE CASCADE);";
+		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.executeUpdate();
 			
 			SQL = "INSERT INTO join"+bbsID+"_user(userID) SELECT userID FROM user WHERE userAvailable=1;";
 			pstmt=conn.prepareStatement(SQL);
-			pstmt.executeUpdate();
+			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

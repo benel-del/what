@@ -82,7 +82,7 @@
        					<th id="myinfo_title" class="table_th1">신청자</th>
        					<th class="table_th2">
        					<%
-       						User userName = userDAO.getuserInfo(join_team.getTeamLeader());
+       						User userName = userDAO.getMemberName(join_team.getTeamLeader());
        						out.print(userName.getUserName()+"("+userName.getUserID()+")");
        					%>
        					</th>
@@ -99,7 +99,7 @@
     					
     						for(int i=0; i<mem.length; i++){
     							if(mem[i] != null){
-    								User user = userDAO.getuserInfo(mem[i]);
+    								User user = userDAO.getMemberName(mem[i]);
     								out.println(user.getUserName()+"/"+user.getUserLevel()+" ("+user.getUserID()+")<br>");
     							}
     						}

@@ -57,6 +57,7 @@
             <div class="board_container">
             	<div class="board_row">
             		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
+            		<input type="button" onclick="location.href='team.jsp?bbsID=<%=bbsID %>'" value="팀원찾기">
             		<table class="board_table">
             		<thead>
             			<tr class="board_tr">
@@ -78,7 +79,7 @@
             				<td><%=join_team.getTeamID() %></td>
             				<td>
             				<%
-            					User userName = userDAO.getuserInfo(join_team.getTeamLeader());
+            					User userName = userDAO.getMemberName(join_team.getTeamLeader());
 	            				out.print(userName.getUserName()+"("+userName.getUserID()+")");	
 	            			%>
 	            			</td>
@@ -88,7 +89,7 @@
             					
             					for(int i=0; i<mem.length; i++){
             						if(mem[i] != null){
-            							User user = userDAO.getuserInfo(mem[i]);
+            							User user = userDAO.getMemberName(mem[i]);
             							out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
             						}
             					}

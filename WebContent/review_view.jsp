@@ -109,17 +109,6 @@
             		
             		<div id="notice_btn-primary">
             		<a href="review.jsp" class="link">글 목록 </a>
-            		
-            		<%
-            			if(userID != null && userID.equals(bbs_review.getWriter())){
-            		%>
-            			/
-            			<a href = "review_update.jsp?bbsID=<%= bbsID %>" class="link"> 수정 </a>
-            			/
-            			<a href = "review_delete.jsp?bbsID=<%= bbsID %>" class="link"> 삭제</a>
-            		<%
-            			}
-            		%>
             		</div>            	
             	</div>
 	    	</div>  

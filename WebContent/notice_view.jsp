@@ -135,15 +135,6 @@
             		
             		<div id="notice_btn-primary">
             			<a href="notice.jsp" class="link">글 목록 </a>
-            		
-            			<%
-            				if(userID != null && userID.equals(bbs_notice.getWriter())){
-            					out.println("/");
-            					out.println("<a href = \"notice_update.jsp?bbsID=" + bbsID + "\" class=\"link\"> 수정 </a>");
-            					out.println("/");
-            					out.println("<a href = \"notice_delete.jsp?bbsID=" + bbsID + "\" class=\"link\"> 삭제 </a>");
-            				}
-            			%>
             		</div>
             	</div>
             </div>		

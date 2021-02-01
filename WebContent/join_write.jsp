@@ -57,8 +57,7 @@
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
-		}
-
+		}		
 		int bbsID = 0;
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
@@ -76,15 +75,16 @@
     <div id="wrapper">
         <br>
         <header>
-        <%
-        	if(userID == null){
-    			PrintWriter script = response.getWriter();
-    			script.println("<script>");
-    			script.println("alert('로그인 후 접근 가능합니다.')");
-    			script.println("location.replace('login.jsp')");
-    			script.println("</script>");
-    		} 
-        	if(userID.equals("admin")){
+        <%      	
+   		    if(userID == null){
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('로그인 후 접근 가능합니다.')");
+				script.println("location.replace('login.jsp')");
+				script.println("</script>");
+			}
+   		    else{
+       	 	if(userID.equals("admin")){
        	%>
            	<div id="service">
        	        <a class="link" href="logoutAction.jsp">로그아웃 </a>
@@ -213,7 +213,9 @@
             	</div>
 	    	</div>  
         </section>
-
+	<%
+   		    }
+	%>
     </div>  
 </body>
 </html>

@@ -53,15 +53,14 @@ public class UserDAO extends DbAccess{
 	
 	/* findID(아이디찾기) - find_idAction.jsp */
 	public String findID(String userName, String userEmail) {
-		String SQL = "SELECT userName, userEmail FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ?;";
+		String SQL = "SELECT userID FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);
 			pstmt.setString(2,  userEmail);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	
-				if(rs.getString(1).equals(userName) && rs.getString(2).equals(userEmail))
-					return rs.getString(1);
+				return rs.getString(1);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -71,7 +70,7 @@ public class UserDAO extends DbAccess{
 	
 	/* findPW(비밀번호 찾기) - find_pwAction.jsp */
 	public int findPW(String userID, String userName, String userEmail) {
-		String SQL = "SELECT userID, userName, userEmail FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ? AND userID = ?;";
+		String SQL = "SELECT * FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ? AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);	
@@ -79,8 +78,7 @@ public class UserDAO extends DbAccess{
 			pstmt.setString(3,  userID);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {	
-				if(rs.getString(1).equals(userID)&& rs.getString(2).equals(userName)&& rs.getString(3).equals(userEmail))
-					return 1;	
+				return 1;	
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -213,9 +211,9 @@ public class UserDAO extends DbAccess{
 /* *********************************************************************************
  * 마이페이지
 ***********************************************************************************/
-	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp & join.jsp & join_view.jsp*/
+	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp*/
 	public User getuserInfo(String userID) {	
-		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?";
+		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -449,6 +447,25 @@ public class UserDAO extends DbAccess{
 			return list;
 	}
 	
+	/* 아이디에 해당하는 userName 가져오기 - join.jsp & join_view.jsp */
+	public User getMemberName(String userID) {	
+		String SQL="SELECT userID, userName, userLevel FROM user WHERE userID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(2));
+				user.setUserLevel(rs.getString(3));
+				return user;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	
