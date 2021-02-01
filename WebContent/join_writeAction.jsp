@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="DB.JoinDAO_team" %>
 <%@ page import="DB.JoinDAO_user" %>
+<%@ page import="DB.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="join_team" class="DB.Join_team" scope="page" />
@@ -38,8 +39,24 @@
 			script.println("</script>");
 		} else{
 			int bbsID=Integer.parseInt(request.getParameter("bbsID"));
-				
-			int teamID = new JoinDAO_team().getInfo(bbsID, userID, join_team.getLeaderPhone(), join_team.getTeamPassword(), join_team.getTeamMember(), join_team.getTeamContent());
+			String[] member = join_team.getTeamMember().split("<br>");
+			int levelSum=0;
+			for(int i=0; i<member.length; i++){
+				//부수합 구하기
+				int level = new UserDAO().getLevelSum(member[i]);
+				if(level == 100){
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('부수합 구하기 실패')");
+					script.println("history.back()");
+					script.println("</script>");
+				}
+				else if(level <= 0)
+					level=0;
+				levelSum += level;
+			}
+			
+			int teamID = new JoinDAO_team().getInfo(bbsID, userID, join_team.getLeaderPhone(), join_team.getTeamPassword(), join_team.getTeamMember(), join_team.getTeamContent(), levelSum);
 			if(teamID == -1){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
@@ -47,7 +64,6 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				String[] member = join_team.getTeamMember().split("<br>");
 				for(int i=0; i<member.length; i++){
 					int result_user = new JoinDAO_user().write(bbsID, teamID, member[i]);
 					if(result_user == -1){

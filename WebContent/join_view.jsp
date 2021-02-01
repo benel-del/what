@@ -104,7 +104,11 @@
     							}
     						}
     					%>
-       				</th>
+       					</th>
+       				</tr>
+       				<tr> 
+       					<th id="myinfo_title" class="table_th1">합 부수</th>
+       					<th class="table_th2"><%=join_team.getTeamLevel()%></th>
        				</tr>
        				<tr>
        					<th id="myinfo_title" class="table_th1">건의사항</th>
@@ -117,6 +121,10 @@
        						}
        					%>
        					</th>
+       				</tr>
+       				<tr> 
+       					<th id="myinfo_title" class="table_th1">신청날짜</th>
+       					<th class="table_th2"><%=join_team.getTeamDate().substring(0,11)%></th>
        				</tr>
         		</table>     			
             </div>

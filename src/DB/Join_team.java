@@ -9,6 +9,8 @@ public class Join_team {
 	private String teamMember;
 	private String teamContent;
 	private int moneyCheck;
+	private String teamDate;
+	private int teamLevel;
 	
 	public int getBbsID() {
 		return bbsID;
@@ -58,4 +60,17 @@ public class Join_team {
 	public void setMoneyCheck(int moneyCheck) {
 		this.moneyCheck = moneyCheck;
 	}
+	public String getTeamDate() {
+		return teamDate;
+	}
+	public void setTeamDate(String teamDate) {
+		this.teamDate = teamDate;
+	}
+	public int getTeamLevel() {
+		return teamLevel;
+	}
+	public void setTeamLevel(int teamLevel) {
+		this.teamLevel = teamLevel;
+	}
+	
 }

@@ -64,9 +64,9 @@
             				<th class="board_thead" id="bbs_num">no.</th>
             				<th class="board_thead" id="bbs_name">신청자</th>
             				<th class="board_thead">참가자명단</th>	
-            				<!-- <th class="board_thead">부수합</th> -->
+            				<th class="board_thead">부수합</th>
             				<th class="board_thead">입금</th>		
-            				<!-- <th class="board_thead">신청날짜</th>		-->
+            				<th class="board_thead">신청날짜</th>
             				<th class="board_thead"></th>
             			</tr>
             		</thead>
@@ -95,7 +95,7 @@
             					}
             				%>
             				</td>
-            				<!-- <td><%//join_team.getLevelSum() %> </td> -->
+            				<td><%=join_team.getTeamLevel() %> </td>
             				<td>
             					<div style="color:blue;">
             					<%
@@ -111,7 +111,7 @@
             					%> 
             					</div>           					
             				</td>
-            				<!-- <td><%//join_team.getJoindate() %> </td> -->
+            				<td><%=join_team.getTeamDate() %> </td>
             				<td>
             				<% 
             					if(join_team.getTeamLeader().equals(userID)){

@@ -24,8 +24,8 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* getInfo - join_wrtieAction.jsp */
-	public int getInfo(int bbsID, String teamLeader, String leaderPhone, String teamPassword, String teamMember, String teamContent) {
-		String SQL="INSERT INTO join"+bbsID+"_team VALUES(?, ?, ?, ?, ?, ?, ?);";
+	public int getInfo(int bbsID, String teamLeader, String leaderPhone, String teamPassword, String teamMember, String teamContent, int teamLevel) {
+		String SQL="INSERT INTO join"+bbsID+"_team VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			int teamID = getNext_join("join"+bbsID+"_team");
@@ -36,6 +36,8 @@ public class JoinDAO_team extends DbAccess{
 			pstmt.setString(5,  teamMember);
 			pstmt.setString(6, teamContent);
 			pstmt.setInt(7,  0);
+			pstmt.setString(8, getDate());
+			pstmt.setInt(9, teamLevel);
 			pstmt.executeUpdate();
 			return teamID;
 		} catch(Exception e) {
@@ -46,7 +48,7 @@ public class JoinDAO_team extends DbAccess{
 	
 	/* getMembers(참가자 명단 목록) - join.jsp */
 	public ArrayList<Join_team> getMembers(int bbsID){		
-		String SQL="SELECT teamID, teamLeader, teamMember, moneyCheck FROM join" + bbsID + "_team ORDER BY teamID DESC;";
+		String SQL="SELECT teamID, teamLeader, teamMember, moneyCheck, teamDate, teamLevel FROM join" + bbsID + "_team ORDER BY teamID DESC;";
 		ArrayList<Join_team> list = new ArrayList<Join_team>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -57,6 +59,8 @@ public class JoinDAO_team extends DbAccess{
 				join_team.setTeamLeader(rs.getString(2));
 				join_team.setTeamMember(rs.getString(3));
 				join_team.setMoneyCheck(rs.getInt(4));
+				join_team.setTeamDate(rs.getString(5));
+				join_team.setTeamLevel(rs.getInt(6));
 				list.add(join_team);
 			}
 		} catch(Exception e) {
@@ -81,6 +85,8 @@ public class JoinDAO_team extends DbAccess{
 				join_team.setTeamPassword(rs.getString(4));
 				join_team.setTeamMember(rs.getString(5));
 				join_team.setTeamContent(rs.getString(6));
+				join_team.setTeamDate(rs.getString(8));
+				join_team.setTeamLevel(rs.getInt(9));
 				return join_team;
 			}
 		} catch(Exception e) {
@@ -107,13 +113,14 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* join_updateAction.jsp */
-	public int update(int bbsID, int teamID, String member, String phone, String content) {
-		String SQL = "UPDATE join"+bbsID+"_team SET teamMember=?, leaderPhone=?, teamContent=? WHERE teamID="+teamID+";";
+	public int update(int bbsID, int teamID, String member, String phone, String content, int level) {
+		String SQL = "UPDATE join"+bbsID+"_team SET teamMember=?, leaderPhone=?, teamContent=?, teamLevel=? WHERE teamID="+teamID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, member);
 			pstmt.setString(2, phone);
 			pstmt.setString(3, content);
+			pstmt.setInt(4, level);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

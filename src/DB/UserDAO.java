@@ -467,7 +467,21 @@ public class UserDAO extends DbAccess{
 		return null;
 	}
 	
-	
+	/* 합부수 구하기 위한 함수 - 해당 userID의 부수를 return함 - join_writeAction.jsp */
+	public int getLevelSum(String userID) {
+		String SQL="SELECT userLevel FROM user WHERE userID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,  userID);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return Integer.parseInt(rs.getString(1));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return 100;
+	}
 	
 	
 	

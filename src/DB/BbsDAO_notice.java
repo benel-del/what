@@ -116,7 +116,7 @@ public class BbsDAO_notice extends DbAccess{
 
 	/* n회 어쩌다 모임 전용 참가신청 db 생성 */
 	public int createTeamListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_team(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, FOREIGN KEY(teamLeader) REFERENCES user(userID));";
+		String SQL="CREATE TABLE join"+bbsID+"_team(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, teamDate datetime, teamLevel int, FOREIGN KEY(teamLeader) REFERENCES user(userID));";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();

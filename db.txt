@@ -44,6 +44,8 @@ create table join00_team(
 	teamMember varchar(200),
 	teamContent varchar(2048),
 	moneyCheck int default 0 not null,
+	teamDate datetime,
+	teamLevel int,
 	FOREIGN KEY(teamLeader) REFERENCES user(userID)
 );
 
