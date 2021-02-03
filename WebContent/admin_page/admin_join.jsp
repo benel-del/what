@@ -1,4 +1,4 @@
-<!-- 관리자 페이지  -->
+<!-- 관리자 - 모임관리 페이지  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -139,7 +139,7 @@
             							out.print("삭제");
             						}
             					%>
-            					<td><a href="../notice_view.jsp?bbsID=<%=list.get(i).getBbsID()%>"><%=list.get(i).getBbsTitle() %></a></td>
+            					<td><%=list.get(i).getBbsTitle() %></td>
             					<td>
             						<input type="button" onclick="location.href='admin_joinList.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="참가자조회">
 								<%

@@ -51,7 +51,7 @@
             <div id="service">
                 <a class="link" href="logoutAction.jsp">로그아웃 </a>
 				|
-                <a class="link" href="admin.jsp">관리자 페이지</a>
+                <a class="link" href="admin_page/admin.jsp">관리자 페이지</a>
            </div>
         <% 
            	} else {
@@ -139,9 +139,9 @@
             			<%
             				if(userID.equals("admin")){
             			%>
-            			<a href="notice_update.jsp?bbsID=<%=bbsID %>" class="link">글 수정</a>
+            			<a href="admin_page/notice_update.jsp?bbsID=<%=bbsID %>" class="link">글 수정</a>
             			| 
-            			<a href="notice_delete.jsp?bbsID=<%=bbsID %>" class="link">글 삭제</a>
+            			<a href="admin_page/notice_delete.jsp?bbsID=<%=bbsID %>" class="link">글 삭제</a>
             			<% 
             				}
             			%>
