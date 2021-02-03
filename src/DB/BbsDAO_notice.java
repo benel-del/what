@@ -212,4 +212,32 @@ public class BbsDAO_notice extends DbAccess{
 		}
 		return list;
 	}
+	
+	
+/* ***********************************************************************
+ * 관리자 페이지
+*************************************************************************/
+	/* 모임공지 리스트 불러오기 - admin_join.jsp */
+	public ArrayList<Bbs_notice> getJoinList(int pageNumber){
+		String SQL = "SELECT * FROM bbs_notice WHERE bbsType='모임공지' ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_notice> list = new ArrayList<Bbs_notice>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_notice bbs_notice = new Bbs_notice();
+				bbs_notice.setBbsID(rs.getInt(1));
+				bbs_notice.setBbsTitle(rs.getString(2));
+				bbs_notice.setWriter(rs.getString(3));
+				bbs_notice.setBbsDate(rs.getString(4));
+				bbs_notice.setBbsAvailable(rs.getInt(6));
+				bbs_notice.setBbsComplete(rs.getInt(11));
+				list.add(bbs_notice);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

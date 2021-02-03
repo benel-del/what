@@ -54,14 +54,25 @@
     			script.println("alert('접근 권한이 없습니다.')");
     			script.println("history.back()");
     			script.println("</script>");
-    		} 
+    		} else{
+    			if(userID.equals("admin")){
         %>
-        	
+        	<div id="service">
+       	        <a class="link" href="logoutAction.jsp">로그아웃 </a>
+       	        | 
+       	        <a class="link" href="admin_page/admin.jsp">관리자페이지</a>
+       	    </div>
+       	<%	
+            } else{
+        %>
    	     	<div id="service">
    	        	<a class="link" href="logoutAction.jsp">로그아웃 </a>
    	            | 
    	            <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
    	        </div>
+   	    <%
+            }
+   	    %>
         	<br>
     	      	
             <!--사이트 이름-->
@@ -135,6 +146,9 @@
             <a class=link href="join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">삭제</a>
             
         </section>
+        <%
+    		}
+        %>
     </div>  
 </body>
 </html>

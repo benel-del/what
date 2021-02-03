@@ -985,6 +985,56 @@ input[id*="answer"] + label + div p{
 }
 
 
+/* ************************************************************
+* ADMIN
+**************************************************************/
+.admin_subtitle h6
+{
+	border : 2px solid #0F4C81;
+	padding : 2px 5px;
+	float: left;
+	color : #0F4C81;
+	font-size : 11px;
+}
+
+.admin_select
+{
+	padding : 1px 5px;
+	float: left;
+	
+}
+
+.admin_select a
+{
+	font-size: 11px;
+	font-weight:700;
+	color : #0F4C81;	
+}
+
+.admin_btn
+{
+	float: right;
+	padding: 2px;
+}
+
+.admin_btn input
+{
+	color : white;
+	background-color:#0F4C81;
+	padding: 2px 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*수정해야됨*/
 /* 화면 너비 0 ~ 768px */
@@ -1151,8 +1201,13 @@ input[id*="toggle"] + label + ul{
 	font-weight:700;
 }
 
-input[id*="toggle"] + label + li a{
+input[id*="toggle"] + label + li a
+{
 	display:inline-block;
 	padding:30px;
 }
+
+
+
+
 }

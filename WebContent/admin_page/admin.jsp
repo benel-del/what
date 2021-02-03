@@ -28,12 +28,7 @@
         <%@ include file="admin_header.jsp" %>
 
     	<!-- menu -->
-    	<section>
-            <a href="admin_user.jsp">회원관리</a>
-            <a href="admin_bbs.jsp">게시글관리</a>
-            <a href="admin_join.jsp">모임관리</a>
-            <a href="admin_stats.jsp">통계관리</a>
-    	</section>
+    	<%@ include file="admin_menubar.jsp" %>
     </div>
 </body>
 </html>

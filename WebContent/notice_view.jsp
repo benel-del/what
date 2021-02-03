@@ -135,6 +135,16 @@
             		
             		<div id="notice_btn-primary">
             			<a href="notice.jsp" class="link">글 목록 </a>
+            			| 
+            			<%
+            				if(userID.equals("admin")){
+            			%>
+            			<a href="notice_update.jsp?bbsID=<%=bbsID %>" class="link">글 수정</a>
+            			| 
+            			<a href="notice_delete.jsp?bbsID=<%=bbsID %>" class="link">글 삭제</a>
+            			<% 
+            				}
+            			%>
             		</div>
             	</div>
             </div>		
