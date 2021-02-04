@@ -140,7 +140,7 @@
 								<%
 									if(list.get(i).getBbsComplete() == 1){			
 								%>
-									<input type="button" onclick="location.href='#'" value="결과조회">
+									<input type="button" onclick="location.href='result_view.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="결과조회">
 								<%
 									}
 								%>
