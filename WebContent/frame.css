@@ -1014,14 +1014,14 @@ input[id*="answer"] + label + div p{
 .admin_btn
 {
 	float: right;
-	padding: 2px;
+	padding: 5px 2px;
 }
 
-.admin_btn input
+.admin_btn a
 {
 	color : white;
 	background-color:#0F4C81;
-	padding: 2px 5px;
+	padding: 4px 5px;
 }
 
 

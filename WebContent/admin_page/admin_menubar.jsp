@@ -8,7 +8,6 @@
                 		<li><a href="#">게시물관리</a></li>
                 		<li><a href="admin_join.jsp">모임관리</a></li>
                 		<li><a href="#">콘텐츠관리</a></li>
-                		<li><a href="#">기타관리</a></li>
                 		<li><a href="#">통계관리</a></li>
             		</ul>
         </div>

@@ -46,9 +46,9 @@ public class JoinDAO_team extends DbAccess{
 		return -1; //데이터베이스 오류
 	}
 	
-	/* getMembers(참가자 명단 목록) - join.jsp */
+	/* getMembers(참가자 명단 목록) - join.jsp & admin_joinList.jsp */
 	public ArrayList<Join_team> getMembers(int bbsID){		
-		String SQL="SELECT teamID, teamLeader, teamMember, moneyCheck, teamDate, teamLevel FROM join" + bbsID + "_team ORDER BY teamID DESC;";
+		String SQL="SELECT * FROM join" + bbsID + "_team ORDER BY teamID DESC;";
 		ArrayList<Join_team> list = new ArrayList<Join_team>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -57,10 +57,11 @@ public class JoinDAO_team extends DbAccess{
 				Join_team join_team = new Join_team();
 				join_team.setTeamID(rs.getInt(1));
 				join_team.setTeamLeader(rs.getString(2));
-				join_team.setTeamMember(rs.getString(3));
-				join_team.setMoneyCheck(rs.getInt(4));
-				join_team.setTeamDate(rs.getString(5));
-				join_team.setTeamLevel(rs.getInt(6));
+				join_team.setLeaderPhone(rs.getString(3));
+				join_team.setTeamMember(rs.getString(5));
+				join_team.setMoneyCheck(rs.getInt(7));
+				join_team.setTeamDate(rs.getString(8));
+				join_team.setTeamLevel(rs.getInt(9));
 				list.add(join_team);
 			}
 		} catch(Exception e) {

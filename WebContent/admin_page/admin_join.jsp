@@ -100,11 +100,6 @@
     			<a href="#" id="inactive">삭제</a>
     		</div>
     		
-    		<div class="admin_btn">
-    			<input type="button" id="admin_inactive-btn" value="글 삭제">
-    			<input type="button" id="admin_active-btn" value="글 활성화">
-    		</div>
-    		
     		<div class="board_container">
             	<div class="board_row">
             		<table class="board_table">
