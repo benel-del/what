@@ -38,6 +38,10 @@
 		script.println("history.back()");
 		script.println("</script>");
 	}
+	int admin=0;
+	if(request.getParameter("admin") != null){
+		admin = Integer.parseInt(request.getParameter("admin"));
+	}
 	Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
 %>
 	
@@ -45,7 +49,7 @@
         <br>
         <header>
         <%
-        	if(userID == null || userID.equals(join_team.getTeamLeader()) == false){
+        	if(userID == null || (userID.equals(join_team.getTeamLeader()) == false && userID.equals("admin")==false)){
         		//신청자 본인만 열람 가능
     			PrintWriter script = response.getWriter();
     			script.println("<script>");
@@ -85,7 +89,7 @@
 
         <section>        
            	<div class="login_page">
-              	<form method="post" action="join_deleteAction.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">
+              	<form method="post" action="join_deleteAction.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=<%=admin%>">
               
                	<div class="dm_header">
                    	<a href="join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">참가신청 삭제</a>

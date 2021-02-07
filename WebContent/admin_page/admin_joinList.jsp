@@ -109,12 +109,7 @@
     			<a href="#" id="unpaid">입금대기</a>
     		</div>
     		
-    		<div class="admin_btn">
-    			<a href="admin_joinDel.jsp?bbsID=<%=bbsID%>">삭제</a>
-    			<a href="admin_joinPaid.jsp?bbsID=<%=bbsID%>&paid=1">입금완료</a>
-    			<a href="admin_joinPaid.jsp?bbsID=<%=bbsID%>&paid=0">입금대기</a>
-    		</div>
-    		
+    		<form method="post" action="admin_joinPaidAction.jsp?bbsID=<%=bbsID%>"> 
     		<div class="board_container">
             	<div class="board_row">
             		<table class="board_table">
@@ -138,8 +133,9 @@
             				for(Join_team join_team : list){
             			%>	
             				<tr class="board_tr">
-            					<td>
-									<input type="checkbox" name="admin_check" id="admin_check" value="<%=join_team.getTeamID()%>">
+            					<td>    
+									<input type="checkbox" name="moneyCheck" id="moneyCheck" value="<%=join_team.getTeamID()%>">
+            						
             					</td>
             					<td><%=join_team.getTeamID() %></td>
             					<td>
@@ -179,18 +175,22 @@
             			%>   			
             			</tbody>
             		</table>
-            	</div>
+            	</div>            	
+            	
+            	<div class="admin_btn">
+            		<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=1">입금완료</button>
+    				<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=0">입금대기</button>	
+            		<a href="../join_write.jsp?bbsID=<%=bbsID %>&admin=1">참가신청</a>
+            	</div>    
+            	
+            	
             	
             	<!-- 페이징 -->
             	<div class="admin_paging">
             	
-            	</div>
-            	
-            	<div class="admin_btn">
-            	    <a href="../join_write.jsp?bbsID=<%=bbsID %>">등록</a>
-            	</div>
+            	</div>    	
             </div>
-    		
+    		</form>
     	</section>
     </div>
 </body>

@@ -140,4 +140,17 @@ public class JoinDAO_team extends DbAccess{
 		}
 		return -1;
 	}
+	
+	/* 관리자 페이지 - 입금여부 변경해주는 함수 : admin_joinPaidAction.jsp */
+	public int updateMoneyChk(int bbsID, int teamID, int paid) {
+		String SQL = "UPDATE join"+bbsID+"_team SET moneyCheck=? WHERE teamID="+teamID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, paid);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }

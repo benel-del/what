@@ -39,6 +39,7 @@
 			script.println("</script>");
 		} else{
 			int bbsID=Integer.parseInt(request.getParameter("bbsID"));
+			int admin=Integer.parseInt(request.getParameter("admin"));
 			String[] member = join_team.getTeamMember().split("<br>");
 			int levelSum=0;
 			for(int i=0; i<member.length; i++){
@@ -76,7 +77,11 @@
 					else{
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
-						script.println("location.replace='join.jsp?bbsID="+bbsID+"'");
+						if(admin == 1){
+							script.println("location.href='admin_page/admin_joinList.jsp?bbsID="+bbsID+"'");
+						}else{
+							script.println("location.href='join.jsp?bbsID="+bbsID+"'");
+						}
 						script.println("</script>");
 					}	
 				}						

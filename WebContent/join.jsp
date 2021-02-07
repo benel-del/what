@@ -111,7 +111,7 @@
             					%> 
             					</div>           					
             				</td>
-            				<td><%=join_team.getTeamDate() %> </td>
+            				<td><%=join_team.getTeamDate().substring(0,11) %> </td>
             				<td>
             				<% 
             					if(join_team.getTeamLeader().equals(userID)){

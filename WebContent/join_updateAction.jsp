@@ -17,7 +17,7 @@
 	if(session.getAttribute("userID") != null){
 		userID = (String) session.getAttribute("userID");
 	}
-	if(userID == null || userID.equals(join_team.getTeamLeader()) == false){
+	if(userID == null || (userID.equals(join_team.getTeamLeader()) == false && userID.equals("admin")==false)){
 		//신청자 본인만 열람 가능
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
@@ -41,6 +41,7 @@
 		} else{
 			int bbsID = Integer.parseInt(request.getParameter("bbsID"));	
 			int teamID = Integer.parseInt(request.getParameter("teamID"));
+			int admin = Integer.parseInt(request.getParameter("admin"));
 			
 			int check = new JoinDAO_team().check_joinPW(bbsID, teamID, join_team.getTeamPassword());
 			if(check == 0){
@@ -93,7 +94,12 @@
 						else{
 							PrintWriter script = response.getWriter();
 							script.println("<script>");
-							script.println("location.replace='join.jsp?bbsID="+bbsID+"'");
+							if(admin == 1){
+								script.println("location.href='admin_page/admin_joinList.jsp?bbsID="+bbsID+"'");
+							}
+							else{
+								script.println("location.href='join.jsp?bbsID="+bbsID+"'");
+							}
 							script.println("</script>");
 						}	
 					}

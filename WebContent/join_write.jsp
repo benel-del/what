@@ -69,6 +69,10 @@
 			script.println("location.href='index.jsp'");
 			script.println("</script>");
 		}
+		int admin = 0;
+		if(request.getParameter("admin") != null){
+			admin = Integer.parseInt(request.getParameter("admin"));
+		}
 		String member;
 	%>
 
@@ -118,7 +122,7 @@
     	
             <div class="board_container">
             	<div class="board_row">
-            	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>" onsubmit="submit_click()">
+            	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>&admin=<%=admin %>" onsubmit="submit_click()">
             	    <% 
             	       	BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
             	    	UserDAO userDAO = new UserDAO();
@@ -176,7 +180,7 @@
 									<div class="join_member_list">
 										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인">
 										<input type="hidden" name="teamMember" id="teamMember" value="">
-										<p id="join_member_list">위에서 checked된 member list를 이 부분에 띄움(jQuery)</p>
+										<p id="join_member_list">참가멤버 리스트(아이디)</p>
 									</div>
 								</td>
 							</tr>

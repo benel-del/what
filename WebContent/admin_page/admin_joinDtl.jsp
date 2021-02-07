@@ -120,9 +120,9 @@
        				</tr>
             	</table>	
             			
-            	<a href="admin_joinDtlDel.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">삭제</a>
+            	<a href="../join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=1">삭제</a>
             	 | 
-    			<a href="admin_joinDtlUpd.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">수정</a>	
+    			<a href="../join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=1">수정</a>	
     			 | 
     			<a href="admin_joinList.jsp?bbsID=<%=bbsID%>">목록</a>	
             	
