@@ -7,6 +7,7 @@
 <%@ page import="DB.JoinDAO_team" %>
 <%@ page import="DB.User" %>
 <%@ page import="DB.UserDAO" %>
+<%@ page import="DB.BbsDAO_notice" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +57,14 @@
     	
             <div class="board_container">
             	<div class="board_row">
+            	<%
+            		if(BbsDAO_notice.isCompelte(bbsID) == 0){
+            	%>
             		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
             		<input type="button" onclick="location.href='team.jsp?bbsID=<%=bbsID %>'" value="팀원찾기">
+            		<%
+            		}
+            		%>
             		<table class="board_table">
             		<thead>
             			<tr class="board_tr">

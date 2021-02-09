@@ -23,7 +23,10 @@
         	$(".board_table > tbody > tr").hide();
     		if(key != ""){
     			var temp;
-    			temp = $(".board_table > tbody > tr > td:nth-child(5n+3):contains('"+key+"')");
+    			if(key != "null")
+    				temp = $(".board_table > tbody > tr > td:nth-child(5n+3):contains('"+key+"')");
+    			else
+    				temp = $(".board_table > tbody > tr > td");
     			$(temp).parent().show();
     		}
     	});

@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DbAccess {
-	protected Connection conn;
-	protected ResultSet rs;	// 정보 담는 객체
-	protected Statement st;
+	static protected Connection conn;
+	static protected ResultSet rs;	// 정보 담는 객체
+	static protected Statement st;
 
 	public DbAccess(){
 		try {

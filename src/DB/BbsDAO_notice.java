@@ -214,6 +214,24 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
 	
+/* *******************************************************************
+* isCompelte - join.jsp	:: 1 > 참가신청, 팀원찾기 버튼 활성 여부
+* *******************************************************************/	
+	static public int isCompelte(int bbsID) {
+		String SQL = "SELECT isCompelete FROM bbs_notice WHERE bbsID = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsID);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getInt(1);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	
 /* ***********************************************************************
  * 관리자 페이지
 *************************************************************************/
