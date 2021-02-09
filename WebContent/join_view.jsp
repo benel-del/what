@@ -39,7 +39,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
+		Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
 		UserDAO userDAO = new UserDAO();
 	%>
 
@@ -93,7 +93,7 @@
        					<th id="myinfo_title" class="table_th1">신청자</th>
        					<th class="table_th2">
        					<%
-       						User userName = userDAO.getMemberName(join_team.getTeamLeader());
+       						User userName = UserDAO.getMemberName(join_team.getTeamLeader());
        						out.print(userName.getUserName()+"("+userName.getUserID()+")");
        					%>
        					</th>
@@ -110,7 +110,7 @@
     					
     						for(int i=0; i<mem.length; i++){
     							if(mem[i] != null){
-    								User user = userDAO.getMemberName(mem[i]);
+    								User user = UserDAO.getMemberName(mem[i]);
     								out.println(user.getUserName()+"/"+user.getUserLevel()+" ("+user.getUserID()+")<br>");
     							}
     						}

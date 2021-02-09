@@ -39,7 +39,7 @@
 		script.println("history.back()");
 		script.println("</script>");
 	}
-	Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
+	Bbs_review bbs_review = BbsDAO_review.getBbs(bbsID);
 	if(!userID.equals(bbs_review.getWriter())){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
@@ -74,7 +74,7 @@
         </header>
 
         <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+		<%@ include file="admin_menubar.jsp" %>
 	<!-- 게시판 공통 요소 : class board_ 사용 -->
 	
         <section class="container">

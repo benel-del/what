@@ -44,7 +44,7 @@
 			int levelSum=0;
 			for(int i=0; i<member.length; i++){
 				//부수합 구하기
-				int level = new UserDAO().getLevelSum(member[i]);
+				int level = UserDAO.getLevelSum(member[i]);
 				if(level == 100){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
@@ -57,7 +57,7 @@
 				levelSum += level;
 			}
 			
-			int teamID = new JoinDAO_team().getInfo(bbsID, userID, join_team.getLeaderPhone(), join_team.getTeamPassword(), join_team.getTeamMember(), join_team.getTeamContent(), levelSum);
+			int teamID = JoinDAO_team.getInfo(bbsID, userID, join_team.getLeaderPhone(), join_team.getTeamPassword(), join_team.getTeamMember(), join_team.getTeamContent(), levelSum);
 			if(teamID == -1){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
@@ -66,7 +66,7 @@
 				script.println("</script>");
 			} else{
 				for(int i=0; i<member.length; i++){
-					int result_user = new JoinDAO_user().write(bbsID, teamID, member[i]);
+					int result_user = JoinDAO_user.write(bbsID, teamID, member[i]);
 					if(result_user == -1){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");

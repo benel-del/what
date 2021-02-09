@@ -43,7 +43,7 @@
 			int teamID = Integer.parseInt(request.getParameter("teamID"));
 			int admin = Integer.parseInt(request.getParameter("admin"));
 			
-			int check = new JoinDAO_team().check_joinPW(bbsID, teamID, join_team.getTeamPassword());
+			int check = JoinDAO_team.check_joinPW(bbsID, teamID, join_team.getTeamPassword());
 			if(check == 0){
 				//비밀번호 불일치
 				PrintWriter script = response.getWriter();
@@ -58,7 +58,7 @@
 				int levelSum=0;
 				for(int i=0; i<member.length; i++){
 					//부수합 구하기
-					int level = new UserDAO().getLevelSum(member[i]);
+					int level = UserDAO.getLevelSum(member[i]);
 					if(level == 100){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");
@@ -70,7 +70,7 @@
 						level=0;
 					levelSum += level;
 				}
-				int update_team = new JoinDAO_team().update(bbsID, teamID, join_team.getTeamMember(), join_team.getLeaderPhone(), join_team.getTeamContent(), levelSum);
+				int update_team = JoinDAO_team.update(bbsID, teamID, join_team.getTeamMember(), join_team.getLeaderPhone(), join_team.getTeamContent(), levelSum);
 				if(update_team == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
@@ -79,11 +79,11 @@
 					script.println("</script>");
 				} else{
 					//join00_user테이블에서 기존에 등록된 팀원들 reset
-					int delete_user = new JoinDAO_user().update_delete(bbsID, teamID);
+					int delete_user = JoinDAO_user.update_delete(bbsID, teamID);
 					
 					//teamMember 재등록
 					for(int i=0; i<member.length; i++){
-						int update_user = new JoinDAO_user().write(bbsID, teamID, member[i]);
+						int update_user = JoinDAO_user.write(bbsID, teamID, member[i]);
 						if(delete_user == -1 || update_user == -1){
 							PrintWriter script = response.getWriter();
 							script.println("<script>");

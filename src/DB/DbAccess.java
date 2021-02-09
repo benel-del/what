@@ -24,7 +24,7 @@ public class DbAccess {
 	}
 	
 	/* 현재 시간 불러오기 - 게시글 저장시 작성일자 표기에 필요 */
-	public String getDate() {
+	static public String getDate() {
 		String SQL="SELECT NOW();";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -40,8 +40,8 @@ public class DbAccess {
 	}
 	
 	/* 새 글 작성 시 몇 번째 게시글인지 표기하는데 필요 */
- 	public int getNext(String table) {
-		String SQL="SELECT * FROM " + table + " ORDER BY bbsID DESC;";
+ 	static public int getNext(String table) {
+		String SQL="SELECT bbsID FROM " + table + " ORDER BY bbsID DESC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
@@ -55,8 +55,25 @@ public class DbAccess {
 		return -1; //데이터베이스 오류
 	}
  	
+ 	/* 글 작성자 불러오기 */
+ 	static public String getWriter(String table, int bbsID) {
+		String SQL="SELECT writer FROM " + table + " WHERE bbsID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsID);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getString(1);
+			}
+			return "nop";
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null; //데이터베이스 오류
+	}
+ 	
 	/* 게시글 삭제 */
-	public int delete(String table, int bbsID) {
+	static public int delete(String table, int bbsID) {
 		String SQL="UPDATE " + table + " SET bbsAvailable = 0 WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -69,7 +86,7 @@ public class DbAccess {
 	}
 	
 	/* 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
-	public boolean nextPage(String table, int pageNumber) {
+	static public boolean nextPage(String table, int pageNumber) {
 		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

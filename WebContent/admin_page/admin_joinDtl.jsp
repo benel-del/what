@@ -61,9 +61,7 @@
     		<br>
 
     		<%
-            	JoinDAO_team joinDAO_team = new JoinDAO_team();
-            	UserDAO userDAO = new UserDAO();
-            	Join_team join_team = joinDAO_team.getJoinView(bbsID, teamID);
+            	Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
             %>	
     		<div class="board_container">
             	<div class="mypage_contents">
@@ -76,7 +74,7 @@
 						
 							for(int i=0; i<mem.length; i++){
 								if(mem[i] != null){
-									User user = userDAO.getMemberName(mem[i]);
+									User user = UserDAO.getMemberName(mem[i]);
 									out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
 								}
 							}
@@ -98,7 +96,7 @@
        					<th id="myinfo_title" class="table_th1">신청자</th>
        					<th class="table_th2">
        					<%
-       						User user = userDAO.getMemberName(join_team.getTeamLeader());
+       						User user = UserDAO.getMemberName(join_team.getTeamLeader());
 							out.print(user.getUserName()+"("+user.getUserID()+")<br>");
        					%>
        					</th>

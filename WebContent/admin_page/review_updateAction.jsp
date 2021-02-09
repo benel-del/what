@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="DB.BbsDAO_review" %>
-<%@ page import="DB.Bbs_review" %>
+    <%@ page import="DB.BbsDAO_review" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import = "java.util.*"%>                         
 <%@ page import = "com.oreilly.servlet.MultipartRequest"%>    
@@ -24,8 +23,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
-		if(userID == null || !userID.equals(bbs_review.getWriter())){
+		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_review", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");
@@ -74,9 +72,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				BbsDAO_review bbsDAO_review = new BbsDAO_review();
-
-				int result = bbsDAO_review.update(bbsID, bbsTitle, bbsContent, fileName1, fileName2, fileName3, fileName4);
+				int result = BbsDAO_review.update(bbsID, bbsTitle, bbsContent, fileName1, fileName2, fileName3, fileName4);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

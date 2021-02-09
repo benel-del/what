@@ -81,7 +81,7 @@
 			admin = Integer.parseInt(request.getParameter("admin"));
 		}
 		String member;
-		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
+		Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
 	%>
 	
     <div id="wrapper">
@@ -130,8 +130,7 @@
             <div class="board_subtitle">참가신청내용 수정</div>
 
 			<% 
-            	UserDAO userDAO = new UserDAO();
-            	ArrayList<User> user_list = userDAO.getUserList_join();
+            	ArrayList<User> user_list = UserDAO.getUserList_join();
             %>
             <div class="board_container">
             	<div class="board_row">
@@ -154,13 +153,13 @@
 								<%
 									JoinDAO_user joinDAO_user = new JoinDAO_user();
 									for(User user : user_list){
-										if(joinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) != 1){
+										if(JoinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) != 1){
 								%>	
 									<tr class="search_board_tr">
 										<td>
 											<input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>" 
 											<% 
-												if(joinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) == 2){
+												if(JoinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) == 2){
 													//해당 유저의 isPart==1이면서 이 팀에 속한 경우
 											%>
 												checked
@@ -196,7 +195,7 @@
 							<td>신청자</td>
 							<td>
 							<%
-       							User userName = userDAO.getuserInfo(join_team.getTeamLeader());
+       							User userName = UserDAO.getuserInfo(join_team.getTeamLeader());
        							out.print(userName.getUserName()+"("+userName.getUserID()+")");
        						%>
        						<input type="hidden" name="teamLeader" value="<%=join_team.getTeamLeader() %>">

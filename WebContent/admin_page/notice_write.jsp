@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
-<%@ page import = "DB.Bbs_notice" %>
 <%@ page import = "DB.BbsDAO_notice" %> 
 
 <!DOCTYPE html>
@@ -74,7 +73,7 @@
         </header>
 
         <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+		<%@ include file="admin_menubar.jsp" %>
 
 		<section class="container">
 			<div class="board_subtitle">공지게시판 </div>
@@ -95,8 +94,7 @@
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-	            						<% BbsDAO_notice bbsDAO_notice = new BbsDAO_notice(); %>
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (bbsDAO_notice.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=bbsDAO_notice.fixNumber()%>/10)  			            					
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (BbsDAO_notice.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=BbsDAO_notice.fixNumber()%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
 			            					<select id = "bbsType" name="bbsType" onchange = "changeSelect()">

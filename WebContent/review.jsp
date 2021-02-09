@@ -4,8 +4,7 @@
 <%@ page import="DB.BbsDAO_review" %>
 <%@ page import="DB.Bbs_review" %>
 <%@ page import="java.util.ArrayList" %>
-    
-<%@ page import="DB.UserDAO" %>
+
 <jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
@@ -75,8 +74,7 @@
             			</thead>
             			<tbody>
             				<%
-            					BbsDAO_review bbsDAO_review = new BbsDAO_review();
-            					ArrayList<Bbs_review> list = bbsDAO_review.getList(pageNumber);
+            					ArrayList<Bbs_review> list = BbsDAO_review.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             				%>          				
             				<tr class="board_tr">
@@ -105,7 +103,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO_review.nextPage("bbs_review", pageNumber+1)){
+            		if(DB.DbAccess.nextPage("bbs_review", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="review.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="DB.JoinDAO_team" %>
-<%@ page import="DB.Join_team " %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="join_team" class="DB.Join_team" scope="page" />
@@ -37,15 +36,13 @@
 			paid = Integer.parseInt(request.getParameter("paid"));
 		}
 		
-		JoinDAO_team joinDAO_team = new JoinDAO_team();
 		String[] teams = request.getParameterValues("moneyCheck");
 		int result;
-		
 		for(int i=0; i<teams.length; i++){
 			if(paid == 1){
-				result = joinDAO_team.updateMoneyChk(bbsID, Integer.parseInt(teams[i]), 1);
+				result = JoinDAO_team.updateMoneyChk(bbsID, Integer.parseInt(teams[i]), 1);
 			} else{
-				result = joinDAO_team.updateMoneyChk(bbsID, Integer.parseInt(teams[i]), 0);
+				result = JoinDAO_team.updateMoneyChk(bbsID, Integer.parseInt(teams[i]), 0);
 			}
 			
 			if(result == -1){

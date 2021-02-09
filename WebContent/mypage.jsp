@@ -57,7 +57,7 @@
 		<%@ include file="menubar.jsp" %>
 				
 		<%
-			User user = new UserDAO().getuserInfo(userID);
+			User user = UserDAO.getuserInfo(userID);
        	%>
         <section class="container">
        		<div class="mypage_contents">

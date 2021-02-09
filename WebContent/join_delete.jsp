@@ -4,7 +4,6 @@
 <%@ page import="java.io.PrintWriter" %>   
 <%@ page import="DB.JoinDAO_team" %>
 <%@ page import="DB.Join_team" %>
-<%@ page import="DB.JoinDAO_user" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +41,7 @@
 	if(request.getParameter("admin") != null){
 		admin = Integer.parseInt(request.getParameter("admin"));
 	}
-	Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
+	Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
 %>
 	
     <div id="wrapper">

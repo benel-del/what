@@ -117,8 +117,7 @@
             			</thead>
             			<tbody>   			
             			<%
-            				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-            				ArrayList<Bbs_notice> list = bbsDAO_notice.getJoinList(pageNumber);
+            				ArrayList<Bbs_notice> list = BbsDAO_notice.getJoinList(pageNumber);
             				for(int i=0; i<list.size(); i++){
             			%>	
             				<tr class="board_tr">
@@ -166,7 +165,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO_notice.nextPage("bbs_notice", pageNumber+1)){
+            		if(DB.DbAccess.nextPage("bbs_notice", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="admin_join.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

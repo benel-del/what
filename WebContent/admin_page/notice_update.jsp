@@ -72,7 +72,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Bbs_notice bbs_notice = new BbsDAO_notice().getBbs(bbsID);
+		Bbs_notice bbs_notice = BbsDAO_notice.getBbs(bbsID);
 		if(!userID.equals(bbs_notice.getWriter())){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -107,7 +107,7 @@
         </header>
 
         <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+		<%@ include file="admin_menubar.jsp" %>
 		
         <section class="container">
             <div class="board_subtitle">공지게시판 </div>

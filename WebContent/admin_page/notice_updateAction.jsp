@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="DB.BbsDAO_notice" %>
-<%@ page import="DB.Bbs_notice" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 	<%
@@ -20,8 +19,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Bbs_notice bbs_notice = new BbsDAO_notice().getBbs(bbsID);
-		if(userID == null || !userID.equals(bbs_notice.getWriter())){
+		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_notice", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");
@@ -41,12 +39,11 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
 				int bbsFix = 0;
 				if(request.getParameter("bbsFix") != null){
 					bbsFix = Integer.parseInt(request.getParameter("bbsFix"));
 				}
-				if((bbsFix == 1 && bbsDAO_notice.fixNumber() > 10) || (bbsFix != 1 && bbsDAO_notice.fixNumber() + bbsFix > 10)){
+				if((bbsFix == 1 && BbsDAO_notice.fixNumber() > 10) || (bbsFix != 1 && BbsDAO_notice.fixNumber() + bbsFix > 10)){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");
@@ -58,7 +55,7 @@
 					bbsComplete=Integer.parseInt(request.getParameter("bbsComplete"));
 				}
 				
-				int result = bbsDAO_notice.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix, request.getParameter("bbsJoindate"), request.getParameter("bbsJoinplace"), bbsComplete);
+				int result = BbsDAO_notice.update(bbsID, request.getParameter("bbsTitle"), request.getParameter("bbsContent"), request.getParameter("bbsType"), bbsFix, request.getParameter("bbsJoindate"), request.getParameter("bbsJoinplace"), bbsComplete);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

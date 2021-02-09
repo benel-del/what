@@ -25,10 +25,7 @@
 		script.println("location.replace('login.jsp')");
 		script.println("</script>");
 	}
-	
-    UserDAO userDAO = new UserDAO();
-	int result = -1;
-	
+
 	if(user.getUserPassword() == null){
 		PrintWriter script = response.getWriter();
 	    script.println("<script>");
@@ -37,18 +34,19 @@
 	    script.println("</script>");
 	}
 	else{
+		int result = -1;
 		if(user.getUserNewPassword() == null) // 비밀번호 변경 x	-> 부수, 전형
-			result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());
+			result = UserDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());
 
 		else{// 비밀번호 변경할 경우
-			if(userDAO.check_pw_limit(user.getUserNewPassword()) == -1){// 비밀번호 제한 검사
+			if(UserDAO.check_pw_limit(user.getUserNewPassword()) == -1){// 비밀번호 제한 검사
 		    	PrintWriter script = response.getWriter();
 			    script.println("<script>");
 			    script.println("alert('비밀번호는 8~15자리 영소문자+숫자로만 설정해주세요.')");
 				script.println("history.back()");
 			    script.println("</script>");
 		    }   
-			else if(userDAO.check_pw_cmp(user.getUserNewPassword(), user.getUserRePassword()) == -1){	// 새 비밀번호와 비밀번호 재입력이 일치하지 않는 경우
+			else if(UserDAO.check_pw_cmp(user.getUserNewPassword(), user.getUserRePassword()) == -1){	// 새 비밀번호와 비밀번호 재입력이 일치하지 않는 경우
 		    	PrintWriter script = response.getWriter();
 		       	script.println("<script>");
 		        script.println("alert('새로운 비밀번호가 서로 맞지 않습니다.')");
@@ -56,7 +54,7 @@
 		       	script.println("</script>");
 			}
 			else
-				result = userDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserNewPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());
+				result = UserDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserNewPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());
 		}
 		
 		if(result == 1){

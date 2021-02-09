@@ -5,7 +5,6 @@
 <%@ page import="DB.BbsDAO_notice" %>
 <%@ page import="DB.Bbs_notice" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="DB.UserDAO" %>
 <jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
@@ -54,8 +53,7 @@
 		/* 게시판 업데이트!
 		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
 		*/
-		BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-		if(bbsDAO_notice.updateBbsComplete() == -1){
+		if(BbsDAO_notice.updateBbsComplete() == -1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('게시판 업데이트에 실패하였습니다.')");
@@ -92,7 +90,7 @@
             			</thead>
             			<tbody>
             				<%
-            					ArrayList<Bbs_notice> list = bbsDAO_notice.getList(pageNumber);
+            					ArrayList<Bbs_notice> list = BbsDAO_notice.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 1){
             				%>          				
@@ -138,7 +136,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO_notice.nextPage("bbs_notice", pageNumber+1)){
+            		if(DB.DbAccess.nextPage("bbs_notice", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="notice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

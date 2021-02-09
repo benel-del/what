@@ -1,4 +1,4 @@
-D<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>
 <%@ page import = "DB.Bbs_result" %>
@@ -6,7 +6,6 @@ D<%@ page language="java" contentType="text/html; charset=UTF-8"
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DB.Join_team" %>
 <%@ page import="DB.JoinDAO_team" %>
-<%@ page import="DB.UserDAO" %>
 <%@ page import="DB.User" %>
  
 <!DOCTYPE html>
@@ -44,8 +43,7 @@ D<%@ page language="java" contentType="text/html; charset=UTF-8"
 		script.println("history.back()");
 		script.println("</script>");
 	}
-	Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
-	if(userID == null || !userID.equals(bbs_result.getWriter())){
+	if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_result", bbsID))){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('수정 권한이 없습니다.')");
@@ -78,16 +76,16 @@ D<%@ page language="java" contentType="text/html; charset=UTF-8"
         </header>
 
         <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+		<%@ include file="admin_menubar.jsp" %>
 
 		<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
             <div class="board_subtitle">결과게시판</div>
             
             <%
-    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
-    			UserDAO userDAO = new UserDAO();
-    			ArrayList<User> list_user = userDAO.getUserlist(1);
+    			ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
+    			ArrayList<User> list_user = DB.UserDAO.getUserlist(1);
+    			Bbs_result bbs_result = BbsDAO_result.getBbs(bbsID);
     		%>
 
             <div class="write_container">

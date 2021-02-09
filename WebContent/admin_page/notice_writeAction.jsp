@@ -38,15 +38,14 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-				if(bbsDAO_notice.fixNumber() + bbs.getBbsFix() > 10){
+				if(BbsDAO_notice.fixNumber() + bbs.getBbsFix() > 10){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");
 					script.println("history.back()");
 					script.println("</script>");
 				}
-				int result = bbsDAO_notice.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix(), bbs.getBbsJoindate(), bbs.getBbsJoinplace());
+				int result = BbsDAO_notice.write(bbs.getBbsTitle(), userID, bbs.getBbsContent(), bbs.getBbsType(), bbs.getBbsFix(), bbs.getBbsJoindate(), bbs.getBbsJoinplace());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

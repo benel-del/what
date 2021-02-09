@@ -30,8 +30,7 @@
 	    script.println("</script>");
     }
 	else{
-	    UserDAO userDAO = new UserDAO();
-		int result = userDAO.preModify(userID, SHA256.getSHA256(user.getUserPassword()));
+		int result = UserDAO.preModify(userID, SHA256.getSHA256(user.getUserPassword()));
 		
 		if(result == 1){
 	    	PrintWriter script = response.getWriter();

@@ -21,12 +21,11 @@
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
 	}
-		
-	UserDAO userDAO = new UserDAO();
-	int result = userDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
+	
+	int result = UserDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
 	
 	if(result == 1){
-		int logDate = userDAO.updateLastLogin(user.getUserID()); //가장 최근 로그인 날짜 업데이트
+		int logDate = UserDAO.updateLastLogin(user.getUserID()); //가장 최근 로그인 날짜 업데이트
 		if(logDate == 1){
 			session.setAttribute("userID", user.getUserID());
 			PrintWriter script = response.getWriter();

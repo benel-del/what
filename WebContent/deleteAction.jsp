@@ -29,8 +29,7 @@
 	    script.println("</script>");
     }
 	else{
-	    UserDAO userDAO = new UserDAO();
-		int result = userDAO.delete(userID, SHA256.getSHA256(user.getUserPassword()));
+		int result = UserDAO.delete(userID, SHA256.getSHA256(user.getUserPassword()));
 		
 		if(result == 1){
 	    	PrintWriter script = response.getWriter();

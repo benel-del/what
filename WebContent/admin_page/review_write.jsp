@@ -51,7 +51,7 @@
         </header>
 
         <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+		<%@ include file="admin_menubar.jsp" %>
 		
 		
 	<!-- 게시판 공통 요소 : class board_ 사용 -->	

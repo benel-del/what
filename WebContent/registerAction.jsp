@@ -27,22 +27,21 @@
 		script.println("</script>");
 	}
 	else{
-    	UserDAO userDAO = new UserDAO();
-    	if(userDAO.check_limit(user) == -1){
+    	if(UserDAO.check_limit(user) == -1){
     		PrintWriter script = response.getWriter();
 	    	script.println("<script>");
 	    	script.println("alert('아이디는 8~15자의 영문 소문자+숫자만 사용 가능합니다.')");
 			script.println("history.back()");
 	    	script.println("</script>");
     	}
-    	else if(userDAO.check_limit(user) == -2){
+    	else if(UserDAO.check_limit(user) == -2){
     	    	PrintWriter script = response.getWriter();
     		    script.println("<script>");
     		    script.println("alert('비밀번호는 8~15자의 영문 소문자+숫자만 사용 가능합니다.')");
     			script.println("history.back()");
     		    script.println("</script>");
     	}
-    	else if(userDAO.check_limit(user) == -3){
+    	else if(UserDAO.check_limit(user) == -3){
         	PrintWriter script = response.getWriter();
     	    script.println("<script>");
     	    script.println("alert('이름은 한글만 사용 가능합니다.')");
@@ -84,7 +83,7 @@
             script.println("history.back()");
            	script.println("</script>");
         }
-    	else if(userDAO.check_pw_cmp(user.getUserPassword(), user.getUserRePassword()) == -1){	// 비밀번호와 비밀번호 재입력이 일치하지 않는 경우
+    	else if(UserDAO.check_pw_cmp(user.getUserPassword(), user.getUserRePassword()) == -1){	// 비밀번호와 비밀번호 재입력이 일치하지 않는 경우
         	PrintWriter script = response.getWriter();
            	script.println("<script>");
             script.println("alert('비밀번호가 서로 맞지 않습니다.')");
@@ -92,7 +91,7 @@
            	script.println("</script>");
         }
     	else{
-    		int result = userDAO.register(user);
+    		int result = UserDAO.register(user);
             if(result == -1){
                	PrintWriter script = response.getWriter();
                 script.println("<script>");
@@ -102,7 +101,7 @@
             }
             else{
             	String userPassword = user.getUserPassword();
-    			int pwhash = userDAO.pwHashing(SHA256.getSHA256(userPassword), user.getUserID());
+    			int pwhash = UserDAO.pwHashing(SHA256.getSHA256(userPassword), user.getUserID());
             	if(pwhash == 0){
             		PrintWriter script = response.getWriter();
                   	script.println("<script>");

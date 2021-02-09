@@ -51,8 +51,7 @@
             <div class="board_subtitle">참가자 명단</div>
 
     		<%
-    			UserDAO userDAO = new UserDAO();
-    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
+    			ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
     		%>
     	
             <div class="board_container">
@@ -86,7 +85,7 @@
             				<td><%=join_team.getTeamID() %></td>
             				<td>
             				<%
-            					User userName = userDAO.getMemberName(join_team.getTeamLeader());
+            					User userName = UserDAO.getMemberName(join_team.getTeamLeader());
 	            				out.print(userName.getUserName()+"("+userName.getUserID()+")");	
 	            			%>
 	            			</td>
@@ -96,7 +95,7 @@
             					
             					for(int i=0; i<mem.length; i++){
             						if(mem[i] != null){
-            							User user = userDAO.getMemberName(mem[i]);
+            							User user = UserDAO.getMemberName(mem[i]);
             							out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
             						}
             					}

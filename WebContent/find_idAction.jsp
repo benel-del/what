@@ -20,10 +20,8 @@
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
 	}
-		
-	UserDAO userDAO = new UserDAO();
-	userID = userDAO.findID(user.getUserName(), user.getUserEmail());
-		
+	
+	userID = UserDAO.findID(user.getUserName(), user.getUserEmail());
 	if(userID == null){
 		//계정이 없는 경우
 		PrintWriter script = response.getWriter();

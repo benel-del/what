@@ -8,7 +8,7 @@ public class BbsDAO_review extends DbAccess{
 		super();
 	}	
 	
-	public int write(String bbsTitle, String writer, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
+	static public int write(String bbsTitle, String writer, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
 		String SQL="INSERT INTO bbs_review(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable, fileName1, fileName2, fileName3, fileName4) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -27,7 +27,7 @@ public class BbsDAO_review extends DbAccess{
 		}
 		return -1; //데이터베이스 오류
 	}
-	public ArrayList<Bbs_review> getList(int pageNumber){
+	static public ArrayList<Bbs_review> getList(int pageNumber){
 		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_review WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		ArrayList<Bbs_review> list = new ArrayList<Bbs_review>();
 		try {
@@ -48,7 +48,7 @@ public class BbsDAO_review extends DbAccess{
 		return list;
 	}
 	
-	public Bbs_review getBbs(int bbsID) {
+	static public Bbs_review getBbs(int bbsID) {
 		String SQL="SELECT * FROM bbs_review WHERE bbsID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -74,7 +74,7 @@ public class BbsDAO_review extends DbAccess{
 		}
 		return null;
 	}
-	public int update(int bbsID, String bbsTitle, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
+	static public int update(int bbsID, String bbsTitle, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
 		String SQL="UPDATE bbs_review SET bbsTitle= ?, bbsContent = ?, fileName1 = ?, fileName2 = ?, fileName3 = ?, fileName4 = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

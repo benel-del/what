@@ -4,7 +4,6 @@
 <%@ page import="DB.BbsDAO_result" %>
 <%@ page import="DB.Bbs_result" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="DB.UserDAO" %>
 <jsp:useBean id="user" class="DB.User" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 
@@ -74,8 +73,7 @@
             			</thead>
             			<tbody>
             				<%
-            					BbsDAO_result bbsDAO_result = new BbsDAO_result();
-            					ArrayList<Bbs_result> list = bbsDAO_result.getList(pageNumber);
+            					ArrayList<Bbs_result> list = BbsDAO_result.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             				%>          				
             				<tr class="board_tr">
@@ -104,7 +102,7 @@
 					</div>
 				<% 
 					}
-            		if(bbsDAO_result.nextPage("bbs_result", pageNumber+1)){
+            		if(DB.DbAccess.nextPage("bbs_result", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="result.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

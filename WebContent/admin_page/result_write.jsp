@@ -66,16 +66,15 @@
         </header>
 
         <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+		<%@ include file="admin_menubar.jsp" %>
 
 		<!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">결과게시판</div>
 			
 			<%
-    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
-    			UserDAO userDAO = new UserDAO();
-    			ArrayList<User> list_user = userDAO.getUserlist(1);
+    			ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
+    			ArrayList<User> list_user = UserDAO.getUserlist(1);
     		%>
             <div class="write_container">
             	<div class="write_row">

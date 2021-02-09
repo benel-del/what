@@ -127,9 +127,7 @@
             			</thead>
             			<tbody>   			
             			<%
-            				JoinDAO_team joinDAO_team = new JoinDAO_team();
-            				UserDAO userDAO = new UserDAO();
-            				ArrayList<Join_team> list = joinDAO_team.getMembers(bbsID);
+            				ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
             				for(Join_team join_team : list){
             			%>	
             				<tr class="board_tr">
@@ -145,7 +143,7 @@
             						
             							for(int i=0; i<mem.length; i++){
                 							if(mem[i] != null){
-                								User user = userDAO.getMemberName(mem[i]);
+                								User user = UserDAO.getMemberName(mem[i]);
                 								out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
                 							}
                 						}
@@ -163,7 +161,7 @@
 								</td>
 								<td>
 								<%
-									User user = userDAO.getMemberName(join_team.getTeamLeader());
+									User user = UserDAO.getMemberName(join_team.getTeamLeader());
 									out.print(user.getUserName()+"("+user.getUserID()+")");
 								%>
 								</td>

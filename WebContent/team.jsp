@@ -102,8 +102,7 @@
             			</thead>
             			<tbody>
             			<%	    	
-            				UserDAO userDAO = new UserDAO();
-            				ArrayList<User> list = userDAO.getUserList_join();
+            				ArrayList<User> list = UserDAO.getUserList_join();
 							for(User user : list){
 		            	%>      				  	
 		            		<tr class="board_tr" id="notice_nonfix">
@@ -113,7 +112,7 @@
 		            			<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>
             					<td>
             					<%
-            						if(new JoinDAO_user().userJoin(bbsID, user.getUserID()) == 1){
+            						if(JoinDAO_user.userJoin(bbsID, user.getUserID()) == 1){
             							out.print("참가신청완료");            				
             						}else{
             							out.print("");

@@ -58,8 +58,7 @@
                     <div id="index_notice-inform">
                         <div class="index_title">모임 공지</div>
                         <%
-                        	BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-                        	Bbs_notice noticeInfo = bbsDAO_notice.noticeInfo_index();
+                        	Bbs_notice noticeInfo = BbsDAO_notice.noticeInfo_index();
         					int bbsJoin=0;
         					if(noticeInfo != null){
         						bbsJoin = noticeInfo.getBbsID();
@@ -127,7 +126,7 @@
                 		<table id="notice1_table"> 
               				<tbody>
               				<%
-        						ArrayList<Bbs_notice> list_notice1 = new BbsDAO_notice().notice_index("모임공지");
+        						ArrayList<Bbs_notice> list_notice1 = BbsDAO_notice.notice_index("모임공지");
         						for(int i=0; i<list_notice1.size(); i++){
  	 	      				%>
  	 	      					<tr>
@@ -142,7 +141,7 @@
               			<table id="notice2_table"> 
               				<tbody>
               				<%
-        						ArrayList<Bbs_notice> list_notice2 = new BbsDAO_notice().notice_index("일반공지");
+        						ArrayList<Bbs_notice> list_notice2 = BbsDAO_notice.notice_index("일반공지");
         						for(int i=0; i<list_notice2.size(); i++){
  	 	      				%>
  	 	      					<tr>
@@ -167,8 +166,7 @@
             			</thead>          			
             			<tbody>
             			<%
-    						UserDAO userDAO = new UserDAO();
-    						ArrayList<User> list = userDAO.getUserRank_index();
+    						ArrayList<User> list = UserDAO.getUserRank_index();
             				for(User user : list){
             					if(user.getUserID().equals("admin") == false){
             						//관리자는 랭킹에 포함하지 않음

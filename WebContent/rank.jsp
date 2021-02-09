@@ -83,8 +83,7 @@
             			
             			<tbody>
             	<%
-            		UserDAO userDAO = new UserDAO();
-        			ArrayList<User> list = userDAO.getUserlist(pageNumber);
+        			ArrayList<User> list = UserDAO.getUserlist(pageNumber);
             		for(int i=0; i<list.size(); i++){
             			if(list.get(i).getUserID().equals("admin") == false){
             	%>
@@ -115,7 +114,7 @@
 					</div>
 				<% 
 					}
-            		if(pageNumber < userDAO.nextPage() / 13 + 1){
+            		if(pageNumber < UserDAO.nextPage() / 13 + 1){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="rank.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

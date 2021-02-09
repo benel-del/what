@@ -31,7 +31,7 @@
 			script.println("location.href='notice.jsp'");
 			script.println("</script>");
 		}
-		Bbs_notice bbs_notice = new BbsDAO_notice().getBbs(bbsID);
+		Bbs_notice bbs_notice = BbsDAO_notice.getBbs(bbsID);
 	%>
 	
     <div id="wrapper">

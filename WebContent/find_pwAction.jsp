@@ -33,7 +33,7 @@
 	}
 		
 	UserDAO userDAO = new UserDAO();
-	int findPW = userDAO.findPW(user.getUserID(), user.getUserName(), user.getUserEmail());
+	int findPW = UserDAO.findPW(user.getUserID(), user.getUserName(), user.getUserEmail());
 		
 	//임시비밀번호 랜덤으로 설정
 	String newUserPw = "";
@@ -49,7 +49,7 @@
 		script.println("history.back()");
 		script.println("</script>");
 	} else{
-		if(userDAO.pwHashing(SHA256.getSHA256(newUserPw), user.getUserID()) == 0){
+		if(UserDAO.pwHashing(SHA256.getSHA256(newUserPw), user.getUserID()) == 0){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('Password hashing error!')");
@@ -60,7 +60,7 @@
 		//emailSendAction
 		String host = "http://localhost:8080/what/";
 		String from = "whatleague@gmail.com";
-		String to = userDAO.getUserEmail(user.getUserID());
+		String to = UserDAO.getUserEmail(user.getUserID());
 			
 		String subject = "어쩌다리그 : 비밀번호가 전송되었습니다.";
 		String content= user.getUserID() + " 회원님의 임시비밀번호는 "+newUserPw+"입니다.";
