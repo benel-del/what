@@ -41,8 +41,8 @@
         		ArrayList<Bbs_faq> list = bbsDAO.getList();
 				for(int i=0; i<list.size(); i++){
       	 	 %>
-            	<input type="checkbox" id="answer01">
-            	<label for="answer01"><%=list.get(i).getBbsTitle() %></label>        
+            	<input type="checkbox" id="answer<%=i%>">
+            	<label for="answer<%=i%>"><%=list.get(i).getBbsTitle() %></label>        
             	<div>          
            			<p><%=list.get(i).getBbsContent() %></p>
         		</div>
