@@ -20,34 +20,29 @@
 			userID = (String) session.getAttribute("userID");
 		}
 	%>
+	
+	<!-- service -->
+	<%
+        if(userID != null){
+        	//로그인 한 사람 접근 불가
+        	PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('이미 로그인하였습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+	%>
+        <div class="service">
+            <a class="link" href="login.jsp">로그인</a>
+            <a class="link" href="register.jsp">회원가입</a>
+        </div> 
+        
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
+    
     <div id="wrapper">
         <br>
-        <header>
-        	<%
-        		if(userID != null){
-        			//로그인 한 사람 접근 불가
-        			PrintWriter script=response.getWriter();
-					script.println("<script>");
-					script.println("alert('이미 로그인하였습니다.')");
-					script.println("history.back()");
-					script.println("</script>");
-				}
-			%>
-            <div class="service">
-                <a class="link" href="login.jsp">로그인</a>
-                |
-                <a class="link" href="register.jsp">회원가입</a>
-            </div>          
-            <br>
-            
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
 		<section class="container">   
 			<div class="login_page">
 				<form method="post" action="find_idAction.jsp">

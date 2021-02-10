@@ -18,35 +18,33 @@
 
 <body>
 	<% 
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	
-	int bbsID =0;
-	if(request.getParameter("bbsID") != null){
-		bbsID=Integer.parseInt(request.getParameter("bbsID"));
-	}
-	if(bbsID ==0){
-		PrintWriter script=response.getWriter();
-		script.println("<script>");
-		script.println("alert('유효하지 않은 글입니다.')");
-		script.println("location.href='result.jsp'");
-		script.println("</script>");
-	}
-	Bbs_result bbs_result = BbsDAO_result.getBbs(bbsID);
-	ArrayList<User> list_user = UserDAO.getUserlist(1);
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		
+		int bbsID =0;
+		if(request.getParameter("bbsID") != null){
+			bbsID=Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID ==0){
+			PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href='result.jsp'");
+			script.println("</script>");
+		}
+		Bbs_result bbs_result = BbsDAO_result.getBbs(bbsID);
+		ArrayList<User> list_user = UserDAO.getUserlist(1);
 	%>
 	
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
     <div id="wrapper">
         <br>
-        <!-- header -->
-        <%@ include file="header.jsp" %>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
-		<!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">결과게시판</div>
 

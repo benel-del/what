@@ -36,25 +36,25 @@
 
 <body>
 	<% //userID 존재 여부
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	int pageNumber = 1; // 기본페이지
-	if(request.getParameter("pageNumber") != null){
-		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-	}
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		int pageNumber = 1; // 기본페이지
+		if(request.getParameter("pageNumber") != null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
 	%>
 	
+	
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
+    
     <div id="wrapper">
         <br>
-        <!-- header -->
-        <%@ include file="header.jsp" %>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
-	<!-- 게시판 공통 요소 : class board_ 사용 -->
         <section class="container">
             <div class="board_subtitle">
             	결과게시판

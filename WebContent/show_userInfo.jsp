@@ -36,14 +36,15 @@
 		User user = UserDAO.getuserInfo(userInfo);
 	%>
 
+
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
+    
     <div id="wrapper">
         <br>
-        <!-- header -->
-        <%@ include file="header.jsp" %>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
         <section class="container">
        		<div class="mypage_contents">
        		    <table class="myinfo_table">

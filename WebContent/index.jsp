@@ -30,9 +30,12 @@
 			$('#notice1_table').hide();
 			$('#notice2_table').show();
 		});
+
 	});
 	</script>
-    <title>어쩌다리그</title>
+	<script src="main.js" defer></script>
+	<script src="https://kit.fontawesome.com/64471f6822.js" crossorigin="anonymous"></script>
+	<title>어쩌다리그</title>
 </head>
 
 <body>
@@ -43,13 +46,14 @@
 		}
 	%>
 	
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
     <div id="wrapper">
         <br>
-        <!-- header -->
-        <%@ include file="header.jsp" %>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
+        
 
         <section>
             <div id="index_top">

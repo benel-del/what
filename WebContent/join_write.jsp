@@ -58,6 +58,14 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}		
+		if(userID == null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인 후 접근 가능합니다.')");
+			script.println("location.replace('login.jsp')");
+			script.println("</script>");
+		}
+		
 		int bbsID = 0;
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
@@ -76,46 +84,14 @@
 		String member;
 	%>
 
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
+    
     <div id="wrapper">
         <br>
-        <header>
-        <%      	
-   		    if(userID == null){
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('로그인 후 접근 가능합니다.')");
-				script.println("location.replace('login.jsp')");
-				script.println("</script>");
-			}
-   		    else{
-       	 	if(userID.equals("admin")){
-       	%>
-           	<div class="service">
-       	        <a class="link" href="logoutAction.jsp">로그아웃 </a>
-       	        | 
-       	        <a class="link" href="admin_page/admin.jsp">관리자페이지</a>
-       	    </div>
-       	<%	
-            } else{
-        %>
-   	        <div class="service">
-   	        	<a class="link" href="logoutAction.jsp">로그아웃 </a>
-   	        	| 
-   	        	<a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
-   	        </div>
-   	    <%
-            }
-   	    %>
-        	<br>
-    	      	
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
         <section class="container">
             <div class="board_subtitle">참가신청</div>
     	

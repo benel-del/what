@@ -34,15 +34,15 @@
 		Bbs_notice bbs_notice = BbsDAO_notice.getBbs(bbsID);
 	%>
 	
+	
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
+    
     <div id="wrapper">
         <br>
-        <!-- header -->
-	    <%@ include file="header.jsp" %>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
-		<!-- 게시판 공통 요소 : class board_ 사용 -->	
         <section class="container">
             <div class="board_subtitle">공지게시판</div>
 

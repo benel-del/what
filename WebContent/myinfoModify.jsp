@@ -22,42 +22,28 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
+		if(userID == null){
+    		//로그인 한 사람만 접근 가능
+            PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인 후 이용 가능합니다.')");
+			script.println("location.replace('login.jsp')");
+			script.println("</script>");
+		}
+		User user = UserDAO.getuserInfo(userID);
 	%>
 	
+	<!-- service -->
+	<div class="service">
+        <a class="link" href="logoutAction.jsp">로그아웃 </a>
+        <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
+    </div>
+    
+    <!-- header -->
+    <%@ include file="header.jsp" %>
+    
     <div id="wrapper">
-        <br>
-        <header>
-        <%
-        	if(userID == null){
-        		//로그인 한 사람만 접근 가능
-	            PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('로그인 후 이용 가능합니다.')");
-				script.println("location.replace('login.jsp')");
-				script.println("</script>");
-           	} else {
-		%>
-            <div class="service">
-                <a class="link" href="logoutAction.jsp">로그아웃 </a>
-                |
-                <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
-           </div>
-            <br>		
-		<% 
-           	}
-       	%>	
-            
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-			
-        <%
-			User user = UserDAO.getuserInfo(userID);
-       	%>
+        <br>	
         <section class="container">
        		<form method="post" action="myinfoModifyAction.jsp">
        			<div class="login_page">

@@ -62,14 +62,15 @@
 		}
 	%>
 	
+	
+	<!-- service -->
+	<%@ include file="service.jsp" %>
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
+    
     <div id="wrapper">
         <br>
-        <!-- header -->
-        <%@ include file="header.jsp" %>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
         <section class="container">
             <div class="board_subtitle">
             	공지게시판

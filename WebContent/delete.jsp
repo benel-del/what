@@ -22,35 +22,27 @@
 		}
 	%>
 	
+	<!-- service -->
+	<% 
+        if(userID == null){
+        	//로그인 한 사람만 접근 가능
+	        PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('로그인 후 이용가능합니다.')");
+			script.println("location.replace('login.jsp')");
+			script.println("</script>");
+        } else{
+	%>
+        <div class="service">
+            <a class="link" href="logoutAction.jsp">로그아웃</a>
+            <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
+        </div>
+            
+	<!-- header -->
+    <%@ include file="header.jsp" %>
+    
     <div id="wrapper">
     	<br>
-        <header>
-       	<% 
-        	if(userID == null){
-        		//로그인 한 사람만 접근 가능
-	            PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('로그인 후 이용가능합니다.')");
-				script.println("location.replace('login.jsp')");
-				script.println("</script>");
-           	} else{
-		%>
-            <div class="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
-                <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
-            </div>          
-            <br>
-           
-            <!--사이트 이름-->
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
-
-        <!-- menu -->
-		<%@ include file="menubar.jsp" %>
-
         <section class="container">
            <div class="login_page">
               <form method="post" action="deleteAction.jsp">              
