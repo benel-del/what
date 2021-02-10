@@ -61,7 +61,8 @@
     		<br>
 
     		<%
-            	Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
+    			UserDAO UserDAO = new UserDAO();
+            	Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
             %>	
     		<div class="board_container">
             	<div class="mypage_contents">

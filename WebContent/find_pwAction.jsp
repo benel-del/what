@@ -32,7 +32,7 @@
 		script.println("</script>");
 	}
 		
-	UserDAO userDAO = new UserDAO();
+	UserDAO UserDAO = new UserDAO();
 	int findPW = UserDAO.findPW(user.getUserID(), user.getUserName(), user.getUserEmail());
 		
 	//임시비밀번호 랜덤으로 설정

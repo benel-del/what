@@ -8,7 +8,7 @@ public class JoinDAO_user extends DbAccess{
 	}
 	
 	/* write(참가신청) - join_writeAction.jsp */
-	static public int write(int bbsID, int teamID, String userID) {
+	public int write(int bbsID, int teamID, String userID) {
 		String SQL="SELECT userID FROM join" + bbsID + "_user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -47,7 +47,7 @@ public class JoinDAO_user extends DbAccess{
 	}
 	
 	/* 해당 유저의 참가여부 return - team.jsp */
-	static public int userJoin(int bbsID, String userID) {
+	public int userJoin(int bbsID, String userID) {
 		String SQL = "SELECT isPart FROM join" + bbsID + "_user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -68,7 +68,7 @@ public class JoinDAO_user extends DbAccess{
 	}
 	
 	/* join_update.jsp */
-	static public int userJoin_update(int bbsID, int teamID, String userID) {
+	public int userJoin_update(int bbsID, int teamID, String userID) {
 		String SQL = "SELECT isPart, teamID FROM join" + bbsID + "_user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -95,7 +95,7 @@ public class JoinDAO_user extends DbAccess{
 	}
 	
 	/* join_updateAction.jsp */
-	static public int update_delete(int bbsID, int teamID) {
+	public int update_delete(int bbsID, int teamID) {
 		String SQL = "UPDATE join"+bbsID+"_user SET isPart=0, teamID=0 WHERE teamID="+teamID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

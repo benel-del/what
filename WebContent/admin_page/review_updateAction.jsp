@@ -23,7 +23,8 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_review", bbsID))){
+		BbsDAO_review BbsDAO_review = new BbsDAO_review();
+		if(userID == null || !userID.equals(BbsDAO_review.getWriter("bbs_review", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");

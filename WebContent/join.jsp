@@ -50,13 +50,13 @@
             <div class="board_subtitle">참가자 명단</div>
 
     		<%
-    			ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
+    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
     		%>
     	
             <div class="board_container">
             	<div class="board_row">
             	<%
-            		if(BbsDAO_notice.isCompelte(bbsID) == 0){
+            		if(new BbsDAO_notice().isCompelte(bbsID) == 0){
             	%>
             		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
             		<input type="button" onclick="location.href='team.jsp?bbsID=<%=bbsID %>'" value="팀원찾기">
@@ -78,6 +78,7 @@
             			
             		<tbody>
             		<%
+            			UserDAO UserDAO = new UserDAO();
             			for(Join_team join_team : list){
             		%>
             			<tr class="board_tr" id="notice_nonfix">

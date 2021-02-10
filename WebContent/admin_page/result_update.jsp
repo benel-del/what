@@ -7,6 +7,7 @@
 <%@ page import="DB.Join_team" %>
 <%@ page import="DB.JoinDAO_team" %>
 <%@ page import="DB.User" %>
+<%@ page import="DB.UserDAO" %>
  
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +44,8 @@
 		script.println("history.back()");
 		script.println("</script>");
 	}
-	if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_result", bbsID))){
+	BbsDAO_result BbsDAO_result = new BbsDAO_result();
+	if(userID == null || !userID.equals(BbsDAO_result.getWriter("bbs_result", bbsID))){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('수정 권한이 없습니다.')");
@@ -83,8 +85,8 @@
             <div class="board_subtitle">결과게시판</div>
             
             <%
-    			ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
-    			ArrayList<User> list_user = DB.UserDAO.getUserlist(1);
+    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
+    			ArrayList<User> list_user = new UserDAO().getUserlist(1);
     			Bbs_result bbs_result = BbsDAO_result.getBbs(bbsID);
     		%>
 

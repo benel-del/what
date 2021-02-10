@@ -74,6 +74,7 @@
             			</thead>
             			<tbody>
             				<%
+            					BbsDAO_review BbsDAO_review = new BbsDAO_review();
             					ArrayList<Bbs_review> list = BbsDAO_review.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             				%>          				
@@ -103,7 +104,7 @@
 					</div>
 				<% 
 					}
-            		if(DB.DbAccess.nextPage("bbs_review", pageNumber+1)){
+            		if(BbsDAO_review.nextPage("bbs_review", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="review.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

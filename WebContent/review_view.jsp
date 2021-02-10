@@ -31,7 +31,7 @@
 			script.println("location.href='review.jsp'");
 			script.println("</script>");
 		}
-		Bbs_review bbs_review = BbsDAO_review.getBbs(bbsID);
+		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
 	%>
 	
 	<!-- service -->

@@ -14,7 +14,7 @@ public class UserDAO extends DbAccess{
 * ·Î±×ÀÎ
 ***********************************************************************************/	
 	/* login - loginAction.jsp */
-	static public int login(String userID, String userPassword) {
+	public int login(String userID, String userPassword) {
 		String SQL = "SELECT userPassword FROM USER WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -37,7 +37,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* updateLastLogin - loginAction.jsp */
-	static public int updateLastLogin(String userID) {
+	public int updateLastLogin(String userID) {
 		String SQL = "UPDATE USER SET userLogdate = ? WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -52,7 +52,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* findID(¾ÆÀÌµðÃ£±â) - find_idAction.jsp */
-	static public String findID(String userName, String userEmail) {
+	public String findID(String userName, String userEmail) {
 		String SQL = "SELECT userID FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -69,7 +69,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* findPW(ºñ¹Ð¹øÈ£ Ã£±â) - find_pwAction.jsp */
-	static public int findPW(String userID, String userName, String userEmail) {
+	public int findPW(String userID, String userName, String userEmail) {
 		String SQL = "SELECT * FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ? AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -87,7 +87,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* getUserEmail(ÀÓ½Ã ºñ¹ø Àü¼ÛÇÒ ÀÌ¸ÞÀÏ Ã£¾Æ¿À±â) - find_pwAction.jsp */
-	static public String getUserEmail(String userID) {
+	public String getUserEmail(String userID) {
 		String SQL = "SELECT userEmail FROM USER WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -107,7 +107,7 @@ public class UserDAO extends DbAccess{
  * È¸¿ø°¡ÀÔ	
  ***********************************************************************************/
 	/* register - registerAction.jsp */
-	static public int register(User user) {
+	public int register(User user) {
 		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -133,7 +133,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* pwHashing(ºñ¹Ð¹øÈ£ ÀúÀå½Ã ÇØ½ÌÀ» ÅëÇØ ¾ÏÈ£È­) - find_pwAction.jsp & registerAction.jsp */
-	static public int pwHashing(String userPassword, String userID) {
+	public int pwHashing(String userPassword, String userID) {
 		String SQL = "UPDATE USER SET userPassword = ? WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -148,7 +148,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* check_limit - registerAction.jsp */
-	static public int check_limit(User user) {
+	public int check_limit(User user) {
 		String id = user.getUserID();
 		String pw = user.getUserPassword();
 		String name = user.getUserName();
@@ -170,7 +170,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* str(ID, PW)ÀÌ ¿µ¹®¼Ò¹®ÀÚ + ¼ýÀÚ·Î¸¸ ±¸¼ºµÈ °æ¿ì 0¹ÝÈ¯, ±×·¸Áö ¾ÊÀ» °æ¿ì -1 ¹ÝÈ¯  - UserDAO.java*/
-	static private int string_pattern1(String str) {
+	private int string_pattern1(String str) {
 		int i;
 		int character=0; //str¿¡ Æ÷ÇÔµÈ ¿µ¼Ò¹®ÀÚ °³¼ö
 		int number=0; //str¿¡ Æ÷ÇÔµÈ ¼ýÀÚ °³¼ö
@@ -192,7 +192,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* »ç¿ëÀÚ ÀÌ¸§ÀÌ ÇÑ±Û·Î ÀÌ·ç¾îÁø °æ¿ì 0¹ÝÈ¯, ±×·¸Áö ¾ÊÀ» °æ¿ì -1¹ÝÈ¯ - UserDAO.java */
-	static private int string_pattern2(String str) {
+	private int string_pattern2(String str) {
 		if(Pattern.matches("[°¡-ÆR]+", str))
 			return 0;
 		else
@@ -200,7 +200,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* check_pw_cmp(ºñ¹Ð¹øÈ£ - ºñ¹Ð¹øÈ£ È®ÀÎ ÀÏÄ¡ ¿©ºÎ) - registerAction.jsp */	
-	static public int check_pw_cmp(String pw, String re_pw) {
+	public int check_pw_cmp(String pw, String re_pw) {
 		if(pw.equals(re_pw) == true)
 			return 1;
 		else
@@ -212,7 +212,7 @@ public class UserDAO extends DbAccess{
  * ¸¶ÀÌÆäÀÌÁö
 ***********************************************************************************/
 	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp*/
-	static public User getuserInfo(String userID) {	
+	public User getuserInfo(String userID) {	
 		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -244,7 +244,7 @@ public class UserDAO extends DbAccess{
 * È¸¿øÁ¤º¸ ¼öÁ¤
 ***********************************************************************************/
 	/* preModify(ºñ¹øÀ¸·Î º»ÀÎÈ®ÀÎ) - preModifyAction.jsp */
-	static public int preModify(String userID, String userPassword) {
+	public int preModify(String userID, String userPassword) {
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -265,7 +265,7 @@ public class UserDAO extends DbAccess{
 	}
 		
 	/* modify(È¸¿ø Á¤º¸ ¼öÁ¤) - myinfoModifyAction.jsp */
-	static public int modify(String userID, String userPassword, String userNewPassword, String userLevel, String userDescription, String userEmail) {
+	public int modify(String userID, String userPassword, String userNewPassword, String userLevel, String userDescription, String userEmail) {
 		int rt = -1;
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
@@ -309,7 +309,7 @@ public class UserDAO extends DbAccess{
 	}
 		
 	/* check_pw_limit(È¸¿ø Á¤º¸ ¼öÁ¤ - »õ·Î¿î ÆÐ½º¿öµå ¼³Á¤ ½Ã Á¦ÇÑÁ¶°Ç È®ÀÎ) - myinfoModifyAction.jsp */
-	static public int check_pw_limit(String pw) {
+	public int check_pw_limit(String pw) {
 		try {
 			if((pw.length() < 8) || (pw.length() > 15) || string_pattern1(pw)==-1)
 				return -1;
@@ -323,7 +323,7 @@ public class UserDAO extends DbAccess{
 * È¸¿ø Å»Åð
 ***********************************************************************************/
 	/* delete(È¸¿øÅ»Åð) - deleteAction.jsp */
-	static public int delete(String userID, String userPassword) {
+	public int delete(String userID, String userPassword) {
 		int rt = -1;
 		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
 		try {
@@ -367,7 +367,7 @@ public class UserDAO extends DbAccess{
 * ·©Å·°Ô½ÃÆÇ
 ***********************************************************************************/	
 	/* getUserList(·©Å©¼ø + ÀÌ¸§¼ø) - rank.jsp */
-	static public ArrayList<User> getUserlist(int pageNumber){
+	public ArrayList<User> getUserlist(int pageNumber){
 		ArrayList<User> list = new ArrayList<User>();
 		String SQL = "SELECT * FROM user WHERE userAvailable = 1 ORDER BY userRank ASC, userName ASC LIMIT ?, 20;";
 		try {
@@ -400,7 +400,7 @@ public class UserDAO extends DbAccess{
 	}
 		
 	/* getUserRank_index - index.jsp */
-	static public ArrayList<User> getUserRank_index(){		
+	public ArrayList<User> getUserRank_index(){		
 		String SQL="SELECT userID, userRank, userName, userLevel FROM user WHERE userAvailable=1 ORDER BY userRank ASC, userName ASC LIMIT 9;";
 		ArrayList<User> list = new ArrayList<User>();
 		try {
@@ -425,7 +425,7 @@ public class UserDAO extends DbAccess{
 * ¸ðÀÓ°Ô½ÃÆÇ - Âü°¡ÀÚ¸í´Ü
 ***********************************************************************************/	
 	/* getUserList_join(Âü°¡½ÅÃ»ÆäÀÌÁö¿¡¼­ Âü°¡ÀÚ¸í´Ü searchÇÒ ¶§ userlist ºÒ·¯¿À±â) - join_write.jsp */
-	static public ArrayList<User> getUserList_join(){
+	public ArrayList<User> getUserList_join(){
 		ArrayList<User> list = new ArrayList<User>();
 		String SQL = "SELECT userID, userName, userGender, userLevel FROM user WHERE userAvailable = 1 AND userID!='admin';";
 		try {
@@ -448,7 +448,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* ¾ÆÀÌµð¿¡ ÇØ´çÇÏ´Â userName °¡Á®¿À±â - join.jsp & join_view.jsp */
-	static public User getMemberName(String userID) {	
+	public User getMemberName(String userID) {	
 		String SQL="SELECT userID, userName, userLevel FROM user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -468,7 +468,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* ÇÕºÎ¼ö ±¸ÇÏ±â À§ÇÑ ÇÔ¼ö - ÇØ´ç userIDÀÇ ºÎ¼ö¸¦ returnÇÔ - join_writeAction.jsp */
-	static public int getLevelSum(String userID) {
+	public int getLevelSum(String userID) {
 		String SQL="SELECT userLevel FROM user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -487,7 +487,7 @@ public class UserDAO extends DbAccess{
 	
 	/* ·©Å· ±â´É - °ü¸®ÀÚ°¡ result µî·Ï ½Ã ¾÷µ¥ÀÌÆ® */
 	/* ·©Å·°Ô½ÃÆÇ ¾÷µ¥ÀÌÆ® */
-	static public int setRank() {
+	public int setRank() {
 		int i = 0;
 		int same = 1;	// Á¡¼ö°¡ µ¿ÀÏÇÒ ½Ã
 		int pre_fir = -1;
@@ -540,7 +540,7 @@ public class UserDAO extends DbAccess{
 	}					
 
 	/* ·©Å·°Ô½ÃÆÇ ´ÙÀ½ ÆäÀÌÁö */
-	static public int nextPage() {
+	public int nextPage() {
 		int count = 0;
 		String SQL="SELECT userID FROM user;";
 		try {
@@ -556,7 +556,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	/* result_view.jsp - ÇØ´ç userÀÇ Á¤º¸ ºÒ·¯¿À±â */
-	static public User getUser(String userID) {
+	public User getUser(String userID) {
 		String SQL="SELECT userName, userLevel FROM user WHERE userID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -576,7 +576,7 @@ public class UserDAO extends DbAccess{
 	
 	
 	
-	static public int resetRank(String userID) {
+	public int resetRank(String userID) {
 		String SQL = "UPDATE USER SET userFirst=0, userSecond=0, userThird=0 WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -588,7 +588,7 @@ public class UserDAO extends DbAccess{
 		}
 		return -1;
 	}
-	static public int updateFirst(String userID) {
+	public int updateFirst(String userID) {
 		String SQL = "UPDATE USER SET userFirst=userFirst+1 WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -600,7 +600,7 @@ public class UserDAO extends DbAccess{
 		}
 		return -1;
 	}
-	static public int updateSecond(String userID) {
+	public int updateSecond(String userID) {
 		String SQL = "UPDATE USER SET userSecond=userSecond+1 WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -612,7 +612,7 @@ public class UserDAO extends DbAccess{
 		}
 		return -1;
 	}
-	static public int updateThird(String userID) {
+	public int updateThird(String userID) {
 		String SQL = "UPDATE USER SET userThird=userThird+1 WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

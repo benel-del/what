@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "DB.BbsDAO_notice" %> 
 <%@ page import="java.io.PrintWriter" %>
 
 <% 
@@ -12,7 +13,7 @@
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
 		}
-		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_notice", bbsID))){
+		if(userID == null || !userID.equals(new BbsDAO_notice().getWriter("bbs_notice", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");

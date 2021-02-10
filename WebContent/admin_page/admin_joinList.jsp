@@ -127,7 +127,8 @@
             			</thead>
             			<tbody>   			
             			<%
-            				ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
+            				UserDAO UserDAO = new UserDAO();
+            				ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
             				for(Join_team join_team : list){
             			%>	
             				<tr class="board_tr">

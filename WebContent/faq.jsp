@@ -36,7 +36,7 @@
         
         	<div class="faq_accordion">
        		 <%
-        		ArrayList<Bbs_faq> list = BbsDAO_faq.getList();
+        		ArrayList<Bbs_faq> list = new BbsDAO_faq().getList();
 				for(int i=0; i<list.size(); i++){
       	 	 %>
             	<input type="checkbox" id="answer<%=i%>">

@@ -19,7 +19,8 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_result", bbsID))){
+		BbsDAO_result BbsDAO_result = new BbsDAO_result();
+		if(userID == null || !userID.equals(BbsDAO_result.getWriter("bbs_result", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");

@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DbAccess {
-	static public Connection conn;
-	static public ResultSet rs;	// 정보 담는 객체
-	static public Statement st;
+	public Connection conn;
+	public ResultSet rs;	// 정보 담는 객체
+	public Statement st;
 
 	public DbAccess(){
 		try {
@@ -24,7 +24,7 @@ public class DbAccess {
 	}
 	
 	/* 현재 시간 불러오기 - 게시글 저장시 작성일자 표기에 필요 */
-	static public String getDate() {
+	public String getDate() {
 		String SQL="SELECT NOW();";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -40,7 +40,7 @@ public class DbAccess {
 	}
 	
 	/* 새 글 작성 시 몇 번째 게시글인지 표기하는데 필요 */
- 	static public int getNext(String table) {
+ 	public int getNext(String table) {
 		String SQL="SELECT bbsID FROM " + table + " ORDER BY bbsID DESC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -56,7 +56,7 @@ public class DbAccess {
 	}
  	
  	/* 글 작성자 불러오기 */
- 	static public String getWriter(String table, int bbsID) {
+ 	public String getWriter(String table, int bbsID) {
 		String SQL="SELECT writer FROM " + table + " WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -73,7 +73,7 @@ public class DbAccess {
 	}
  	
 	/* 게시글 삭제 */
-	static public int delete(String table, int bbsID) {
+	public int delete(String table, int bbsID) {
 		String SQL="UPDATE " + table + " SET bbsAvailable = 0 WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -86,7 +86,7 @@ public class DbAccess {
 	}
 	
 	/* 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
-	static public boolean nextPage(String table, int pageNumber) {
+	public boolean nextPage(String table, int pageNumber) {
 		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

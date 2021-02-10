@@ -99,13 +99,13 @@
             	<div class="board_row">
             	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>&admin=<%=admin %>" onsubmit="submit_click()">
             	    <% 
-            	    	ArrayList<User> user_list = UserDAO.getUserList_join();
+            	    	ArrayList<User> user_list = new UserDAO().getUserList_join();
             	    %>           	            	
             			<table class="board_table">
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead" id="join_title" colspan="2">
-            						<input type="hidden" name="bbsID" value="<%=bbsID %>"><%=BbsDAO_notice.getBbs(bbsID).getBbsTitle() %>
+            						<input type="hidden" name="bbsID" value="<%=bbsID %>"><%=new BbsDAO_notice().getBbs(bbsID).getBbsTitle() %>
             					</th>
             				</tr>
             			</thead>
@@ -130,6 +130,7 @@
 									</thead>
 									<tbody>
 									<%
+										JoinDAO_user JoinDAO_user = new JoinDAO_user();
 										for(User user : user_list){
 											/* join_user에서 isPart = 1인 대상들은 표시하지 않음 */
 											if(JoinDAO_user.userJoin(bbsID, user.getUserID()) != 1){
@@ -189,9 +190,6 @@
             	</div>
 	    	</div>  
         </section>
-	<%
-   		    }
-	%>
     </div>  
 </body>
 </html>

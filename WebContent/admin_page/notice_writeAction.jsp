@@ -38,6 +38,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
+				BbsDAO_notice BbsDAO_notice = new BbsDAO_notice();
 				if(BbsDAO_notice.fixNumber() + bbs.getBbsFix() > 10){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

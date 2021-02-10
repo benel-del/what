@@ -73,8 +73,8 @@
             <div class="board_subtitle">결과게시판</div>
 			
 			<%
-    			ArrayList<Join_team> list = JoinDAO_team.getMembers(bbsID);
-    			ArrayList<User> list_user = UserDAO.getUserlist(1);
+    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
+    			ArrayList<User> list_user = new UserDAO().getUserlist(1);
     		%>
             <div class="write_container">
             	<div class="write_row">

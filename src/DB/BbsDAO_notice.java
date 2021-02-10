@@ -9,7 +9,7 @@ public class BbsDAO_notice extends DbAccess{
 	}	
 	
 	/* '모임공지'이면서 '모임 날짜'가 이미 지난 게시물의 경우 bbsComplete를 1로 세팅 */
-	static public int updateBbsComplete() {
+	public int updateBbsComplete() {
 		String SQL="UPDATE bbs_notice SET bbsComplete = 1 WHERE bbsType='모임공지' AND ? > bbsJoindate;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -22,7 +22,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
  	/* notice_update.jsp - 중요게시글 상단 고정 여부 */
- 	static public int fixNumber() {
+ 	public int fixNumber() {
 		int count = 0;
 		String SQL = "SELECT bbsID FROM bbs_notice WHERE bbsAvailable = 1 AND bbsFix = 1";
 		try {
@@ -37,7 +37,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
  	
  	/* 게시글 작성 */
-	static public int write(String bbsTitle, String writer, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace) {
+	public int write(String bbsTitle, String writer, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace) {
 		String SQL="INSERT INTO bbs_notice VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -67,7 +67,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
 
  	/* 게시글 수정 */
-	static public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace, int bbsComplete) {
+	public int update(int bbsID, String bbsTitle, String bbsContent, String bbsType, int bbsFix, String bbsJoindate, String bbsJoinplace, int bbsComplete) {
 		String SQL="UPDATE bbs_notice SET bbsType = ?, bbsTitle = ?, bbsContent = ?, bbsFix = ?, bbsJoindate = ?, bbsJoinplace = ?, bbsComplete = ? WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -87,7 +87,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
 	/* DB에 저장된 게시글 내용 불러오기 */
-	static public Bbs_notice getBbs(int bbsID) {
+	public Bbs_notice getBbs(int bbsID) {
 		String SQL="SELECT * FROM bbs_notice WHERE bbsID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -115,7 +115,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
 
 	/* n회 어쩌다 모임 전용 참가신청 db 생성 */
-	static public int createTeamListDB(int bbsID) {
+	public int createTeamListDB(int bbsID) {
 		String SQL="CREATE TABLE join"+bbsID+"_team(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, teamDate datetime, teamLevel int, FOREIGN KEY(teamLeader) REFERENCES user(userID));";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -127,7 +127,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
 	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
-	static public int createUserListDB(int bbsID) {
+	public int createUserListDB(int bbsID) {
 		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0, FOREIGN KEY(userID, userAvailable) REFERENCES user(userID, userAvailable) ON UPDATE CASCADE);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -145,7 +145,7 @@ public class BbsDAO_notice extends DbAccess{
 /* *******************************************************************
 * noticeInfo_index - index.jsp
 * *******************************************************************/
-	static public Bbs_notice noticeInfo_index(){
+	public Bbs_notice noticeInfo_index(){
 		String SQL = "SELECT * FROM bbs_notice WHERE bbsAvailable = 1 AND bbsComplete = 0 AND bbsType='모임공지' ORDER BY bbsJoindate ASC LIMIT 1;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -169,7 +169,7 @@ public class BbsDAO_notice extends DbAccess{
 /* *******************************************************************
 * notice_index - index.jsp
 * *******************************************************************/
-	static public ArrayList<Bbs_notice> notice_index(String type){
+	public ArrayList<Bbs_notice> notice_index(String type){
 		String SQL = "SELECT bbsID, bbsTitle FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 5;";
 		ArrayList<Bbs_notice> list = new ArrayList<>();
 		try {
@@ -189,7 +189,7 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
 	/* notice.jsp에서 출력할 게시물 목록에 대한 정보 */
-	static public ArrayList<Bbs_notice> getList(int pageNumber){
+	public ArrayList<Bbs_notice> getList(int pageNumber){
 		String SQL = "SELECT * FROM bbs_notice WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
 		ArrayList<Bbs_notice> list = new ArrayList<Bbs_notice>();
 		try {
@@ -217,7 +217,7 @@ public class BbsDAO_notice extends DbAccess{
 /* *******************************************************************
 * isCompelte - join.jsp	:: 1 > 참가신청, 팀원찾기 버튼 활성 여부
 * *******************************************************************/	
-	static public int isCompelte(int bbsID) {
+	public int isCompelte(int bbsID) {
 		String SQL = "SELECT isCompelete FROM bbs_notice WHERE bbsID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -236,7 +236,7 @@ public class BbsDAO_notice extends DbAccess{
  * 관리자 페이지
 *************************************************************************/
 	/* 모임공지 리스트 불러오기 - admin_join.jsp */
-	static public ArrayList<Bbs_notice> getJoinList(int pageNumber){
+	public ArrayList<Bbs_notice> getJoinList(int pageNumber){
 		String SQL = "SELECT * FROM bbs_notice WHERE bbsType='모임공지' ORDER BY bbsID DESC LIMIT ?, 12;";
 		ArrayList<Bbs_notice> list = new ArrayList<Bbs_notice>();
 		try {

@@ -39,7 +39,7 @@
 		script.println("history.back()");
 		script.println("</script>");
 	}
-	Bbs_review bbs_review = BbsDAO_review.getBbs(bbsID);
+	Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
 	if(!userID.equals(bbs_review.getWriter())){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");

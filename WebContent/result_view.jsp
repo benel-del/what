@@ -34,8 +34,8 @@
 			script.println("location.href='result.jsp'");
 			script.println("</script>");
 		}
-		Bbs_result bbs_result = BbsDAO_result.getBbs(bbsID);
-		ArrayList<User> list_user = UserDAO.getUserlist(1);
+		Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
+		ArrayList<User> list_user = new UserDAO().getUserlist(1);
 	%>
 	
 	<!-- service -->

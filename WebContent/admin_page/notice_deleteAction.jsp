@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
-
+<%@ page import = "DB.BbsDAO_notice" %> 
 <% 
 		request.setCharacterEncoding("UTF-8"); 
 		String userID = null;
@@ -18,14 +18,15 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_notice", bbsID))){
+		BbsDAO_notice BbsDAO_notice = new BbsDAO_notice();
+		if(userID == null || !userID.equals(BbsDAO_notice.getWriter("bbs_notice", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('권한이 없습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		} else{
-			int result = DB.DbAccess.delete("bbs_notice", bbsID);
+			int result = BbsDAO_notice.delete("bbs_notice", bbsID);
 			if(result == -1){
 				PrintWriter script = response.getWriter();
 				script.println("<script>");

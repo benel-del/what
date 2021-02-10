@@ -19,7 +19,8 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		if(userID == null || !userID.equals(DB.DbAccess.getWriter("bbs_notice", bbsID))){
+		BbsDAO_notice BbsDAO_notice = new BbsDAO_notice();
+		if(userID == null || !userID.equals(BbsDAO_notice.getWriter("bbs_notice", bbsID))){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정 권한이 없습니다.')");
@@ -40,10 +41,11 @@
 				script.println("</script>");
 			} else{
 				int bbsFix = 0;
+				int fixNumber = BbsDAO_notice.fixNumber();
 				if(request.getParameter("bbsFix") != null){
 					bbsFix = Integer.parseInt(request.getParameter("bbsFix"));
 				}
-				if((bbsFix == 1 && BbsDAO_notice.fixNumber() > 10) || (bbsFix != 1 && BbsDAO_notice.fixNumber() + bbsFix > 10)){
+				if((bbsFix == 1 && fixNumber > 10) || (bbsFix != 1 && fixNumber + bbsFix > 10)){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
 					script.println("alert('중요공지는 10개까지 등록 가능합니다.')");

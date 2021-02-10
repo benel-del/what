@@ -30,7 +30,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				int result = BbsDAO_result.write(bbs_result.getBbsTitle(), userID, bbs_result.getBbsContent(), bbs_result.getPlaceFirst(), bbs_result.getPlaceSecond(), bbs_result.getPlaceThird());
+				int result = new BbsDAO_result().write(bbs_result.getBbsTitle(), userID, bbs_result.getBbsContent(), bbs_result.getPlaceFirst(), bbs_result.getPlaceSecond(), bbs_result.getPlaceThird());
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

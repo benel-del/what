@@ -21,7 +21,7 @@
 		script.println("</script>");
 	}
 	
-	userID = UserDAO.findID(user.getUserName(), user.getUserEmail());
+	userID = new UserDAO().findID(user.getUserName(), user.getUserEmail());
 	if(userID == null){
 		//계정이 없는 경우
 		PrintWriter script = response.getWriter();

@@ -53,6 +53,7 @@
 		/* 게시판 업데이트!
 		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
 		*/
+		BbsDAO_notice BbsDAO_notice = new BbsDAO_notice();
 		if(BbsDAO_notice.updateBbsComplete() == -1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -137,7 +138,7 @@
 					</div>
 				<% 
 					}
-            		if(DB.DbAccess.nextPage("bbs_notice", pageNumber+1)){
+            		if(BbsDAO_notice.nextPage("bbs_notice", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="notice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

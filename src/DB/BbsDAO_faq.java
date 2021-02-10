@@ -9,7 +9,7 @@ public class BbsDAO_faq extends DbAccess{
 	}	
 	
 	/* faq ¿€º∫ */
-	static public int write(String bbsTitle, String writer, String bbsContent) {
+	public int write(String bbsTitle, String writer, String bbsContent) {
 		String SQL="INSERT INTO bbs_faq(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable) VALUES(?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -27,7 +27,7 @@ public class BbsDAO_faq extends DbAccess{
 	}
 	
 	/* getList - faq.jsp */
-	static public ArrayList<Bbs_faq> getList(){
+	public ArrayList<Bbs_faq> getList(){
 		String SQL = "SELECT bbsID, bbsTitle, bbsContent FROM bbs_faq WHERE bbsAvailable = 1 ORDER BY bbsID DESC;";
 		ArrayList<Bbs_faq> list = new ArrayList<>();
 		try {

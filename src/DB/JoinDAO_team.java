@@ -8,7 +8,7 @@ public class JoinDAO_team extends DbAccess{
 		super();
 	}	
 	
-	static public int getNext_join(String table) {
+	public int getNext_join(String table) {
 		String SQL="SELECT * FROM " + table + " ORDER BY teamID DESC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -24,7 +24,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* getInfo - join_wrtieAction.jsp */
-	static public int getInfo(int bbsID, String teamLeader, String leaderPhone, String teamPassword, String teamMember, String teamContent, int teamLevel) {
+	public int getInfo(int bbsID, String teamLeader, String leaderPhone, String teamPassword, String teamMember, String teamContent, int teamLevel) {
 		String SQL="INSERT INTO join"+bbsID+"_team VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -47,7 +47,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* getMembers(참가자 명단 목록) - join.jsp & admin_joinList.jsp */
-	static public ArrayList<Join_team> getMembers(int bbsID){		
+	public ArrayList<Join_team> getMembers(int bbsID){		
 		String SQL="SELECT * FROM join" + bbsID + "_team ORDER BY teamID DESC;";
 		ArrayList<Join_team> list = new ArrayList<Join_team>();
 		try {
@@ -71,7 +71,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* getJoinView(참가자 명단 자세히 보기) - join_view.jsp */
-	static public Join_team getJoinView(int bbsID, int teamID){		
+	public Join_team getJoinView(int bbsID, int teamID){		
 		String SQL="SELECT * FROM join" + bbsID + "_team WHERE teamID=?;";
 
 		try {
@@ -97,7 +97,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* join_updateAction.jsp - 업데이트 시 비밀번호 일치여부 확인 */
-	static public int check_joinPW(int bbsID, int teamID, String password) {
+	public int check_joinPW(int bbsID, int teamID, String password) {
 		String SQL="SELECT teamPassword FROM join"+bbsID+"_team WHERE teamID="+teamID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -114,7 +114,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* join_updateAction.jsp */
-	static public int update(int bbsID, int teamID, String member, String phone, String content, int level) {
+	public int update(int bbsID, int teamID, String member, String phone, String content, int level) {
 		String SQL = "UPDATE join"+bbsID+"_team SET teamMember=?, leaderPhone=?, teamContent=?, teamLevel=? WHERE teamID="+teamID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -130,7 +130,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* join_deleteAction.jsp */
-	static public int delete(int bbsID, int teamID) {
+	public int delete(int bbsID, int teamID) {
 		String SQL = "DELETE FROM join"+bbsID+"_team WHERE teamID="+teamID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -142,7 +142,7 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* 관리자 페이지 - 입금여부 변경해주는 함수 : admin_joinPaidAction.jsp */
-	static public int updateMoneyChk(int bbsID, int teamID, int paid) {
+	public int updateMoneyChk(int bbsID, int teamID, int paid) {
 		String SQL = "UPDATE join"+bbsID+"_team SET moneyCheck=? WHERE teamID="+teamID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

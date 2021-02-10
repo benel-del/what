@@ -88,13 +88,16 @@
             				</tr>
             			</thead>
             			
-            			<% int selected = 0; %>
+            			<%
+            			int selected = 0;
+            			int fixNumber = new BbsDAO_notice().fixNumber();
+            			%>
             			<tbody>
             				<tr>
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (BbsDAO_notice.fixNumber() >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=BbsDAO_notice.fixNumber()%>/10)  			            					
+			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (fixNumber >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=fixNumber%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
 			            					<select id = "bbsType" name="bbsType" onchange = "changeSelect()">

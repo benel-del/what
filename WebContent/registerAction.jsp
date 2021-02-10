@@ -27,6 +27,7 @@
 		script.println("</script>");
 	}
 	else{
+		UserDAO UserDAO = new UserDAO();
     	if(UserDAO.check_limit(user) == -1){
     		PrintWriter script = response.getWriter();
 	    	script.println("<script>");

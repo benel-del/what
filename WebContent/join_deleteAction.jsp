@@ -32,6 +32,7 @@
 			int bbsID = Integer.parseInt(request.getParameter("bbsID"));	
 			int teamID = Integer.parseInt(request.getParameter("teamID"));
 			int admin = Integer.parseInt(request.getParameter("admin"));
+			JoinDAO_team JoinDAO_team = new JoinDAO_team();
 			
 			int check = JoinDAO_team.check_joinPW(bbsID, teamID, join_team.getTeamPassword());
 			if(check == 0){
@@ -45,7 +46,7 @@
 			else{
 				//비밀번호 일치하는 경우, join00_team에서 해당 teamID 삭제
 				int delete_team = JoinDAO_team.delete(bbsID, teamID);
-				int delete_user = JoinDAO_user.update_delete(bbsID, teamID);
+				int delete_user = new JoinDAO_user().update_delete(bbsID, teamID);
 				if(delete_team == -1 || delete_user == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

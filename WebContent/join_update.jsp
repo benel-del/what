@@ -80,7 +80,7 @@
 			admin = Integer.parseInt(request.getParameter("admin"));
 		}
 		String member;
-		Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
+		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
 		if(userID == null || (userID.equals(join_team.getTeamLeader()) == false && userID.equals("admin")==false)){
     		//신청자 본인만 열람 가능
 			PrintWriter script = response.getWriter();
@@ -104,6 +104,7 @@
             <div class="board_subtitle">참가신청내용 수정</div>
 
 			<% 
+				UserDAO UserDAO = new UserDAO();
             	ArrayList<User> user_list = UserDAO.getUserList_join();
             %>
             <div class="board_container">
@@ -125,7 +126,7 @@
 								</thead>
 								<tbody>
 								<%
-									JoinDAO_user joinDAO_user = new JoinDAO_user();
+									JoinDAO_user JoinDAO_user = new JoinDAO_user();
 									for(User user : user_list){
 										if(JoinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) != 1){
 								%>	

@@ -34,6 +34,7 @@
 	    script.println("</script>");
 	}
 	else{
+		UserDAO UserDAO = new UserDAO();
 		int result = -1;
 		if(user.getUserNewPassword() == null) // 비밀번호 변경 x	-> 부수, 전형
 			result = UserDAO.modify(userID, SHA256.getSHA256(user.getUserPassword()), SHA256.getSHA256(user.getUserPassword()), user.getUserLevel(), user.getUserDescription(), user.getUserEmail());

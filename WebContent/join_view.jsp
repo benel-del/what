@@ -38,7 +38,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
+		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
 		UserDAO userDAO = new UserDAO();
 		
 		if(userID == null || userID.equals(join_team.getTeamLeader()) == false){
@@ -49,7 +49,7 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		
+		UserDAO UserDAO = new UserDAO();
 	%>
 	
 	<!-- service -->
@@ -121,9 +121,6 @@
             <a class=link href="join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">삭제</a>
             
         </section>
-        <%
-    		}
-        %>
     </div>  
 </body>
 </html>

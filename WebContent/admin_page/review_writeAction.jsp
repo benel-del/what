@@ -61,7 +61,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				int result = BbsDAO_review.write(bbsTitle, userID, bbsContent, fileName1, fileName2, fileName3, fileName4);
+				int result = new BbsDAO_review().write(bbsTitle, userID, bbsContent, fileName1, fileName2, fileName3, fileName4);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");

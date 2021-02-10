@@ -37,6 +37,7 @@
 		}
 		
 		String[] teams = request.getParameterValues("moneyCheck");
+		JoinDAO_team JoinDAO_team = new JoinDAO_team();
 		int result;
 		for(int i=0; i<teams.length; i++){
 			if(paid == 1){

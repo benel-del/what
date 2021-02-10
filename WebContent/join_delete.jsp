@@ -41,7 +41,7 @@
 		if(request.getParameter("admin") != null){
 			admin = Integer.parseInt(request.getParameter("admin"));
 		}
-		Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
+		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
 	%>
 	
 	<!-- service -->

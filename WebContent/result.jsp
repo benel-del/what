@@ -73,6 +73,7 @@
             			</thead>
             			<tbody>
             				<%
+            					BbsDAO_result BbsDAO_result = new BbsDAO_result();
             					ArrayList<Bbs_result> list = BbsDAO_result.getList(pageNumber);
             					for(int i=0; i<list.size(); i++){
             				%>          				
@@ -102,7 +103,7 @@
 					</div>
 				<% 
 					}
-            		if(DB.DbAccess.nextPage("bbs_result", pageNumber+1)){
+            		if(BbsDAO_result.nextPage("bbs_result", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="result.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

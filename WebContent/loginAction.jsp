@@ -21,7 +21,7 @@
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
 	}
-	
+	UserDAO UserDAO = new UserDAO();
 	int result = UserDAO.login(user.getUserID(), SHA256.getSHA256(user.getUserPassword()));
 	
 	if(result == 1){

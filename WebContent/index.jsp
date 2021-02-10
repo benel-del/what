@@ -59,6 +59,7 @@
                     <div id="index_notice-inform">
                         <div class="index_title">모임 공지</div>
                         <%
+                        	BbsDAO_notice BbsDAO_notice = new BbsDAO_notice();
                         	Bbs_notice noticeInfo = BbsDAO_notice.noticeInfo_index();
         					int bbsJoin=0;
         					if(noticeInfo != null){
@@ -167,7 +168,7 @@
             			</thead>          			
             			<tbody>
             			<%
-    						ArrayList<User> list = UserDAO.getUserRank_index();
+    						ArrayList<User> list = new UserDAO().getUserRank_index();
             				for(User user : list){
             					if(user.getUserID().equals("admin") == false){
             						//관리자는 랭킹에 포함하지 않음
