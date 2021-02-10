@@ -41,16 +41,11 @@
 		} else{
 	%>
 	
+	<!-- header -->
+    <%@ include file="admin_header.jsp" %>
+        
     <div id="wrapper">
-        <br>
-        <!-- header -->
-        <%@ include file="admin_header.jsp" %>
-
-    	<!-- menu -->
-    	<%@ include file="admin_menubar.jsp" %>
-    	
-    	<!-- body -->
-    	<section>
+        <section>
     	   	<div class="admin_subtitle">
     			<h6>
     			모임관리 - <a href="admin_join.jsp">모임조회</a> 

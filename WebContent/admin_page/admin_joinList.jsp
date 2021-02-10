@@ -77,16 +77,11 @@
 		}
 	%>
 	
+	<!-- header -->
+    <%@ include file="admin_header.jsp" %>
+    
     <div id="wrapper">
-        <br>
-        <!-- header -->
-        <%@ include file="admin_header.jsp" %>
-
-    	<!-- menu -->
-    	<%@ include file="admin_menubar.jsp" %>
-    	
-    	<!-- body -->
-    	<section>
+        <section>
     	   	<div class="admin_subtitle">
     			<h6>모임관리 - <a href="admin_join.jsp">모임조회</a> - <a href="admin_joinList.jsp?bbsID=<%=bbsID %>">참가자조회</a></h6>
     		</div>  		

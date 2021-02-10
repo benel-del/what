@@ -22,13 +22,11 @@
 		}
 	%>
 	
+	<!-- header -->
+    <%@ include file="admin_header.jsp" %>
+    
     <div id="wrapper">
-        <br>
-        <!-- header -->
-        <%@ include file="admin_header.jsp" %>
-
-    	<!-- menu -->
-    	<%@ include file="admin_menubar.jsp" %>
+        
     </div>
 </body>
 </html>

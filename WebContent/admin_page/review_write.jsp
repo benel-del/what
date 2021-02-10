@@ -13,49 +13,18 @@
 </head>
 
 <body>
-<% //userID 존재 여부
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
+	<%
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
 	%>
 	
+	<!-- header -->
+    <%@ include file="admin_header.jsp" %>
+    
     <div id="wrapper">
-
-        <br>
-        <header>
-        <%
-    		if(userID == null || userID.equals("admin") == false){
-    			PrintWriter script = response.getWriter();
-    			script.println("<script>");
-    			script.println("alert('관리자만 접근 가능합니다.')");
-    			script.println("location.href='index.jsp");
-    			script.println("</script>");
-    		} else if(userID.equals("admin") == true){
-        %>
-			<!--로그인, 회원가입 버튼-->
-            <div id="service">
-                <a class="link" href="logoutAction.jsp">로그아웃</a>
-                |
-                <a class="link" href="admin.jsp">관리자 페이지</a>
-           </div>
-            <br>		
-		<% 
-           	}
-       	%>
-            
-            <!--사이트 이름-->
-            <div id="title">
-                <h1><a href="index.jsp">어쩌다 리그</a></h1>
-            </div>
-        </header>
-
-        <!-- menu -->
-		<%@ include file="admin_menubar.jsp" %>
-		
-		
-	<!-- 게시판 공통 요소 : class board_ 사용 -->	
-        <section class="container">
+		<section class="container">
             <div class="board_subtitle">
             	후기게시판
             </div>
