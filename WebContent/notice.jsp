@@ -71,7 +71,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section class="container">
             <div class="board_subtitle">
             	공지게시판
@@ -152,11 +151,6 @@
 	            <div class="board_search">	            	
    	        		<input id="bbs_search-btn" type="button" value="검색">
    	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
-   	        		<!-- <select id="bbs_search-option">
-    	        		<option value='title'>제목</option>
-    	        		<option value='head'>머릿말</option>
-    	        		<option value='ing'>진행여부</option>
-    	        	</select>-->
 	            </div>  
 	    	</div>  
         </section>

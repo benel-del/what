@@ -401,7 +401,7 @@ public class UserDAO extends DbAccess{
 		
 	/* getUserRank_index - index.jsp */
 	public ArrayList<User> getUserRank_index(){		
-		String SQL="SELECT userID, userRank, userName, userLevel FROM user WHERE userAvailable=1 ORDER BY userRank ASC, userName ASC LIMIT 9;";
+		String SQL="SELECT userID, userRank, userName, userLevel FROM user WHERE userAvailable=1 ORDER BY userRank ASC, userName ASC LIMIT 10;";
 		ArrayList<User> list = new ArrayList<User>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

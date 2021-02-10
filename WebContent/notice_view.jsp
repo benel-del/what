@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<% //userID 존재 여부
+	<% 
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -42,7 +42,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section class="container">
             <div class="board_subtitle">공지게시판</div>
 

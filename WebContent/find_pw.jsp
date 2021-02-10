@@ -42,7 +42,6 @@
     
     
     <div id="wrapper">
-        <br>
 		<section class="container">
         	<div class="login_page">
             	<form method="post" action="find_pwAction.jsp">

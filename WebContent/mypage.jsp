@@ -43,7 +43,6 @@
     <%@ include file="header.jsp" %> 
      		
     <div id="wrapper">
-        <br>
         <section class="container">
        		<div class="mypage_contents">
        		    <table class="myinfo_table">

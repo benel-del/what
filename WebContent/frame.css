@@ -101,12 +101,12 @@ a{
 ***********************************************/
 #wrapper
 {
-	position:relative;
-	min-height:100%;
-	max-width: 1024px;
-	margin:0 auto;
-	padding-bottom:130px;
+	width: 1024px;
+	margin: 10px auto;
+	padding: 20px;
+	border: 1px solid #bcbcbc;
 }
+
 
 section
 {
@@ -115,7 +115,6 @@ section
 }
 
 
-/*
 .link
 {
     color: #0F4C81;
@@ -138,42 +137,44 @@ section
     border-radius: 0.4em;
     color: #92A8D1;
 }
-*/
 
 /* *********************************************************
 ** FOOTER
 ************************************************************/
 footer{
-	width:100%;
-	height:130px;
-	bottom:0px;
-	position:absolute;
+	
+	background-color: #0F4C81;
+	color: white;
 	padding: 10px 10px;
-	font-size:13px;
-	background-color:#0F4C81;
-	color:white;	
+	width: 1024px;
+	height: 130px;
+	margin: 0 auto;
 }
 
 /* *********************************************************
 ** index.jsp
 ************************************************************/
-#index_top
-{
-	width: 100%;
-	height: 650px;
+#index_top{
+	width: 1024px;
+	height: 600px;
 	margin: 5px 0px;
 }
 
-.index_title
-{
-	font-size:20px;
-	font-weight:600;
-	color:#0f4c81;
+#index_bottom{
+	width: 1024px;
+	height: 300px;
+	margin: 5px 0px;
 }
 
-#index_noticeInfo
-{
-	width: 65%;
+.index_title{
+	font-size: 20px;
+	font-weight: 600;
+	color: #0f4c81;
+}
+
+/* index 모임공지 */
+#index_noticeInfo{	
+	width: 600px;
 	height: 100%;
 	float: left;
 	margin: 0px 5px;
@@ -182,73 +183,36 @@ footer{
     border: 1px solid #0F4C81;
 }
 
-#index_notice-inform
-{
-	height: 75%;
+#index_noticeInfo_inside{
+	height: 90%;
 	border: 1px dashed #0F4C81;
 	padding: 10px 10px;
 }
 
-.index_notice-btn
-{
-    background-color: #0F4C81;
-    border-radius: 1em;
-    width: 200px;
-    padding: 10px 0;
-    margin: 10px auto;
+#index_notice-btn{
+	padding-top: 10px;
 }
 
-#index_notice-btn a
-{
-	margin:0px auto;
-	height:25px;
-	width:100%;
-	font-size:20px;
-	text-align:center;
-	display:inline-block;
-	cursor:pointer;
-}
-    
-    #index_notice-btn a:link {
-        background-color: #0F4C81;
-        color: white;
-        width: 200px;
-    }
-    #index_notice-btn a:visited {
-        background-color: #0F4C81;
-        color: white;
-    }
-    #index_notice-btn a:hover:not(.active) {
-        color: #92A8D1;
-    }
-    
-.index_notice_board
-{
-	margin:5px auto;
-	text-align:center;
-	width:100%;
-	height:90%;
-	padding:10px 10px;
-}
-
-.index_notice_board thead
-{
+.index_join-btn{
 	background-color: #0F4C81;
-	text-align: center;
 	color: white;
-	height:20px;
-}
-.index_notice_board td
-{
-	height:15px;
+	border-radius: 0.4em;
+	width: 190px;
+	font-size: 20px;
+	padding: 7px 0px;
+	cursor : pointer;
 }
 
-.index_notice_subtitle
-{
-	text-align:center;
-	color:white;
+.column_board{
+	border: solid 1px #bcbcbc;
+	width : 100%;
+	margin: 10px 0;
+}
+
+.table_th1{
 	background-color: #0F4C81;
-	width:10%;
+	color: white;
+	text-align: center;
 }
 
 #notice_more
@@ -257,75 +221,60 @@ footer{
 	color:white;
 	width:100%;
 	display:inline-block;
-	height:20px;
 }
 
+
+/* index 랭킹 */
+#index_rank{
+	width: 370px;
+	height:100%;
+	float:left;
+	padding:20px 20px;
+	margin:0;
+    border-radius: 0.4em;
+    border: 1px solid #0F4C81;	
+}
+
+
 /* index 공지사항 */
-#index_notice
-{
-	width:34%;
-	height:30%;
-	float:right;
-	margin:0px 0px 3px 0px;
+#index_notice{
+	width:300px;
+	height:100%;
+	float:left;
+	margin:0 5px;
 	padding:20px 20px;
 	border-radius:0.4em;
 	border:1px solid #0F4C81;
 }
 
-/* index 랭킹 */
-#index_rank
-  {
-	width:34%;
-	height:69%;
-	float:right;
-	padding:20px 20px;
-	margin:3px 0px 0px 0px;
-    border-radius: 0.4em;
-    border: 1px solid #0F4C81;	
+#index_notice input{
+	margin: 5px 0;
 }
-.index_rank_board{
-	margin:5px auto;
-	text-align:center;
-	width:100%;
-	height:90%;
-}
-.index_rank_board thead{
+
+.bbs_notice-btn{
 	background-color: #0F4C81;
-	text-align: center;
+	padding: 2px;
 	color: white;
-	height:30px;
 }
 
-#index_bottom
-{
-	width:100%;
-	height:300px;
-	margin: 5px 0px;
+#index_notice a{
+	color: #0F4C81;
 }
 
-#index_shop
-{
-	width:30%;
-	height:100%;
-	float:left;
-	margin:0px 5px;
-	padding:20px 20px;
-    border-radius: 0.4em;
-    border: 1px solid #0F4C81;
+#index_notice a:hover{
+	color: #92A8D1;
 }
 
-.index_shop img
-{
-	margin:10px 10px;
-	height:70%;
-	width:85%;
+#index_notice tr{
+	height: 20px;
 }
 
+/* 유투브 강좌 */
 #index_youtube
 {
-	width:69%;
+	width:670px;
 	height:100%;
-	float:right;
+	float:left;
 	margin: 0px 0px;
 	padding:20px 20px;
 	border-radius: 0.4em;
@@ -336,7 +285,7 @@ footer{
 {
 	margin: 2px 10px;
 	height: 80%;
-	width:95%;
+	width: 95%;
 }	
 
 #index_TBAL-avi
@@ -364,33 +313,40 @@ footer{
 ************************************************************/
 .login_page{
 	margin:25px auto;
-	width:95%;
+	width:70%;
 	padding:10px 10px;
 	text-align:center;
 	border:1px solid #0F4C81;
 }
+
 .login_header{
 	font-size:30px;
 	font-weight:700;
 	margin:20px auto;
 }
-	.login_header a:link{
-		color:#0F4C81;
-	}
-	.login_header a:visited{
-		color:#0F4C81;
-	}
+
+.login_header a:link{
+	color:#0F4C81;
+}
+
+.login_header a:visited{
+	color:#0F4C81;
+}
+
 .login_form{
 	display:block;
 }
-	.login_form input{
-		margin:5px auto;
-		height:30px;
-		width:85%;
-	}
-	.login_form input:hover{
-		border:1px solid #0F4C81;
-	}
+
+.login_form input{
+	margin:5px auto;
+	height:30px;
+	width:85%;
+}
+
+.login_form input:hover{
+	border:1px solid #0F4C81;
+}
+
 .login_submit-btn{
 	display:block;
 	margin:8px auto;
@@ -404,15 +360,19 @@ footer{
 	font-size:20px;
 	font-weight:700;
 }
+
 .login_find{
 	padding:10px 10px;
 	margin:10px auto;
 }
+
 .login_find a{
 	font-weight:600;
 }
 
-/* REGISTER */
+/* *********************************************************
+** register.jsp
+************************************************************/
 .register_gender-btn{
 	text-align:center;
 	margin:0px 20px;
@@ -1065,7 +1025,7 @@ input[id*="answer"] + label + div p{
 	right: 0px;
 	font-size: 24px;
 	color: white;
-	top: 11vh;
+	top: 8vh;
 	width: 10%;
 }
 
@@ -1074,6 +1034,32 @@ input[id*="answer"] + label + div p{
 	display: flex;
 }
 
+/* *************************************************
+** WRAPPER
+***************************************************/
+#wrapper{
+	width: auto;
+	padding: 0px 0px;
+	border: none;
+}
 
+/* *************************************************
+** index.jsp
+****************************************************/
+#index_noticeInfo,
+#index_notice,
+#index_rank{
+	float: none;
+	width: auto;
+	margin : 5px 0px;
+}
+
+#index_noticeInfo{
+	
+}
+
+#index_bottom{
+	display: none;
+}
 
 }

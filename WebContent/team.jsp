@@ -63,7 +63,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section class="container">
             <div class="board_subtitle">팀원 찾기</div>
             

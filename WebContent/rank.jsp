@@ -62,7 +62,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section class="container">
             <div class="board_subtitle">랭킹게시판</div>
             

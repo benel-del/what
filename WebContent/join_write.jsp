@@ -91,7 +91,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section class="container">
             <div class="board_subtitle">참가신청</div>
     	

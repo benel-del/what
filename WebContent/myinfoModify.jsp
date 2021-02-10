@@ -43,7 +43,6 @@
     <%@ include file="header.jsp" %>
     
     <div id="wrapper">
-        <br>	
         <section class="container">
        		<form method="post" action="myinfoModifyAction.jsp">
        			<div class="login_page">

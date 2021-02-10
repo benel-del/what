@@ -44,7 +44,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section>        
            	<div class="login_page">
               	<form method="post" action="preModifyAction.jsp">

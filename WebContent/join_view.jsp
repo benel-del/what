@@ -58,7 +58,6 @@
     <%@ include file="header.jsp" %>
     
     <div id="wrapper">
-        <br>
         <section class="container">
             <div class="board_subtitle">참가신청내용 조회</div>
     	

@@ -41,7 +41,6 @@
     
     
     <div id="wrapper">
-        <br>
         <section class="container">
         	<div class="login_page">
             

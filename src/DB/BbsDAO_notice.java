@@ -170,7 +170,7 @@ public class BbsDAO_notice extends DbAccess{
 * notice_index - index.jsp
 * *******************************************************************/
 	public ArrayList<Bbs_notice> notice_index(String type){
-		String SQL = "SELECT bbsID, bbsTitle FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 5;";
+		String SQL = "SELECT bbsID, bbsTitle FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 8;";
 		ArrayList<Bbs_notice> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

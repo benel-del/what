@@ -75,7 +75,6 @@
     <%@ include file="header.jsp" %>
 	
     <div id="wrapper">
-        <br>
         <section>        
            	<div class="login_page">
               	<form method="post" action="join_deleteAction.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=<%=admin%>">
