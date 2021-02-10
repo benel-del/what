@@ -15,9 +15,8 @@
        		script.println("</script>");
         } else{
     %>
-            <a class="link" href="../logoutAction.jsp">로그아웃 </a>
-  			|
-            <a class="link" href="../index.jsp">사용자 페이지</a>
+            <a href="../logoutAction.jsp">로그아웃 </a>
+            <a href="../index.jsp">사용자 페이지</a>
     <%
         }
     %>
