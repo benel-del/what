@@ -96,9 +96,9 @@ a{
 }
 
 
-/* Wrapper */
-
-
+/* *********************************************
+** Wrapper
+***********************************************/
 #wrapper
 {
 	position:relative;
@@ -108,6 +108,14 @@ a{
 	padding-bottom:130px;
 }
 
+section
+{
+	min-height:900px;
+	margin: 20px 0px;
+}
+
+
+/*
 .link
 {
     color: #0F4C81;
@@ -130,71 +138,20 @@ a{
     border-radius: 0.4em;
     color: #92A8D1;
 }
-
-
-
+*/
 
 /* *********************************************************
 ** FOOTER
 ************************************************************/
-footer
-{
+footer{
 	width:100%;
 	height:130px;
 	bottom:0px;
 	position:absolute;
 	padding: 10px 10px;
 	font-size:13px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	background-color:#0F4C81;
-	color:white;
-}
-
-/* *********************************************************
-** MENU
-************************************************************/
-.menu
-{
-	height:50px;
-	width:100%;
-	text-align:center;
-    background-color:#0F4C81;
-}
-
-.menu label
-{
-	display:none;
-}
-.menu input
-{
-	display:none;
-}
-.menu li
-{
-	display:inline;
-}
-.menu li a:hover
-{
-    background-color: white;
-    color: #0F4C81;
-}
-
-.menu a 
-{
-    display: inline-block;
-    line-height:50px;
-    width: 140px;
-    padding: 0 15px;
-    color: white;
-    font-size:17px;
-    font-weight:700;
-}
-
-/* SECTION_COMMON */
-section
-{
-	min-height:900px;
-	margin: 20px 0px;
+	color:white;	
 }
 
 /* *********************************************************
@@ -1109,8 +1066,6 @@ input[id*="answer"] + label + div p{
 	font-size: 24px;
 	color: white;
 	top: 11vh;
-	
-	heignt: 92vh;
 	width: 10%;
 }
 

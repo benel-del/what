@@ -23,15 +23,6 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		if(userID == null || userID.equals(join_team.getTeamLeader()) == false){
-    		//신청자 본인만 열람 가능
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('접근 권한이 없습니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		}
-
 		int bbsID = 0;
 		if(request.getParameter("bbsID") != null){
 			bbsID = Integer.parseInt(request.getParameter("bbsID"));
@@ -49,6 +40,16 @@
 		}
 		Join_team join_team = JoinDAO_team.getJoinView(bbsID, teamID);
 		UserDAO userDAO = new UserDAO();
+		
+		if(userID == null || userID.equals(join_team.getTeamLeader()) == false){
+    		//신청자 본인만 열람 가능
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('접근 권한이 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		
 	%>
 	
 	<!-- service -->

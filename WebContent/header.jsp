@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
+	
+	<script src="main.js" defer></script>
+	<script src="https://kit.fontawesome.com/64471f6822.js" crossorigin="anonymous"></script>
 
 	<nav class="navbar">			
 		<div class="navbar__logo">
