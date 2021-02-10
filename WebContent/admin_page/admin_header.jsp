@@ -12,7 +12,7 @@
        		script.println("</script>");
         } else{
     %>
-        <div id="service">
+        <div class="service">
             <a class="link" href="../logoutAction.jsp">로그아웃 </a>
   			|
             <a class="link" href="../index.jsp">사용자 페이지</a>
@@ -22,7 +22,6 @@
     %>
        	<br>
        	
-        <!--사이트 이름-->
         <div id="title">
             <h1><a href="admin.jsp">어쩌다 리그-관리자페이지</a></h1>
         </div>

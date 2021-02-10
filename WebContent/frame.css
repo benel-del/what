@@ -89,8 +89,8 @@ header h1
     color: #0F4C81;
 }
 
-#service
-{/*로그인&회원가입 버튼*/
+.service
+{
 	position:absolute;
 	right:0px;
 	margin:2px 2px;

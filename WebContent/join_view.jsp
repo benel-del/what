@@ -57,7 +57,7 @@
     		} else{
     			if(userID.equals("admin")){
         %>
-        	<div id="service">
+        	<div class="service">
        	        <a class="link" href="logoutAction.jsp">로그아웃 </a>
        	        | 
        	        <a class="link" href="admin_page/admin.jsp">관리자페이지</a>
@@ -65,7 +65,7 @@
        	<%	
             } else{
         %>
-   	     	<div id="service">
+   	     	<div class="service">
    	        	<a class="link" href="logoutAction.jsp">로그아웃 </a>
    	            | 
    	            <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
@@ -75,7 +75,6 @@
    	    %>
         	<br>
     	      	
-            <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>

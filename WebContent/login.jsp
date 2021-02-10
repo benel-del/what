@@ -34,14 +34,13 @@
 				}
 			%>
             <!--로그인, 회원가입 버튼-->
-            <div id="service">
+            <div class="service">
                 <a class="link" href="login.jsp">로그인</a>
                 |
                 <a class="link" href="register.jsp">회원가입</a>
             </div>          
             <br>
             
-            <!--사이트 이름-->
             <div id="title">
                 <h1><a href="index.jsp">어쩌다 리그</a></h1>
             </div>
