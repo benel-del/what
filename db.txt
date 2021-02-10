@@ -102,12 +102,10 @@ create table bbs_faq(
 );
 
 insert into user values("admin", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "admin", "mi", "-", "", 0, 0, 0, 0, "Admin@do.c", 1, 0, 0);
-insert into user values("test", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "테스트", "남", "3", "", 0, 0, 0, 0, "test@do.c", 1, 0, 0);
+insert into user values("test", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "테스트", "남", "3", "", 0, 0, 0, 0, "test@do.c", 0, 0, 0);
 insert into user values("test1", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "테스트, "남", "1", "", 0, 0, 0, 0, "test1@do.c", 1, 0, 0);
-insert into user values("test2", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "가가가", "여", "0", "", 0, 0, 0, 0, "test2@do.c", 1, 0, 0);
-insert into user values("test3", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "나다라", "여", "-1", "", 0, 0, 0, 0, "test3@do.c", 1, 0, 0);
-insert into user values("test4", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "모로호", "여", "2", "", 0, 0, 0, 0, "test4@do.c", 1, 0, 0);
-insert into user values("test5", "92773cce14ea2db535bb78e3c0bcb11ed16669a9ae2bc3ef3a18c10422d05235", "배바벼", "남", "-2", "", 0, 0, 0, 0, "test5@do.c", 1, 0, 0);
+
+
 
 
 INSERT INTO bbs_faq(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable) VALUES("test", "admin", "2020-02-02 01:02:02", "testgkqslek", 1);

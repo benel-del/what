@@ -33,7 +33,7 @@
 			script.println("location.href='rank.jsp'");
 			script.println("</script>");
 		}
-		User user = UserDAO.getuserInfo(userInfo);
+		User user = new UserDAO().getuserInfo(userInfo);
 	%>
 
 

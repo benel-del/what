@@ -114,7 +114,7 @@
 					</div>
 				<% 
 					}
-            		if(pageNumber < UserDAO.nextPage() / 13 + 1){
+            		if(pageNumber < UserDAO.NumOfUser() / 13 + 1){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="rank.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

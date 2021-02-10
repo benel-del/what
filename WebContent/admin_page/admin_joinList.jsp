@@ -104,6 +104,13 @@
     			<a href="#" id="unpaid">입금대기</a>
     		</div>
     		
+    		<!-- HERE!! -->
+    		<div class="admin_update">
+    			<input type="button" id="admin_unpaid-btn" value="입금취소">
+	    		<input type="button" id="admin_piad-btn" value="입금완료">
+    			<input type="button" id="admin_delete-btn" value="삭제">
+    		</div>
+    		
     		<form method="post" action="admin_joinPaidAction.jsp?bbsID=<%=bbsID%>"> 
     		<div class="board_container">
             	<div class="board_row">

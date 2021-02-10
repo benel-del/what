@@ -108,7 +108,7 @@ public class UserDAO extends DbAccess{
  ***********************************************************************************/
 	/* register - registerAction.jsp */
 	public int register(User user) {
-		String SQL = "INSERT INTO USER VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String SQL = "INSERT INTO USER(userID, userPassword, userName, userGender, userLevel, userEmail, userRegdate, userLogdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -116,15 +116,15 @@ public class UserDAO extends DbAccess{
 			pstmt.setString(3,  user.getUserName());
 			pstmt.setString(4,  user.getUserGender());
 			pstmt.setString(5,  user.getUserLevel());
-			pstmt.setString(6,  user.getUserDescription());
-			pstmt.setInt(7,  user.getUserRank());
-			pstmt.setInt(8,  0);
-			pstmt.setInt(9,  0);
-			pstmt.setInt(10,  0);
-			pstmt.setString(11, user.getUserEmail());
-			pstmt.setInt(12, 1);
-			pstmt.setString(13, getDate().substring(0,11));
-			pstmt.setString(14, getDate().substring(0,11));
+			//pstmt.setString(6,  user.getUserDescription());
+			//pstmt.setInt(7,  user.getUserRank());	// userRank default 0,
+			//pstmt.setInt(8,  0);	// userFirst default 0,
+			//pstmt.setInt(9,  0);	// userSecond default 0,
+			//pstmt.setInt(10,  0);	// userThird default 0,
+			pstmt.setString(6, user.getUserEmail());
+			//pstmt.setInt(12, 1);	// userAvailable default 1
+			pstmt.setString(7, getDate().substring(0,11));
+			pstmt.setString(8, getDate().substring(0,11));
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -484,6 +484,36 @@ public class UserDAO extends DbAccess{
 	}
 	
 	
+/* *********************************************************************************
+* 관리자페이지 - 회원관리
+***********************************************************************************/	
+	/* getAll('관리자페이지-회원관리'에서 userList 불러오기) - admin_user.jsp */	
+	public ArrayList<User> getAll() {	
+		String SQL="SELECT userAvailable, userID, userName, userGender, userLevel, userRank, userRegdate, userLogdate FROM user WHERE userID != 'admin';";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			ArrayList<User> list = new ArrayList<>();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserAvailable(rs.getInt(1));
+				user.setUserID(rs.getString(2));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserRank(rs.getInt(6));
+				user.setUserRegdate(rs.getString(7));
+				user.setUserLogdate(rs.getString(8));
+				list.add(user);
+			}
+			return list;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	
 	/* 랭킹 기능 - 관리자가 result 등록 시 업데이트 */
 	/* 랭킹게시판 업데이트 */
@@ -498,7 +528,7 @@ public class UserDAO extends DbAccess{
 		String SQL = "UPDATE user SET userRank = ? WHERE userRank = 0;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, nextPage()+1);
+			pstmt.setInt(1, NumOfUser()+1);
 			pstmt.executeUpdate();
 			
 			SQL = "SELECT * FROM user ORDER BY userFirst DESC, userSecond DESC, userThird DESC;";
@@ -539,8 +569,8 @@ public class UserDAO extends DbAccess{
 		return -1;
 	}					
 
-	/* 랭킹게시판 다음 페이지 */
-	public int nextPage() {
+	/* 랭킹게시판 다음 페이지 x >> 다음 랭킹 */
+	public int NumOfUser() {
 		int count = 0;
 		String SQL="SELECT userID FROM user;";
 		try {
