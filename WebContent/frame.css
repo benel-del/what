@@ -487,6 +487,41 @@ footer{
 	
 }
 
+/* 그 외 게시판 검색바 */
+/* 게시판 검색바 */
+#bbs_search-option{
+	float: right;
+	height: 100%;
+	width: 10%;
+}
+#bbs_search-bar{
+	float: right;
+	height: 100%;
+	width: 30%;
+	padding: 5px;
+	margin: 0px 5px;
+}
+#bbs_search-btn{
+	float: right;
+	height: 100%;
+	width: 10%;
+	display: block;
+    border:none;
+    background-color: #0F4C81;
+	color:white;
+    cursor: pointer;
+}
+#notice_btn-primary{
+	margin:5px auto;
+	text-align:center;
+	font-weight:800;
+	color:#0F4C81;
+	padding: 15px 30px;
+	width: 100%;
+	height: 50px;
+	border: 1px solid #0F4C81;
+}
+
 
 /**************************************************
 ** MY_PAGE
@@ -549,46 +584,45 @@ footer{
 
 /*************************************************************
 ** 게시판 공통요소 
-*************************************************************/
-	
-	
-	
-	
-	
-	
-
-	
+*************************************************************/	
 /* BOARD COMMON */
 .board_container{
 	padding:10px 10px;
 	height:700px;
 	width:100%;
 }
+
 .board_subtitle{
 	margin: 25px 5px 10px 5px;
 	height:35px;
 	font-size:25px;
 	font-weight:700;
 }
+
 .board_table{
 	text-align:center;
 	border : 1px solid #0F4C81;
 	width:100%;
 }
+
 .board_table a{
 	color: #0F4C81;
 }
+
 .board_table a:hover{
 	color: #cfe6fa;
 }
+
 .board_thead{
 	background-color: #0F4C81;
 	text-align: center;
 	color: white;
 }
+
 .board_tr{
 	height: 50px;
 }
+
 .board_write-btn{
 	background-color: #0F4C81;
 	float: right;
@@ -596,6 +630,7 @@ footer{
 	height: 25px;
 	width: 100px;
 }
+
 .board_write-btn a{
 	height:100%;
 	width:100%;
@@ -605,14 +640,17 @@ footer{
 	color:white;
 	display:inline-block;
 }
-	.board_write-btn a:link {
-        background-color: #0F4C81;
-        color: white;
-    }
-    .board_write-btn a:visited {
-        background-color: #0F4C81;
-        color: white;
-    }
+	
+.board_write-btn a:link {
+    background-color: #0F4C81;
+    color: white;
+}
+.board_write-btn a:visited {
+    background-color: #0F4C81;
+    color: white;
+}
+
+/* paging */
 .board_page-move{
 	margin:20px 0px;
 	padding: 15px 30px;
@@ -632,59 +670,16 @@ footer{
 }
 
 
-
-
-
-
-/* NOTICE, RESULT, REVIEW 목록보기 */
-#bbs_type{
-	width: 12%;
-}
-#bbs_num{
-	width:8%;
-}
-#bbs_writer{
-	width: 12%;
-}
-#bbs_day{
-	width: 20%;
-}
+/* notice */
 #notice_fix{
 	background-color: #cfe6fa;
 }
 
-#bbs_search-option{
-	float: right;
-	height: 100%;
-	width: 10%;
-}
-#bbs_search-bar{
-	float: right;
-	height: 100%;
-	width: 30%;
-	padding: 5px;
-	margin: 0px 5px;
-}
-#bbs_search-btn{
-	float: right;
-	height: 100%;
-	width: 10%;
-	display: block;
-    border:none;
-    background-color: #0F4C81;
-	color:white;
-    cursor: pointer;
-}
-#notice_btn-primary{
-	margin:5px auto;
-	text-align:center;
-	font-weight:800;
-	color:#0F4C81;
-	padding: 15px 30px;
-	width: 100%;
-	height: 50px;
-	border: 1px solid #0F4C81;
-}
+
+
+
+
+
 
 /* NOTICE, REVIEW, RESULT 글쓰기 양식 */
 .write_container{
@@ -838,15 +833,14 @@ footer{
 
 
 
-/* RANK */
-#bbs_name{
-	width:10%;
-}
-#bbs_level{
-	width:5%;
-}
 
-/* FAQ */
+
+
+
+
+/************************************************************
+** FAQ
+*************************************************************/
 input[id*="answer"]{
 	display:none;
 }
@@ -895,6 +889,8 @@ input[id*="answer"] + label + div p{
 	width:300px;
 	color:#0F4C81;
 }
+
+
 
 /* ************************************************************
 * ADMIN
@@ -957,6 +953,10 @@ input[id*="answer"] + label + div p{
 #league_table th{
 	width: 10%;
 }
+
+
+
+
 
 
 
