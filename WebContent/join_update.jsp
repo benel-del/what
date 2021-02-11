@@ -107,67 +107,68 @@
             	ArrayList<User> user_list = UserDAO.getUserList_join();
             %>
             <div class="board_container">
-            	<div class="board_row">
             	<form method="post" action="join_updateAction.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=<%=admin %>" onsubmit="submit_click()">
-            		<table class="board_table">
+            		<table class="myinfo_table">
             		<tbody>
-            		<tr class="board_tr">
-						<td>참가자</td>
-						<td>
-							<input type="text" id="join_search-bar" placeholder="이름을 입력해주세요.">
-							<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색하기">
-							<table class="search_board">
-								<thead>
-									<tr class="search_board_tr">
-										<th>체크</th>
-										<th>이름/부수(아이디)</th>
-									</tr>
-								</thead>
-								<tbody>
+            			<tr>
+							<td class="table_th1">참가자</td>
+							<td class="table_th2">
+								<div class="join_search">
+									<input type="text" id="join_search-bar" placeholder="이름을 입력해주세요.">
+									<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색">
+								</div>
+								<table class="search_board">
+									<thead>
+										<tr class="search_board_tr">
+											<th>체크</th>
+											<th>이름/부수(아이디)</th>
+										</tr>
+									</thead>
+									<tbody>
 								<%
 									JoinDAO_user JoinDAO_user = new JoinDAO_user();
 									for(User user : user_list){
 										if(JoinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) != 1){
 								%>	
-									<tr class="search_board_tr">
-										<td>
-											<input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>" 
-											<% 
-												if(JoinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) == 2){
-													//해당 유저의 isPart==1이면서 이 팀에 속한 경우
-											%>
-												checked
-											<%
-												}
-											%>
-											>
-										</td>
-										<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
-									</tr>
-								<%	
-										}
-									}	
-								%>
-								</tbody>
-							</table>
-						</td>
+										<tr class="search_board_tr">
+											<td>
+												<input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>" 
+												<% 
+													if(JoinDAO_user.userJoin_update(bbsID, teamID, user.getUserID()) == 2){
+														//해당 유저의 isPart==1이면서 이 팀에 속한 경우
+												%>
+													checked
+												<%
+													}
+												%>
+												>
+											</td>
+											<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
+										</tr>
+									<%	
+											}
+										}	
+									%>
+									</tbody>
+								</table>
+							</td>
 						</tr>
 						<tr>
-							<td>참가자 명단<br>(참가자 검색 후 자동 새로고침)</td>
-							<td>
+							<td class="table_th1">참가자 명단</td>
+							<td class="table_th2">
 								<div class="join_member_list">
-									<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인">
+									<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인(아이디)">
 									<input type="hidden" name="teamMember" id="teamMember" value="">
-									<p id="join_member_list">참가멤버 리스트(아이디)</p>
+									<p>참가자 리스트(아이디)</p>
 								</div>
 							</td>
 						</tr>
             		
             		
             		
-						<tr class="board_tr">
-							<td>신청자</td>
-							<td>
+						<tr>
+							<td class="table_th1">신청자</td>
+							<td class="table_th2">
 							<%
        							User userName = UserDAO.getuserInfo(join_team.getTeamLeader());
        							out.print(userName.getUserName()+"("+userName.getUserID()+")");
@@ -176,36 +177,31 @@
 							</td>
 						</tr>
 
-						<tr class="board_tr">
-							<td>신청자 연락처</td>
-							<td>
-								<input type="tel" class="join_form" id="user_Phone" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}" value="<%=join_team.getLeaderPhone() %>">
+						<tr>
+							<td class="table_th1">신청자 연락처</td>
+							<td class="table_th2">
+								<input type="tel" id="user_Phone" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}" value="<%=join_team.getLeaderPhone() %>">
 							</td>
 						</tr>
 						
-						<tr class="board_tr">
-							<td>건의사항</td>
-							<td>
+						<tr>
+							<td class="table_th1">건의사항</td>
+							<td class="table_th2">
 								<input type="text" name="teamContent" value="<%=join_team.getTeamContent() %>">
 							</td>
 						</tr>
 						
-						<tr class="board_tr">
-							<td>비밀번호</td>
-							<td>
+						<tr>
+							<td class="table_th1">비밀번호</td>
+							<td class="table_th2">
 								<input type="text" name="teamPassword">
 							</td>
 						</tr>
-						<tr>
- 							<td  colspan="2">
- 								<input type="submit" class="join-btn" value="수정하기">
- 							</td>
- 						</tr>
  					</tbody>
             		</table>
+            		<input type="submit" class="login_submit-btn" value="수정하기">
             		
             	</form>
-              </div>
 	    	</div>  
         </section>
 

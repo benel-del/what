@@ -104,7 +104,6 @@ a{
 	width: 1024px;
 	margin: 10px auto;
 	padding: 20px;
-	border: 1px solid #bcbcbc;
 }
 
 
@@ -207,12 +206,6 @@ footer{
 	border: solid 1px #bcbcbc;
 	width : 100%;
 	margin: 10px 0;
-}
-
-.table_th1{
-	background-color: #0F4C81;
-	color: white;
-	text-align: center;
 }
 
 #notice_more
@@ -398,44 +391,173 @@ footer{
 	text-align:right;
 }
 
-/* JOIN */
-.join_form{
-	width:85%;
-	padding: .5em .3em;
+
+/* *********************************************************
+** JOIN - join_update & join_write
+************************************************************/
+/* 참가자 검색 테이블 */
+.search_board{
+	margin: 5px auto;
+	padding: 5px 5px;
+	width: 100%;
 }
-#join_member_btn{
-	padding: .5em .3em;
-	width:20%;
-	height: 100%;
-	cursor:pointer;
+.search_board_tr th{
+	background-color: #0F4C81;
+	color: white;
+	padding: 5px 5px;
 }
+.search_board_tr td{
+	color: #0F4C81;
+	text-align: center;
+	padding: 5px 0;
+}
+
+/* 참가자 검색 바 & 버튼 */
+.join_search{
+	display: flex;
+	justify-content: space-between;	
+	align-items: center;
+}
+#join_search-bar{
+	margin: 5px 0px 5px 7px;
+	padding: 5px 5px; 
+	border: solid 1px #0F4C81;
+	font-size: 15px;
+}
+
+#join_search-bar:hover,
+#join_search-bar:focus{
+	border: solid 2px #cfe6fa;
+}
+
+#join_search-btn{
+	margin: 5px 7px;
+	background-color: #0F4C81;
+	color: white;
+	padding: 5px 5px;
+	font-size: 17px;
+	cursor: pointer;
+	width: 100px;
+}
+
+/* 참가자 명단 */
 .join_member_list{
-	border : 1px solid #0F4C81;
-	width:85%;
-	padding: .5em .3em;
-	display: block;
-	margin: 0px auto;
+	width: 100%;
+	padding: 5px 5px;
+	margin: 5px auto;
+	text-align: center;
 }
-#join_Content{
-	width:85%;
-	height:100px;
-	overflow:scroll;
-	padding:10px 10px;
+#joinMemberCheck{
+	width: 100%;
+	padding: 5px 5px;
+	margin: 5px auto;
+	text-align:center;
+	background-color: #0F4C81;
+	color: white;
+	cursor: pointer;
 }
-.join-btn{
+
+/********************************************************
+** 게시판 검색바
+********************************************************/
+.board_search{
+	margin: 5px auto;
+	padding: 20px 20px;
+	width: 100%;
+	height: 70px;
+	border: 1px solid #0F4C81;
+}
+
+/* team.jsp 페이지 검색바 */
+#team_search{
+	margin:0 5px;
+	float:right;
+	width:200px;
+	padding: .5em .5em;
+}
+
+#team_search-btn{
+	float:right;
+	padding: 9px 5px;
+	width:100px;
 	background-color:#0F4C81;
-	margin:20px auto;
-	height:40px;
-	width:120px;
 	color:white;
+	border:none;
 	cursor:pointer;
-	font-weight:600;
+	
 }
-.join_td{
-	width: 60%;
+
+
+/**************************************************
+** MY_PAGE
+***************************************************/
+.mypage_contents {
+	text-align:center;
+	padding: 20px;
+	margin: 60px auto;
 }
+.myinfo_table{
+	margin: 0 auto;
+	width:85%;
+}
+.table_th1{
+	background-color: #0F4C81;
+	color: white;
+	text-align: center;
+	border:1px solid #0F4C81;
+	width: 200px;
+	min-height: 35px;
+}
+.table_th2{
+	border:1px solid #0F4C81;
+	min-height: 35px;
+	padding: 5px 5px;
+}
+.bottom-btn{
+	text-align: center;
+	margin: 20px auto;
+}
+.bottom-btn a{
+	color: #0F4C81;
+	font-weight: 600;
+}
+
+.myinfo_table input{
+		width: 100%;
+		height: 100%;
+		border: none;
+}
+.myinfo_table select{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+/* Mypage modify&delete 회원정보 수정하기/삭제하기 */
+.dm_header{
+    font-size: 28px;
+    font-weight: 700;
+    margin: 20px auto;
+}
+.dm_header a:link{
+	color: #0F4C81;
+}
+.dm_header a:visited{
+	color: #0F4C81;
+}
+
+
+/*************************************************************
+** 게시판 공통요소 
+*************************************************************/
+	
+	
+	
+	
+	
 	
 
+	
 /* BOARD COMMON */
 .board_container{
 	padding:10px 10px;
@@ -452,6 +574,12 @@ footer{
 	text-align:center;
 	border : 1px solid #0F4C81;
 	width:100%;
+}
+.board_table a{
+	color: #0F4C81;
+}
+.board_table a:hover{
+	color: #cfe6fa;
 }
 .board_thead{
 	background-color: #0F4C81;
@@ -502,13 +630,11 @@ footer{
 .board_page-move-symbol-right{
 	float: right;
 }
-.board_search{
-	margin: 5px 0px;
-	padding: 20px 20px;
-	width: 100%;
-	height: 70px;
-	border: 1px solid #0F4C81;
-}
+
+
+
+
+
 
 /* NOTICE, RESULT, REVIEW 목록보기 */
 #bbs_type{
@@ -769,173 +895,6 @@ input[id*="answer"] + label + div p{
 	width:300px;
 	color:#0F4C81;
 }
-
-/* MY_PAGE */
-.mypage_contents {
-	text-align:center;
-	padding: 20px;
-	margin: 60px auto;
-}
-.myinfo_table{
-	margin:20px auto;
-}
-	.myinfo_table input{
-		width: 100%;
-		height: 100%;
-		border: none;
-	}
-	.myinfo_table select{
-		width: 100%;
-		height: 100%;
-		border: none;
-	}
-#myinfo_title{
-	background-color:#0F4C81;
-	color:white;
-}
-.table_th1{
-	border:1px solid #0F4C81;
-	width: 35%;
-	height: 30px;
-}
-.table_th2{
-	border:1px solid #0F4C81;
-	width: 60%;
-	height: 30px;
-	padding: 5px 5px;
-}
-#userDescription{
-	border:1px solid #0F4C81;
-	width: 300px;
-	height: 200px;
-	padding: 10px 10px;
-}
-.info_textarea{
-	overflow:scroll;
-	resize:none;
-	width:100%;
-	height:100%;
-	border:none;
-}
-
-/* Mypage modify&delete 회원정보 수정하기/삭제하기 */
-.dm_header{
-    font-size: 28px;
-    font-weight: 700;
-    margin: 20px auto;
-}
-	.dm_header a:link{
-		color: #0F4C81;
-	}
-	.dm_header a:visited{
-		color: #0F4C81;
-	}
-
-/* TEAM */
-#team_search{
-	margin:0 5px;
-	float:right;
-	height:100%;
-	width:100px;
-}
-#team_search-btn{
-	float:right;
-	height:100%;
-	width:50px;
-	background-color:#0F4C81;
-	color:white;
-	border:none;
-	cursor:pointer;
-	
-}
-#team_userName{
-	width:10%;
-}
-#team_userGender{
-	width: 6%;
-}
-#team_userLevel{
-	width : 6%;
-}
-#team_userType{
-	width:25%;
-}
-
-
-/* popup */
-#popup{
-	position: relative;
-}
-.popup_container{
-	padding: 5px;
-	margin: 10px;
-	border: 1px solid #0F4C81;
-}
-.member_container{
-	margin: 5px 0px;
-	padding: 10px 10px;
-	width: 100%;
-	height: auto;
-	border: 1px solid #0F4C81;
-}
-
-.search_bar{
-	width: 100%;
-	height: 50px;
-}
-#member_search-btn{
-	float: left;
-	height: 30px;
-	width: 10%;
-	display: block;
-    border:none;
-    background-color: #0F4C81;
-	color:white;
-    cursor: pointer;
-}
-#member_search-bar{
-	float: left;
-	height: 30px;
-	width: 40%;
-	padding: 5px;
-	margin: 0px 5px;
-}
-.search_table{
-	text-align:center;
-	width:100%;
-	border: 1px solid #0F4C81;
-	margin: 5px;
-}
-.search_table thead{
-	background-color: #0F4C81;
-	color:white;
-}
-.search_table tr{
-	height: 35px;
-}
-#member_choice{
-	width: 5%;
-}
-.member_choice-btn{
-    cursor: pointer;
-    font-size: 10px;
-    width: 70%;
-    height: 20px;
-}
-.popup_button{
-	text-align: center;
-}
-.popup_button input{
-	background-color:#0F4C81;
-	margin:20px auto;
-	height:40px;
-	width:80px;
-	color:white;
-	cursor:pointer;
-	font-weight:600;
-	display: inline;
-}
-
 
 /* ************************************************************
 * ADMIN

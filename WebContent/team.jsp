@@ -67,37 +67,39 @@
             <div class="board_subtitle">팀원 찾기</div>
             
             <!-- 검색 바 -->
-	            <div class="board_search">	            	
-   	        		<input id="team_search-btn" type="button" value="검색">
+	        <div class="board_search">	            	
+   	        	<input id="team_search-btn" type="button" value="검색">
    	        		
-   	        		<select name="searchWord" id="team_search">
-    	        		<option value='null'>--부수--</option>
-    	        		<option value='-3'>-3</option>
-    	        		<option value='-2'>-2</option>
-    	        		<option value='-1'>-1</option>
-    	        		<option value='0'>0</option>
-    	        		<option value='1'>1</option>
-    	        		<option value='2'>2</option>
-    	        		<option value='3'>3</option>
-    	        		<option value='4'>4</option>
-    	        		<option value='5'>5</option>
-    	        		<option value='6'>6</option>
-    	        		<option value='7'>7</option>
-   	        		</select>
-   	        	</div>
+   	        	<select name="searchWord" id="team_search">
+    	        	<option value='null'>--부수--</option>
+    	        	<option value='-3'>-3</option>
+    	        	<option value='-2'>-2</option>
+    	        	<option value='-1'>-1</option>
+    	        	<option value='0'>0</option>
+    	        	<option value='1'>1</option>
+    	        	<option value='2'>2</option>
+    	        	<option value='3'>3</option>
+    	        	<option value='4'>4</option>
+    	        	<option value='5'>5</option>
+    	        	<option value='6'>6</option>
+    	        	<option value='7'>7</option>
+   	        	</select>
+   	        </div>
 
             <div class="board_container">
             	<div class="board_row">
-            		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
-            		<input type="button" onclick="location.href='join.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
+            		<div class="admin_btn">
+	            		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
+	            		<input type="button" onclick="location.href='join.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
+            		</div>
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
-            					<th class="board_thead" id="team_userName">이름</th>
-            					<th class="board_thead" id="team_userGender">성별</th>
-            					<th class="board_thead" id="team_userLevel">부수</th>
-            					<th class="board_thead" id="bbs_name">아이디</th>
-            					<th class="board_thead" id="">참가여부</th>
+            					<th class="board_thead">이름</th>
+            					<th class="board_thead">성별</th>
+            					<th class="board_thead">부수</th>
+            					<th class="board_thead">아이디</th>
+            					<th class="board_thead">참가여부</th>
             				</tr>
             			</thead>
             			<tbody>

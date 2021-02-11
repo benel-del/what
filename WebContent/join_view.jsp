@@ -64,7 +64,7 @@
             <div class="board_container">       	            	      
        		    <table class="myinfo_table">
        				<tr>
-       					<th id="myinfo_title" class="table_th1">신청자</th>
+       					<th class="table_th1">신청자</th>
        					<th class="table_th2">
        					<%
        						User userName = UserDAO.getMemberName(join_team.getTeamLeader());
@@ -73,11 +73,11 @@
        					</th>
        				</tr>
        				<tr>
-       					<th id="myinfo_title" class="table_th1">신청자연락처</th>
+       					<th class="table_th1">신청자연락처</th>
        					<th class="table_th2"><%=join_team.getLeaderPhone() %></th>
        				</tr>
        				<tr>
-       					<th id="myinfo_title" class="table_th1">참가자 명단</th>
+       					<th class="table_th1">참가자 명단</th>
        					<th class="table_th2">
        					<%
     						String[] mem = join_team.getTeamMember().split("<br>");
@@ -92,12 +92,12 @@
        					</th>
        				</tr>
        				<tr> 
-       					<th id="myinfo_title" class="table_th1">합 부수</th>
+       					<th class="table_th1">합 부수</th>
        					<th class="table_th2"><%=join_team.getTeamLevel()%></th>
        				</tr>
        				<tr>
-       					<th id="myinfo_title" class="table_th1">건의사항</th>
-       					<th class="table_th2">
+       					<th class="table_th1">건의사항</th>
+       					<th class="table_th2" style="min-height: 200px">
        					<%
        						if(join_team.getTeamContent() != null){
        							out.print(join_team.getTeamContent());
@@ -108,16 +108,20 @@
        					</th>
        				</tr>
        				<tr> 
-       					<th id="myinfo_title" class="table_th1">신청날짜</th>
+       					<th class="table_th1">신청날짜</th>
        					<th class="table_th2"><%=join_team.getTeamDate().substring(0,11)%></th>
        				</tr>
-        		</table>     			
+        		</table>
+        		
+        		<div class="bottom-btn">
+	        		<a class=link href="join.jsp?bbsID=<%=bbsID%>">목록</a>
+		            |
+		            <a class=link href="join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">수정</a>
+		            |
+		            <a class=link href="join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">삭제</a>
+	            </div>    			
             </div>
-            <a class=link href="join.jsp?bbsID=<%=bbsID%>">목록</a>
-            |
-            <a class=link href="join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">수정</a>
-            |
-            <a class=link href="join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">삭제</a>
+            
             
         </section>
     </div>  

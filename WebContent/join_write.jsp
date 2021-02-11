@@ -103,98 +103,93 @@
             <div class="board_subtitle">참가신청</div>
     	
             <div class="board_container">
-            	<div class="board_row">
-            	    <form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>&admin=<%=admin %>" onsubmit="submit_click()">
+            	<form method="post" action="join_writeAction.jsp?bbsID=<%=bbsID %>&admin=<%=admin %>" onsubmit="submit_click()">
             	    <% 
             	    	ArrayList<User> user_list = new UserDAO().getUserList_join();
             	    %>           	            	
-            			<table class="board_table">
+            		<table class="myinfo_table">
             			<thead>
-            				<tr class="board_tr">
-            					<th class="board_thead" id="join_title" colspan="2">
+            				<tr>
+            					<th class="table_th1" colspan="2">
             						<input type="hidden" name="bbsID" value="<%=bbsID %>"><%=new BbsDAO_notice().getBbs(bbsID).getBbsTitle() %>
             					</th>
             				</tr>
             			</thead>
             			<tbody>
-							<tr class="board_tr">
+							<tr>
 								<td colspan = "2">(전달사항 입력할 위치임) ex.조원 한 분이 일괄로 신청해 주시기 바랍니다</td>
 							</tr>
-							<tr class="board_tr">
+							<tr>
 								<td colspan = "2">*조원들은 반드시 사이트에 가입되어 있어야 합니다.<br></td>
 							</tr>
-							<tr class="board_tr">
-								<td>참가자</td>
-							<td>
-								<input type="text" id="join_search-bar" placeholder="이름을 입력해주세요.">
-								<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색하기">
-								<table class="search_board">
-									<thead>
-										<tr class="search_board_tr">
-											<th>체크</th>
-											<th>이름/부수(아이디)</th>
-										</tr>
-									</thead>
-									<tbody>
-									<%
-										JoinDAO_user JoinDAO_user = new JoinDAO_user();
-										for(User user : user_list){
-											/* join_user에서 isPart = 1인 대상들은 표시하지 않음 */
-											if(JoinDAO_user.userJoin(bbsID, user.getUserID()) != 1){
-									%>	
-										<tr class="search_board_tr">
-											<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>
-											<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
-										</tr>
-									<%	
-											}
-										}	
-									%>
-									</tbody>
-								</table>
-							</td>
+							<tr>
+								<td class="table_th1">참가자</td>
+								<td class="table_th2">
+									<div class="join_search">
+										<input type="text" id="join_search-bar" placeholder="이름을 입력해주세요.">
+										<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색하기">
+									</div>
+									<table class="search_board">
+										<thead>
+											<tr class="search_board_tr">
+												<th>체크</th>
+												<th>이름/부수(아이디)</th>
+											</tr>
+										</thead>
+										<tbody>
+										<%
+											JoinDAO_user JoinDAO_user = new JoinDAO_user();
+											for(User user : user_list){
+												/* join_user에서 isPart = 1인 대상들은 표시하지 않음 */
+												if(JoinDAO_user.userJoin(bbsID, user.getUserID()) != 1){
+										%>	
+											<tr class="search_board_tr">
+												<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>
+												<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
+											</tr>
+										<%	
+												}
+											}	
+										%>
+										</tbody>
+									</table>
+								</td>
 							</tr>
 							<tr>
-								<td>참가자 명단<br>(참가자 검색 후 자동 새로고침)</td>
-								<td>
+								<td class="table_th1">참가자 명단<br></td>
+								<td class="table_th2">
 									<div class="join_member_list">
-										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인">
+										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인(아이디)">
 										<input type="hidden" name="teamMember" id="teamMember" value="">
-										<p id="join_member_list">참가멤버 리스트(아이디)</p>
+										<p>참가멤버 리스트(아이디)</p>
 									</div>
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
-								<td>신청자 연락처</td>
-								<td class="join_td">
-									<input type="tel" class="join_form" id="user_Phone" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
+								<td class="table_th1">신청자 연락처</td>
+								<td class="table_th2">
+									<input type="tel" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
-								<td>비밀번호</td>
-								<td>
-									<input type="password" class="join_form" id="join_Password" name="teamPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
+								<td class="table_th1">비밀번호</td>
+								<td class="table_th2">
+									<input type="password" name="teamPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
-								<td>전달내용</td>
-								<td>
-									<textarea id="join_Content" placeholder="참가 관련 전달내용 기재" name="teamContent" maxlength="2048"></textarea>
+								<td class="table_th1">건의사항</td>
+								<td class="table_th2">
+									<input type="text" placeholder="참가 관련 전달내용 기재" name="teamContent" maxlength="2048"></textarea>
 								</td>
 							</tr>
-							
-							<tr>
- 								<td  colspan="2">
- 									<input type="submit" class="join-btn" value="참가신청">
- 								</td>
- 							</tr>
             			</tbody>
-            			</table>
-            		</form>	
-            	</div>
+            		</table>
+            		<input type="submit" class="login_submit-btn" value="참가신청">          	
+            	</form>	
 	    	</div>  
         </section>
     </div>  

@@ -50,7 +50,7 @@
             <div class="board_container">
             	<div class="board_row">
 	            		<input type="button" value="출력하기">      
-	            		<input type="button" onclick="location.href='join_view.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
+	            		<input type="button" onclick="location.href='join.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
             	<%
             		//예선 조 그룹 수
 					int groupNum = new JoinDAO_team().getGroupNum(bbsID);

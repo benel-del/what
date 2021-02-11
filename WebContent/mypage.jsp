@@ -46,67 +46,68 @@
         <section class="container">
        		<div class="mypage_contents">
        		    <table class="myinfo_table">
-       				<tr class="myinfo_userID">
-       					<th id="myinfo_title" class="table_th1">아이디</th>
+       				<tr>
+       					<th class="table_th1">아이디</th>
        					<th class="table_th2"><%=user.getUserID() %></th>
        				</tr>
 
-       				<tr class="myinfo_userName">
-       					<th id="myinfo_title" class="table_th1">이름</th>
+       				<tr>
+       					<th class="table_th1">이름</th>
        					<th class="table_th2"><%=user.getUserName() %></th>
        				</tr>
 
-       				<tr class="myinfo_userGender">
-       					<th id="myinfo_title" class="table_th1">성별</th>
+       				<tr>
+       					<th class="table_th1">성별</th>
        					<th class="table_th2"><%=user.getUserGender() %></th>
        				</tr>
        				
-       				<tr class="myinfo_userEmail">
-       					<th id="myinfo_title" class="table_th1">이메일</th>
+       				<tr >
+       					<th class="table_th1">이메일</th>
        					<th class="table_th2"><%=user.getUserEmail() %></th>
        				</tr>
 
-       				<tr class="myinfo_userLevel">
-       					<th id="myinfo_title" class="table_th1">부수</th>
-       					<th class="table_th2"><%=user.getUserLevel() %></th>
+       				<tr >
+       					<th class="table_th1">부수</th>
+       					<th class="table_th2"><%=user.getUserLevel() %>부</th>
        				</tr>
 
-       				<tr class="myinfo_userDescription">
-       					<th id="myinfo_title" class="table_th1">내 소개</th>
-       					<th id="userDescription">
-       						<textarea class="info_textarea" readonly><%if(user.getUserDescription() != null){out.println(user.getUserDescription());} else{ out.println("");}%></textarea>
+       				<tr>
+       					<th class="table_th1">내 소개</th>
+       					<th class="table_th2" style="min-height: 200px">
+       						<%if(user.getUserDescription() != null){out.println(user.getUserDescription());} else{ out.println("");}%>
        					</th>
        				</tr>
 
-       				<tr class="myinfo_userRank">
-       					<th id="myinfo_title" class="table_th1">랭킹</th>
+       				<tr>
+       					<th class="table_th1">랭킹</th>
        					<th class="table_th2"><%if(user.getUserRank() == 0) out.print("-"); else out.print(user.getUserRank() + "위");%></th>
        				</tr>
-       				<tr class="myinfo_userFirst">
-       					<th id="myinfo_title" class="table_th1">1위</th>
+       				<tr>
+       					<th class="table_th1">1위</th>
        					<th class="table_th2"><%=user.getUserFirst() %>회</th>
        				</tr>
-       				<tr class="myinfo_userSecond">
-       					<th id="myinfo_title" class="table_th1">2위</th>
+       				<tr>
+       					<th class="table_th1">2위</th>
        					<th class="table_th2"><%=user.getUserSecond() %>회</th>
        				</tr>
-       				<tr class="myinfo_userThird">
-       					<th id="myinfo_title" class="table_th1">3위</th>
+       				<tr>
+       					<th class="table_th1">3위</th>
        					<th class="table_th2"><%=user.getUserThird() %>회</th>
        				</tr>
-       				<tr class="myinfo_userRegdate">
-       					<th id="myinfo_title" class="table_th1">가입날짜</th>
+       				<tr>
+       					<th class="table_th1">가입날짜</th>
        					<th class="table_th2"><%=user.getUserRegdate().substring(0,11) %></th>
        				</tr>
-       				<tr class="myinfo_userLogdate">
-       					<th id="myinfo_title" class="table_th1">최근 로그인</th>
+       				<tr>
+       					<th class="table_th1">최근 로그인</th>
        					<th class="table_th2"><%=user.getUserLogdate().substring(0,11) %></th>
        				</tr>
         		</table>
-        		
-        		<a class=link href="preModify.jsp">회원정보수정</a>
-        		|
-        		<a class=link href="delete.jsp">회원탈퇴</a>
+        		<div class="bottom-btn">
+	        		<a class=link href="preModify.jsp">회원정보수정</a>
+	        		|
+	        		<a class=link href="delete.jsp">회원탈퇴</a>
+        		</div>
         	</div>
         </section>
     </div>
