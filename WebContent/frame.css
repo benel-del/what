@@ -949,14 +949,20 @@ input[id*="answer"] + label + div p{
 	font-size : 11px;
 }
 
+.admin_subtitle a{
+	color : #0F4C81;
+	font-size : 11px; 
+}
+
 .admin_select
 {
-	padding : 1px 5px;
+	padding : 3px 10px;
 	float: left;
 	
 }
 
-.admin_select a
+.admin_select a,
+.admin_a-btn a
 {
 	font-size: 11px;
 	font-weight:700;
@@ -969,13 +975,16 @@ input[id*="answer"] + label + div p{
 	padding: 5px 2px;
 }
 
-.admin_btn a
+.admin_btn button,
+.admin_btn input
 {
 	color : white;
 	background-color:#0F4C81;
-	padding: 4px 5px;
+	border: 0.5px solid #bcbcbc;
+	padding: 5px 5px;
+	margin: 5px 0.5px;
+	cursor : pointer;
 }
-
 
 
 

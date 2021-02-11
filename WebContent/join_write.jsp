@@ -81,6 +81,14 @@
 		if(request.getParameter("admin") != null){
 			admin = Integer.parseInt(request.getParameter("admin"));
 		}
+		
+		if(admin==0 && new BbsDAO_notice().isComplete(bbsID) != 0){
+			PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('참가신청이 마감된 모임입니다.')");
+			script.println("location.href='index.jsp'");
+			script.println("</script>");
+		}
 		String member;
 	%>
 

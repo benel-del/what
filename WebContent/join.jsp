@@ -55,7 +55,7 @@
             <div class="board_container">
             	<div class="board_row">
             	<%
-            		if(new BbsDAO_notice().isCompelte(bbsID) == 0){
+            		if(new BbsDAO_notice().isComplete(bbsID) == 0){
             	%>
             		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
             		<input type="button" onclick="location.href='team.jsp?bbsID=<%=bbsID %>'" value="팀원찾기">

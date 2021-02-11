@@ -10,10 +10,9 @@ public class BbsDAO_notice extends DbAccess{
 	
 	/* '모임공지'이면서 '모임 날짜'가 이미 지난 게시물의 경우 bbsComplete를 1로 세팅 */
 	public int updateBbsComplete() {
-		String SQL="UPDATE bbs_notice SET bbsComplete = 1 WHERE bbsType='모임공지' AND ? > bbsJoindate;";
+		String SQL="UPDATE bbs_notice SET bbsComplete = 1 WHERE bbsType='모임공지' AND date(bbsJoindate) < date_format(now(), '%Y%m%d');";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  getDate());
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -116,7 +115,7 @@ public class BbsDAO_notice extends DbAccess{
 
 	/* n회 어쩌다 모임 전용 참가신청 db 생성 */
 	public int createTeamListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_team(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, teamDate datetime, teamLevel int, FOREIGN KEY(teamLeader) REFERENCES user(userID));";
+		String SQL="CREATE TABLE join"+bbsID+"_team(teamID int auto_increment PRIMARY KEY, teamLeader VARCHAR(20) NOT NULL, leaderPhone VARCHAR(20) NOT NULL, teamPassword VARCHAR(10) NOT NULL, teamMember VARCHAR(200), teamContent VARCHAR(2048), moneyCheck INT DEFAULT 0 NOT NULL, teamDate datetime, teamLevel int, teamGroup INT DEFAULT 0 NOT NULL, FOREIGN KEY(teamLeader) REFERENCES user(userID));";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();
@@ -217,8 +216,8 @@ public class BbsDAO_notice extends DbAccess{
 /* *******************************************************************
 * isCompelte - join.jsp	:: 1 > 참가신청, 팀원찾기 버튼 활성 여부
 * *******************************************************************/	
-	public int isCompelte(int bbsID) {
-		String SQL = "SELECT isCompelete FROM bbs_notice WHERE bbsID = ?";
+	public int isComplete(int bbsID) {
+		String SQL = "SELECT bbsComplete FROM bbs_notice WHERE bbsID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
@@ -250,6 +249,7 @@ public class BbsDAO_notice extends DbAccess{
 				bbs_notice.setWriter(rs.getString(3));
 				bbs_notice.setBbsDate(rs.getString(4));
 				bbs_notice.setBbsAvailable(rs.getInt(6));
+				bbs_notice.setBbsJoindate(rs.getString(9));
 				bbs_notice.setBbsComplete(rs.getInt(11));
 				list.add(bbs_notice);
 			}
@@ -257,5 +257,17 @@ public class BbsDAO_notice extends DbAccess{
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	/* 해당 모임의 참가신청 마감 */
+	public int update_bbsComplete(int bbsID) {
+		String SQL = "UPDATE bbs_notice SET bbsComplete=2 WHERE bbsID="+bbsID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 }

@@ -5,6 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DB.BbsDAO_notice" %>
 <%@ page import="DB.Bbs_notice" %>
+<%@ page import="DB.JoinDAO_team" %>
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +25,9 @@
     		if(key != ""){
     			$(".board_table > tbody > tr").hide();
     			if(option == "title")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+4):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(9n+4):contains('"+key+"')");
     			else if(option == "writer")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+6):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(9n+6):contains('"+key+"')");
     			$(temp).parent().show();
     		}
     	}
@@ -42,12 +43,22 @@
     	});    	
     	$('#active').click(function(){
     		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(8n+3):contains('일반')");
+    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('진행중')");
     		$(temp).parent().show();
     	});   	
+    	$('#complete').click(function(){
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('신청마감')");
+    		$(temp).parent().show();
+    	});
+    	$('#end').click(function(){
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('완료')");
+    		$(temp).parent().show();
+    	});
     	$('#inactive').click(function(){
     		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(8n+3):contains('삭제')");
+    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('삭제')");
     		$(temp).parent().show();
     	});
     	
@@ -65,6 +76,17 @@
 		int pageNumber = 1;
 		if(request.getParameter("pageNumber") != null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+		
+		/* 게시판 업데이트!
+		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
+		*/
+		if(new BbsDAO_notice().updateBbsComplete() == -1){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('게시판 업데이트에 실패하였습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
 		}
 	%>
 	
@@ -90,24 +112,31 @@
     		<div class="admin_select">
     			<a href="#" id="all">전체</a>
     			| 
-    			<a href="#" id="active">일반</a>
+    			<a href="#" id="active">진행중</a>
     			| 
+    			<a href="#" id="complete">신청마감</a>
+    			|
+    			<a href="#" id="end">완료</a>
+    			|
     			<a href="#" id="inactive">삭제</a>
     		</div>
     		
     		<div class="board_container">
+    			<form method="post" action="admin_joinCompleteAction.jsp"> 			
             	<div class="board_row">
             		<table class="board_table">
             			<thead>
             				<tr class="board_tr">
             					<th class="board_thead">체크</th>
             					<th class="board_thead">bbsID</th>
-            					<th class="board_thead">상태</th>
+            					<th class="board_thead">모임현황</th>
             					<th class="board_thead">제목</th>
             					<th class="board_thead"></th>
+            					<th class="board_thead">모임일자</th>
+            					<th class="board_thead">참가팀</th>
             					<th class="board_thead">작성자</th>
-            					<th class="board_thead">작성일자</th>
-            					<th class="board_thead">참가인원</th>
+            					<th class="board_thead">작성일자</th>           					
+            					
             				</tr>
             			</thead>
             			<tbody>   			
@@ -118,15 +147,21 @@
             			%>	
             				<tr class="board_tr">
             					<td>
-									<input type="checkbox" name="admin_check" id="admin_check" value="<%=list.get(i).getBbsID()%>">
+									<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
             					</td>
             					<td><%=list.get(i).getBbsID() %></td>
             					<td>
             					<%
-            						if(list.get(i).getBbsAvailable() == 1){
-            							out.print("일반");
-            						}else{
+            						if(list.get(i).getBbsAvailable() == 0){
             							out.print("삭제");
+            						} else{
+	            						if(list.get(i).getBbsComplete() == 0){
+	            							out.print("진행중");
+	            						}else if(list.get(i).getBbsComplete() == 1){
+	            							out.print("완료");
+	            						}else{
+	            							out.print("신청마감");
+	            						}
             						}
             					%>
             					<td><%=list.get(i).getBbsTitle() %></td>
@@ -140,9 +175,10 @@
 									}
 								%>
 								</td>
+								<td><%=list.get(i).getBbsJoindate() %></td>
+								<td><%=new JoinDAO_team().countTeamNum(list.get(i).getBbsID()) %></td>	
 								<td><%=list.get(i).getWriter() %></td>
-								<td><%=list.get(i).getBbsDate().substring(0,11) %></td>
-								<td>참가인원</td>							
+								<td><%=list.get(i).getBbsDate().substring(0,11) %></td>														
             				</tr>
             			<%
             				}
@@ -150,6 +186,13 @@
             			</tbody>
             		</table>
             	</div>
+            	
+            	<div class="admin_btn">
+    				<button type="submit" formaction="admin_joinCompleteAction.jsp">참가신청 마감</button>
+    			</div>
+    			</form>	
+            	            	
+            	            	
             	            	
             	<!-- 이전/다음 페이지 -->
             	<div class="admin_paging">

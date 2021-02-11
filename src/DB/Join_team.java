@@ -11,6 +11,7 @@ public class Join_team {
 	private int moneyCheck;
 	private String teamDate;
 	private int teamLevel;
+	private int teamGroup;
 	
 	public int getBbsID() {
 		return bbsID;
@@ -71,6 +72,12 @@ public class Join_team {
 	}
 	public void setTeamLevel(int teamLevel) {
 		this.teamLevel = teamLevel;
+	}
+	public int getTeamGroup() {
+		return teamGroup;
+	}
+	public void setTeamGroup(int teamGroup) {
+		this.teamGroup = teamGroup;
 	}
 	
 }

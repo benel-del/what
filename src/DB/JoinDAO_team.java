@@ -25,7 +25,7 @@ public class JoinDAO_team extends DbAccess{
 	
 	/* getInfo - join_wrtieAction.jsp */
 	public int getInfo(int bbsID, String teamLeader, String leaderPhone, String teamPassword, String teamMember, String teamContent, int teamLevel) {
-		String SQL="INSERT INTO join"+bbsID+"_team VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String SQL="INSERT INTO join"+bbsID+"_team VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			int teamID = getNext_join("join"+bbsID+"_team");
@@ -38,6 +38,7 @@ public class JoinDAO_team extends DbAccess{
 			pstmt.setInt(7,  0);
 			pstmt.setString(8, getDate());
 			pstmt.setInt(9, teamLevel);
+			pstmt.setInt(10, 0);
 			pstmt.executeUpdate();
 			return teamID;
 		} catch(Exception e) {
@@ -147,6 +148,49 @@ public class JoinDAO_team extends DbAccess{
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, paid);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	/* 참가 팀 수 계산해주는 함수 : admin_join.jsp */
+	public int countTeamNum(int bbsID) {
+		String SQL="SELECT COUNT(*) FROM join"+bbsID+"_team WHERE moneyCheck=1;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
+	/* 모임 참가하는(입금완료된) 팀들의 teamID 불러오기 - leagueAction.jsp */
+	public ArrayList<Integer> getTeamIDs(int bbsID) {
+		String SQL="SELECT teamID FROM join"+bbsID+"_team WHERE moneyCheck=1;";
+		ArrayList<Integer> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {				
+				list.add(rs.getInt(1));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int updateGroup(int bbsID, int teamID, int group) {
+		String SQL = "UPDATE join"+bbsID+"_team SET teamGroup=? WHERE teamID="+teamID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, group);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

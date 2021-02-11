@@ -46,6 +46,7 @@ create table join00_team(
 	moneyCheck int default 0 not null,
 	teamDate datetime,
 	teamLevel int,
+	teamGroup int default 0,
 	FOREIGN KEY(teamLeader) REFERENCES user(userID)
 );
 

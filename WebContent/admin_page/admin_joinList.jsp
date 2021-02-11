@@ -104,15 +104,13 @@
     			<a href="#" id="unpaid">입금대기</a>
     		</div>
     		
-    		<!-- HERE!! -->
-    		<div class="admin_update">
-    			<input type="button" id="admin_unpaid-btn" value="입금취소">
-	    		<input type="button" id="admin_piad-btn" value="입금완료">
-    			<input type="button" id="admin_delete-btn" value="삭제">
+    		<div class="admin_btn">
+    			<input type="button" onclick="location.href='league.jsp?bbsID=<%=bbsID %>'" value="예선대진표 짜기">
     		</div>
-    		
-    		<form method="post" action="admin_joinPaidAction.jsp?bbsID=<%=bbsID%>"> 
+
+    		 
     		<div class="board_container">
+    			<form method="post" action="admin_joinPaidAction.jsp?bbsID=<%=bbsID%>">
             	<div class="board_row">
             		<table class="board_table">
             			<thead>
@@ -181,17 +179,16 @@
             	<div class="admin_btn">
             		<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=1">입금완료</button>
     				<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=0">입금대기</button>	
-            		<a href="../join_write.jsp?bbsID=<%=bbsID %>&admin=1">참가신청</a>
+            		<button type="submit" formaction="../join_write.jsp?bbsID=<%=bbsID %>&admin=1">참가신청</button>
             	</div>    
-            	
-            	
+            	</form>           	
             	
             	<!-- 페이징 -->
             	<div class="admin_paging">
             	
             	</div>    	
             </div>
-    		</form>
+    		
     	</section>
     </div>
 </body>
