@@ -197,4 +197,36 @@ public class JoinDAO_team extends DbAccess{
 		}
 		return -1;
 	}
+	
+	public int getGroupNum(int bbsID) {
+		String SQL="SELECT MAX(teamGroup) FROM join"+bbsID+"_team WHERE moneyCheck=1;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
+	public ArrayList<Join_team> getTeam(int bbsID, int group) {
+		String SQL="SELECT teamID, teamMember FROM join"+bbsID+"_team WHERE teamGroup="+group+";";
+		ArrayList<Join_team> list = new ArrayList<Join_team>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Join_team join_team = new Join_team();
+				join_team.setTeamID(rs.getInt(1));
+				join_team.setTeamMember(rs.getString(2));
+				list.add(join_team);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

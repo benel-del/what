@@ -986,8 +986,18 @@ input[id*="answer"] + label + div p{
 	cursor : pointer;
 }
 
+/* *******************************************************
+** League (리그전 표)
+*********************************************************/
+#league_table{
+	margin: 10px auto;
+	table-layout: fixed;
+	word-break: break-all;
+}
 
-
+#league_table th{
+	width: 10%;
+}
 
 
 
