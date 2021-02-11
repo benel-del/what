@@ -98,11 +98,6 @@
     			<a href="#" id="rank">랭킹순</a>
     		</div>
     		
-    		<!-- HERE!! -->
-    		<div class="admin_update">
-    			<input type="button" id="admin_delete-btn" value="삭제">
-    		</div>
-    		
     		<div class="board_container">
             	<div class="board_row">
             		<table class="board_table">
@@ -143,7 +138,11 @@
             			</tbody>
             		</table>
             	</div>
-            	            	
+            	
+            	<div class="admin_btn">
+            		<input type="submit" formaction="..." value="삭제">
+            	</div>
+            	   	
             	<!-- 이전/다음 페이지 -->
             	<div class="admin_paging">
             	<%
