@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../frame.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
     <script type="text/javascript"> 
     $(document).ready(function(){ 
     	/* 검색 기능 */
@@ -101,49 +102,52 @@
 	    			<a href="#" id="rank">랭킹순</a>
 	    		</div>
     		
-            	<div class="board_row">
-            		<table class="board_table">
-            			<thead>
-            				<tr class="board_tr">
-            					<th class="board_thead">체크</th>
-            					<th class="board_thead">상태</th>
-            					<th class="board_thead">아이디</th>
-            					<th class="board_thead">이름</th>
-            					<th class="board_thead">성별</th>
-            					<th class="board_thead">부수</th>
-            					<th class="board_thead">랭킹</th>
-            					<th class="board_thead">가입일자</th>
-            					<th class="board_thead">최근로그인</th>
-            				</tr>
-            			</thead>
-            			<tbody>   			
-            			<%
-            				ArrayList<User> list = new UserDAO().getAll();
-            				for(int i=0; i<list.size(); i++){
-            			%>	
-            				<tr class="board_tr">
-            					<td>
-									<input type="checkbox" name="admin_check" id="admin_check" value="<%=i+1%>">
-            					</td>
-            					<td><%=list.get(i).getUserAvailable() %></td>
-            					<td><%=list.get(i).getUserID()%></td>
-            					<td><a href="admin_userPopup.jsp"><%=list.get(i).getUserName() %></a></td>
-            					<td><%=list.get(i).getUserGender() %></td>
-								<td><%=list.get(i).getUserLevel() %>부</td>
-								<td><%=list.get(i).getUserRank() %>위</td>
-								<td><%=list.get(i).getUserRegdate() %></td>
-								<td><%=list.get(i).getUserLogdate() %></td>					
-            				</tr>
-            			<%
-            				}
-            			%>   			
-            			</tbody>
-            		</table>
-            	</div>
-            	
-            	<div class="admin_btn">
-            		<input type="submit" formaction="..." value="삭제">
-            	</div>
+	    		<form method="post" action="admin_userDel.jsp?">
+	            	<div class="board_row">
+	            		<table class="board_table">
+	            			<thead>
+	            				<tr class="board_tr">
+	            					<th class="board_thead">체크</th>
+	            					<th class="board_thead">상태</th>
+	            					<th class="board_thead">아이디</th>
+	            					<th class="board_thead">이름</th>
+	            					<th class="board_thead">성별</th>
+	            					<th class="board_thead">부수</th>
+	            					<th class="board_thead">랭킹</th>
+	            					<th class="board_thead">가입일자</th>
+	            					<th class="board_thead">최근로그인</th>
+	            				</tr>
+	            			</thead>
+	            			<tbody>   			
+	            			<%
+	            				ArrayList<User> list = new UserDAO().getAll();
+	            				for(int i=0; i<list.size(); i++){
+	            			%>	
+	            				<tr class="board_tr">
+	            					<td>
+										<input type="checkbox" name="userID" id="userID" value="<%=list.get(i).getUserID()%>">
+	            					</td>
+	            					<td><%if(list.get(i).getUserAvailable() == 1){%>활동<%}else{%>탈퇴<%} %></td>
+	            					<td><%=list.get(i).getUserID()%></td>
+	            					<td><a href="admin_userDtl.jsp?user=<%=list.get(i).getUserID()%>&available=<%=list.get(i).getUserAvailable()%>"><%=list.get(i).getUserName() %></a></td>
+	            					<td><%=list.get(i).getUserGender() %></td>
+									<td><%=list.get(i).getUserLevel() %>부</td>
+									<td><%=list.get(i).getUserRank() %>위</td>
+									<td><%=list.get(i).getUserRegdate() %></td>
+									<td><%=list.get(i).getUserLogdate() %></td>					
+	            				</tr>
+	            			<%
+	            				}
+	            			%>   			
+	            			</tbody>
+	            		</table>
+	            	</div>
+	            	
+	            	<div class="admin_btn">
+	            		<button type="submit" formaction="admin_userDelAction.jsp?available=0">계정 삭제</button>
+	            		<button type="submit" formaction="admin_userDelAction.jsp?available=1">계정 복구</button>
+	            	</div>
+           	   	</form>
             	   	
             	<!-- 이전/다음 페이지 -->
             	<div class="admin_paging">

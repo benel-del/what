@@ -212,8 +212,8 @@ public class UserDAO extends DbAccess{
  * 마이페이지
 ***********************************************************************************/
 	/* getUserInfo - mypage.jsp & myinfoModify.jsp & show_userInfo.jsp*/
-	public User getuserInfo(String userID) {	
-		String SQL="SELECT * FROM user WHERE userAvailable = 1 AND userID = ?;";
+	public User getUserInfo(String userID, int userAvailable) {	
+		String SQL="SELECT * FROM user WHERE userAvailable = " + userAvailable + " AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -489,7 +489,7 @@ public class UserDAO extends DbAccess{
 ***********************************************************************************/	
 	/* getAll('관리자페이지-회원관리'에서 userList 불러오기) - admin_user.jsp */	
 	public ArrayList<User> getAll() {	
-		String SQL="SELECT userAvailable, userID, userName, userGender, userLevel, userRank, userRegdate, userLogdate FROM user WHERE userID != 'admin';";
+		String SQL="SELECT userAvailable, userID, userName, userGender, userLevel, userRank, userRegdate, userLogdate FROM user WHERE userID != 'admin' ORDER BY userName ASC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();

@@ -153,7 +153,7 @@
 	            				for(int i=0; i<list.size(); i++){
 	            			%>
 	            				
-	            				<tr class="board_tr"">
+	            				<tr class="board_tr">
 	            					<td>
 										<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
 	            					</td>

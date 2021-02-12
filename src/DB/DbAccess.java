@@ -85,6 +85,19 @@ public class DbAccess {
 		return -1; //데이터베이스 오류
 	}
 	
+	/* 계정 삭제 */
+	public int delete(int available, String userID) {
+		String SQL="UPDATE user SET userAvailable = " + available + " WHERE userID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //데이터베이스 오류
+	}
+	
 	/* 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
 	public boolean nextPage(String table, int pageNumber) {
 		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";

@@ -132,7 +132,7 @@ public class BbsDAO_notice extends DbAccess{
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.executeUpdate();
 			
-			SQL = "INSERT INTO join"+bbsID+"_user(userID, userAvailable) SELECT userID, userAvailable FROM user WHERE userAvailable=1;";
+			SQL = "INSERT INTO join"+bbsID+"_user(userID, userAvailable) SELECT userID, userAvailable FROM user WHERE userAvailable=1 AND userID != 'admin';";
 			pstmt=conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {

@@ -170,7 +170,7 @@
 							<td class="table_th1">신청자</td>
 							<td class="table_th2">
 							<%
-       							User userName = UserDAO.getuserInfo(join_team.getTeamLeader());
+       							User userName = UserDAO.getUserInfo(join_team.getTeamLeader(), 1);
        							out.print(userName.getUserName()+"("+userName.getUserID()+")");
        						%>
        						<input type="hidden" name="teamLeader" value="<%=join_team.getTeamLeader() %>">

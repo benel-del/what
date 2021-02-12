@@ -30,7 +30,7 @@
 			script.println("location.replace('login.jsp')");
 			script.println("</script>");
 		}
-		User user = new UserDAO().getuserInfo(userID);
+		User user = new UserDAO().getUserInfo(userID, 1);
 	%>
 	
 	<!-- service -->
