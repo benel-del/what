@@ -61,6 +61,13 @@
             </div>
 
             <div class="board_container">
+            
+         	   <!-- 검색 바 -->
+	            <div class="board_search">	            	
+   	        		<input id="bbs_search-btn" type="button" value="검색">
+   	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
+	            </div>  
+	            
             	<div class="board_row">
             		<table class="board_table">
             			<thead>
@@ -113,18 +120,7 @@
             	%>
             	</div>
             	
-     			<!-- 검색 바 -->
-	            <div class="board_search">	            	
-   	        		<input id="bbs_search-btn" type="button" value="검색">
-   	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
-   	        		<!-- 
-   	        		<select id="bbs_search-option">
-    	        		<option value='title'>제목</option>
-    	        		<option value='mix'>제목 + 내용</option>
-    	        		<option value='content'>내용</option>
-    	        	</select>
-    	        	 -->
-	            </div>   
+     			 
 	    	</div>  
         </section>
 

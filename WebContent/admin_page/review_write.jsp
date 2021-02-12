@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "java.io.PrintWriter" %>
+<%@ page import = "java.io.PrintWriter" %>
+<%@ page import="DB.BbsDAO_notice" %>
     
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <title>어쩌다리그</title>
 </head>
 
@@ -18,6 +19,19 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
+		int bbsID = 0;
+		if(request.getParameter("bbsID") != null && request.getParameter("bbsID").equals("") == false){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		
+		String title = new BbsDAO_notice().getTitle(bbsID);
 	%>
 	
 	<!-- header -->
@@ -25,17 +39,19 @@
     
     <div id="wrapper">
 		<section class="container">
-            <div class="board_subtitle">
-            	후기게시판
-            </div>
-
             <div class="write_container">
+            
+            	<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsReview.jsp">후기게시물조회</a> - <a href="review_select.jsp">모임 선택</a> - <a href="review_write.jsp?bbsID=<%=bbsID %>">후기게시물 작성</a></h6>
+	    		</div>  
+	    		<br><br>
+	    		
             	<div class="write_row">
-            	<form method="post" action="review_writeAction.jsp" enctype="multipart/form-data">
+            	<form method="post" action="review_writeAction.jsp?bbsID=<%=bbsID %>" enctype="multipart/form-data">
             		<table class="write_table">
             			<thead>
             				<tr class="write_tr">
-            					<th colspan="2" class="write_title" style="text-align:center;">게시판글쓰기 양식</th>
+            					<th colspan="2" class="write_title" style="text-align:center;"><%=title %></th>
             				</tr>
             			</thead>
             			
@@ -44,7 +60,7 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								<input type="text" id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
+            								<input type="text" id="bbs_title" placeholder="글 제목" name="bbsTitle" value="<%=title %> 후기" maxlength="50">
             							</div>
             						</div>            						
             					</td>

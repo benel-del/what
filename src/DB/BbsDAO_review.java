@@ -8,19 +8,20 @@ public class BbsDAO_review extends DbAccess{
 		super();
 	}	
 	
-	public int write(String bbsTitle, String writer, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
-		String SQL="INSERT INTO bbs_review(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable, fileName1, fileName2, fileName3, fileName4) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	public int write(int bbsID, String bbsTitle, String writer, String bbsContent, String fileName1, String fileName2, String fileName3, String fileName4) {
+		String SQL="INSERT INTO bbs_review VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  bbsTitle);
-			pstmt.setString(2,  writer);
-			pstmt.setString(3,  getDate());
-			pstmt.setString(4,  bbsContent);
-			pstmt.setInt(5,  1);
-			pstmt.setString(6,  fileName1);
-			pstmt.setString(7,  fileName2);
-			pstmt.setString(8,  fileName3);
-			pstmt.setString(9,  fileName4);
+			pstmt.setInt(1, bbsID);
+			pstmt.setString(2,  bbsTitle);
+			pstmt.setString(3,  writer);
+			pstmt.setString(4,  getDate());
+			pstmt.setString(5,  bbsContent);
+			pstmt.setInt(6,  1);
+			pstmt.setString(7,  fileName1);
+			pstmt.setString(8,  fileName2);
+			pstmt.setString(9,  fileName3);
+			pstmt.setString(10,  fileName4);
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -91,5 +92,44 @@ public class BbsDAO_review extends DbAccess{
 		}
 		return -1; //데이터베이스 오류
 	}			
+	
+	/* 관리자 페이지 - 후기 게시판 목록 불러오기 */
+	public ArrayList<Bbs_review> getReview(int pageNumber){
+		String SQL="SELECT * FROM bbs_review ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_review> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_review bbs_review = new Bbs_review();
+				bbs_review.setBbsID(rs.getInt(1));
+				bbs_review.setBbsTitle(rs.getString(2));
+				bbs_review.setWriter(rs.getString(3));
+				bbs_review.setBbsDate(rs.getString(4));
+				bbs_review.setBbsAvailable(rs.getInt(6));
+				
+				list.add(bbs_review);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int isReview(int bbsID) {
+		String SQL="SELECT bbsAvailable FROM bbs_review WHERE bbsID="+bbsID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1); //해당 게시글이 review테이블에 있는 경우
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //해당 게시글이 review테이블에 없는 경우
+	}
+	
 
 }

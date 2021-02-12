@@ -46,16 +46,16 @@
         
     <div id="wrapper">
         <section>
-    	   	<div class="admin_subtitle">
-    			<h6>
-    			모임관리 - <a href="admin_join.jsp">모임조회</a> 
-    			- <a href="admin_joinList.jsp?bbsID=<%=bbsID %>">참가자조회</a>
-    			- <a href="admin_joinDtl.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID %>">참가신청내용</a>
-    			</h6>
-    		</div>  		
-    		<br>
-
-    		<div class="board_container">
+    	   	<div class="board_container">
+	    		<div class="admin_subtitle">
+	    			<h6>
+	    			모임관리 - <a href="admin_join.jsp">모임조회</a> 
+	    			- <a href="admin_joinList.jsp?bbsID=<%=bbsID %>">참가자조회</a>
+	    			- <a href="admin_joinDtl.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID %>">참가신청내용</a>
+	    			</h6>
+	    		</div>  		
+	    		<br>
+	    		
             	<div class="mypage_contents">
 	       		    <table class="myinfo_table">
 	       				<tr>

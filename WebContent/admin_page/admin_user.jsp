@@ -73,32 +73,34 @@
     
     <div id="wrapper">
     	<section>
-    	   	<div class="admin_subtitle">
-    			<h6>회원관리 - <a href="admin_user.jsp">회원조회</a></h6>
-    		</div>  		
-    		<br>
+	   		<div class="board_container">
+		   		<div class="admin_subtitle">
+	    			<h6>회원관리 - <a href="admin_user.jsp">회원조회</a></h6>
+	    		</div>  		
+	    		<br>
+	    		
+    			<!-- 검색바 -->
+	    		<div class="board_search">
+	    			<input type="button" id="admin_search-btn" value="검색">
+	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
+	    			<select id="admin_search-option">
+	    				<option value="id">아이디</option>
+	    				<option value="name">이름</option>
+	    				<option value="level">부수</option>
+	    			</select>
+	    		</div>
+	    		
+	    		<!-- 게시물 정렬옵션 -->
+	    		<div class="admin_select">
+	    			<a href="#" id="name">이름순</a>
+	    			| 
+	    			<a href="#" id="id">아이디순</a>
+	    			| 
+	    			<a href="#" id="register">가입일자순</a>
+	    			| 
+	    			<a href="#" id="rank">랭킹순</a>
+	    		</div>
     		
-    		<div class="board_search">
-    			<select id="admin_search-option">
-    				<option value="id">아이디</option>
-    				<option value="name">이름</option>
-    				<option value="level">부수</option>
-    			</select>
-    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
-    			<input type="button" id="admin_search-btn" value="검색">
-    		</div>
-    		
-    		<div class="admin_select">
-    			<a href="#" id="name">이름순</a>
-    			| 
-    			<a href="#" id="id">아이디순</a>
-    			| 
-    			<a href="#" id="register">가입일자순</a>
-    			| 
-    			<a href="#" id="rank">랭킹순</a>
-    		</div>
-    		
-    		<div class="board_container">
             	<div class="board_row">
             		<table class="board_table">
             			<thead>

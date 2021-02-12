@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <title>어쩌다리그</title>
 </head>
 
@@ -34,17 +34,19 @@
 		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
 	%>
 	
-	<!-- service -->
-	<%@ include file="service.jsp" %>
 	<!-- header -->
-    <%@ include file="header.jsp" %>
+    <%@ include file="admin_header.jsp" %>
     
     
     <div id="wrapper">
         <section class="container">
-            <div class="board_subtitle">후기게시판 </div>
-
             <div class="view_container">
+            
+           	 	<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsReview.jsp">후기게시물조회</a> - <a href="review_view.jsp?bbsID=<%=bbsID%>">후기게시물 상세보기</a></h6>
+	    		</div>  
+	    		<br><br>
+            	
             	<div class="view_row">
             		<table class="view_table">  
             			<thead>
@@ -73,8 +75,22 @@
             		</table>
             		
             		<div class="bbs_btn-primary">
-            		<a href="review.jsp" class="link">글 목록 </a>
-            		</div>            	
+            		<a href="admin_bbsReview.jsp" class="link">글 목록 </a>
+            		|            			
+            		<%
+            			if(bbs_review.getBbsAvailable() == 1){
+            		%>
+            			<a href="review_update.jsp?bbsID=<%=bbsID %>" class="link">글 수정</a>
+            			| 
+            			<a href="admin_bbsDelAction.jsp?bbsType=3&available=0&bbsID=<%=bbsID %>" class="link">글 삭제</a>
+            		<%
+            			}else{
+            		%>
+            			<a href="admin_bbsDelAction.jsp?bbsType=3&available=1&bbsID=<%=bbsID %>" class="link">글 복구</a>            		
+            		<%
+            			}
+            		%>
+            		</div>           	
             	</div>
 	    	</div>  
         </section>

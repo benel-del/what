@@ -35,7 +35,6 @@
 			script.println("</script>");
 		}
 		Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
-		ArrayList<User> list_user = new UserDAO().getUserlist(1);
 	%>
 	
 	<!-- service -->
@@ -67,68 +66,35 @@
 	            				<td class="view_subtitle">우승</td>
 	            				<td colspan="3" class="content1">
 	            				<% 
-	            				if(bbs_result.getPlaceFirst() != null){
-	            					String[] array=bbs_result.getPlaceFirst().split("/");
-	            					for(int i=0; i<array.length; i++){
-										for(User user : list_user){
-											if(array[i].equals(user.getUserID()) == true){
-												out.print(" ");
-				            					out.print(user.getUserName());
-				            					out.print("(");
-				            					out.print(user.getUserLevel());
-				            					out.print(")");
-				            					if(i < array.length-1)
-				            						out.print(" /");
-											}
-										}
-									}
-	            				} else {out.println("");}
+	            					if(bbs_result.getPlaceFirst() == null){
+	            						out.print(" ");
+	            					}else{
+	            						out.print(bbs_result.getPlaceFirst());
+	            					}
 	            				%>
 	            				</td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">준우승</td>
 	            				<td colspan="3" class="content1">
-	            				<% 
-	            				if(bbs_result.getPlaceSecond() != null){
-	            					String[] array=bbs_result.getPlaceSecond().split("/");
-	            					for(int i=0; i<array.length; i++){
-										for(User user : list_user){
-											if(array[i].equals(user.getUserID()) == true){
-												out.print(" ");
-				            					out.print(user.getUserName());
-				            					out.print("(");
-				            					out.print(user.getUserLevel());
-				            					out.print(")");
-				            					if(i < array.length-1)
-				            						out.print(" /");
-											}
-										}
-									}
-	            				} else {out.println("");}
+	            				<%
+	            					if(bbs_result.getPlaceSecond() == null){
+	            						out.print(" ");
+	            					}else{
+	            						out.print(bbs_result.getPlaceSecond());
+	            					}
 	            				%>
 								</td>
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">3위</td>
 	            				<td colspan="3" class="view_content1">
-	            				<% 
-	            				if(bbs_result.getPlaceThird() != null){
-	            					String[] array=bbs_result.getPlaceThird().split("/");
-	            					for(int i=0; i<array.length; i++){
-										for(User user : list_user){
-											if(array[i].equals(user.getUserID()) == true){
-												out.print(" ");
-				            					out.print(user.getUserName());
-				            					out.print("(");
-				            					out.print(user.getUserLevel());
-				            					out.print(")");
-				            					if(i < array.length-1)
-				            						out.print(" /");
-											}
-										}
-									}
-	            				} else {out.println("");}
+	            				<%
+	            					if(bbs_result.getPlaceThird() == null){
+	            						out.print(" ");
+	            					}else{
+	            						out.print(bbs_result.getPlaceThird());
+	            					}
 	            				%>
 	            				</td>
             				</tr>

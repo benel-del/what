@@ -6,7 +6,6 @@
 <%@ page import="DB.UserDAO" %>
 <%@ page import="DB.User" %>
 <%@ page import="DB.BbsDAO_notice" %>
-<%@ page import="DB.BbsDAO_result" %>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +55,7 @@
             		<table class="write_table">
             			<thead>
             				<tr class="write_tr">
-            					<th colspan="2" class="write_title" style="text-align:center;">글쓰기</th>
+            					<th colspan="2" class="write_title" style="text-align:center;"><%=title %></th>
             				</tr>
             			</thead>
             			

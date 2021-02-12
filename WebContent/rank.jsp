@@ -66,6 +66,18 @@
             <div class="board_subtitle">랭킹게시판</div>
             
             <div class="board_container">
+            
+           		<!-- 검색 바 -->
+		        <div class="board_search">	            	
+	   	        	<input id="bbs_search-btn" type="button" value="검색">
+	   	        	<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="30">
+		        	<select id="bbs_search-option">
+    	        		<option value='name'>이름</option>
+    	        		<option value='level'>부수</option>
+    	        		<option value='id'>아이디</option>
+    	        	</select>
+		        </div>	
+		        
             	<div class="board_row">
             		<table class="board_table">
             			<thead>
@@ -122,19 +134,7 @@
             	<%
             		}
             	%>
-            	</div>
-            	
-     			<!-- 검색 바 -->
-		        <div class="board_search">	            	
-	   	        	<input id="bbs_search-btn" type="button" value="검색">
-	   	        	<input id="bbs_search-bar" type="text" placeholder="검색어를 입력해주세요" maxlength="30">
-		        	<select id="bbs_search-option">
-    	        		<option value='name'>이름</option>
-    	        		<option value='level'>부수</option>
-    	        		<option value='id'>아이디</option>
-    	        	</select>
-		        </div>		           
-	            
+            	</div>            
 	    	</div>  
         </section>
     </div>

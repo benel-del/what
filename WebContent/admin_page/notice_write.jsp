@@ -48,10 +48,14 @@
     <%@ include file="admin_header.jsp" %>
     
     <div id="wrapper">
-        <section class="container">
-			<div class="board_subtitle">공지게시판 </div>
-            
+        <section class="container">            
             <div class="write_container">
+            
+            	<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsNotice.jsp">공지게시물조회</a> - <a href="notice_write.jsp">공지게시물 작성하기</a></h6>
+	    		</div>  
+	    		<br><br>
+	    		
             	<div class="write_row">
             		<form method="post" action="notice_writeAction.jsp">
             			<table class="write_table">

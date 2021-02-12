@@ -260,8 +260,8 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
 	/* 해당 모임의 참가신청 마감 */
-	public int update_bbsComplete(int bbsID) {
-		String SQL = "UPDATE bbs_notice SET bbsComplete=2 WHERE bbsID="+bbsID+";";
+	public int update_bbsComplete(int bbsID, int complete) {
+		String SQL = "UPDATE bbs_notice SET bbsComplete="+complete+" WHERE bbsID="+bbsID+";";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			return pstmt.executeUpdate();

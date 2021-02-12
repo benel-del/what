@@ -7,7 +7,7 @@
 	<%
 		
 		/* parameter로 bbsType, bbsID, available을 받음
-		** bbsType이 1이면 공지, 2이면 결과, 3이면 후기 테이블로 연결
+		** bbsType이 1이면 공지, 2이면 결과, 3이면 후기, 4이면 faq 테이블로 연결
 		** bbsID는 배열로 받음. 각 게시물의 view페이지에서 넘겨받을 경우 1개의 parameter만 넘어올 것이고, 
 		** 여러개 checkbox로 선택해서 넘겨받을 경우 여러개의 bbsID들이 배열로 들어옴
 		** available이 0이면 글 삭제, 1이면 글 복구 작업을 수행함.
@@ -44,6 +44,8 @@
 			table="bbs_result";
 		}else if(bbsType==3){
 			table="bbs_review";
+		}else if(bbsType==4){
+			table="bbs_faq";
 		}
 		
 		int available = 0;
@@ -80,8 +82,10 @@
 				script.println("location.href='admin_bbsNotice.jsp'");
 			}else if(bbsType==2){
 				script.println("location.href='admin_bbsResult.jsp'");
-			}else{
+			}else if(bbsType==3){
 				script.println("location.href='admin_bbsReview.jsp'");
+			}else{
+				script.println("location.href='admin_bbsFaq.jsp'");
 			}
 			script.println("</script>");
 

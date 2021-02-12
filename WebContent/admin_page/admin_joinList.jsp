@@ -81,107 +81,109 @@
     <%@ include file="admin_header.jsp" %>
     
     <div id="wrapper">
-        <section>
-    	   	<div class="admin_subtitle">
+        <section>	   	 
+    		<div class="board_container">  
+    		
+    		<div class="admin_subtitle">
     			<h6>모임관리 - <a href="admin_join.jsp">모임조회</a> - <a href="admin_joinList.jsp?bbsID=<%=bbsID %>">참가자조회</a></h6>
     		</div>  		
     		<br>
+    				
+    			<!-- 검색바 -->
+	    		<div class="board_search">
+	    			<input type="button" id="admin_search-btn" value="검색">
+	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
+	    			<select id="admin_search-option">
+	    				<option value="leader">신청자</option>
+	    				<option value="member">참가자</option>
+	    			</select>
+	    		</div>
+	    		
+	    		<!-- 게시물 정렬 옵션 -->
+	    		<div class="admin_select">
+	    			<a href="#" id="all">전체</a>
+	    			| 
+	    			<a href="#" id="paid">입금완료</a>
+	    			| 
+	    			<a href="#" id="unpaid">입금대기</a>
+	    		</div>
+	    		
+	    		<div class="admin_btn">
+	    			<input type="button" onclick="location.href='../league_view.jsp?bbsID=<%=bbsID %>&admin=1'" value="조확인">
+	    			<input type="button" onclick="location.href='league.jsp?bbsID=<%=bbsID %>'" value="조편성">
+	    		</div>
     		
-    		<div class="board_search">
-    			<select id="admin_search-option">
-    				<option value="leader">신청자</option>
-    				<option value="member">참가자</option>
-    			</select>
-    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
-    			<input type="button" id="admin_search-btn" value="검색">
-    		</div>
-    		
-    		<div class="admin_select">
-    			<a href="#" id="all">전체</a>
-    			| 
-    			<a href="#" id="paid">입금완료</a>
-    			| 
-    			<a href="#" id="unpaid">입금대기</a>
-    		</div>
-    		
-    		<div class="admin_btn">
-    			<input type="button" onclick="location.href='../league_view.jsp?bbsID=<%=bbsID %>&admin=1'" value="조확인">
-    			<input type="button" onclick="location.href='league.jsp?bbsID=<%=bbsID %>'" value="조편성">
-    		</div>
-
-    		 
-    		<div class="board_container">
     			<form method="post" action="admin_joinPaidAction.jsp?bbsID=<%=bbsID%>">
-            	<div class="board_row">
-            		<table class="board_table">
-            			<thead>
-            				<tr class="board_tr">
-            					<th class="board_thead">체크</th>
-            					<th class="board_thead">teamID</th>
-            					<th class="board_thead">참가자명단</th>
-            					<th class="board_thead">부수합</th>
-            					<th class="board_thead">입금</th>
-            					<th class="board_thead">신청자</th>
-            					<th class="board_thead">연락처</th>
-            					<th class="board_thead">신청일자</th>
-            				</tr>
-            			</thead>
-            			<tbody>   			
-            			<%
-            				UserDAO UserDAO = new UserDAO();
-            				ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
-            				for(Join_team join_team : list){
-            			%>	
-            				<tr class="board_tr">
-            					<td>    
-									<input type="checkbox" name="moneyCheck" id="moneyCheck" value="<%=join_team.getTeamID()%>">
-            						
-            					</td>
-            					<td><%=join_team.getTeamID() %></td>
-            					<td>
-            						<a href="admin_joinDtl.jsp?bbsID=<%=bbsID%>&teamID=<%=join_team.getTeamID()%>">
-            						<%
-            							String[] mem = join_team.getTeamMember().split("<br>");
-            						
-            							for(int i=0; i<mem.length; i++){
-                							if(mem[i] != null){
-                								User user = UserDAO.getMemberName(mem[i]);
-                								out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
-                							}
-                						}
-            						%>
-            						</a>
-            					</td>
-            					<td><%=join_team.getTeamLevel() %></td>
-            					<td>
-            					<%
-            						if(join_team.getMoneyCheck() == 1)
-            							out.print("입금완료");
-            						else
-            							out.print("입금대기");
-            					%>
-								</td>
-								<td>
-								<%
-									User user = UserDAO.getMemberName(join_team.getTeamLeader());
-									out.print(user.getUserName()+"("+user.getUserID()+")");
-								%>
-								</td>
-								<td><%=join_team.getLeaderPhone() %></td>
-								<td><%=join_team.getTeamDate().substring(0,11) %></td>							
-            				</tr>
-            			<%
-            				}
-            			%>   			
-            			</tbody>
-            		</table>
-            	</div>            	
-            	
-            	<div class="admin_btn">
-            		<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=1">입금완료</button>
-    				<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=0">입금대기</button>	
-            		<button type="submit" formaction="../join_write.jsp?bbsID=<%=bbsID %>&admin=1">참가신청</button>
-            	</div>    
+	            	<div class="board_row">
+	            		<table class="board_table">
+	            			<thead>
+	            				<tr class="board_tr">
+	            					<th class="board_thead">체크</th>
+	            					<th class="board_thead">teamID</th>
+	            					<th class="board_thead">참가자명단</th>
+	            					<th class="board_thead">부수합</th>
+	            					<th class="board_thead">입금</th>
+	            					<th class="board_thead">신청자</th>
+	            					<th class="board_thead">연락처</th>
+	            					<th class="board_thead">신청일자</th>
+	            				</tr>
+	            			</thead>
+	            			<tbody>   			
+	            			<%
+	            				UserDAO UserDAO = new UserDAO();
+	            				ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
+	            				for(Join_team join_team : list){
+	            			%>	
+	            				<tr class="board_tr">
+	            					<td>    
+										<input type="checkbox" name="moneyCheck" id="moneyCheck" value="<%=join_team.getTeamID()%>">
+	            						
+	            					</td>
+	            					<td><%=join_team.getTeamID() %></td>
+	            					<td>
+	            						<a href="admin_joinDtl.jsp?bbsID=<%=bbsID%>&teamID=<%=join_team.getTeamID()%>">
+	            						<%
+	            							String[] mem = join_team.getTeamMember().split("<br>");
+	            						
+	            							for(int i=0; i<mem.length; i++){
+	                							if(mem[i] != null){
+	                								User user = UserDAO.getMemberName(mem[i]);
+	                								out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
+	                							}
+	                						}
+	            						%>
+	            						</a>
+	            					</td>
+	            					<td><%=join_team.getTeamLevel() %></td>
+	            					<td>
+	            					<%
+	            						if(join_team.getMoneyCheck() == 1)
+	            							out.print("입금완료");
+	            						else
+	            							out.print("입금대기");
+	            					%>
+									</td>
+									<td>
+									<%
+										User user = UserDAO.getMemberName(join_team.getTeamLeader());
+										out.print(user.getUserName()+"("+user.getUserID()+")");
+									%>
+									</td>
+									<td><%=join_team.getLeaderPhone() %></td>
+									<td><%=join_team.getTeamDate().substring(0,11) %></td>							
+	            				</tr>
+	            			<%
+	            				}
+	            			%>   			
+	            			</tbody>
+	            		</table>
+	            	</div>            	
+	            	
+	            	<div class="admin_btn">
+	            		<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=1">입금완료</button>
+	    				<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=0">입금대기</button>	
+	            		<button type="submit" formaction="../join_write.jsp?bbsID=<%=bbsID %>&admin=1">참가신청</button>
+	            	</div>    
             	</form>           	
             	
             	<!-- 페이징 -->

@@ -8,45 +8,37 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <title>어쩌다리그</title>
 </head>
 
 <body>
-<% //userID 존재 여부
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	if(userID == null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('로그인 후 이용가능합니다.')");
-		script.println("location.replace('login.jsp')");
-		script.println("</script>");
-	}
-	
-	int bbsID = 0;
-	if(request.getParameter("bbsID") != null){
-		bbsID = Integer.parseInt(request.getParameter("bbsID"));
-	}
-	if(bbsID == 0){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('유효하지 않은 글입니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
-	Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
-	if(!userID.equals(bbs_review.getWriter())){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('수정 권한이 없습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
+	<% 
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		int bbsID = 0;
+		if(request.getParameter("bbsID") != null){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
+		if(!userID.equals(bbs_review.getWriter())){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('수정 권한이 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
 	%>
 	
 	<!-- header -->
@@ -54,11 +46,13 @@
     
     <div id="wrapper">
 		<section class="container">
-            <div class="board_subtitle">
-            	후기게시판
-            </div>
-
             <div class="write_container">
+            
+           		<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsReview.jsp">후기게시물조회</a> - <a href="review_view.jsp?bbsID=<%=bbsID%>">후기게시물 상세보기</a> - <a href="review_update.jsp?bbsID=<%=bbsID %>">후기게시물 수정</a></h6>
+	    		</div>  
+	    		<br><br>
+	    		
             	<div class="write_row">
             	<form method="post" action="review_updateAction.jsp?bbsID=<%=bbsID%>" enctype="multipart/form-data">
             		<table class="write_table">

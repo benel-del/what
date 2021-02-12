@@ -1,4 +1,4 @@
-<!-- 관리자 - 결과게시물관리 페이지  -->
+<!-- 관리자 - 결과게시물조회  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -26,9 +26,9 @@
     		if(key != ""){
     			$(".board_table > tbody > tr").hide();
     			if(option == "title")
-    				temp = $(".board_table > tbody > tr > td:nth-child(9n+4):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
     			else if(option == "writer")
-    				temp = $(".board_table > tbody > tr > td:nth-child(9n+6):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(7n+6):contains('"+key+"')");
     			$(temp).parent().show();
     		}
     	}
@@ -44,12 +44,12 @@
     	});    	
     	$('#active').click(function(){
     		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('일반')");
+    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('일반')");
     		$(temp).parent().show();
     	});   	
     	$('#inactive').click(function(){
     		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('삭제')");
+    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('삭제')");
     		$(temp).parent().show();
     	});
     	
@@ -102,31 +102,31 @@
      		    		   	    
     <div id="wrapper">
         <section>
-    	   	<div class="admin_subtitle">
-    			<h6>게시물관리 - <a href="admin_bbsResult.jsp">결과게시물조회</a></h6>
-    		</div>  
-    		<br>		
+    	   	<div class="board_container">
+	    		<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsResult.jsp">결과게시물조회</a></h6>
+	    		</div>  
+	    		<br>
+	    		
+    			<!-- 검색바 -->
+	    		<div class="board_search">
+	    			<input type="button" id="admin_search-btn" value="검색">
+	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">	    			
+	    			<select id="admin_search-option">
+	    				<option value="title">제목</option>
+	    				<option value="writer">작성자</option>
+	    			</select>
+	    		</div>
+	    		
+	    		 <!-- 게시물 정렬 옵션 -->	
+	    		<div class="admin_select">
+	    			<a href="#" id="all">전체</a>
+	    			| 
+	    			<a href="#" id="active">일반</a>
+	    			| 
+	    			<a href="#" id="inactive">삭제</a>
+	    		</div>
     		
-    		<!-- 검색바 -->
-    		<div class="board_search">
-    			<select id="admin_search-option">
-    				<option value="title">제목</option>
-    				<option value="writer">작성자</option>
-    			</select>
-    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
-    			<input type="button" id="admin_search-btn" value="검색">
-    		</div>
-    		
-    		 <!-- 게시물 정렬 옵션 -->	
-    		<div class="admin_select">
-    			<a href="#" id="all">전체</a>
-    			| 
-    			<a href="#" id="active">일반</a>
-    			| 
-    			<a href="#" id="inactive">삭제</a>
-    		</div>	
-    		  		
-    		<div class="board_container">
     			<div class="admin_btn">
     		   	 	<input type="button" value="글 등록" onclick="location.href='result_select.jsp'"> 		
     			</div>
@@ -195,7 +195,7 @@
 					</div>
 				<% 
 					}
-            		if(new BbsDAO_result().admin_nextPage("bbs_notice", pageNumber+1)){
+            		if(new BbsDAO_result().admin_nextPage("bbs_result", pageNumber+1)){
 				%>
 					<div class="board_page-move-symbol-right">
             			<a href="admin_bbsResult.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>

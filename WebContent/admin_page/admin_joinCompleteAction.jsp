@@ -24,6 +24,17 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
+		int complete=-1;
+		if(request.getParameter("complete")!= null){
+			complete = Integer.parseInt(request.getParameter("complete"));
+		}
+		if(complete == -1){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('error!')");
+			script.println("history.back()");
+			script.println("</script>");
+		} 
 		
 		String[] bbsIDs = request.getParameterValues("bbsID");
 		if(bbsIDs == null){
@@ -36,7 +47,7 @@
 			BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
 
 			for(int i=0; i<bbsIDs.length; i++){
-				int result = bbsDAO_notice.update_bbsComplete(Integer.parseInt(bbsIDs[i]));
+				int result = bbsDAO_notice.update_bbsComplete(Integer.parseInt(bbsIDs[i]), complete);
 				
 				if(result == -1){
 					PrintWriter script = response.getWriter();

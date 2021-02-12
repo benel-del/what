@@ -18,7 +18,19 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
-		else{
+		int bbsID = 0;
+		if(request.getParameter("bbsID") != null && request.getParameter("bbsID").equals("") == false){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		
+		
 			String uploadPath=request.getRealPath("upload");
 			String bbsTitle = "";
 			String bbsContent = "";
@@ -61,7 +73,7 @@
 				script.println("history.back()");
 				script.println("</script>");
 			} else{
-				int result = new BbsDAO_review().write(bbsTitle, userID, bbsContent, fileName1, fileName2, fileName3, fileName4);
+				int result = new BbsDAO_review().write(bbsID, bbsTitle, userID, bbsContent, fileName1, fileName2, fileName3, fileName4);
 				if(result == -1){
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
@@ -71,10 +83,10 @@
 				} else{
 					PrintWriter script = response.getWriter();
 					script.println("<script>");
-					script.println("location.href='review.jsp'");
+					script.println("location.href='admin_bbsReview.jsp'");
 					script.println("</script>");
 				}
 			}
-		}
+		
 
 	%>
