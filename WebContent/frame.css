@@ -190,13 +190,14 @@ footer{
 
 #index_notice-btn{
 	padding-top: 10px;
+	text-align: center;
 }
 
 .index_join-btn{
 	background-color: #0F4C81;
 	color: white;
 	border-radius: 0.4em;
-	width: 190px;
+	width: 180px;
 	font-size: 20px;
 	padding: 7px 0px;
 	cursor : pointer;

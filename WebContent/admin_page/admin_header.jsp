@@ -34,8 +34,8 @@
 			<li><a href="admin_user.jsp">회원관리</a></li>
             <li><a href="admin_bbsNotice.jsp">게시물관리</a></li>
             <li><a href="admin_join.jsp">모임관리</a></li>
-            <li><a href="#">콘텐츠관리</a></li>
-            <li><a href="#">통계관리</a></li>
+            <!-- <li><a href="#">콘텐츠관리</a></li>
+            <li><a href="#">통계관리</a></li>-->
 		</ul>
 		
 		<!-- 인스타 아이콘 -->
