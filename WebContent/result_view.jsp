@@ -141,7 +141,7 @@
             			</tbody>
             		</table>
             		
-            		<div id="notice_btn-primary">
+            		<div class="bbs_btn-primary">
             		<a href="result.jsp" class="link">글 목록 </a>
             		</div>           	
             	</div> 

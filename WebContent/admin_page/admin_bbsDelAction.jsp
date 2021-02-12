@@ -5,6 +5,14 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 
 	<%
+		
+		/* parameter로 bbsType, bbsID, available을 받음
+		** bbsType이 1이면 공지, 2이면 결과, 3이면 후기 테이블로 연결
+		** bbsID는 배열로 받음. 각 게시물의 view페이지에서 넘겨받을 경우 1개의 parameter만 넘어올 것이고, 
+		** 여러개 checkbox로 선택해서 넘겨받을 경우 여러개의 bbsID들이 배열로 들어옴
+		** available이 0이면 글 삭제, 1이면 글 복구 작업을 수행함.
+		*/
+		
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");

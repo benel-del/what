@@ -99,6 +99,7 @@
 	<!-- header -->
     <%@ include file="admin_header.jsp" %>
     
+    <!-- sidebar -->
     <div class="sidebar_wrapper">
 	    <div class="sidebar">	        		
 	      	<h6><a href="#" class="updown-btn"><i class="fas fa-angle-double-right"></i></a></h6>	
@@ -118,6 +119,7 @@
     		</div>  
     		<br>		
     		
+    		<!-- 검색바 -->
     		<div class="board_search">
     			<select id="admin_search-option">
     				<option value="title">제목</option>
@@ -127,18 +129,20 @@
     			<input type="button" id="admin_search-btn" value="검색">
     		</div>
     		
+    		<!-- 게시물 정렬 옵션 -->
     		<div class="admin_select">
     			<a href="#" id="all">전체</a>
     			| 
     			<a href="#" id="notice1">일반</a>
     			| 
     			<a href="#" id="notice2">모임</a>
-    		</div>	
+    		</div>	  		
     		  		
-    		<div class="board_container">
+    		<div class="board_container">    		
     			<div class="admin_btn">
     		   	 	<input type="button" value="글 등록" onclick="location.href='notice_write.jsp'"> 		
     			</div>
+    			
     			<form method="post" action="admin_bbsDel.jsp?bbsType='공지'"> 			
             		<div class="board_row">
             			<table class="board_table">
@@ -151,8 +155,7 @@
 	            					<th class="board_thead">제목</th>
 	            					<th class="board_thead"></th>
 	            					<th class="board_thead">작성자</th>
-	            					<th class="board_thead">작성일자</th>           					
-	            					
+	            					<th class="board_thead">작성일자</th>           						            					
 	            				</tr>
 	            			</thead>
 	            			<tbody>   			
@@ -213,7 +216,7 @@
 	    			</div> 				
     			</form>	
             	            	        	            	
-            	<!-- 이전/다음 페이지 -->
+            	<!-- 페이징 -->
             	<div class="admin_paging">
             	<%
             		if(pageNumber != 1){

@@ -55,71 +55,69 @@
     		</div>  		
     		<br>
 
-    		<%
-    			UserDAO UserDAO = new UserDAO();
-            	Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
-            %>	
     		<div class="board_container">
             	<div class="mypage_contents">
-       		    <table class="myinfo_table">
-       				<tr>
-       					<th class="table_th1">참가자명단</th>
-       					<th class="table_th2">
-       					<%
-       						String[] mem = join_team.getTeamMember().split("<br>");
-						
-							for(int i=0; i<mem.length; i++){
-								if(mem[i] != null){
-									User user = UserDAO.getMemberName(mem[i]);
-									out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
+	       		    <table class="myinfo_table">
+	       				<tr>
+	       					<th class="table_th1">참가자명단</th>
+	       					<th class="table_th2">
+	       					<%
+	       						UserDAO UserDAO = new UserDAO();
+	       	            		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
+	       						String[] mem = join_team.getTeamMember().split("<br>");
+							
+								for(int i=0; i<mem.length; i++){
+									if(mem[i] != null){
+										User user = UserDAO.getMemberName(mem[i]);
+										out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
+									}
 								}
-							}
-       					%>
-       					</th>
-       				</tr>
-       				
-       				<tr>
-       					<th class="table_th1">부수 합</th>
-       					<th class="table_th2"><%=join_team.getTeamLevel() %>부</th>
-       				</tr>
-       				
-       				<tr>
-       					<th class="table_th1">신청비밀번호</th>
-       					<th class="table_th2"><%=join_team.getTeamPassword() %></th>
-       				</tr>
-       				
-       				<tr>
-       					<th class="table_th1">신청자</th>
-       					<th class="table_th2">
-       					<%
-       						User user = UserDAO.getMemberName(join_team.getTeamLeader());
-							out.print(user.getUserName()+"("+user.getUserID()+")<br>");
-       					%>
-       					</th>
-       				</tr>
-       				
-       				<tr>
-       					<th class="table_th1">신청자 연락처</th>
-       					<th class="table_th2"><%=join_team.getLeaderPhone() %></th>
-       				</tr>
-       				
-       				<tr>
-       					<th class="table_th1">건의사항</th>
-       					<th class="table_th2"><%=join_team.getTeamContent() %></th>
-       				</tr>
-       				
-       				<tr>
-       					<th class="table_th1">신청일자</th>
-       					<th class="table_th2"><%=join_team.getTeamDate().substring(0,11) %></th>
-       				</tr>
-            	</table>	
+	       					%>
+	       					</th>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">부수 합</th>
+	       					<th class="table_th2"><%=join_team.getTeamLevel() %>부</th>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">신청비밀번호</th>
+	       					<th class="table_th2"><%=join_team.getTeamPassword() %></th>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">신청자</th>
+	       					<th class="table_th2">
+	       					<%
+	       						User user = UserDAO.getMemberName(join_team.getTeamLeader());
+								out.print(user.getUserName()+"("+user.getUserID()+")<br>");
+	       					%>
+	       					</th>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">신청자 연락처</th>
+	       					<th class="table_th2"><%=join_team.getLeaderPhone() %></th>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">건의사항</th>
+	       					<th class="table_th2"><%=join_team.getTeamContent() %></th>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">신청일자</th>
+	       					<th class="table_th2"><%=join_team.getTeamDate().substring(0,11) %></th>
+	       				</tr>
+	            	</table>	
             	
-	            	<div class="admin_a-btn">		
-	            		<a href="../join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=1">삭제</a>
+	            	<div class="bbs_btn-primary" style="width: 85%;">		
+	            		<a class="link" href="../join_delete.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=1">삭제</a>
 	            		 | 
-	    				<a href="../join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=1">수정</a>	
+	    				<a class="link" href="../join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=1">수정</a>	
 	    				 | 
-	    				<a href="admin_joinList.jsp?bbsID=<%=bbsID%>">목록</a>	
+	    				<a class="link" href="admin_joinList.jsp?bbsID=<%=bbsID%>">목록</a>	
 	            	</div>
             	</div>	              				
             </div>   		

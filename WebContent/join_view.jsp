@@ -113,7 +113,7 @@
        				</tr>
         		</table>
         		
-        		<div class="bottom-btn">
+        		<div class="bbs_btn-primary" style="width: 85%;">
 	        		<a class=link href="join.jsp?bbsID=<%=bbsID%>">목록</a>
 		            |
 		            <a class=link href="join_update.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>">수정</a>

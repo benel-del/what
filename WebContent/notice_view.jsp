@@ -76,32 +76,32 @@
             				</tr>
             			</tbody>
             		</table>
-            		
-            	<%
-            		if(bbs_notice.getBbsType().equals("모임공지") == true){
-            			if(bbs_notice.getBbsComplete() == 0){
-            			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join_write.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
-            			out.println("</div>");
-            			}
-            			else{
-            				out.println("<div id=\"notice_btn-primary\">");
-                			out.println("<a href=\"result_view.jsp?bbsID=" + bbsID + "\" class=\"link\">결과보기</a>");
-                			out.println("</div>");
-            			}
-            		} 
-            	%>
-            	<%
-            		if(bbs_notice.getBbsType().equals("모임공지")==true){
-            			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가자 명단 보기</a>");
-            			out.println("</div>");
-            		}
-            	%>
-            		
-            		<div id="notice_btn-primary">
-            			<a href="notice.jsp" class="link">글 목록 </a>
-            		</div>
+            		            		
+	            	<%
+	            		if(bbs_notice.getBbsType().equals("모임공지") == true){
+	            			if(bbs_notice.getBbsComplete() == 0){
+	            	%>
+	            		<div class="bbs_btn-primary">
+	            			<a href="join_write.jsp?bbsID=<%=bbsID %>" class="link">참가신청</a>
+	            		</div>
+	            	<%
+	            			}else{
+	            	%>
+	            		<div class="bbs_btn-primary">
+	                		<a href="result_view.jsp?bbsID=<%=bbsID %>" class="link">결과보기</a>
+	                	</div>
+	            	<%
+	     					}
+	            	%>	            	
+		            	<div class="bbs_btn-primary">
+	            	        <a href="join.jsp?bbsID=<%=bbsID %>" class="link">참가자 명단 보기</a>
+	            		</div>
+	            	<% 
+	            		}	 
+	            	%>   		
+	            		<div class="bbs_btn-primary">
+	            			<a href="notice.jsp" class="link">글 목록 </a>
+	            		</div>
             	</div>
             </div>		
         </section>

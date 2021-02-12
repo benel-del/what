@@ -122,7 +122,7 @@
             			</tbody>
             		</table>
             		
-            		<div id="notice_btn-primary">
+            		<div class="bbs_btn-primary">
             		<a href="admin_bbsResult.jsp" class="link">글 목록 </a>
             		|            			
             		<%

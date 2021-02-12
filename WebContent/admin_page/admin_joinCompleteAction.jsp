@@ -8,6 +8,11 @@
 <jsp:setProperty name="bbs_notice" property="bbsID" />
 
 	<%
+	
+		/* 참가신청 마감
+		** parameter로 bbsID들을 배열로 받음
+		** 해당 게시물들의 bbsComplete=2(신청마감)으로 업데이트
+		*/
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");

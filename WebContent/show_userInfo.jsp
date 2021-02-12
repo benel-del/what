@@ -91,12 +91,13 @@
        				<tr>
        				<th class="table_th1">3위</th>
        				<th class="table_th2"><%=user.getUserThird() %>회</th>
-       				</tr>
+       				</tr>       			
         		</table>
         		
-        		<div class="bottom-btn">	
+        		<div class="bbs_btn-primary" style="width: 85%;">	
         			<a class=link href="rank.jsp">목록</a>
         		</div>
+        		
         	</div>
         </section>
 

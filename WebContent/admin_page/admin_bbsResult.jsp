@@ -87,6 +87,7 @@
 	<!-- header -->
     <%@ include file="admin_header.jsp" %>
     
+    <!-- sidebar -->
     <div class="sidebar_wrapper">
 	    <div class="sidebar">	        		
 	      	<h6><a href="#" class="updown-btn"><i class="fas fa-angle-double-right"></i></a></h6>	
@@ -106,6 +107,7 @@
     		</div>  
     		<br>		
     		
+    		<!-- 검색바 -->
     		<div class="board_search">
     			<select id="admin_search-option">
     				<option value="title">제목</option>
@@ -115,6 +117,7 @@
     			<input type="button" id="admin_search-btn" value="검색">
     		</div>
     		
+    		 <!-- 게시물 정렬 옵션 -->	
     		<div class="admin_select">
     			<a href="#" id="all">전체</a>
     			| 
@@ -127,6 +130,7 @@
     			<div class="admin_btn">
     		   	 	<input type="button" value="글 등록" onclick="location.href='result_select.jsp'"> 		
     			</div>
+    			
     			<form method="post" action="admin_bbsDel.jsp?bbsType=2"> 			
             		<div class="board_row">
             			<table class="board_table">
@@ -181,7 +185,7 @@
 	    			</div> 				
     			</form>	
             	            	        	            	
-            	<!-- 이전/다음 페이지 -->
+            	<!-- 페이징 -->
             	<div class="admin_paging">
             	<%
             		if(pageNumber != 1){

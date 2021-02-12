@@ -101,6 +101,7 @@
     		</div>  		
     		<br>
     		
+    		<!-- 검색바 -->
     		<div class="board_search">
     			<select id="admin_search-option">
     				<option value="title">제목</option>
@@ -110,6 +111,7 @@
     			<input type="button" id="admin_search-btn" value="검색">
     		</div>
     		
+    		<!-- 게시물 정렬 옵션 -->
     		<div class="admin_select">
     			<a href="#" id="all">전체</a>
     			| 
@@ -124,80 +126,78 @@
     		
     		<div class="board_container">
     			<form method="post" action="admin_joinCompleteAction.jsp"> 			
-            	<div class="board_row">
-            		<table class="board_table">
-            			<thead>
-            				<tr class="board_tr">
-            					<th class="board_thead">체크</th>
-            					<th class="board_thead">bbsID</th>
-            					<th class="board_thead">모임현황</th>
-            					<th class="board_thead">제목</th>
-            					<th class="board_thead"></th>
-            					<th class="board_thead">모임일자</th>
-            					<th class="board_thead">참가팀</th>
-            					<th class="board_thead">작성자</th>
-            					<th class="board_thead">작성일자</th>           					
-            					
-            				</tr>
-            			</thead>
-            			<tbody>   			
-            			<%
-            			BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-            				ArrayList<Bbs_notice> list = bbsDAO_notice.getJoinList(pageNumber);
-            				for(int i=0; i<list.size(); i++){
-            			%>	
-            				<tr class="board_tr">
-            					<td>
-									<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
-            					</td>
-            					<td><%=list.get(i).getBbsID() %></td>
-            					<td>
-            					<%
-            						if(list.get(i).getBbsAvailable() == 0){
-            							out.print("삭제");
-            						} else{
-	            						if(list.get(i).getBbsComplete() == 0){
-	            							out.print("진행중");
-	            						}else if(list.get(i).getBbsComplete() == 1){
-	            							out.print("완료");
-	            						}else{
-	            							out.print("신청마감");
+	            	<div class="board_row">
+	            		<table class="board_table">
+	            			<thead>
+	            				<tr class="board_tr">
+	            					<th class="board_thead">체크</th>
+	            					<th class="board_thead">bbsID</th>
+	            					<th class="board_thead">모임현황</th>
+	            					<th class="board_thead">제목</th>
+	            					<th class="board_thead"></th>
+	            					<th class="board_thead">모임일자</th>
+	            					<th class="board_thead">참가팀</th>
+	            					<th class="board_thead">작성자</th>
+	            					<th class="board_thead">작성일자</th>           					
+	            					
+	            				</tr>
+	            			</thead>
+	            			<tbody>   			
+	            			<%
+	            				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
+	            				ArrayList<Bbs_notice> list = bbsDAO_notice.getJoinList(pageNumber);
+	            				for(int i=0; i<list.size(); i++){
+	            			%>	
+	            				<tr class="board_tr">
+	            					<td>
+										<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
+	            					</td>
+	            					<td><%=list.get(i).getBbsID() %></td>
+	            					<td>
+	            					<%
+	            						if(list.get(i).getBbsAvailable() == 0){
+	            							out.print("삭제");
+	            						} else{
+		            						if(list.get(i).getBbsComplete() == 0){
+		            							out.print("진행중");
+		            						}else if(list.get(i).getBbsComplete() == 1){
+		            							out.print("완료");
+		            						}else{
+		            							out.print("신청마감");
+		            						}
 	            						}
-            						}
-            					%>
-            					<td><%=list.get(i).getBbsTitle() %></td>
-            					<td>
-            						<input type="button" onclick="location.href='admin_joinList.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="참가자조회">
-								<%
-									if(list.get(i).getBbsComplete() == 1){	
-										if(new BbsDAO_result().isResult(list.get(i).getBbsID()) == 1){
-								%>
-									<input type="button" onclick="location.href='result_view.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="결과조회">
-								<%
+	            					%>
+	            					<td><%=list.get(i).getBbsTitle() %></td>
+	            					<td>
+	            						<input type="button" onclick="location.href='admin_joinList.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="참가자조회">
+									<%
+										if(list.get(i).getBbsComplete() == 1){	
+											if(new BbsDAO_result().isResult(list.get(i).getBbsID()) == 1){
+									%>
+										<input type="button" onclick="location.href='result_view.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="결과조회">
+									<%
+											}
 										}
-									}
-								%>
-								</td>
-								<td><%=list.get(i).getBbsJoindate() %></td>
-								<td><%=new JoinDAO_team().countTeamNum(list.get(i).getBbsID()) %></td>	
-								<td><%=list.get(i).getWriter() %></td>
-								<td><%=list.get(i).getBbsDate().substring(0,11) %></td>														
-            				</tr>
-            			<%
-            				}
-            			%>   			
-            			</tbody>
-            		</table>
-            	</div>
-            	
-            	<div class="admin_btn">
-    				<button type="submit" formaction="admin_joinCompleteAction.jsp">참가신청 마감</button>
-    			</div>
+									%>
+									</td>
+									<td><%=list.get(i).getBbsJoindate() %></td>
+									<td><%=new JoinDAO_team().countTeamNum(list.get(i).getBbsID()) %></td>	
+									<td><%=list.get(i).getWriter() %></td>
+									<td><%=list.get(i).getBbsDate().substring(0,11) %></td>														
+	            				</tr>
+	            			<%
+	            				}
+	            			%>   			
+	            			</tbody>
+	            		</table>
+	            	</div>
+	            	
+	            	<div class="admin_btn">
+	    				<button type="submit" formaction="admin_joinCompleteAction.jsp">참가신청 마감</button>
+	    			</div>
     			</form>	
-            	            	
-            	            	
-            	            	
-            	<!-- 이전/다음 페이지 -->
+            	            	        	            	
+            	<!-- 페이징 -->
             	<div class="admin_paging">
             	<%
             		if(pageNumber != 1){

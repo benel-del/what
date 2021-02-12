@@ -511,16 +511,6 @@ footer{
 	color:white;
     cursor: pointer;
 }
-#notice_btn-primary{
-	margin:5px auto;
-	text-align:center;
-	font-weight:800;
-	color:#0F4C81;
-	padding: 15px 30px;
-	width: 100%;
-	height: 50px;
-	border: 1px solid #0F4C81;
-}
 
 
 /**************************************************
@@ -547,14 +537,6 @@ footer{
 	border:1px solid #0F4C81;
 	min-height: 35px;
 	padding: 5px 5px;
-}
-.bottom-btn{
-	text-align: center;
-	margin: 20px auto;
-}
-.bottom-btn a{
-	color: #0F4C81;
-	font-weight: 600;
 }
 
 .myinfo_table input{
@@ -675,6 +657,17 @@ footer{
 	background-color: #cfe6fa;
 }
 
+/* 상세보기 페이지 공통요소 - 하단 버튼 */
+.bbs_btn-primary{
+	margin:5px auto;
+	text-align:center;
+	font-weight:800;
+	color:#0F4C81;
+	padding: 15px 30px;
+	width: 100%;
+	height: 50px;
+	border: 1px solid #0F4C81;
+}
 
 
 

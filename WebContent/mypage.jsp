@@ -103,7 +103,7 @@
        					<th class="table_th2"><%=user.getUserLogdate().substring(0,11) %></th>
        				</tr>
         		</table>
-        		<div class="bottom-btn">
+        		<div class="bbs_btn-primary" style="width: 85%;">
 	        		<a class=link href="preModify.jsp">회원정보수정</a>
 	        		|
 	        		<a class=link href="delete.jsp">회원탈퇴</a>
