@@ -171,14 +171,17 @@ public class JoinDAO_team extends DbAccess{
 	}
 	
 	/* 모임 참가하는(입금완료된) 팀들의 teamID 불러오기 - leagueAction.jsp */
-	public ArrayList<Integer> getTeamIDs(int bbsID) {
-		String SQL="SELECT teamID FROM join"+bbsID+"_team WHERE moneyCheck=1;";
-		ArrayList<Integer> list = new ArrayList<>();
+	public ArrayList<Join_team> getTeamIDs(int bbsID) {
+		String SQL="SELECT teamID, teamMember FROM join"+bbsID+"_team WHERE moneyCheck=1;";
+		ArrayList<Join_team> list = new ArrayList<Join_team>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {				
-				list.add(rs.getInt(1));
+			while(rs.next()) {
+				Join_team join_team = new Join_team();
+				join_team.setTeamID(rs.getInt(1));
+				join_team.setTeamMember(rs.getString(2));
+				list.add(join_team);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();

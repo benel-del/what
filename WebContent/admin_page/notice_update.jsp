@@ -10,8 +10,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
@@ -53,13 +53,6 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		if(userID == null){
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('로그인 후 이용가능합니다.')");
-			script.println("location.replace('login.jsp')");
-			script.println("</script>");
-		}
 	
 		int bbsID = 0;
 		if(request.getParameter("bbsID") != null){
@@ -88,9 +81,12 @@
     
     <div id="wrapper">
         <section class="container">
-            <div class="board_subtitle">공지게시판 수정</div>
-
             <div class="write_container">
+            	<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsNotice.jsp">공지게시물조회</a> - <a href="notice_view.jsp?bbsID=<%=bbsID %>">공지게시물 상세보기</a> - <a href="notice_update.jsp?bbsID=<%=bbsID %>">공지게시물 수정하기</a></h6>
+	    		</div>  
+	    		<br><br>
+	    		
             	<div class="write_row">
             		<form method="post" action="notice_updateAction.jsp?bbsID=<%=bbsID%>">
             			<table class="write_table">

@@ -40,7 +40,7 @@
     	return mem;
     }
     function join_click(){ //'명단확인' 버튼 클릭 시 참가자명단 update 	
-    	document.getElementById('join_member_list').innerHTML=memberList();
+    	document.getElementById('join_memberList').innerHTML=memberList();
     }
     
     function submit_click(){//'참가신청' 버튼 클릭 시 teamMember의 value값 저장
@@ -161,7 +161,7 @@
 									<div class="join_member_list">
 										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인(아이디)">
 										<input type="hidden" name="teamMember" id="teamMember" value="">
-										<p>참가멤버 리스트(아이디)</p>
+										<p id="join_memberList">참가멤버 리스트(아이디)</p>
 									</div>
 								</td>
 							</tr>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="DB.JoinDAO_team" %>
+<%@ page import="DB.Join_team" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.util.ArrayList " %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -48,8 +49,8 @@
 			}
 			else{
 		
-				ArrayList<Integer> teamIDs = new JoinDAO_team().getTeamIDs(bbsID);
-				int total = teamIDs.size(); //입금완료된 팀 수
+				ArrayList<Join_team> list = new JoinDAO_team().getTeamIDs(bbsID);
+				int total = list.size(); //입금완료된 팀 수
 				
 				if(total == 0){
 					PrintWriter script = response.getWriter();
@@ -87,7 +88,7 @@
 						}
 					}
 					//teamID가 teamIDs[i]인 row의 group을 random으로 업데이트
-					int result = new JoinDAO_team().updateGroup(bbsID, teamIDs.get(i), random+1);
+					int result = new JoinDAO_team().updateGroup(bbsID, list.get(i).getTeamID(), random+1);
 					if(result == -1){
 						PrintWriter script = response.getWriter();
 						script.println("<script>");

@@ -941,6 +941,61 @@ input[id*="answer"] + label + div p{
 	cursor : pointer;
 }
 
+.sidebar_wrapper{
+	position: absolute;
+	margin: 20px 10px;
+}
+
+.sidebar{
+	position: absolute;
+	float: left;
+	top: 20px;
+	background-color:white;
+	border: 1px solid #0F4C81;
+	border-radius: 10px 10px;
+	padding: 10px 10px;
+}
+
+.sidebar h6{
+	font-size: 15px;
+}
+
+.sidebar_content{
+	display: none;
+}
+
+.sidebar_content.active,
+.sidebar.active{
+	display: inline;
+	width: 150px;
+}
+
+.sidebar li{
+	margin: 10px 0;
+	font-size: 10px;
+	color : #0F4C81;
+}
+.sidebar a{
+	color : #0F4C81;
+	font-weight: 600;
+}
+.sidebar a:hover{
+	color: #cfe6fa;
+}
+
+.sidebar.fixed{
+	position: fixed;
+	top: 10;
+	margin-top: 30px;
+}
+
+#wrapper_notice_sidebar{
+	width: 900px;
+	margin: 10px 10px;
+	padding: 20px;
+	float: right;
+}
+
 /* *******************************************************
 ** League (리그전 표)
 *********************************************************/

@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <title>어쩌다리그</title>
 </head>
 
@@ -35,17 +35,30 @@
 	%>
 	
 	
-	<!-- service -->
-	<%@ include file="service.jsp" %>
 	<!-- header -->
-    <%@ include file="header.jsp" %>
+	<%@ include file="admin_header.jsp" %>
     
+    <div class="sidebar_wrapper">
+	    <div class="sidebar">	        		
+	      	<h6><a href="#" class="updown-btn"><i class="fas fa-angle-double-right"></i></a></h6>	
+	        <ul class="sidebar_content">
+		        <li><i class="fas fa-angle-right"></i> <a href="admin_bbsNotice.jsp">공지게시물 조회</a></li>
+		        <li><i class="fas fa-angle-right"></i> <a href="admin_bbsResult.jsp">결과게시물 조회</a></li>
+		        <li><i class="fas fa-angle-right"></i> <a href="admin_bbsReview.jsp">후기게시물 조회</a></li>
+		       	<li><i class="fas fa-angle-right"></i> <a href="admin_bbsFaq.jsp">FAQ 조회</a></li>
+	        </ul>	
+	     </div>
+    </div>
     
     <div id="wrapper">
         <section class="container">
-            <div class="board_subtitle">공지게시판</div>
+        	<div class="view_container">
 
-            <div class="view_container">
+	        	<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsNotice.jsp">공지게시물조회</a> - <a href="notice_view.jsp?bbsID=<%=bbsID %>">공지게시물 상세보기</a></h6>
+	    		</div>  
+	    		<br><br>
+
             	<div class="view_row">
             		<table class="view_table">  
             			<thead>
@@ -79,28 +92,30 @@
             		
             	<%
             		if(bbs_notice.getBbsType().equals("모임공지") == true){
-            			if(bbs_notice.getBbsComplete() == 0){
             			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join_write.jsp?bbsID=" + bbsID + "\" class=\"link\">참가신청</a>");
-            			out.println("</div>");
-            			}
-            			else{
-            				out.println("<div id=\"notice_btn-primary\">");
-                			out.println("<a href=\"result_view.jsp?bbsID=" + bbsID + "\" class=\"link\">결과보기</a>");
-                			out.println("</div>");
-            			}
+                		out.println("<a href=\"result_view.jsp?bbsID=" + bbsID + "\" class=\"link\">결과보기</a>");
+                		out.println(" | ");
+                		out.println("<a href=\"review_view.jsp?bbsID=" + bbsID + "\" class=\"link\">후기보기</a>");
+                		out.println("</div>");
             		} 
-            	%>
-            	<%
-            		if(bbs_notice.getBbsType().equals("모임공지")==true){
-            			out.println("<div id=\"notice_btn-primary\">");
-            			out.println("<a href=\"join.jsp?bbsID=" + bbsID + "\" class=\"link\">참가자 명단 보기</a>");
-            			out.println("</div>");
-            		}
             	%>
             		
             		<div id="notice_btn-primary">
-            			<a href="notice.jsp" class="link">글 목록 </a>
+            			<a href="admin_bbsNotice.jsp" class="link">글 목록 </a>
+            			|             			
+            		<%
+            			if(bbs_notice.getBbsAvailable() == 1){
+            		%>
+            			<a href="notice_update.jsp?bbsID=<%=bbsID %>" class="link">글 수정</a>
+            			| 
+            			<a href="admin_bbsDelAction.jsp?bbsType=1&available=0&bbsID=<%=bbsID %>" class="link">글 삭제</a>
+            		<%
+            			}else{
+            		%>
+            			<a href="admin_bbsDelAction.jsp?bbsType=1&available=1&bbsID=<%=bbsID %>" class="link">글 복구</a>            		
+            		<%
+            			}
+            		%>
             		</div>
             	</div>
             </div>		

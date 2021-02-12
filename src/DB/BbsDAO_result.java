@@ -8,18 +8,19 @@ public class BbsDAO_result extends DbAccess{
 		super();
 	}	
 
-	public int write(String bbsTitle, String writer, String bbsContent, String placeFirst, String placeSecond, String placeThird) {
-		String SQL="INSERT INTO bbs_result(bbsTitle, writer, bbsDate, bbsContent, bbsAvailable, placeFirst, placeSecond, placeThird) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+	public int write(int bbsID, String bbsTitle, String writer, String bbsContent, String placeFirst, String placeSecond, String placeThird) {
+		String SQL="INSERT INTO bbs_result VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,  bbsTitle);
-			pstmt.setString(2,  writer);
-			pstmt.setString(3,  getDate());
-			pstmt.setString(4,  bbsContent);
-			pstmt.setInt(5,  1);
-			pstmt.setString(6,  placeFirst);
-			pstmt.setString(7,  placeSecond);
-			pstmt.setString(8,  placeThird);
+			pstmt.setInt(1, bbsID);
+			pstmt.setString(2,  bbsTitle);
+			pstmt.setString(3,  writer);
+			pstmt.setString(4,  getDate());
+			pstmt.setString(5,  bbsContent);
+			pstmt.setInt(6,  1);
+			pstmt.setString(7,  placeFirst);
+			pstmt.setString(8,  placeSecond);
+			pstmt.setString(9,  placeThird);
 
 			return pstmt.executeUpdate();
 		} catch(Exception e) {
@@ -27,6 +28,7 @@ public class BbsDAO_result extends DbAccess{
 		}
 		return -1; //데이터베이스 오류
 	}
+	
 	public ArrayList<Bbs_result> getList(int pageNumber){
 		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_result WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
@@ -111,5 +113,43 @@ public class BbsDAO_result extends DbAccess{
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	/* 관리자 페이지 - 결과 게시판 목록 불러오기 */
+	public ArrayList<Bbs_result> getResult(int pageNumber){
+		String SQL="SELECT * FROM bbs_result ORDER BY bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_result bbs_result = new Bbs_result();
+				bbs_result.setBbsID(rs.getInt(1));
+				bbs_result.setBbsTitle(rs.getString(2));
+				bbs_result.setWriter(rs.getString(3));
+				bbs_result.setBbsDate(rs.getString(4));
+				bbs_result.setBbsAvailable(rs.getInt(6));
+				
+				list.add(bbs_result);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public int isResult(int bbsID) {
+		String SQL="SELECT bbsAvailable FROM bbs_result WHERE bbsID="+bbsID+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1); //해당 게시글이 result테이블에 있는 경우
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1; //해당 게시글이 result테이블에 없는 경우
 	}
 }

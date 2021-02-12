@@ -15,43 +15,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <title>어쩌다리그</title>
 </head>
 
 <body>
-	<% //userID 존재 여부
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	if(userID == null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('로그인 후 이용가능합니다.')");
-		script.println("location.replace('login.jsp')");
-		script.println("</script>");
-	}
-	
-	int bbsID = 0;
-	if(request.getParameter("bbsID") != null){
-		bbsID = Integer.parseInt(request.getParameter("bbsID"));
-	}
-	if(bbsID == 0){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('유효하지 않은 글입니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
-	BbsDAO_result BbsDAO_result = new BbsDAO_result();
-	if(userID == null || !userID.equals(BbsDAO_result.getWriter("bbs_result", bbsID))){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('수정 권한이 없습니다.')");
-		script.println("history.back()");
-		script.println("</script>");
-	}
+	<% 
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+		
+		int bbsID = 0;
+		if(request.getParameter("bbsID") != null){
+			bbsID = Integer.parseInt(request.getParameter("bbsID"));
+		}
+		if(bbsID == 0){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
 	%>
 	
 	<!-- header -->
@@ -60,15 +45,17 @@
 	
     <div id="wrapper">
         <section class="container">
-            <div class="board_subtitle">결과게시판</div>
             
             <%
-    			ArrayList<Join_team> list = new JoinDAO_team().getMembers(bbsID);
-    			ArrayList<User> list_user = new UserDAO().getUserlist(1);
-    			Bbs_result bbs_result = BbsDAO_result.getBbs(bbsID);
+    			Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
     		%>
 
             <div class="write_container">
+           		<div class="admin_subtitle">
+	    			<h6>게시물관리 - <a href="admin_bbsResult.jsp">결과게시물조회</a> - <a href="result_select.jsp">모임 선택</a> - <a href="result_update.jsp?bbsID=<%=bbsID %>">결과게시물 수정</a></h6>
+	    		</div>  
+	    		<br><br>
+
             	<div class="write_row">
             	<form method="post" action="result_updateAction.jsp?bbsID=<%=bbsID%>">
             		<table class="write_table">
@@ -92,34 +79,25 @@
             					<td>
             						<div class="bbs_result">
             							<select name="placeFirst">
-											<option value='' selected>-- 1위 --</option>
-											<%
+											<option value=''>-- 1위 --</option>
+	  										
+	  									<%
+											ArrayList<Join_team> list = new JoinDAO_team().getTeamIDs(bbsID);
+										
 											for(Join_team join_team : list){
-            									if(join_team.getMoneyCheck() == 1){
-            										String[] array=join_team.getTeamMember().split("/");
-            	    
-           									%>
-	  										<option value=<%=join_team.getTeamMember()%> <% if(bbs_result.getPlaceFirst().equals(join_team.getTeamMember()) == true) out.print("selected");%>>
-	  										<%
-	  										 		for(int i=0; i<array.length; i++){
-	  											 		for(User user : list_user){
-	  											 			if(array[i].equals(user.getUserID()) == true){
-	  											 				out.print(" ");
-	  				            								out.print(user.getUserName());
-	  				            								out.print("(");
-	  				            								out.print(user.getUserLevel());
-	  				            								out.print(")");
-	  				            								if(i < array.length-1)
-	  				            									out.print(" /");
-	  											 			}	
-	  													 }
-	  										 		}
-	  										%>
-	  										</option>
-	  										<%
-	  										 	}
-            								}
-            								%>								 	
+												String mem="";
+												String[] arr = join_team.getTeamMember().split("<br>");
+												for(int i=0; i<arr.length; i++){
+					    							if(arr[i] != null){
+					    								User user = new UserDAO().getMemberName(arr[i]);
+					    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+					    							}
+					    						}
+										%>
+											<option value='<%=mem %>' <%if(mem.equals(bbs_result.getPlaceFirst())){ out.print("selected");} %>><%=mem %></option>
+										<%
+											}
+										%>							 	
 										</select>            						
 									</div>
             					</td>
@@ -127,72 +105,50 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
-            						<select name="placeSecond">
-											<option value='' selected>-- 2위 --</option>
+	            						<select name="placeSecond">
+											<option value=''>-- 2위 --</option>
+		  										
+		  									<%											
+												for(Join_team join_team : list){
+													String mem="";
+													String[] arr = join_team.getTeamMember().split("<br>");
+													for(int i=0; i<arr.length; i++){
+						    							if(arr[i] != null){
+						    								User user = new UserDAO().getMemberName(arr[i]);
+						    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+						    							}
+						    						}
+											%>
+												<option value='<%=mem %>' <%if(mem.equals(bbs_result.getPlaceSecond())){ out.print("selected");} %>><%=mem %></option>
 											<%
-											for(Join_team join_team : list){
-            									if(join_team.getMoneyCheck() == 1){
-            										String[] array=join_team.getTeamMember().split("/");
-            	    
-           									%>
-	  										 <option value=<%=join_team.getTeamMember()%> <% if(bbs_result.getPlaceSecond().equals(join_team.getTeamMember()) == true) out.print("selected");%>>
-	  										 <%
-	  										 		for(int i=0; i<array.length; i++){
-	  											 		for(User user : list_user){
-	  											 			if(array[i].equals(user.getUserID()) == true){
-	  											 				out.print(" ");
-	  				            								out.print(user.getUserName());
-	  				            								out.print("(");
-	  				            								out.print(user.getUserLevel());
-	  				            								out.print(")");
-	  				            								if(i < array.length-1)
-	  				            									out.print(" /");
-	  											 			}
-	  													 }
-	  												 }
-	  										%>
-	  										</option>
-	  										<%
-            									}
-            								}
-            								%>								 	
-										</select>
+												}
+											%>							 	
+										</select> 								 	
             						</div>
             					</td>
             				</tr>
             				<tr>
             					<td>
             						<div class="bbs_result">
-            						<select name="placeThird">
-											<option value='' selected>-- 3위 --</option>
+	            						<select name="placeThird">
+												<option value=''>-- 3위 --</option>
+		  										
+		  									<%											
+												for(Join_team join_team : list){
+													String mem="";
+													String[] arr = join_team.getTeamMember().split("<br>");
+													for(int i=0; i<arr.length; i++){
+						    							if(arr[i] != null){
+						    								User user = new UserDAO().getMemberName(arr[i]);
+						    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+						    							}
+						    						}
+											%>
+												<option value='<%=mem %>' <%if(mem.equals(bbs_result.getPlaceThird())){ out.print("selected");} %>><%=mem %></option>
 											<%
-											for(Join_team join_team : list){
-            									if(join_team.getMoneyCheck() == 1){
-            										String[] array=join_team.getTeamMember().split("/");
-            	    
-           									%>
-	  										 <option value=<%=join_team.getTeamMember()%> <% if(bbs_result.getPlaceThird().equals(join_team.getTeamMember()) == true) out.print("selected");%>>
-	  										 <%
-	  										 		for(int i=0; i<array.length; i++){
-	  											 		for(User user : list_user){
-	  											 			if(array[i].equals(user.getUserID()) == true){
-	  											 				out.print(" ");
-	  				            								out.print(user.getUserName());
-	  				            								out.print("(");
-	  				            								out.print(user.getUserLevel());
-	  				            								out.print(")");
-	  				            								if(i < array.length-1)
-	  				            									out.print(" /");
-	  											 			}
-	  											 		}
-	  										 		}
-	  										 %>
-	  										 </option>
-	  										 <%
-	  											}
-            								}
-            								%>								 	
-										</select>
+												}
+											%>							 	
+											</select> 							 	
             						</div>
             					</td>
             				</tr>

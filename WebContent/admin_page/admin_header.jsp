@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 	
-<script src="main.js" defer></script>
+<script src="../main.js" defer></script>
 <script src="https://kit.fontawesome.com/64471f6822.js" crossorigin="anonymous"></script>
 
 
@@ -30,7 +30,7 @@
 		
 		<ul class="navbar__menu">
 			<li><a href="admin_user.jsp">회원관리</a></li>
-            <li><a href="admin_bbs.jsp">게시물관리</a></li>
+            <li><a href="admin_bbsNotice.jsp">게시물관리</a></li>
             <li><a href="admin_join.jsp">모임관리</a></li>
             <li><a href="#">콘텐츠관리</a></li>
             <li><a href="#">통계관리</a></li>

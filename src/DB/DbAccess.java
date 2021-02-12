@@ -73,8 +73,8 @@ public class DbAccess {
 	}
  	
 	/* 게시글 삭제 */
-	public int delete(String table, int bbsID) {
-		String SQL="UPDATE " + table + " SET bbsAvailable = 0 WHERE bbsID = ?;";
+	public int delete(String table, int available, int bbsID) {
+		String SQL="UPDATE " + table + " SET bbsAvailable = " + available + " WHERE bbsID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
@@ -88,6 +88,22 @@ public class DbAccess {
 	/* 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
 	public boolean nextPage(String table, int pageNumber) {
 		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  getNext(table) - (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				return true;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/* 관리자페이지의 페이징 처리 : 한 페이지 당 12개의 게시물 표시한다고 할 때, 다음 페이지로 넘어가는지 여부 */
+	public boolean admin_nextPage(String table, int pageNumber) {
+		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? ORDER BY bbsID DESC LIMIT 12;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1,  getNext(table) - (pageNumber - 1) * 12);

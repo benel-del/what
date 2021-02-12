@@ -6,6 +6,7 @@
 <%@ page import="DB.BbsDAO_notice" %>
 <%@ page import="DB.Bbs_notice" %>
 <%@ page import="DB.JoinDAO_team" %>
+<%@ page import="DB.BbsDAO_result" %>
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -168,10 +169,12 @@
             					<td>
             						<input type="button" onclick="location.href='admin_joinList.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="참가자조회">
 								<%
-									if(list.get(i).getBbsComplete() == 1){			
+									if(list.get(i).getBbsComplete() == 1){	
+										if(new BbsDAO_result().isResult(list.get(i).getBbsID()) == 1){
 								%>
-									<input type="button" onclick="location.href='../result_view.jsp?bbsID=<%=list.get(i).getBbsID() %>&admin=1'" value="결과조회">
+									<input type="button" onclick="location.href='result_view.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="결과조회">
 								<%
+										}
 									}
 								%>
 								</td>

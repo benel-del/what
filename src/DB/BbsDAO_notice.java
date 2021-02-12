@@ -270,4 +270,64 @@ public class BbsDAO_notice extends DbAccess{
 		}
 		return -1;
 	}
+	
+	/* admin_bbsNotice.jsp에서 출력할 게시물 목록에 대한 정보 */
+	public ArrayList<Bbs_notice> getNotice(int pageNumber){
+		String SQL = "SELECT * FROM bbs_notice ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
+		ArrayList<Bbs_notice> list = new ArrayList<Bbs_notice>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_notice bbs_notice = new Bbs_notice();
+				bbs_notice.setBbsID(rs.getInt(1));
+				bbs_notice.setBbsTitle(rs.getString(2));
+				bbs_notice.setWriter(rs.getString(3));
+				bbs_notice.setBbsDate(rs.getString(4));
+				bbs_notice.setBbsAvailable(rs.getInt(6));
+				bbs_notice.setBbsType(rs.getString(7));
+				bbs_notice.setBbsFix(rs.getInt(8));
+				bbs_notice.setBbsComplete(rs.getInt(11));
+				list.add(bbs_notice);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/* result_select.jsp에 출력할 모임공지 정보 */
+	public ArrayList<Bbs_notice> result_getList(){
+		String SQL = "SELECT * FROM bbs_notice WHERE bbsType='모임공지' AND bbsComplete=1 AND bbsAvailable=1 ORDER BY bbsID DESC;";
+		ArrayList<Bbs_notice> list = new ArrayList<Bbs_notice>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_notice bbs_notice = new Bbs_notice();
+				bbs_notice.setBbsID(rs.getInt(1));
+				bbs_notice.setBbsTitle(rs.getString(2));
+				list.add(bbs_notice);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public String getTitle(int bbsID) {
+		String SQL = "SELECT bbsTitle FROM bbs_notice WHERE bbsID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, bbsID);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return rs.getString(1);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

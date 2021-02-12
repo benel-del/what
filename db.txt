@@ -70,10 +70,7 @@ create table bbs_result(
 	placeFirst varchar(200),
 	placeSecond varchar(200),
 	placeThird varchar(200),
-	FOREIGN KEY(writer) REFERENCES user(userID),
-	FOREIGN KEY(placeFirst) REFERENCES user(userID),
-	FOREIGN KEY(placeSecond) REFERENCES user(userID),
-	FOREIGN KEY(placeThird) REFERENCES user(userID)
+	FOREIGN KEY(writer) REFERENCES user(userID)
 );
 
 /* 후기게시판 글 리스트 */
