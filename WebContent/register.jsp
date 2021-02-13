@@ -32,8 +32,8 @@
 	
 	<!-- service -->
 	<div class="service">
-        <a class="link" href="login.jsp">로그인 </a>
-        <a class="link" href="register.jsp">회원가입</a>
+        <a href="login.jsp">로그인 </a>
+        <a href="register.jsp">회원가입</a>
     </div> 
     
 	<!-- header -->

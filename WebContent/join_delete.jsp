@@ -57,15 +57,15 @@
         if(userID.equals("admin")){
     %>
 		<div class="service">
-   	        <a class="link" href="logoutAction.jsp">로그아웃 </a>
-   	        <a class="link" href="admin_page/admin.jsp %>">관리자페이지</a>
+   	        <a href="logoutAction.jsp">로그아웃 </a>
+   	        <a href="admin_page/admin.jsp %>">관리자페이지</a>
    	    </div>        
     <%		
         } else{
     %>
         <div class="service">
-   	        <a class="link" href="logoutAction.jsp">로그아웃 </a>
-   	        <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
+   	        <a href="logoutAction.jsp">로그아웃 </a>
+   	        <a href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
    	    </div>
    	<% 
        	}

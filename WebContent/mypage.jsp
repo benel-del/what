@@ -35,8 +35,8 @@
 	
 	<!-- service -->
 	<div class="service">
-       <a class="link" href="logoutAction.jsp">로그아웃 </a>
-       <a class="link" href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
+       <a href="logoutAction.jsp">로그아웃 </a>
+       <a href="mypage.jsp?userID=<%=userID %>"><%=userID %></a>
     </div>   
 
 	<!-- header -->
