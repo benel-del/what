@@ -25,11 +25,11 @@
     		if(key != ""){
     			$(".board_table > tbody > tr").hide();
     			if(option == "id")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+3):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(9n+3):contains('"+key+"')");
     			else if(option == "name")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+4):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(9n+4):contains('"+key+"')");
     			else if(option == "level")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+6):contains('"+key+"')");
+    				temp = $(".board_table > tbody > tr > td:nth-child(9n+6):contains('"+key+"')");
     			$(temp).parent().show();
     		}
     	}
@@ -133,8 +133,8 @@
 	            					<td><%=list.get(i).getUserGender() %></td>
 									<td><%=list.get(i).getUserLevel() %>부</td>
 									<td><%=list.get(i).getUserRank() %>위</td>
-									<td><%=list.get(i).getUserRegdate() %></td>
-									<td><%=list.get(i).getUserLogdate() %></td>					
+									<td><%=list.get(i).getUserRegdate().substring(0,11) %></td>
+									<td><%=list.get(i).getUserLogdate().substring(0,11) %></td>					
 	            				</tr>
 	            			<%
 	            				}
@@ -155,14 +155,14 @@
             		if(pageNumber != 1){
             	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="admin_join.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="admin_user.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 				<% 
 					}
             		if(pageNumber < new UserDAO().NumOfUser() / 13 + 1){
 				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="admin_join.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="admin_user.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
             	<%
             		}
