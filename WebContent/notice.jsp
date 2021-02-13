@@ -19,46 +19,27 @@
     <script type="text/javascript"> 
     /* 검색 기능 */
     $(document).ready(function(){ 
-    	var per = 10;
+    	var per = 12;
     	var pageNumber = $('#pageNumber').val();
     	$(".board_page-move-symbol-left").hide();
 		$(".board_page-move-symbol-right").hide();
+    	
+		var tr = $(".board_table > tbody > tr");
+		$.each(tr, function(index, item){
+			if(index < per*pageNumber && index >= per*(pageNumber-1))
+				$(item).show();
+			else
+				$(item).hide();
+		})
 
-    	paging($(".board_table > tbody > tr"));
-    	
-    	
-		/* enter 기능 */
-    	$('#bbs_search-btn').click(function(){ search();})
-    	$('#bbs_search-bar').keydown(function(key){
-    		if(key.keyCode == 13)
-    			search();
-    	})
-    	
-    	function search() {
-    		var key = $('#bbs_search-bar').val();
-    		$(".board_table > tbody > tr").hide();
-    		
-    		var temp;
-    		temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
-    		paging($(temp).parent());
-    		
-    	}
-		
-		function paging(tr){
-			for(var i = 0; i < tr.length; i++)
-				if(i < per*pageNumber && i >= per*(pageNumber-1))
-					$(tr.eq(i)).show();
-				else
-					$(tr.eq(i)).hide();
-	    	if(tr.length > pageNumber*per)
-	    		$(".board_page-move-symbol-right").show();
-	    	else
-	    		$(".board_page-move-symbol-right").hide();
-	    	if(pageNumber != 1)
-	    		$(".board_page-move-symbol-left").show();
-	    	else
-	    		$(".board_page-move-symbol-left").hide();
-		}
+    	if(tr.length > pageNumber*per)
+    		$(".board_page-move-symbol-right").show();
+    	else
+    		$(".board_page-move-symbol-right").hide();
+    	if(pageNumber != 1)
+    		$(".board_page-move-symbol-left").show();
+    	else
+    		$(".board_page-move-symbol-left").hide();
     })
     </script>
     <title>어쩌다리그</title>
@@ -103,12 +84,19 @@
     		if(request.getParameter("pageNumber") != null){
     			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
     		}
+    		String value="";
+    		if(request.getParameter("value") != null){
+    			value = request.getParameter("value");
+    		}
     		%>
-            <input id="pageNumber" type="text" value="<%=pageNumber%>">
+    			<input id="pageNumber" type="hidden" value="<%=pageNumber %>">
+    			
             	<!-- 검색 바 -->
-	            <div class="board_search">	            	
-   	        		<input id="bbs_search-btn" type="button" value="검색">
-   	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
+	            <div class="board_search">	
+	                <form method="get" action="notice.jsp"> 	
+	   	        		<input id="bbs_search-btn" type="button" value="검색">
+	   	        		<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" maxlength="30">
+	            	</form>
 	            </div> 
 	            
             	<div class="board_row">
@@ -125,7 +113,9 @@
             			</thead>
             			<tbody>
             				<%
-            					ArrayList<Bbs_notice> list = BbsDAO_notice.getList();
+            					ArrayList<Bbs_notice> list;
+            					if(value.equals(""))	list = BbsDAO_notice.getList();
+            					else	list = BbsDAO_notice.getList(value);
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 1){
             				%>          				
@@ -206,10 +196,10 @@
             	<!-- 이전/다음 페이지 -->
             	<div class="board_page-move">
             		<div class="board_page-move-symbol-left">
-            			<a href="notice.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="notice.jsp?pageNumber=<%=pageNumber-1 %>&value=<%=value %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 					<div class="board_page-move-symbol-right">
-            			<a href="notice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="notice.jsp?pageNumber=<%=pageNumber+1 %>&value=<%=value %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
             	</div>
             	
