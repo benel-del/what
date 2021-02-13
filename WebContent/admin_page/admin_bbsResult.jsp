@@ -155,7 +155,7 @@
 	            				
 	            				<tr class="board_tr">
 	            					<td>
-										<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
+										<input type="checkbox" name="bbsID" id="bbsID<%=list.get(i).getBbsID()%>" value="<%=list.get(i).getBbsID()%>">
 	            					</td>
 	            					<td><%=list.get(i).getBbsID() %></td>
 	            					<td>

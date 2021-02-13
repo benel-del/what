@@ -181,7 +181,7 @@
 	            				
 	            				<tr class="board_tr" <%if(list.get(i).getBbsFix()==1){out.print("id='notice_fix'");} %>">
 	            					<td>
-										<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
+										<input type="checkbox" name="bbsID" id="bbsID<%=list.get(i).getBbsID()%>" value="<%=list.get(i).getBbsID()%>">
 	            					</td>
 	            					<td><%=list.get(i).getBbsID() %></td>
 	            					<td>
