@@ -29,7 +29,7 @@
 			script.println("alert('로그인 후 접근 가능합니다.')");
 			script.println("location.replace('login.jsp')");
 			script.println("</script>");
-		}
+		}else{
 		User user = new UserDAO().getUserInfo(userID, 1);
 	%>
 	
@@ -104,12 +104,15 @@
        				</tr>
         		</table>
         		<div class="bbs_btn-primary" style="width: 85%;">
-	        		<a class=link href="preModify.jsp">회원정보수정</a>
+	        		<a class=link href="myinfoModify.jsp">회원정보수정</a>
 	        		|
 	        		<a class=link href="delete.jsp">회원탈퇴</a>
         		</div>
         	</div>
         </section>
     </div>
+    <%
+		}
+    %>
 </body>
 </html>

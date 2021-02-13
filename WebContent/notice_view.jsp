@@ -87,10 +87,12 @@
 	            			<a href="join_write.jsp?bbsID=<%=bbsID %>" class="link">참가신청</a>
 	            		</div>
 	            	<%
-	            			}else{
+	            			}else if(bbs_notice.getBbsComplete() == 1){
 	            	%>
 	            		<div class="bbs_btn-primary">
 	                		<a href="result_view.jsp?bbsID=<%=bbsID %>" class="link">결과보기</a>
+	                		 | 
+	                		<a href="review_view.jsp?bbsID=<%=bbsID %>" class="link">후기보기</a>
 	                	</div>
 	            	<%
 	     					}

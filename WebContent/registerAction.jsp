@@ -109,6 +109,14 @@
                     script.println("alert('Password hashing error!')");
                     script.println("</script>"); 
             	}
+            	
+            	if(new UserDAO().updateRank()==-1){
+            		PrintWriter script = response.getWriter();
+                  	script.println("<script>");
+                    script.println("alert('랭킹 업데이트 실패!')");
+                    script.println("</script>"); 
+            	}
+            	
     			session.setAttribute("userID", user.getUserID()); //회원가입 후 바로 로그인상태로 전환
                	PrintWriter script = response.getWriter();
               	script.println("<script>");

@@ -30,8 +30,15 @@
     }
 	else{
 		int result = new UserDAO().delete(userID, SHA256.getSHA256(user.getUserPassword()));
-		
+	
 		if(result == 1){
+			if(new UserDAO().updateRank()==-1){
+		    	PrintWriter script = response.getWriter();
+	          	script.println("<script>");
+	            script.println("alert('랭킹 업데이트 실패!')");
+	            script.println("</script>"); 
+	    	}
+			
 	    	PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('회원 탈퇴되었습니다.')");
