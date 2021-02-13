@@ -20,6 +20,29 @@
  
     <script type="text/javascript"> 
     $(document).ready(function(){ 
+    	var per = 10;
+    	var pageNumber = $('#pageNumber').val();
+    	$(".board_page-move-symbol-left").hide();
+		$(".board_page-move-symbol-right").hide();
+
+    	var tr = $(".board_table > tbody > tr");
+    	for(var i = 0; i < tr.length; i++)
+			if(i < per*pageNumber && i >= per*(pageNumber-1))
+				$(tr.eq(i)).show();
+			else
+				$(tr.eq(i)).hide();
+    	if(tr.length > pageNumber*per)
+    		$(".board_page-move-symbol-right").show();
+    	if(pageNumber != 1)
+    		$(".board_page-move-symbol-left").show();
+    	
+    	/* enter 기능 */
+    	$('#admin_search-btn').click(function(){ search();})
+    	$('#admin_search-bar').keydown(function(key){
+    		if(key.keyCode == 13)
+    			search();
+    	})
+    	
     	/* 검색 기능 */
     	function search() {
     		var option = $("#admin_search-option option:selected").val();
@@ -32,11 +55,7 @@
     			$(temp).parent().show();
     		}
     	}
-    	$('#admin_search-btn').click(function(){ search();})
-    	$('#admin_search-bar').keydown(function(key){
-    		if(key.keyCode == 13)
-    			search();
-    	});
+    	
     	
     	/* admin_select */
     	$('#all').click(function(){
@@ -106,11 +125,6 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		int pageNumber = 1;
-		if(request.getParameter("pageNumber") != null){
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		}
-		
 		/* 게시판 업데이트!
 		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
 		*/
@@ -120,6 +134,28 @@
 			script.println("alert('게시판 업데이트에 실패하였습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
+		}
+		int pageNumber = 1;
+		if(request.getParameter("pageNumber") != null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+
+		String option = "";
+		if(request.getParameter("option") != null){
+			option = request.getParameter("option");
+		}
+		String value="";
+		if(request.getParameter("value") != null){
+			value = request.getParameter("value");
+		}
+		
+		
+		BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
+		ArrayList<Bbs_notice> list = bbsDAO_notice.getNotice();
+
+		if(value.equals("")==false){
+			//검색어가 있는 경우
+			list = bbsDAO_notice.getNotice(option, value);
 		}
 	%>
 	
@@ -146,14 +182,18 @@
 	    			<h6>게시물관리 - <a href="admin_bbsNotice.jsp">공지게시물조회</a></h6>
 	    		</div>  
 	    		<br>
+	    		
+	    		<input id="pageNumber" type="hidden" value="<%=pageNumber %>">
     		
 	    		<!-- 검색바 -->
-	    		<div class="board_search">	    			
-	    			<input type="button" id="admin_search-btn" value="검색">
-	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
-	    			<select id="admin_search-option">
-	    				<option value="title">제목</option>
-	    			</select>
+	    		<div class="board_search">
+	    			<form method="get" action="admin_bbsNotice.jsp">	    			
+	    				<input type="submit" id="admin_search-btn" value="검색">
+	    				<input type="text" id="admin_search-bar" name="value" placeholder="검색어 입력">
+	    				<select id="admin_search-option" name="option">
+	    					<option value="bbsTitle">제목</option>
+	    				</select>
+	    			</form>
 	    		</div>
 	    		
 	    		<!-- 게시물 정렬 옵션 -->
@@ -194,9 +234,7 @@
 	            				</tr>
 	            			</thead>
 	            			<tbody>   			
-	            			<%
-	            				BbsDAO_notice bbsDAO_notice = new BbsDAO_notice();
-	            				ArrayList<Bbs_notice> list = bbsDAO_notice.getNotice(pageNumber);
+	            			<%        				
 	            				for(int i=0; i<list.size(); i++){
 	            			%>
 	            				
@@ -262,22 +300,13 @@
             	            	        	            	
             	<!-- 페이징 -->
             	<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="admin_bbsNoitce.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="admin_bbsNotice.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
-				<% 
-					}
-            		if(new BbsDAO_notice().admin_nextPage("bbs_notice", pageNumber+1)){
-				%>
+					<div><%=pageNumber %></div>
 					<div class="board_page-move-symbol-right">
-            			<a href="admin_bbsNoitce.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="admin_bbsNotice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
-            	<%
-            		}
-            	%>
             	</div>
             </div>   		
     	</section>
