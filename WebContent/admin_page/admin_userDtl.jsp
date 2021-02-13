@@ -121,19 +121,25 @@
 	       					<th class="table_th1">3위</th>
 	       					<td class="table_th2"><%=userInfo.getUserThird() %>회</td>
 	       				</tr>
-	       				
-	       				<tr>
-	       					<td colspan=2 class="table_th2">	
-			            		<a class="link" href="admin_userUpdAction.jsp?userID=<%=user%>">수정</a>
-			            		 | 
-			            		<%if(available == 1) {%>
-			    				<a class="link" href="admin_userDelAction.jsp?userID=<%=user%>&available=0">삭제</a>
-			    				<%} else{ %>
-			    				<a class="link" href="admin_userDelAction.jsp?userID=<%=user%>&available=1">계정복구</a>
-			    				<%} %>
-	       					</td>
-	       				</tr>
-	            	</table>	
+	            	</table>
+	            	
+	            	<div class="bbs_btn-primary" style="width: 85%;">
+	            	<%
+	            		if(available == 1){
+	            	%>		
+	            		<a class="link" href="admin_userDelAction.jsp?userID=<%=user%>&available=0">계정삭제</a>
+	            		 | 
+	    				<a class="link" href="admin_userUpdAction.jsp?userID=<%=user%>">수정</a>
+	    			<%
+	            		}else{
+	    			%>	
+	    				<a class="link" href="admin_userDelAction.jsp?userID=<%=user %>&available=1">계정복구</a>
+	    			<%
+	            		}
+	    			%>
+	    				 | 
+	    				<a class="link" href="admin_user.jsp">목록</a>	
+	            	</div>	
             	</div>	              				
             </div>   		
     	</section>
