@@ -98,7 +98,8 @@
 	            					for(int i=0; i<mem.length; i++){
 	            						if(mem[i] != null){
 	            							User user = UserDAO.getMemberName(mem[i]);
-	            							out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
+	            							if(user != null)
+	            								out.println(user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+")<br>");
 	            						}
 	            					}
 	            				%>
