@@ -21,15 +21,19 @@
     	$("#team_search-btn").click(function() {
     		var key = $('#team_search').val();
         	$(".board_table > tbody > tr").hide();
-    		if(key != ""){
-    			var temp;
-    			
-    			if(key != "null")
-    				temp = $(".board_table > tbody > tr > td:nth-child(5n+3):contains('"+key+"')");
-    			else
-    				temp = $(".board_table > tbody > tr > td");
-    			$(temp).parent().show();
-    		}
+    		if(key != ""){    			
+    			if(key != null){ 
+    				var arrList = $(".board_table>tbody>tr>td:nth-child(5n+3)");
+    				$.each(arrList, function(index, item){
+    					if(key == $(item).text()){
+    						$(item).parent().show();
+    					}
+    				});
+    				
+    			}				
+    		} else{
+				$(".board_table > tbody > tr > td").show();
+			}
     	});
 	
     });
@@ -53,6 +57,10 @@
 			script.println("alert('유효하지 않은 게시물입니다.')");
 			script.println("location.href='index.jsp'");
 			script.println("</script>");
+		}
+		int pageNumber = 1;
+		if(request.getParameter("pageNumber") != null){
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		}
 	%>
 	
@@ -113,7 +121,7 @@
 		            		<tr class="board_tr" id="notice_nonfix">
 		            			<td><%=user.getUserName() %></td>
 		            			<td><%=user.getUserGender() %></td>
-								<td id=""><%=user.getUserLevel() %></td>
+								<td id="level"><%=user.getUserLevel() %></td>
 		            			<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>
             					<td>
             					<%
@@ -133,6 +141,24 @@
             	</div>
             	            	
             	<!-- 페이징 -->
+ 				<div class="board_page-move">
+            	<%
+            		if(pageNumber != 1){
+            	%>
+            		<div class="board_page-move-symbol-left">
+            			<a href="team.jsp?pageNumber=<%=pageNumber-1%>" class="link"> ◀ 이전 페이지 </a>
+					</div>
+				<% 
+					}
+            		//if(pageNumber < ){
+				%>
+					<div class="board_page-move-symbol-right">
+            			<a href="team.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            		</div>
+            	<%
+            		//}
+            	%>
+            	</div> 
 	    	</div>  
         </section>
 

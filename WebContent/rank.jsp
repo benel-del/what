@@ -22,14 +22,22 @@
     		var key = $('#bbs_search-bar').val();
     		$(".board_table > tbody > tr").hide();
     		var temp;
-    		if(option == "name")
+    		if(option == "name"){
     			temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
-    		else if(option == "level")
-    			temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
-    		else if(option == "id")
+    			$(temp).parent().show();
+    		} else if(option == "level"){
+    			var arrList = $(".board_table > tbody > tr > td:nth-child(7n+3)");
+    			$.each(arrList, function(index, item){
+    				if(key == $(item).text()){
+    					$(item).parent().show();
+    				}
+    				
+    			});
+    		} else if(option == "id"){
     			temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
-
-    		$(temp).parent().show();
+    			$(temp).parent().show();
+    		}
+    		
     		
     	}
     	$('#bbs_search-btn').click(function(){ search();})
