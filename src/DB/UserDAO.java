@@ -621,6 +621,36 @@ public class UserDAO extends DbAccess{
 		return null;
 	}
 	
+	public ArrayList<User> getAll(String option, String value) {	
+		String SQL="SELECT userAvailable, userID, userName, userGender, userLevel, userRank, userRegdate, userLogdate FROM user WHERE "+option+" LIKE '%"+value+"%' AND userID != 'admin' ORDER BY userName ASC;";
+		
+		if(option.contentEquals("userLevel")) {
+			SQL="SELECT userAvailable, userID, userName, userGender, userLevel, userRank, userRegdate, userLogdate FROM user WHERE "+option+"="+value+" AND userID != 'admin' ORDER BY userName ASC;";
+		}
+		
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			ArrayList<User> list = new ArrayList<>();
+			while(rs.next()) {
+				User user = new User();
+				user.setUserAvailable(rs.getInt(1));
+				user.setUserID(rs.getString(2));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserRank(rs.getInt(6));
+				user.setUserRegdate(rs.getString(7));
+				user.setUserLogdate(rs.getString(8));
+				list.add(user);
+			}
+			return list;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/* (게시물관리 - 결과게시물) result_view.jsp - 해당 user의 정보 불러오기 */
 	public User getUser(String userID) {
 		String SQL="SELECT userName, userLevel FROM user WHERE userID = ?";
