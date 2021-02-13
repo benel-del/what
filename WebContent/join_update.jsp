@@ -31,7 +31,6 @@
     		$(temp).parent().show();
     		}
     	});
-	
     });
     
     function memberList(){//checked list를 mem변수에 string으로 저장

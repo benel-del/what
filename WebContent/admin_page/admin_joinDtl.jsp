@@ -1,4 +1,4 @@
-<!-- 모임관리 - 참가자조회 - 참가신청내용 페이지  -->
+<!-- 모임관리 - 참가자조회 - 참가자 상세보기  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>

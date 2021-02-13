@@ -45,8 +45,7 @@
     
     function submit_click(){//'참가신청' 버튼 클릭 시 teamMember의 value값 저장
     	document.getElementById('teamMember').value=memberList();
-    }
-	
+    }	
     </script>
     
     <title>어쩌다리그</title>

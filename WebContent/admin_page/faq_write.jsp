@@ -1,4 +1,4 @@
-<!-- faq게시판 글쓰기 -->
+<!-- 게시물관리 - FAQ 작성 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter" %>

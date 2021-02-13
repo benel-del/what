@@ -1,4 +1,4 @@
-<!-- 회원관리 - 회원정보 페이지  -->
+<!-- 회원관리 - 회원조회 - 회원정보  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -103,11 +103,23 @@
 	       				</tr>
 	       				
 	       				<tr>
-	       					<th colspan=2 class="table_th1">랭킹 | 우수 | 준우승 | 3위</th>
+	       					<th class="table_th1">랭킹</th>
+	       					<td class="table_th2"><%=userInfo.getUserRank() %>위</td>
 	       				</tr>
 	       				
 	       				<tr>
-	       					<th colspan=2 class="table_th2"><%=userInfo.getUserRank() %>위 | <%=userInfo.getUserFirst() %>회 | <%=userInfo.getUserSecond() %>회 | <%=userInfo.getUserThird() %>회</th>
+	       					<th class="table_th1">1위</th>
+	       					<td class="table_th2"><%=userInfo.getUserFirst() %>회</td>
+	       				</tr>
+	       				
+	       				<tr>
+	       					<th class="table_th1">2위</th>
+	       					<td class="table_th2"><%=userInfo.getUserSecond() %>회</td>	       					
+	       				</tr>
+	       				
+	       				<tr>	       					
+	       					<th class="table_th1">3위</th>
+	       					<td class="table_th2"><%=userInfo.getUserThird() %>회</td>
 	       				</tr>
 	       				
 	       				<tr>

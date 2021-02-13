@@ -1,4 +1,4 @@
-<!-- 관리자 - 회원관리 페이지  -->
+<!-- 회원관리 - 회원조회  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -40,17 +40,18 @@
     	});
     	
     	/* admin_select */
-    	$('#name').click(function(){
-    		//$(".board_table > tbody > tr").show();
+    	$('#all').click(function(){
+    		$(".board_table > tbody > tr").show();
     	});    	
-    	$('#id').click(function(){
-    		
+    	$('#active').click(function(){
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+2):contains('활동')");
+    		$(temp).parent().show();
     	});   	
-    	$('#register').click(function(){
-    		
-    	});
-    	$('#rank').click(function(){
-    		
+    	$('#inactive').click(function(){
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(9n+2):contains('탈퇴')");
+    		$(temp).parent().show();
     	});
     	
     });
@@ -93,13 +94,12 @@
 	    		
 	    		<!-- 게시물 정렬옵션 -->
 	    		<div class="admin_select">
-	    			<a href="#" id="name">이름순</a>
+	    			<a href="#" id="all">전체</a>
 	    			| 
-	    			<a href="#" id="id">아이디순</a>
+	    			<a href="#" id="active">활동</a>
 	    			| 
-	    			<a href="#" id="register">가입일자순</a>
-	    			| 
-	    			<a href="#" id="rank">랭킹순</a>
+	    			<a href="#" id="inactive">탈퇴</a>
+
 	    		</div>
     		
 	    		<form method="post" action="admin_userDel.jsp?">
@@ -128,8 +128,8 @@
 										<input type="checkbox" name="userID" id="userID" value="<%=list.get(i).getUserID()%>">
 	            					</td>
 	            					<td><%if(list.get(i).getUserAvailable() == 1){%>활동<%}else{%>탈퇴<%} %></td>
-	            					<td><%=list.get(i).getUserID()%></td>
-	            					<td><a href="admin_userDtl.jsp?user=<%=list.get(i).getUserID()%>&available=<%=list.get(i).getUserAvailable()%>"><%=list.get(i).getUserName() %></a></td>
+	            					<td><a href="admin_userDtl.jsp?user=<%=list.get(i).getUserID()%>&available=<%=list.get(i).getUserAvailable()%>"><%=list.get(i).getUserID()%></a></td>
+	            					<td><%=list.get(i).getUserName() %></td>
 	            					<td><%=list.get(i).getUserGender() %></td>
 									<td><%=list.get(i).getUserLevel() %>부</td>
 									<td><%=list.get(i).getUserRank() %>위</td>

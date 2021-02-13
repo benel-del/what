@@ -1,4 +1,4 @@
-<!-- 모임관리 - 참가자조회 페이지  -->
+<!-- 모임관리 - 참가자조회  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
