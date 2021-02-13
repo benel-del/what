@@ -187,7 +187,7 @@
             	</form>           	
             	
             	<!-- 페이징 -->
-            	<div class="admin_paging">
+            	<div class="board_page-move">
             	
             	</div>    	
             </div>

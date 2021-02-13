@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="DB.DbAccess" %>
+<%@ page import="DB.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -51,6 +52,14 @@
 				}
 			}
 			if(result != -1){
+				if(new UserDAO().updateRank() == -1){
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('랭킹 업데이트 실패')");
+					script.println("history.back()");
+					script.println("</script>");
+				}
+				
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('성공적으로 업데이트 되었습니다.')");

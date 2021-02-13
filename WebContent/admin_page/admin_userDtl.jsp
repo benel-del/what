@@ -1,4 +1,4 @@
-<!-- 회원관리 - 회원조회 - 회원정보  -->
+<!-- 회원관리 - 회원조회 - 회원정보 상세보기  -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
@@ -33,7 +33,7 @@
 		if(user == null || available == -1){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("alert('유효하지 않은 계정입니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		} else{
@@ -89,7 +89,7 @@
 	       				
 	       				<tr>
 	       					<th class="table_th1">내 소개</th>
-	       					<td class="table_th2"><%if(userInfo.getUserDescription() != null) %><%=userInfo.getUserDescription() %></td>
+	       					<td class="table_th2" style="min-height: 100px"><%if(userInfo.getUserDescription() != null) %><%=userInfo.getUserDescription() %></td>
 	       				</tr>
 	       				
 	       				<tr>
@@ -129,7 +129,7 @@
 	            	%>		
 	            		<a class="link" href="admin_userDelAction.jsp?userID=<%=user%>&available=0">계정삭제</a>
 	            		 | 
-	    				<a class="link" href="admin_userUpdAction.jsp?userID=<%=user%>">수정</a>
+	    				<a class="link" href="admin_userUpd.jsp?userID=<%=user%>&available=1">수정</a>
 	    			<%
 	            		}else{
 	    			%>	

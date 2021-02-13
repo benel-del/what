@@ -612,5 +612,23 @@ public class UserDAO extends DbAccess{
 		return null;
 	}
 	
+	public int admin_update(String userID, String userName, String userEmail, String userLevel, String userDescription, int userFirst, int userSecond, int userThird) {
+		String SQL = "UPDATE USER SET userName=?, userEmail=?, userLevel=?, userDescription=?, userFirst=?, userSecond=?, userThird=? WHERE userID=?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);	
+			pstmt.setString(1,  userName);
+			pstmt.setString(2,  userEmail);
+			pstmt.setString(3,  userLevel);
+			pstmt.setString(4,  userDescription);
+			pstmt.setInt(5, userFirst);
+			pstmt.setInt(6, userSecond);
+			pstmt.setInt(7, userThird);
+			pstmt.setNString(8, userID);
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 
 }

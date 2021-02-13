@@ -150,7 +150,7 @@
            	   	</form>
             	   	
             	<!-- 이전/다음 페이지 -->
-            	<div class="admin_paging">
+            	<div class="board_page-move">
             	<%
             		if(pageNumber != 1){
             	%>
