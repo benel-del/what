@@ -26,25 +26,33 @@
 		$(".board_page-move-symbol-right").hide();
 
     	var tr = $(".board_table > tbody > tr");
-    	for(var i = 0; i < tr.length; i++)
+    	/*for(var i = 0; i < tr.length; i++)
 			if(i < per*pageNumber && i >= per*(pageNumber-1))
 				$(tr.eq(i)).show();
 			else
-				$(tr.eq(i)).hide();
+				$(tr.eq(i)).hide();*/
+    	$.each(tr, function(index, item){
+    		if(index < per*pageNumber && index >= per*(pageNumber-1))
+    			$(item).show();
+    		else
+    			$(item).hide();
+    	})
+    	
     	if(tr.length > pageNumber*per)
     		$(".board_page-move-symbol-right").show();
     	if(pageNumber != 1)
     		$(".board_page-move-symbol-left").show();
     	
+    	
     	/* enter 기능 */
-    	$('#admin_search-btn').click(function(){ search();})
+    	/*$('#admin_search-btn').click(function(){ search();})
     	$('#admin_search-bar').keydown(function(key){
     		if(key.keyCode == 13)
     			search();
-    	})
+    	})*/
     	
     	/* 검색 기능 */
-    	function search() {
+    	/*function search() {
     		var option = $("#admin_search-option option:selected").val();
     		var key = $('#admin_search-bar').val();
     		var temp;
@@ -54,7 +62,7 @@
     				temp = $(".board_table > tbody > tr > td:nth-child(8n+5):contains('"+key+"')");
     			$(temp).parent().show();
     		}
-    	}
+    	}*/
     	
     	
     	/* admin_select */
