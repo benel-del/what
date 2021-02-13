@@ -301,11 +301,11 @@
             	<!-- 페이징 -->
             	<div class="board_page-move">
             		<div class="board_page-move-symbol-left">
-            			<a href="admin_bbsNotice.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="admin_bbsNotice.jsp?pageNumber=<%=pageNumber-1 %>&value=<%=value %>&option=<%=option %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
 					<div><%=pageNumber %></div>
 					<div class="board_page-move-symbol-right">
-            			<a href="admin_bbsNotice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="admin_bbsNotice.jsp?pageNumber=<%=pageNumber+1 %>&value=<%=value %>&option=<%=option %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
             	</div>
             </div>   		
