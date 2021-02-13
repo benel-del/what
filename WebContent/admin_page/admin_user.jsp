@@ -147,6 +147,7 @@
 	            		<button type="submit" formaction="admin_userDelAction.jsp?available=0">계정 삭제</button>
 	            		<button type="submit" formaction="admin_userDelAction.jsp?available=1">계정 복구</button>
 	            	</div>
+	            	<br><br>
            	   	</form>
             	   	
             	<!-- 이전/다음 페이지 -->

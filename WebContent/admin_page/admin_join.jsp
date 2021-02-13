@@ -197,6 +197,7 @@
 	    				<button type="submit" formaction="admin_joinCompleteAction.jsp?complete=2">참가신청 마감</button>
 	    				<button type="submit" formaction="admin_joinCompleteAction.jsp?complete=0">참가신청 열기</button>
 	    			</div>
+	    			<br><br>
     			</form>	
             	            	        	            	
             	<!-- 페이징 -->

@@ -175,7 +175,8 @@
 	            	<div class="admin_btn">
 	    				<button type="submit" formaction="admin_bbsDelAction.jsp?bbsType=4&available=0">글 삭제</button>
 	    				<button type="submit" formaction="admin_bbsDelAction.jsp?bbsType=4&available=1">글 복구</button>
-	    			</div> 				
+	    			</div>
+	    			<br><br>
     			</form>	
             	            	        	            	
             	<!-- 페이징 -->

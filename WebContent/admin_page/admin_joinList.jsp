@@ -183,7 +183,8 @@
 	            		<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=1">입금완료</button>
 	    				<button type="submit" formaction="admin_joinPaidAction.jsp?bbsID=<%=bbsID %>&paid=0">입금대기</button>	
 	            		<button type="submit" formaction="../join_write.jsp?bbsID=<%=bbsID %>&admin=1">참가신청</button>
-	            	</div>    
+	            	</div>
+	            	<br><br>    
             	</form>           	
             	
             	<!-- 페이징 -->
