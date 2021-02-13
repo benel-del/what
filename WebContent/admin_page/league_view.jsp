@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="frame.css">
+    <link rel="stylesheet" type="text/css" href="../frame.css">
     <title>어쩌다리그</title>
 </head>
 
@@ -34,15 +34,13 @@
 			PrintWriter script=response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 게시물입니다.')");
-			script.println("location.href='index.jsp'");
+			script.println("history.back()");
 			script.println("</script>");
 		}
 	%>
 	
-	<!-- service -->
-	<%@ include file="service.jsp" %>
 	<!-- header -->
-    <%@ include file="header.jsp" %>
+    <%@ include file="admin_header.jsp" %>
     
     <div id="wrapper">
         <section class="container">
@@ -50,8 +48,7 @@
             <div class="board_container">
             	<div class="board_row">
             	<div class="admin_btn">
-	            		<input type="button" onclick="location.href='join.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
-	            		<input type="button" value="팀원찾기" onclick="location.href='team.jsp?bbsID=<%=bbsID %>'">
+	            		<input type="button" value="출력하기">      
             		</div>
             	<%
             	

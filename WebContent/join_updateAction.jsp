@@ -38,7 +38,13 @@
 			script.println("alert('비밀번호를 입력해주세요.')");
 			script.println("history.back()");
 			script.println("</script>");
-		} else{
+		} else if(join_team.getTeamMember() == null){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('참가 멤버를 선택해주세요.')");
+			script.println("history.back()");
+			script.println("</script>");			
+		}else{
 			int bbsID = Integer.parseInt(request.getParameter("bbsID"));	
 			int teamID = Integer.parseInt(request.getParameter("teamID"));
 			int admin = Integer.parseInt(request.getParameter("admin"));

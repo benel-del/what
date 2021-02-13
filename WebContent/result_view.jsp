@@ -36,6 +36,13 @@
 			script.println("location.href='result.jsp'");
 			script.println("</script>");
 		}
+		if(new BbsDAO_result().isResult(bbsID) == -1){
+			PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('결과가 작성되지 않았습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else{
 		Bbs_result bbs_result = new BbsDAO_result().getBbs(bbsID);
 	%>
 	
@@ -116,5 +123,8 @@
 	    	</div>  
         </section>
     </div>
+    <%
+		}
+    %>
 </body>
 </html>

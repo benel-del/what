@@ -87,6 +87,7 @@ public class JoinDAO_team extends DbAccess{
 				join_team.setTeamPassword(rs.getString(4));
 				join_team.setTeamMember(rs.getString(5));
 				join_team.setTeamContent(rs.getString(6));
+				join_team.setMoneyCheck(rs.getInt(7));
 				join_team.setTeamDate(rs.getString(8));
 				join_team.setTeamLevel(rs.getInt(9));
 				return join_team;

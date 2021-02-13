@@ -53,6 +53,12 @@
     		%>
     	
             <div class="board_container">
+            	<div class="admin_btn">
+            		<input type="button" value="팀원찾기" onclick="location.href='team.jsp?bbsID=<%=bbsID %>'">
+            		<input type="button" value="참가신청" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'">
+            		<input type="button" value="대진표 확인" onclick="location.href='league_view.jsp?bbsID=<%=bbsID %>'">
+            	</div>
+            
             	<div class="board_row">
             	<%
             		if(new BbsDAO_notice().isComplete(bbsID) == 0){

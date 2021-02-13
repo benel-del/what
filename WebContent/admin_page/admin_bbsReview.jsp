@@ -27,8 +27,6 @@
     			$(".board_table > tbody > tr").hide();
     			if(option == "title")
     				temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
-    			else if(option == "writer")
-    				temp = $(".board_table > tbody > tr > td:nth-child(7n+6):contains('"+key+"')");
     			$(temp).parent().show();
     		}
     	}
@@ -114,7 +112,6 @@
 	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">	    			
 	    			<select id="admin_search-option">
 	    				<option value="title">제목</option>
-	    				<option value="writer">작성자</option>
 	    			</select>
 	    		</div>
 	    		

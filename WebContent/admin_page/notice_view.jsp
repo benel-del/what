@@ -94,13 +94,18 @@
             		
             	<%
             		if(bbs_notice.getBbsType().equals("모임공지") == true){
-            			out.println("<div id=\"notice_btn-primary\">");
-                		out.println("<a href=\"result_view.jsp?bbsID=" + bbsID + "\" class=\"link\">결과보기</a>");
-                		out.println(" | ");
-                		out.println("<a href=\"review_view.jsp?bbsID=" + bbsID + "\" class=\"link\">후기보기</a>");
-                		out.println("</div>");
-            		} 
+            			if(bbs_notice.getBbsComplete() == 1){
             	%>
+            		<div class="bbs_btn-primary">
+                		<a href="result_view.jsp?bbsID=<%=bbsID %>" class="link">결과보기</a>
+                		|
+                		<a href="review_view.jsp?bbsID=<%=bbsID %>" class="link">후기보기</a>
+                	</div>
+                <%
+            			}
+            		}
+                %>	
+                
             		
             		<div class="bbs_btn-primary">
             			<a href="admin_bbsNotice.jsp" class="link">글 목록 </a>

@@ -91,6 +91,7 @@
             		<div class="admin_btn">
 	            		<input type="button" onclick="location.href='join_write.jsp?bbsID=<%=bbsID %>'" value="참가신청">
 	            		<input type="button" onclick="location.href='join.jsp?bbsID=<%=bbsID %>'" value="참가자확인">
+            			<input type="button" value="대진표 확인" onclick="location.href='league_view.jsp?bbsID=<%=bbsID %>'">
             		</div>
             		<table class="board_table">
             			<thead>

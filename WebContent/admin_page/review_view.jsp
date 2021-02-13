@@ -30,9 +30,17 @@
 			PrintWriter script=response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 글입니다.')");
-			script.println("location.href='review.jsp'");
+			script.println("history.back()");
 			script.println("</script>");
 		}
+		if(new BbsDAO_review().isReview(bbsID) == -1){
+			PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('후기가 작성되지 않았습니다.')");
+			script.println("location.href='review_write.jsp?bbsID="+bbsID+"'");
+			script.println("</script>");
+		} else{
+		
 		Bbs_review bbs_review = new BbsDAO_review().getBbs(bbsID);
 	%>
 	
@@ -97,5 +105,8 @@
 	    	</div>  
         </section>
     </div>
+    <%
+		}
+    %>
 </body>
 </html>

@@ -42,6 +42,15 @@
 			admin = Integer.parseInt(request.getParameter("admin"));
 		}
 		Join_team join_team = new JoinDAO_team().getJoinView(bbsID, teamID);
+		
+		//입금 완료 상태에서는 참가 삭제가 불가능하다.
+		if(join_team.getMoneyCheck() == 1 && userID.equals("admin") == false){
+			PrintWriter script=response.getWriter();
+			script.println("<script>");
+			script.println("alert('참가 삭제를 할 수 없습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		} else{
 	%>
 	
 	<!-- service -->
@@ -100,5 +109,8 @@
 		</section>
 
     </div>
+    <%
+		}
+    %>
 </body>
 </html>

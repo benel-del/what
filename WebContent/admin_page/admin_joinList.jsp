@@ -109,7 +109,7 @@
 	    		</div>
 	    		
 	    		<div class="admin_btn">
-	    			<input type="button" onclick="location.href='../league_view.jsp?bbsID=<%=bbsID %>&admin=1'" value="조확인">
+	    			<input type="button" onclick="location.href='league_view.jsp?bbsID=<%=bbsID %>&admin=1'" value="조확인">
 	    			<input type="button" onclick="location.href='league.jsp?bbsID=<%=bbsID %>'" value="조편성">
 	    		</div>
     		

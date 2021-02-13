@@ -103,7 +103,7 @@
 	       				
 	       				<tr>
 	       					<th class="table_th1">건의사항</th>
-	       					<th class="table_th2"><%=join_team.getTeamContent() %></th>
+	       					<th class="table_th2" style="min-height: 200px;"><%if(join_team.getTeamContent() != null){out.print(join_team.getTeamContent());}%></th>
 	       				</tr>
 	       				
 	       				<tr>

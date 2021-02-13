@@ -5,6 +5,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="DB.BbsDAO_notice" %>
 <%@ page import="DB.BbsDAO_result" %>
+<%@ page import="DB.BbsDAO_review" %>
 <%@ page import="DB.Bbs_notice" %>
 	
 <!DOCTYPE html>
@@ -28,8 +29,6 @@
     			$(".board_table > tbody > tr").hide();
     			if(option == "title")
     				temp = $(".board_table > tbody > tr > td:nth-child(8n+5):contains('"+key+"')");
-    			else if(option == "writer")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+7):contains('"+key+"')");
     			$(temp).parent().show();
     		}
     	}
@@ -136,7 +135,6 @@
 	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">
 	    			<select id="admin_search-option">
 	    				<option value="title">제목</option>
-	    				<option value="writer">작성자</option>
 	    			</select>
 	    		</div>
 	    		
@@ -207,9 +205,16 @@
 											<input type="button" onclick="location.href='result_update.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="결과수정">
 									<%
 	            							}
+	            							if(new BbsDAO_review().isReview(list.get(i).getBbsID()) == -1){
 	            					%>
-	            						<input type="button" onclick="location.href='review_write.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="후기등록">
-	            						
+	            							<input type="button" onclick="location.href='review_write.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="후기등록">
+	            					<%
+	            							}else{
+									%>
+												<input type="button" onclick="location.href='review_update.jsp?bbsID=<%=list.get(i).getBbsID() %>'" value="후기수정">									
+									<%
+	            							}
+	            					%>	
 	            					<% 
 	            						}
 									%>
