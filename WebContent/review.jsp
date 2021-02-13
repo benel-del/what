@@ -18,19 +18,28 @@
     <link rel="stylesheet" type="text/css" href="frame.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
     <script type="text/javascript"> 
-    /* 검색 기능 */
     $(document).ready(function(){ 
-    	function search() {
-    		var key = $('#bbs_search-bar').val();
-    		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+2):contains('"+key+"')");
-    		$(temp).parent().show();
-    	}
-    	$('#bbs_search-btn').click(function(){ search();})
-    	$('#bbs_search-bar').keydown(function(key){
-    		if(key.keyCode == 13)
-    			search();
-    	})
+    	var per = 12;
+    	var pageNumber = $('#pageNumber').val();
+    	$(".board_page-move-symbol-left").hide();
+		$(".board_page-move-symbol-right").hide();
+    	
+		var tr = $(".board_table > tbody > tr");
+		$.each(tr, function(index, item){
+			if(index < per*pageNumber && index >= per*(pageNumber-1))
+				$(item).show();
+			else
+				$(item).hide();
+		})
+
+    	if(tr.length > pageNumber*per)
+    		$(".board_page-move-symbol-right").show();
+    	else
+    		$(".board_page-move-symbol-right").hide();
+    	if(pageNumber != 1)
+    		$(".board_page-move-symbol-left").show();
+    	else
+    		$(".board_page-move-symbol-left").hide();
     })
     </script>
     <title>어쩌다리그</title>
@@ -45,6 +54,10 @@
 		int pageNumber = 1; // 기본페이지
 		if(request.getParameter("pageNumber") != null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
+		String value="";
+		if(request.getParameter("value") != null){
+			value = request.getParameter("value");
 		}
 	%>
 	
@@ -62,11 +75,14 @@
             </div>
 
             <div class="board_container">
+            	<input id="pageNumber" type="hidden" value="<%=pageNumber %>">
             
          	   <!-- 검색 바 -->
-	            <div class="board_search">	            	
-   	        		<input id="bbs_search-btn" type="button" value="검색">
-   	        		<input id="bbs_search-bar" type="text" placeholder="제목을 입력해주세요" maxlength="30">
+	            <div class="board_search">	            
+	            	<form method="get" action="review.jsp">	
+	   	        		<input id="bbs_search-btn" type="button" value="검색">
+	   	        		<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" value="<%if(!value.equals("")) %><%=value %>" maxlength="30">
+	            	</form>
 	            </div>  
 	            
             	<div class="board_row">
@@ -82,7 +98,9 @@
             			<tbody>
             				<%
             					BbsDAO_review BbsDAO_review = new BbsDAO_review();
-            					ArrayList<Bbs_review> list = BbsDAO_review.getList(pageNumber);
+	            				ArrayList<Bbs_review> list;
+	        					if(value.equals(""))	list = BbsDAO_review.getList();
+	        					else	list = BbsDAO_review.getList(value);
             					for(int i=0; i<list.size(); i++){
             				%>          				
             				<tr class="board_tr">
@@ -103,22 +121,12 @@
             	
             	
             	<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="review.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="review.jsp?pageNumber=<%=pageNumber-1 %>&value=<%=value %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
-				<% 
-					}
-            		if(BbsDAO_review.nextPage("bbs_review", pageNumber+1)){
-				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="review.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="review.jsp?pageNumber=<%=pageNumber+1 %>&value=<%=value %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
-            	<%
-            		}
-            	%>
             	</div>
             	
      			 

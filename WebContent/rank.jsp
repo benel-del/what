@@ -81,10 +81,10 @@
 		        	<form method="get" action="rank.jsp">       	
 		   	        	<input id="bbs_search-btn" type="button" value="검색">
 		   	        	<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" value="<%if(!value.equals("")) %><%=value %>" maxlength="30">
-			        	<select id="bbs_search-option">
-	    	        		<option value='name' <%if(option.equals("name")) %>checked>이름</option>
-	    	        		<option value='level' <%if(option.equals("level")) %>checked>부수</option>
-	    	        		<option value='id' <%if(option.equals("id")) %>checked>아이디</option>
+			        	<select id="bbs_search-option" name="option">
+	    	        		<option value='name' <%if(option.equals("name")){ %>selected<%} %>>이름</option>
+	    	        		<option value='level' <%if(option.equals("level")){ %>selected<%} %>>부수</option>
+	    	        		<option value='id' <%if(option.equals("id")){ %>selected<%} %>>아이디</option>
 	    	        	</select>
 	    	        </form>
 		        </div>	

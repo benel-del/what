@@ -97,7 +97,7 @@
             				<%
             					BbsDAO_result BbsDAO_result = new BbsDAO_result();
             					ArrayList<Bbs_result> list;
-            					if(value.equlas(""))	list = BbsDAO_result.getList();
+            					if(value.equals(""))	list = BbsDAO_result.getList();
             					else	list = BbsDAO_result.getList(value);
             					for(int i=0; i<list.size(); i++){
             				%>          				
