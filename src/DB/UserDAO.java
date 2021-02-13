@@ -369,7 +369,7 @@ public class UserDAO extends DbAccess{
 	/* getUserList(랭크순 + 이름순) - rank.jsp */
 	public ArrayList<User> getUserlist(){
 		ArrayList<User> list = new ArrayList<User>();
-		String SQL = "SELECT * FROM user WHERE userAvailable = 1 ORDER BY userRank ASC, userLevel DESC, userName ASC;";
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 AND userID != 'admin' ORDER BY userRank ASC, userLevel DESC, userName ASC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();		
@@ -398,7 +398,7 @@ public class UserDAO extends DbAccess{
 	
 	public ArrayList<User> getUserlist(String option, String value){
 		ArrayList<User> list = new ArrayList<User>();
-		String SQL = "SELECT * FROM user WHERE userAvailable = 1 AND "+option+" LIKE '%"+value+"%' ORDER BY userRank ASC, userLevel DESC, userName ASC;";
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 AND userID != 'admin' AND "+option+" LIKE '%"+value+"%' ORDER BY userRank ASC, userLevel DESC, userName ASC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();		

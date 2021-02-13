@@ -59,7 +59,7 @@
 		}
 		String option="";
 		if(request.getParameter("option") != null){
-			value = request.getParameter("option");
+			option = request.getParameter("option");
 		}
 	%>
 	
@@ -110,19 +110,17 @@
         			if(value.equals(""))	list = UserDAO.getUserlist();
         			else	list = UserDAO.getUserlist(option, value);
             		for(int i=0; i<list.size(); i++){
-            			if(list.get(i).getUserID().equals("admin") == false){
             	%>
-            				<tr class="board_tr" id="notice_nonfix">
-            					<td><%=list.get(i).getUserRank() %></td>
-            					<td><%=list.get(i).getUserName() %></td>
-            					<td><%=list.get(i).getUserLevel() %></td>		
-            					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
-            					<td><%=list.get(i).getUserFirst() %></td>
-            					<td><%=list.get(i).getUserSecond() %></td>
-            					<td><%=list.get(i).getUserThird() %></td>
-            				</tr>   				
+           				<tr class="board_tr" id="notice_nonfix">
+           					<td><%=list.get(i).getUserRank() %></td>
+           					<td><%=list.get(i).getUserName() %></td>
+           					<td><%=list.get(i).getUserLevel() %></td>		
+           					<td><a class = "link" href = "show_userInfo.jsp?userID=<%=list.get(i).getUserID()%>"><%=list.get(i).getUserID() %></a></td>           
+           					<td><%=list.get(i).getUserFirst() %></td>
+           					<td><%=list.get(i).getUserSecond() %></td>
+           					<td><%=list.get(i).getUserThird() %></td>
+           				</tr>   				
 				<%
-            			}
 					}
 				%>
             			</tbody>
@@ -131,22 +129,12 @@
             	            	
             	<!-- 이전/다음 페이지 -->
  				<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
             		<div class="board_page-move-symbol-left">
             			<a href="rank.jsp?pageNumber=<%=pageNumber-1%>&option=<%=option %>&value=<%=value %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
-				<% 
-					}
-            		if(pageNumber < UserDAO.NumOfUser() / 13 + 1){
-				%>
 					<div class="board_page-move-symbol-right">
             			<a href="rank.jsp?pageNumber=<%=pageNumber+1 %>&option=<%=option %>&value=<%=value %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
-            	<%
-            		}
-            	%>
             	</div>            
 	    	</div>  
         </section>
