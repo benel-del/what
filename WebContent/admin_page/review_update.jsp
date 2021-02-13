@@ -68,7 +68,7 @@
 	            				<td>
 	            					<div class="write_subtitle">
 			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs_review.getBbsTitle() %>">
+			            					<input type="text" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs_review.getBbsTitle() %>">
 			            				</div>
 	            					</div>
 								</td>
@@ -76,7 +76,7 @@
             				<tr>
             					<td>
             						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_review.getBbsContent() %></textarea>
+            							<textarea placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_review.getBbsContent() %></textarea>
             						</div>
             					</td>
  							</tr>
@@ -84,7 +84,7 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName1">
+            								파일명 : <input type="file" name="fileName1">
             							</div>
             						</div>            						
             					</td>
@@ -93,7 +93,7 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName2">
+            								파일명 : <input type="file" name="fileName2">
             							</div>
             						</div>            						
             					</td>
@@ -101,7 +101,7 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName3">
+            								파일명 : <input type="file" name="fileName3">
             							</div>
             						</div>            						
             					</td>
@@ -109,7 +109,7 @@
             					<td>
             						<div class="write_subtitle">
        		  							<div class="bbsTitle">            							
-            								파일명 : <input type="file" id="bbs_title" name="fileName4">
+            								파일명 : <input type="file" name="fileName4">
             							</div>
             						</div>            						
             					</td>

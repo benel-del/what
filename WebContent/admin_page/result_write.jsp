@@ -149,8 +149,8 @@
             				</tr>
             				<tr>	
             					<td>
-            						<div class="bbs_Result">
-            							<input type="text" id="bbs_content" name="bbsContent" maxlength="2048" value="모두 수고하셨습니다!">	
+            						<div class="bbsContent">
+            							<textarea name="bbsContent" maxlength="2048">모두 수고하셨습니다!</textarea>	
             						</div>
             					</td>
             				</tr>

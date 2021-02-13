@@ -24,7 +24,7 @@
    	 
    	 /* 일반공지일 때는 join_input 입력 필요없음 - 안보이게 하기 */
    	 function changeSelect(){
-		var sel = document.getElementById("bbsType");
+		var sel = document.getElementById("bbs_type");
 		var selVal = sel.options[sel.selectedIndex].value;
 		if(selVal == '모임공지'){
 			$("#join_input").show();
@@ -66,24 +66,24 @@
             			</thead>
             			
             			<%
-            			int selected = 0;
-            			int fixNumber = new BbsDAO_notice().fixNumber();
+	            			int selected = 0;
+	            			int fixNumber = new BbsDAO_notice().fixNumber();
             			%>
             			<tbody>
             				<tr>
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if (fixNumber >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=fixNumber%>/10)  			            					
+			            					<input type="checkbox" name="bbsFix" value=1 <% if (fixNumber >= 10) out.print("disabled=false"); %>/> 중요공지 (<%=fixNumber%>/10)  			            					
 		            					</div>
 			            				<div class="bbsType">
-			            					<select id = "bbsType" name="bbsType" onchange = "changeSelect()">
+			            					<select id = "bbs_type" name="bbsType" onchange = "changeSelect()">
 				  								<option value='일반공지'>일반공지</option>
 				  								<option value='모임공지' selected>모임공지</option>
 											</select>
 			            				</div>
 			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50">
+			            					<input type="text" placeholder="글 제목" name="bbsTitle" maxlength="50">
 			            				</div>	
 	            					</div>
 								</td>
@@ -105,7 +105,7 @@
             				<tr>
             					<td>
             						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
+            							<textarea placeholder="글 내용" name="bbsContent" maxlength="2048"></textarea>
             						</div>
             					</td>
             				</tr>

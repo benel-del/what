@@ -24,7 +24,7 @@
    	
    	 /* 글 수정 화면 로딩 시 */
    	 window.onload = function(){
-		var sel = document.getElementById("bbsType");
+		var sel = document.getElementById("bbs_type");
 		var selVal = sel.options[sel.selectedIndex].value;
 		if(selVal == '모임공지'){
 			$("#join_input").show();
@@ -35,7 +35,7 @@
    	 
    	 /* 일반공지일 때는 join_input 입력 필요없음 - 안보이게 하기 */
    	function changeSelect(){
-		var sel = document.getElementById("bbsType");
+		var sel = document.getElementById("bbs_type");
 		var selVal = sel.options[sel.selectedIndex].value;
 		if(selVal == '모임공지'){
 			$("#join_input").show();
@@ -101,17 +101,17 @@
 	            				<td>
 	            					<div class="write_subtitle">
 	            						<div class="bbsFix">
-			            					<input type="checkbox" id="bbs_fix" name="bbsFix" value=1 <% if(bbs_notice.getBbsFix() == 1) out.print("checked"); else if (fixNumber >= 10) out.print("disabled=false"); %>/> 중요공지(<%=fixNumber%>/10)
-			            					<input type="checkbox" id="bbs_fix" name="bbsComplete" value=1 <% if(bbs_notice.getBbsComplete() == 1) out.print("checked"); %>/> 완료 
+			            					<input type="checkbox" name="bbsFix" value=1 <% if(bbs_notice.getBbsFix() == 1) out.print("checked"); else if (fixNumber >= 10) out.print("disabled=false"); %>/> 중요공지(<%=fixNumber%>/10)
+			            					<input type="checkbox" name="bbsComplete" value=1 <% if(bbs_notice.getBbsComplete() == 1) out.print("checked"); %>/> 완료 
 		            					</div>
 			            				<div class="bbsType">
-			            					<select name="bbsType" id="bbsType" onchange = "changeSelect()">
+			            					<select name="bbsType" id="bbs_type" onchange = "changeSelect()">
 				  								<option value='일반공지' <%if(bbs_notice.getBbsType().equals("일반공지") == true) out.print("selected"); %>>일반공지</option>
 				  								<option value='모임공지' <%if(bbs_notice.getBbsType().equals("모임공지") == true) out.print("selected"); %>>모임공지</option>
 											</select>
 			            				</div>
 			            				<div class="bbsTitle">
-			            					<input type="text"  id="bbs_title" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs_notice.getBbsTitle() %>">
+			            					<input type="text" placeholder="글 제목" name="bbsTitle" maxlength="50" value="<%=bbs_notice.getBbsTitle() %>">
 			            				</div>
 	            					</div>
 								</td>
@@ -133,7 +133,7 @@
             				<tr>
             					<td>
             						<div class="bbsContent">
-            							<textarea id="bbs_content" placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_notice.getBbsContent() %></textarea>
+            							<textarea placeholder="글 내용" name="bbsContent" maxlength="2048"><%=bbs_notice.getBbsContent() %></textarea>
             						</div>
             					</td>
             				</tr>

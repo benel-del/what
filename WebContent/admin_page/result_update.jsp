@@ -158,7 +158,7 @@
             				</tr>
             				<tr>
             					<td>
-            						<div class="bbs_Result">
+            						<div class="bbsContent">
             							<textarea id="bbs_content" placeholder="기타" name="bbsContent" maxlength="2048"><% if(bbs_result.getBbsContent() != null){out.println(bbs_result.getBbsContent());} else {out.println("");}%></textarea>	
             						</div>
             					</td>

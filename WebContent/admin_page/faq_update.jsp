@@ -60,14 +60,14 @@
 	            				<tr>
 		            				<td>
 				            			<div class="bbsContent" style="height:100px;">
-				            				<textarea id="bbs_content" placeholder="질문" name="bbsTitle" maxlength="2048" ><%=bbs_faq.getBbsTitle() %></textarea>
+				            				<textarea placeholder="질문" name="bbsTitle" maxlength="2048" ><%=bbs_faq.getBbsTitle() %></textarea>
 				            			</div>	
 									</td>
 	            				</tr>
 	            				<tr>
 	            					<td>
 	            						<div class="bbsContent">
-	            							<textarea id="bbs_content" placeholder="답변" name="bbsContent" maxlength="2048" style="min-height: 300px"><%=bbs_faq.getBbsContent() %></textarea>
+	            							<textarea placeholder="답변" name="bbsContent" maxlength="2048" style="min-height: 300px"><%=bbs_faq.getBbsContent() %></textarea>
 	            						</div>
 	            					</td>
 	            				</tr>
