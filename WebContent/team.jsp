@@ -23,6 +23,7 @@
         	$(".board_table > tbody > tr").hide();
     		if(key != ""){
     			var temp;
+    			
     			if(key != "null")
     				temp = $(".board_table > tbody > tr > td:nth-child(5n+3):contains('"+key+"')");
     			else
@@ -112,7 +113,7 @@
 		            		<tr class="board_tr" id="notice_nonfix">
 		            			<td><%=user.getUserName() %></td>
 		            			<td><%=user.getUserGender() %></td>
-								<td><%=user.getUserLevel() %></td>
+								<td id=""><%=user.getUserLevel() %></td>
 		            			<td><a class = "link" href = "show_userInfo.jsp?userID=<%=user.getUserID()%>"><%=user.getUserID() %></a></td>
             					<td>
             					<%

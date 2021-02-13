@@ -233,4 +233,16 @@ public class JoinDAO_team extends DbAccess{
 		}
 		return list;
 	}
+	
+	public int check_pwLimit(String pw) {
+		if(pw.length() != 4)
+			return -1;
+		
+		for(int i=0; i<4 ; i++) {
+			if(pw.charAt(i) > '9' || pw.charAt(i) < '0') {
+				return -1;
+			}
+		}
+		return 0;
+	}
 }

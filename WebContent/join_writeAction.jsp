@@ -43,6 +43,12 @@
 			script.println("alert('참가 멤버를 선택해주세요.')");
 			script.println("history.back()");
 			script.println("</script>");	
+		} else if(new JoinDAO_team().check_pwLimit(join_team.getTeamPassword()) == -1){
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('비밀번호는 숫자로 4자리 입력해주세요.')");
+			script.println("history.back()");
+			script.println("</script>");	
 		} else{
 			int bbsID=Integer.parseInt(request.getParameter("bbsID"));
 			int admin=Integer.parseInt(request.getParameter("admin"));

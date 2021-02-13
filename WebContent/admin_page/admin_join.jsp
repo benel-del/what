@@ -63,6 +63,25 @@
     		$(temp).parent().show();
     	});
     	
+    	/* 전체선택 및 전체해제 */
+    	$("#chk_all").click(function(){
+    		if($("#chk_all").prop("checked")){
+    			$(".chk").prop("checked", true);
+    		}
+    		else{
+    			$(".chk").prop("checked", false);
+    		}
+    	});
+    	
+    	/* 한개라도 선택 해제 시 전체선택 체크박스도 해제 */
+    	$(".chk").click(function(){
+    		if($("input[name='bbsID']:checked").length == $("input[name='bbsID']").length ){
+    			$("#chk_all").prop("checked", true);	    			
+    		} else{
+    			$("#chk_all").prop("checked", false);
+    		}
+    	});
+    	
     });
     </script>
     <title>어쩌다리그 - 관리자페이지</title>
@@ -125,6 +144,11 @@
 	    			|
 	    			<a href="#" id="inactive">삭제</a>
 	    		</div>
+	    		
+	    		<div class="select_all">
+	    			전체선택
+	    			<input type="checkbox" class="chk" id="chk_all">
+	    		</div>	
     		
     			<form method="post" action="admin_joinCompleteAction.jsp"> 			
 	            	<div class="board_row">
@@ -151,7 +175,7 @@
 	            			%>	
 	            				<tr class="board_tr">
 	            					<td>
-										<input type="checkbox" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
+										<input type="checkbox" class="chk" name="bbsID" id="bbsID" value="<%=list.get(i).getBbsID()%>">
 	            					</td>
 	            					<td><%=list.get(i).getBbsID() %></td>
 	            					<td>

@@ -53,6 +53,25 @@
     		$(temp).parent().show();
     	});
     	
+    	/* 전체선택 및 전체해제 */
+    	$("#chk_all").click(function(){
+    		if($("#chk_all").prop("checked")){
+    			$(".chk").prop("checked", true);
+    		}
+    		else{
+    			$(".chk").prop("checked", false);
+    		}
+    	});
+    	
+    	/* 한개라도 선택 해제 시 전체선택 체크박스도 해제 */
+    	$(".chk").click(function(){
+    		if($("input[name='moneyCheck']:checked").length == $("input[name='moneyCheck']").length ){
+    			$("#chk_all").prop("checked", true);	    			
+    		} else{
+    			$("#chk_all").prop("checked", false);
+    		}
+    	}); 
+    	
     });
     </script>
     <title>어쩌다리그 - 관리자페이지</title>
@@ -75,6 +94,8 @@
 			script.println("history.back()");
 			script.println("</script>");
 		}
+		
+		
 	%>
 	
 	<!-- header -->
@@ -108,6 +129,11 @@
 	    			<a href="#" id="unpaid">입금대기</a>
 	    		</div>
 	    		
+	    		<div class="select_all">
+	    			전체선택
+	    			<input type="checkbox" class="chk" id="chk_all">
+	    		</div>	
+	    		
 	    		<div class="admin_btn">
 	    			<input type="button" onclick="location.href='league_view.jsp?bbsID=<%=bbsID %>&admin=1'" value="조확인">
 	    			<input type="button" onclick="location.href='league.jsp?bbsID=<%=bbsID %>'" value="조편성">
@@ -136,7 +162,7 @@
 	            			%>	
 	            				<tr class="board_tr">
 	            					<td>    
-										<input type="checkbox" name="moneyCheck" id="moneyCheck" value="<%=join_team.getTeamID()%>">
+										<input type="checkbox" class="chk" name="moneyCheck" id="moneyCheck" value="<%=join_team.getTeamID()%>">
 	            						
 	            					</td>
 	            					<td><%=join_team.getTeamID() %></td>

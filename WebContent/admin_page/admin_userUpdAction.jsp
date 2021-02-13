@@ -72,7 +72,7 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('회원정보 업데이트를 성공하였습니다.')");
-			script.println("location.href = 'admin_user.jsp'");
+			script.println("location.href = 'admin_userDtl.jsp?user="+update_userID+"&available=1'");
 			script.println("</script>");
 		}			
 	

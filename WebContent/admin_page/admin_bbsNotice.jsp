@@ -75,6 +75,24 @@
     		}
     	});
     	
+    	/* 전체선택 및 전체해제 */
+    	$("#chk_all").click(function(){
+    		if($("#chk_all").prop("checked")){
+    			$(".chk").prop("checked", true);
+    		}
+    		else{
+    			$(".chk").prop("checked", false);
+    		}
+    	});
+    	
+    	/* 한개라도 선택 해제 시 전체선택 체크박스도 해제 */
+    	$(".chk").click(function(){
+    		if($("input[name='bbsID']:checked").length == $("input[name='bbsID']").length ){
+    			$("#chk_all").prop("checked", true);	    			
+    		} else{
+    			$("#chk_all").prop("checked", false);
+    		}
+    	});
     });
     </script>
     
@@ -149,7 +167,12 @@
 	    			<a href="#" id="notice1">일반</a>
 	    			| 
 	    			<a href="#" id="notice2">모임</a>
-	    		</div>	  		
+	    		</div>	
+	    		
+	    		<div class="select_all">
+					전체선택
+					<input type="checkbox" class="chk" id="chk_all">
+				</div>  		
     		  		    		   		
     			<div class="admin_btn">
     		   	 	<input type="button" value="글 등록" onclick="location.href='notice_write.jsp'"> 		
@@ -179,7 +202,7 @@
 	            				
 	            				<tr class="board_tr" <%if(list.get(i).getBbsFix()==1){out.print("id='notice_fix'");} %>">
 	            					<td>
-										<input type="checkbox" name="bbsID" id="bbsID<%=list.get(i).getBbsID()%>" value="<%=list.get(i).getBbsID()%>">
+										<input type="checkbox" class="chk" name="bbsID" id="bbsID<%=list.get(i).getBbsID()%>" value="<%=list.get(i).getBbsID()%>">
 	            					</td>
 	            					<td><%=list.get(i).getBbsID() %></td>
 	            					<td>
