@@ -19,22 +19,36 @@
     <script type="text/javascript"> 
     /* 검색 기능 */
     $(document).ready(function(){ 
-    	function search() {
-    		var key = $('#bbs_search-bar').val();
-    		$(".board_table > tbody > tr").hide();
-    		//$(".board_page-move-symbol-left").hide();
-    		//$(".board_page-move-symbol-right").hide();
-    		var temp;
-    		temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
-    		$(temp).parent().show();
-    	}
-		
+    	var per = 10;
+    	var pageNumber = $('#pageNumber').val();
+    	$(".board_page-move-symbol-left").hide();
+		$(".board_page-move-symbol-right").hide();
+
+    	var tr = $(".board_table > tbody > tr");
+    	for(var i = 0; i < tr.length; i++)
+			if(i < per*pageNumber && i >= per*(pageNumber-1))
+				$(tr.eq(i)).show();
+			else
+				$(tr.eq(i)).hide();
+    	if(tr.length > pageNumber*per)
+    		$(".board_page-move-symbol-right").show();
+    	if(pageNumber != 1)
+    		$(".board_page-move-symbol-left").show();
 		/* enter 기능 */
     	$('#bbs_search-btn').click(function(){ search();})
     	$('#bbs_search-bar').keydown(function(key){
     		if(key.keyCode == 13)
     			search();
     	})
+    	
+    	function search() {
+    		var key = $('#bbs_search-bar').val();
+    		$(".board_table > tbody > tr").hide();
+    		
+    		var temp;
+    		temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
+    		
+    	}
     })
     </script>
     <title>어쩌다리그</title>
@@ -46,10 +60,7 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		int pageNumber = 1;
-		if(request.getParameter("pageNumber") != null){
-			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-		}
+		
 		/* 게시판 업데이트!
 		* '모임공지'이면서 날짜가 이미 지난 모임일 경우, bbsComplete를 1(완료)로 자동으로 update시킨다.
 		*/
@@ -77,7 +88,13 @@
             </div>
 
             <div class="board_container">
-            
+            <%
+    		int pageNumber = 1;
+    		if(request.getParameter("pageNumber") != null){
+    			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+    		}
+    		%>
+            <input id="pageNumber" type="text" value="<%=pageNumber%>">
             	<!-- 검색 바 -->
 	            <div class="board_search">	            	
    	        		<input id="bbs_search-btn" type="button" value="검색">
@@ -98,7 +115,7 @@
             			</thead>
             			<tbody>
             				<%
-            					ArrayList<Bbs_notice> list = BbsDAO_notice.getList(pageNumber);
+            					ArrayList<Bbs_notice> list = BbsDAO_notice.getList();
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 1){
             				%>          				
@@ -178,22 +195,12 @@
             	            	
             	<!-- 이전/다음 페이지 -->
             	<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
             		<div class="board_page-move-symbol-left">
             			<a href="notice.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
-				<% 
-					}
-            		if(BbsDAO_notice.nextPage("bbs_notice", pageNumber+1)){
-				%>
 					<div class="board_page-move-symbol-right">
             			<a href="notice.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
-            	<%
-            		}
-            	%>
             	</div>
             	
      			 

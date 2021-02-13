@@ -188,12 +188,12 @@ public class BbsDAO_notice extends DbAccess{
 	}
 	
 	/* notice.jsp에서 출력할 게시물 목록에 대한 정보 */
-	public ArrayList<Bbs_notice> getList(int pageNumber){
-		String SQL = "SELECT * FROM bbs_notice WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC LIMIT ?, 12;";
+	public ArrayList<Bbs_notice> getList(){
+		String SQL = "SELECT * FROM bbs_notice WHERE bbsAvailable = 1 ORDER BY bbsFix DESC, bbsID DESC;";
 		ArrayList<Bbs_notice> list = new ArrayList<Bbs_notice>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber-1) * 12);
+			//pstmt.setInt(1,  (pageNumber-1) * 12);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_notice bbs_notice = new Bbs_notice();
