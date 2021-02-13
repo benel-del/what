@@ -18,23 +18,30 @@
  
     <script type="text/javascript"> 
     $(document).ready(function(){ 
-    	/* 검색 기능 */
-    	function search() {
-    		var option = $("#admin_search-option option:selected").val();
-    		var key = $('#admin_search-bar').val();
-    		var temp;
-    		if(key != ""){
-    			$(".board_table > tbody > tr").hide();
-    			if(option == "title")
-    				temp = $(".board_table > tbody > tr > td:nth-child(7n+4):contains('"+key+"')");
-    			$(temp).parent().show();
-    		}
+    	var per = 12;
+    	var pageNumber = $('#pageNumber').val();
+    	$(".board_page-move-symbol-left").hide();
+		$(".board_page-move-symbol-right").hide();
+		
+		paging($(".board_table > tbody > tr"));
+		
+    	function paging(tr){
+	    	$.each(tr, function(index, item){
+	    		if(index < per*pageNumber && index >= per*(pageNumber-1))
+	    			$(item).show();
+	    		else
+	    			$(item).hide();
+	    	})
+	    	
+	    	if(tr.length > pageNumber*per)
+	    		$(".board_page-move-symbol-right").show();
+	    	else
+	    		$(".board_page-move-symbol-right").hide();
+	    	if(pageNumber != 1)
+	    		$(".board_page-move-symbol-left").show();
+	    	else
+	    		$(".board_page-move-symbol-left").hide();
     	}
-    	$('#admin_search-btn').click(function(){ search();})
-    	$('#admin_search-bar').keydown(function(key){
-    		if(key.keyCode == 13)
-    			search();
-    	});
     	
     	/* admin_select */
     	$('#all').click(function(){
@@ -99,6 +106,23 @@
 		if(request.getParameter("pageNumber") != null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		}
+
+		String option = "";
+		if(request.getParameter("option") != null){
+			option = request.getParameter("option");
+		}
+		String value="";
+		if(request.getParameter("value") != null){
+			value = request.getParameter("value");
+		}
+		
+		BbsDAO_result bbsDAO_result = new BbsDAO_result();
+		ArrayList<Bbs_result> list = bbsDAO_result.getResult();
+
+		if(value.equals("")==false){
+			//검색어가 있는 경우
+			list = bbsDAO_result.getResult(option, value);
+		}
 	%>
 	
 	<!-- header -->
@@ -125,13 +149,17 @@
 	    		</div>  
 	    		<br>
 	    		
+	    		<input type="hidden" id="pageNumber" value="<%=pageNumber %>">
+	    		
     			<!-- 검색바 -->
 	    		<div class="board_search">
-	    			<input type="button" id="admin_search-btn" value="검색">
-	    			<input type="text" id="admin_search-bar" placeholder="검색어 입력">	    			
-	    			<select id="admin_search-option">
-	    				<option value="title">제목</option>
-	    			</select>
+	    			<form method="get" action="admin_bbsResult.jsp">
+		    			<input type="submit" id="admin_search-btn" value="검색">
+		    			<input type="text" id="admin_search-bar" name="value" placeholder="검색어 입력">	    			
+		    			<select id="admin_search-option" name="option">
+		    				<option value="bbsTitle">제목</option>
+		    			</select>
+	    			</form>
 	    		</div>
 	    		
 	    		 <!-- 게시물 정렬 옵션 -->	
@@ -169,8 +197,6 @@
 	            			</thead>
 	            			<tbody>   			
 	            			<%
-	            				BbsDAO_result bbsDAO_result = new BbsDAO_result();
-	            				ArrayList<Bbs_result> list = bbsDAO_result.getResult(pageNumber);
 	            				for(int i=0; i<list.size(); i++){
 	            			%>
 	            				
@@ -209,22 +235,12 @@
             	            	        	            	
             	<!-- 페이징 -->
             	<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="admin_bbsResult.jsp?pageNumber=<%=pageNumber-1 %>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="admin_bbsResult.jsp?pageNumber=<%=pageNumber-1 %>&value=<%=value %>&option=<%=option %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
-				<% 
-					}
-            		if(new BbsDAO_result().admin_nextPage("bbs_result", pageNumber+1)){
-				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="admin_bbsResult.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="admin_bbsResult.jsp?pageNumber=<%=pageNumber+1 %>&value=<%=value %>&option=<%=option %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
-            	<%
-            		}
-            	%>
             	</div>
             </div>   		
     	</section>

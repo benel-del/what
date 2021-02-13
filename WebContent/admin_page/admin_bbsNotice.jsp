@@ -20,50 +20,30 @@
  
     <script type="text/javascript"> 
     $(document).ready(function(){ 
-    	var per = 10;
+    	var per = 12;
     	var pageNumber = $('#pageNumber').val();
     	$(".board_page-move-symbol-left").hide();
 		$(".board_page-move-symbol-right").hide();
-
-    	var tr = $(".board_table > tbody > tr");
-    	/*for(var i = 0; i < tr.length; i++)
-			if(i < per*pageNumber && i >= per*(pageNumber-1))
-				$(tr.eq(i)).show();
-			else
-				$(tr.eq(i)).hide();*/
-    	$.each(tr, function(index, item){
-    		if(index < per*pageNumber && index >= per*(pageNumber-1))
-    			$(item).show();
-    		else
-    			$(item).hide();
-    	})
-    	
-    	if(tr.length > pageNumber*per)
-    		$(".board_page-move-symbol-right").show();
-    	if(pageNumber != 1)
-    		$(".board_page-move-symbol-left").show();
-    	
-    	
-    	/* enter 기능 */
-    	/*$('#admin_search-btn').click(function(){ search();})
-    	$('#admin_search-bar').keydown(function(key){
-    		if(key.keyCode == 13)
-    			search();
-    	})*/
-    	
-    	/* 검색 기능 */
-    	/*function search() {
-    		var option = $("#admin_search-option option:selected").val();
-    		var key = $('#admin_search-bar').val();
-    		var temp;
-    		if(key != ""){
-    			$(".board_table > tbody > tr").hide();
-    			if(option == "title")
-    				temp = $(".board_table > tbody > tr > td:nth-child(8n+5):contains('"+key+"')");
-    			$(temp).parent().show();
-    		}
-    	}*/
-    	
+		
+		paging($(".board_table > tbody > tr"));
+		
+    	function paging(tr){
+	    	$.each(tr, function(index, item){
+	    		if(index < per*pageNumber && index >= per*(pageNumber-1))
+	    			$(item).show();
+	    		else
+	    			$(item).hide();
+	    	})
+	    	
+	    	if(tr.length > pageNumber*per)
+	    		$(".board_page-move-symbol-right").show();
+	    	else
+	    		$(".board_page-move-symbol-right").hide();
+	    	if(pageNumber != 1)
+	    		$(".board_page-move-symbol-left").show();
+	    	else
+	    		$(".board_page-move-symbol-left").hide();
+    	}
     	
     	/* admin_select */
     	$('#all').click(function(){
@@ -226,7 +206,7 @@
     		   	 	<input type="button" value="글 등록" onclick="location.href='notice_write.jsp'"> 		
     			</div>
     			
-    			<form method="post" action="admin_bbsDel.jsp?bbsType='공지'"> 			
+    			<form method="get" action="admin_bbsDel.jsp?bbsType='공지'"> 			
             		<div class="board_row">
             			<table class="board_table">
 	            			<thead>

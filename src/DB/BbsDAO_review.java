@@ -94,12 +94,33 @@ public class BbsDAO_review extends DbAccess{
 	}			
 	
 	/* 관리자 페이지 - 후기 게시판 목록 불러오기 */
-	public ArrayList<Bbs_review> getReview(int pageNumber){
-		String SQL="SELECT * FROM bbs_review ORDER BY bbsID DESC LIMIT ?, 12;";
+	public ArrayList<Bbs_review> getReview(){
+		String SQL="SELECT * FROM bbs_review ORDER BY bbsID DESC;";
 		ArrayList<Bbs_review> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_review bbs_review = new Bbs_review();
+				bbs_review.setBbsID(rs.getInt(1));
+				bbs_review.setBbsTitle(rs.getString(2));
+				bbs_review.setWriter(rs.getString(3));
+				bbs_review.setBbsDate(rs.getString(4));
+				bbs_review.setBbsAvailable(rs.getInt(6));
+				
+				list.add(bbs_review);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_review> getReview(String option, String value){
+		String SQL="SELECT * FROM bbs_review WHERE "+option+" LIKE '%"+value+"%' ORDER BY bbsID DESC;";
+		ArrayList<Bbs_review> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_review bbs_review = new Bbs_review();

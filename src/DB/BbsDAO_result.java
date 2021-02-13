@@ -116,12 +116,34 @@ public class BbsDAO_result extends DbAccess{
 	}
 	
 	/* 관리자 페이지 - 결과 게시판 목록 불러오기 */
-	public ArrayList<Bbs_result> getResult(int pageNumber){
-		String SQL="SELECT * FROM bbs_result ORDER BY bbsID DESC LIMIT ?, 12;";
+	public ArrayList<Bbs_result> getResult(){
+		String SQL="SELECT * FROM bbs_result ORDER BY bbsID DESC;";
 		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_result bbs_result = new Bbs_result();
+				bbs_result.setBbsID(rs.getInt(1));
+				bbs_result.setBbsTitle(rs.getString(2));
+				bbs_result.setWriter(rs.getString(3));
+				bbs_result.setBbsDate(rs.getString(4));
+				bbs_result.setBbsAvailable(rs.getInt(6));
+				
+				list.add(bbs_result);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_result> getResult(String option, String value){
+		String SQL="SELECT * FROM bbs_result WHERE "+option+" LIKE '%"+value+"%' ORDER BY bbsID DESC;";
+		
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_result bbs_result = new Bbs_result();

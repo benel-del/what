@@ -62,12 +62,33 @@ public class BbsDAO_faq extends DbAccess{
 	}
 	
 	/* 관리자페이지 - faq 목록 가져오기 */
-	public ArrayList<Bbs_faq> getFAQ(int pageNumber){
-		String SQL = "SELECT * FROM bbs_faq ORDER BY bbsID DESC LIMIT ?, 12;";
+	public ArrayList<Bbs_faq> getFAQ(){
+		String SQL = "SELECT * FROM bbs_faq ORDER BY bbsID DESC;";
 		ArrayList<Bbs_faq> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber-1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_faq bbs = new Bbs_faq();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setWriter(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				list.add(bbs);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_faq> getFAQ(String option, String value){
+		String SQL = "SELECT * FROM bbs_faq WHERE "+option+" LIKE '%"+value+"%' ORDER BY bbsID DESC;";
+		ArrayList<Bbs_faq> list = new ArrayList<>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_faq bbs = new Bbs_faq();
