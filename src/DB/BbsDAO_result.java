@@ -29,12 +29,32 @@ public class BbsDAO_result extends DbAccess{
 		return -1; //데이터베이스 오류
 	}
 	
-	public ArrayList<Bbs_result> getList(int pageNumber){
-		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_result WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
+	public ArrayList<Bbs_result> getList(){
+		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_result WHERE bbsAvailable = 1 ORDER BY bbsID DESC;";
 		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext("bbs_result") - (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_result bbs_result = new Bbs_result();
+				bbs_result.setBbsID(rs.getInt(1));
+				bbs_result.setBbsTitle(rs.getString(2));
+				bbs_result.setWriter(rs.getString(3));
+				bbs_result.setBbsDate(rs.getString(4));
+
+				list.add(bbs_result);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_result> getList(String value){
+		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_result WHERE bbsAvailable = 1 AND bbsTitle LIKE '%"+value+"%' ORDER BY bbsID DESC;";
+		ArrayList<Bbs_result> list = new ArrayList<Bbs_result>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_result bbs_result = new Bbs_result();

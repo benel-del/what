@@ -28,12 +28,32 @@ public class BbsDAO_review extends DbAccess{
 		}
 		return -1; //데이터베이스 오류
 	}
-	public ArrayList<Bbs_review> getList(int pageNumber){
-		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_review WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
+	
+	public ArrayList<Bbs_review> getList(){
+		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_review WHERE bbsAvailable = 1 ORDER BY bbsID DESC;";
 		ArrayList<Bbs_review> list = new ArrayList<Bbs_review>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  getNext("bbs_review") - (pageNumber - 1) * 12);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs_review bbs_review = new Bbs_review();
+				bbs_review.setBbsID(rs.getInt(1));
+				bbs_review.setBbsTitle(rs.getString(2));
+				bbs_review.setWriter(rs.getString(3));
+				bbs_review.setBbsDate(rs.getString(4));
+				list.add(bbs_review);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public ArrayList<Bbs_review> getList(String value){
+		String SQL="SELECT bbsID, bbsTitle, writer, bbsDate FROM bbs_review WHERE bbsAvailable = 1 AND bbsTitle LIKE '%"+value+"%' ORDER BY bbsID DESC;";
+		ArrayList<Bbs_review> list = new ArrayList<Bbs_review>();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Bbs_review bbs_review = new Bbs_review();

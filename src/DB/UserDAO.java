@@ -367,15 +367,12 @@ public class UserDAO extends DbAccess{
 * 랭킹게시판
 ***********************************************************************************/	
 	/* getUserList(랭크순 + 이름순) - rank.jsp */
-	public ArrayList<User> getUserlist(int pageNumber){
+	public ArrayList<User> getUserlist(){
 		ArrayList<User> list = new ArrayList<User>();
-		String SQL = "SELECT * FROM user WHERE userAvailable = 1 ORDER BY userRank ASC, userName ASC LIMIT ?, 20;";
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 ORDER BY userRank ASC, userLevel DESC, userName ASC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  (pageNumber-1) * 20+1);
-			
-			rs = pstmt.executeQuery();
-			
+			rs = pstmt.executeQuery();		
 			while(rs.next()) {
 				User user = new User();
 				user.setUserID(rs.getString(1));
@@ -392,16 +389,47 @@ public class UserDAO extends DbAccess{
 				user.setUserLogdate(rs.getString(14));
 				list.add(user);
 			}
-			} catch(Exception e) {
-				System.out.println("getUserlist fail");
-			} finally {
-			}
-			return list;
+		} catch(Exception e) {
+			System.out.println("getUserlist fail");
+		} finally {
+		}
+		return list;
 	}
+	
+	public ArrayList<User> getUserlist(String option, String value){
+		ArrayList<User> list = new ArrayList<User>();
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 AND "+option+" LIKE '%"+value+"%' ORDER BY userRank ASC, userLevel DESC, userName ASC;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();		
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(3));
+				user.setUserGender(rs.getString(4));
+				user.setUserLevel(rs.getString(5));
+				user.setUserDescription(rs.getString(6));
+				user.setUserRank(rs.getInt(7));
+				user.setUserFirst(rs.getInt(8));
+				user.setUserSecond(rs.getInt(9));
+				user.setUserThird(rs.getInt(10));
+				user.setUserEmail(rs.getString(11));
+				user.setUserRegdate(rs.getString(13));
+				user.setUserLogdate(rs.getString(14));
+				list.add(user);
+			}
+		} catch(Exception e) {
+			System.out.println("getUserlist fail");
+		} finally {
+		}
+		return list;
+	}
+	
+	
 		
 	/* getUserRank_index - index.jsp */
 	public ArrayList<User> getUserRank_index(){		
-		String SQL="SELECT userID, userRank, userName, userLevel FROM user WHERE userAvailable=1 ORDER BY userRank ASC, userName ASC LIMIT 10;";
+		String SQL="SELECT userID, userRank, userName, userLevel FROM user WHERE userAvailable=1 ORDER BY userRank ASC, userLevel DESC, userName ASC LIMIT 10;";
 		ArrayList<User> list = new ArrayList<User>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

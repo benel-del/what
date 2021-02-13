@@ -17,7 +17,6 @@
     <link rel="stylesheet" type="text/css" href="frame.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
     <script type="text/javascript"> 
-    /* 검색 기능 */
     $(document).ready(function(){ 
     	var per = 12;
     	var pageNumber = $('#pageNumber').val();
@@ -95,7 +94,7 @@
 	            <div class="board_search">	
 	                <form method="get" action="notice.jsp"> 	
 	   	        		<input id="bbs_search-btn" type="button" value="검색">
-	   	        		<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" maxlength="30">
+	   	        		<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" value="<%if(!value.equals("")) %><%=value %>" maxlength="30">
 	            	</form>
 	            </div> 
 	            
