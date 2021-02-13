@@ -44,7 +44,7 @@
     	});    	
     	$('#active').click(function(){
     		$(".board_table > tbody > tr").hide();
-    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('일반')");
+    		var temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('게시')");
     		$(temp).parent().show();
     	});   	
     	$('#inactive').click(function(){
@@ -122,7 +122,7 @@
 	    		<div class="admin_select">
 	    			<a href="#" id="all">전체</a>
 	    			| 
-	    			<a href="#" id="active">일반</a>
+	    			<a href="#" id="active">게시</a>
 	    			| 
 	    			<a href="#" id="inactive">삭제</a>
 	    		</div>
@@ -161,7 +161,7 @@
 	            					<td>
 	            					<%
 	            						if(list.get(i).getBbsAvailable() == 0){
-	            							out.print("삭제");
+	            							out.print("게시");
 	            						} else{
 		            						out.print("일반");
 	            						}

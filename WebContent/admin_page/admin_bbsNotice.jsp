@@ -42,7 +42,17 @@
     	/* admin_select */
     	$('#all').click(function(){
     		$(".board_table > tbody > tr").show();
-    	});    	
+    	});
+    	$('#active').click(function(){
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(8n+3):contains('게시')");
+    		$(temp).parent().show();
+    	});   	
+    	$('#inactive').click(function(){
+    		$(".board_table > tbody > tr").hide();
+    		var temp = $(".board_table > tbody > tr > td:nth-child(8n+3):contains('삭제')");
+    		$(temp).parent().show();
+    	});
     	$('#notice1').click(function(){
     		$(".board_table > tbody > tr").hide();
     		var temp = $(".board_table > tbody > tr > td:nth-child(8n+4):contains('일반')");
@@ -134,6 +144,10 @@
 	    		<div class="admin_select">
 	    			<a href="#" id="all">전체</a>
 	    			| 
+	    			<a href="#" id="active">게시</a>
+	    			| 
+	    			<a href="#" id="inactive">삭제</a>
+	    			|
 	    			<a href="#" id="notice1">일반</a>
 	    			| 
 	    			<a href="#" id="notice2">모임</a>
@@ -175,7 +189,7 @@
 	            						if(list.get(i).getBbsAvailable() == 0){
 	            							out.print("삭제");
 	            						} else{
-		            						out.print("일반");
+		            						out.print("게시");
 	            						}
 	            					%>
 	            					</td>
