@@ -71,7 +71,7 @@
 			} else{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.href='admin_bbsNotice.jsp'");
+				script.println("location.href='notice_view.jsp?bbsID="+bbsID+"'");
 				script.println("</script>");
 			}
 		}

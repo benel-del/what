@@ -156,7 +156,7 @@
 				
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.href='admin_bbsResult.jsp'");
+				script.println("location.href='result_view.jsp?bbsID="+bbsID+"'");
 				script.println("</script>");
 			}
 		}

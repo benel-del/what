@@ -46,7 +46,7 @@
 			} else{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("location.href='admin_bbsFaq.jsp'");
+				script.println("location.href='faq_view.jsp?bbsID="+bbsID+"'");
 				script.println("</script>");
 			}
 		}

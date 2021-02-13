@@ -181,9 +181,9 @@
 	            					<td>
 	            					<%
 	            						if(list.get(i).getBbsAvailable() == 0){
-	            							out.print("게시");
+	            							out.print("삭제");
 	            						} else{
-		            						out.print("일반");
+		            						out.print("게시");
 	            						}
 	            					%>
 	            					</td>
