@@ -483,9 +483,89 @@ public class UserDAO extends DbAccess{
 		return 100;
 	}
 	
+/* ********************************************************************************
+* 랭킹
+* ********************************************************************************/
+	/* 랭킹게시판 다음 페이지 x >> 다음 랭킹 */
+	public int NumOfUser() {
+		int count = 0;
+		String SQL="SELECT userID FROM user;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				count++;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	/* user들 1, 2, 3위 횟수 업데이트 - result_updateAction.jsp & result_writeAction.jsp */
+	public int updateCount(String userID, String countName, int count) {
+		String SQL = "UPDATE USER SET "+countName+"="+countName+"+? WHERE userID = ?;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, count);
+			pstmt.setString(2, userID);		
+			
+			if(count == -1) {
+				setFirst();
+				setSecond();
+				setThird();
+			}
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	public int setFirst() {
+		String SQL = "UPDATE USER SET userFirst=0 where userFirst < 0;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);		
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int setSecond() {
+		String SQL = "UPDATE USER SET userSecond=0 where userSecond < 0;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);		
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	public int setThird() {
+		String SQL = "UPDATE USER SET userThird=0 where userThird < 0;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);		
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int updateRank() {
+		String SQL = "UPDATE USER a SET userRank = (SELECT ranks FROM (SELECT rank() over(ORDER BY userFirst DESC, userSecond DESC, userThird DESC) as ranks, userID FROM USER WHERE userID!='admin' AND userAvailable=1) b WHERE b.userID = a.userID);";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);		
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 	
 /* *********************************************************************************
-* 관리자페이지 - 회원관리
+* 관리자페이지
 ***********************************************************************************/	
 	/* getAll('관리자페이지-회원관리'에서 userList 불러오기) - admin_user.jsp */	
 	public ArrayList<User> getAll() {	
@@ -513,79 +593,7 @@ public class UserDAO extends DbAccess{
 		return null;
 	}
 	
-	
-	
-	/* 랭킹 기능 - 관리자가 result 등록 시 업데이트 */
-	/* 랭킹게시판 업데이트 */
-	public int setRank() {
-		int i = 0;
-		int same = 1;	// 점수가 동일할 시
-		int pre_fir = -1;
-		int pre_sec = -1;
-		int pre_thi = -1;
-		Boolean isFir = true;
-		
-		String SQL = "UPDATE user SET userRank = ? WHERE userRank = 0;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, NumOfUser()+1);
-			pstmt.executeUpdate();
-			
-			SQL = "SELECT * FROM user ORDER BY userFirst DESC, userSecond DESC, userThird DESC;";
-			try {
-				pstmt = conn.prepareStatement(SQL);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					SQL = "UPDATE user SET userRank = ? WHERE userID = ?";
-					if(!isFir && (pre_fir == rs.getInt(8) && pre_sec == rs.getInt(9) && pre_thi == rs.getInt(10))) {
-						same ++;
-					}
-					else {
-						i += same;
-						same = 1;
-					}	
-					try {
-						pstmt = conn.prepareStatement(SQL);
-						pstmt.setInt(1, i);
-						pstmt.setString(2, rs.getString(1));
-						pstmt.executeUpdate();
-					} catch(Exception e) {
-						e.printStackTrace();
-					}
-					if(isFir)
-						isFir = false;
-					pre_fir = rs.getInt(8);
-					pre_sec = rs.getInt(9);
-					pre_thi = rs.getInt(10);
-				}
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-			
-			return 1; //성공
-		} catch(Exception e) {
-			e.printStackTrace();
-		}	
-		return -1;
-	}					
-
-	/* 랭킹게시판 다음 페이지 x >> 다음 랭킹 */
-	public int NumOfUser() {
-		int count = 0;
-		String SQL="SELECT userID FROM user;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				count++;
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return count;
-	}
-	
-	/* result_view.jsp - 해당 user의 정보 불러오기 */
+	/* (게시물관리 - 결과게시물) result_view.jsp - 해당 user의 정보 불러오기 */
 	public User getUser(String userID) {
 		String SQL="SELECT userName, userLevel FROM user WHERE userID = ?";
 		try {
@@ -604,54 +612,5 @@ public class UserDAO extends DbAccess{
 		return null;
 	}
 	
-	
-	
-	public int resetRank(String userID) {
-		String SQL = "UPDATE USER SET userFirst=0, userSecond=0, userThird=0 WHERE userID = ?;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			pstmt.executeUpdate();
-			return 1;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	public int updateFirst(String userID) {
-		String SQL = "UPDATE USER SET userFirst=userFirst+1 WHERE userID = ?;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			pstmt.executeUpdate();
-			return 1;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	public int updateSecond(String userID) {
-		String SQL = "UPDATE USER SET userSecond=userSecond+1 WHERE userID = ?;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			pstmt.executeUpdate();
-			return 1;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	public int updateThird(String userID) {
-		String SQL = "UPDATE USER SET userThird=userThird+1 WHERE userID = ?;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			pstmt.executeUpdate();
-			return 1;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
+
 }

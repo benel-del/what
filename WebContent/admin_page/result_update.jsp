@@ -78,6 +78,7 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
+            							<input type="hidden" value="<%=bbs_result.getPlaceFirst() %>" name="originFirst">
             							<select name="placeFirst">
 											<option value=''>-- 1위 --</option>
 	  										
@@ -90,7 +91,7 @@
 												for(int i=0; i<arr.length; i++){
 					    							if(arr[i] != null){
 					    								User user = new UserDAO().getMemberName(arr[i]);
-					    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+					    								mem += user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+") ";
 					    							}
 					    						}
 										%>
@@ -105,6 +106,7 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
+            							<input type="hidden" value="<%=bbs_result.getPlaceSecond() %>" name="originSecond">
 	            						<select name="placeSecond">
 											<option value=''>-- 2위 --</option>
 		  										
@@ -115,7 +117,7 @@
 													for(int i=0; i<arr.length; i++){
 						    							if(arr[i] != null){
 						    								User user = new UserDAO().getMemberName(arr[i]);
-						    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+						    								mem += user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+") ";
 						    							}
 						    						}
 											%>
@@ -130,6 +132,7 @@
             				<tr>
             					<td>
             						<div class="bbs_result">
+            							<input type="hidden" value="<%=bbs_result.getPlaceThird() %>" name="originThird">
 	            						<select name="placeThird">
 												<option value=''>-- 3위 --</option>
 		  										
@@ -140,7 +143,7 @@
 													for(int i=0; i<arr.length; i++){
 						    							if(arr[i] != null){
 						    								User user = new UserDAO().getMemberName(arr[i]);
-						    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+						    								mem += user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+") ";
 						    							}
 						    						}
 											%>

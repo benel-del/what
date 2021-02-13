@@ -84,7 +84,7 @@
 												for(int i=0; i<arr.length; i++){
 					    							if(arr[i] != null){
 					    								User user = new UserDAO().getMemberName(arr[i]);
-					    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+					    								mem += user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+") ";
 					    							}
 					    						}
 										%>
@@ -109,7 +109,7 @@
 												for(int i=0; i<arr.length; i++){
 					    							if(arr[i] != null){
 					    								User user = new UserDAO().getMemberName(arr[i]);
-					    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+					    								mem += user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+") ";
 					    							}
 					    						}
 										%>
@@ -133,7 +133,7 @@
 												for(int i=0; i<arr.length; i++){
 					    							if(arr[i] != null){
 					    								User user = new UserDAO().getMemberName(arr[i]);
-					    								mem += user.getUserName()+"("+user.getUserLevel()+") ";
+					    								mem += user.getUserName()+"/"+user.getUserLevel()+"("+user.getUserID()+") ";
 					    							}
 					    						}
 										%>
