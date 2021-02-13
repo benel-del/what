@@ -24,16 +24,9 @@
     	$(".board_page-move-symbol-left").hide();
 		$(".board_page-move-symbol-right").hide();
 
-    	var tr = $(".board_table > tbody > tr");
-    	for(var i = 0; i < tr.length; i++)
-			if(i < per*pageNumber && i >= per*(pageNumber-1))
-				$(tr.eq(i)).show();
-			else
-				$(tr.eq(i)).hide();
-    	if(tr.length > pageNumber*per)
-    		$(".board_page-move-symbol-right").show();
-    	if(pageNumber != 1)
-    		$(".board_page-move-symbol-left").show();
+    	paging($(".board_table > tbody > tr"));
+    	
+    	
 		/* enter 기능 */
     	$('#bbs_search-btn').click(function(){ search();})
     	$('#bbs_search-bar').keydown(function(key){
@@ -47,8 +40,25 @@
     		
     		var temp;
     		temp = $(".board_table > tbody > tr > td:nth-child(7n+3):contains('"+key+"')");
+    		paging($(temp).parent());
     		
     	}
+		
+		function paging(tr){
+			for(var i = 0; i < tr.length; i++)
+				if(i < per*pageNumber && i >= per*(pageNumber-1))
+					$(tr.eq(i)).show();
+				else
+					$(tr.eq(i)).hide();
+	    	if(tr.length > pageNumber*per)
+	    		$(".board_page-move-symbol-right").show();
+	    	else
+	    		$(".board_page-move-symbol-right").hide();
+	    	if(pageNumber != 1)
+	    		$(".board_page-move-symbol-left").show();
+	    	else
+	    		$(".board_page-move-symbol-left").hide();
+		}
     })
     </script>
     <title>어쩌다리그</title>
