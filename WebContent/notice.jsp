@@ -113,8 +113,8 @@
             			<tbody>
             				<%
             					ArrayList<Bbs_notice> list;
-            					if(value.equals(""))	list = BbsDAO_notice.getList();
-            					else	list = BbsDAO_notice.getList(value);
+            					if(value.equals("")) list = BbsDAO_notice.getList();
+            					else list = BbsDAO_notice.getList(value);
             					for(int i=0; i<list.size(); i++){
             						if(list.get(i).getBbsFix() == 1){
             				%>          				

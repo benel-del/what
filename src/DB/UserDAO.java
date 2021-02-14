@@ -470,9 +470,31 @@ public class UserDAO extends DbAccess{
 			}
 			} catch(Exception e) {
 				System.out.println("getUserlist fail");
-			} finally {
+		} finally {
+		}
+		return list;
+	}
+	
+	public ArrayList<User> getUserList_join(String option, String value){
+		ArrayList<User> list = new ArrayList<User>();
+		String SQL = "SELECT userID, userName, userGender, userLevel FROM user WHERE userAvailable = 1 AND userID!='admin' AND "+option+"="+value+";";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserName(rs.getString(2));
+				user.setUserGender(rs.getString(3));
+				user.setUserLevel(rs.getString(4));
+				list.add(user);
 			}
-			return list;
+			} catch(Exception e) {
+				System.out.println("getUserlist fail");
+		} finally {
+		}
+		return list;
 	}
 	
 	/* 아이디에 해당하는 userName 가져오기 - join.jsp & join_view.jsp */

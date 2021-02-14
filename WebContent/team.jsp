@@ -16,26 +16,28 @@
     <link rel="stylesheet" type="text/css" href="frame.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>
     <script type="text/javascript"> 
-    /* 검색 기능 */
-    $(document).ready(function(){   	
-    	$("#team_search-btn").click(function() {
-    		var key = $('#team_search').val();
-        	$(".board_table > tbody > tr").hide();
-    		if(key != ""){    			
-    			if(key != null){ 
-    				var arrList = $(".board_table>tbody>tr>td:nth-child(5n+3)");
-    				$.each(arrList, function(index, item){
-    					if(key == $(item).text()){
-    						$(item).parent().show();
-    					}
-    				});
-    				
-    			}				
-    		} else{
-				$(".board_table > tbody > tr > td").show();
-			}
-    	});
-	
+    $(document).ready(function(){ 
+    	var per = 12;
+    	var pageNumber = $('#pageNumber').val();
+    	$(".board_page-move-symbol-left").hide();
+		$(".board_page-move-symbol-right").hide();
+    	
+		var tr = $(".board_table > tbody > tr");
+		$.each(tr, function(index, item){
+			if(index < per*pageNumber && index >= per*(pageNumber-1))
+				$(item).show();
+			else
+				$(item).hide();
+		})
+
+    	if(tr.length > pageNumber*per)
+    		$(".board_page-move-symbol-right").show();
+    	else
+    		$(".board_page-move-symbol-right").hide();
+    	if(pageNumber != 1)
+    		$(".board_page-move-symbol-left").show();
+    	else
+    		$(".board_page-move-symbol-left").hide();
     });
     </script>
     <title>어쩌다리그</title>
@@ -51,17 +53,29 @@
 		if(request.getParameter("bbsID") != null){
 			bbsID=Integer.parseInt(request.getParameter("bbsID"));
 		}
-		if(bbsID ==0){
+		if(bbsID == 0){
 			PrintWriter script=response.getWriter();
 			script.println("<script>");
 			script.println("alert('유효하지 않은 게시물입니다.')");
 			script.println("location.href='index.jsp'");
 			script.println("</script>");
 		}
+		
 		int pageNumber = 1;
 		if(request.getParameter("pageNumber") != null){
 			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 		}
+		
+		String value="";
+		if(request.getParameter("value") != null){
+			value = request.getParameter("value");
+		}
+		
+		JoinDAO_user joinDAO_user = new JoinDAO_user();
+		ArrayList<User> list = new UserDAO().getUserList_join();
+		
+		if(value.equals("")==false)
+			list = new UserDAO().getUserList_join("userLevel", value);
 	%>
 	
 	
@@ -77,24 +91,28 @@
             
             <div class="board_container">
 	            
+	            <input type="hidden" id="pageNumber" value="<%=pageNumber %>">
+	            
 	            <!-- 검색 바 -->
-		        <div class="board_search">	            	
-	   	        	<input id="team_search-btn" type="button" value="검색">
-	   	        		
-	   	        	<select name="searchWord" id="team_search">
-	    	        	<option value='null'>--부수--</option>
-	    	        	<option value='-3'>-3</option>
-	    	        	<option value='-2'>-2</option>
-	    	        	<option value='-1'>-1</option>
-	    	        	<option value='0'>0</option>
-	    	        	<option value='1'>1</option>
-	    	        	<option value='2'>2</option>
-	    	        	<option value='3'>3</option>
-	    	        	<option value='4'>4</option>
-	    	        	<option value='5'>5</option>
-	    	        	<option value='6'>6</option>
-	    	        	<option value='7'>7</option>
-	   	        	</select>
+		        <div class="board_search">	 
+		        	<form method="get" action="team.jsp">          	
+		   	        	<input id="team_search-btn" type="submit" value="검색">
+		   	        	<input type="hidden" name="bbsID" value="<%=bbsID %>">
+		   	        	<select name="value" id="team_search">
+		    	        	<option value='null'>--부수--</option>
+		    	        	<option value='-3'>-3</option>
+		    	        	<option value='-2'>-2</option>
+		    	        	<option value='-1'>-1</option>
+		    	        	<option value='0'>0</option>
+		    	        	<option value='1'>1</option>
+		    	        	<option value='2'>2</option>
+		    	        	<option value='3'>3</option>
+		    	        	<option value='4'>4</option>
+		    	        	<option value='5'>5</option>
+		    	        	<option value='6'>6</option>
+		    	        	<option value='7'>7</option>
+		   	        	</select>
+	   	        	</form> 
 	   	        </div>
             	<div class="board_row">
             		<div class="admin_btn">
@@ -114,9 +132,7 @@
             			</thead>
             			<tbody>
             			<%
-            				JoinDAO_user joinDAO_user = new JoinDAO_user();
-            				ArrayList<User> list = new UserDAO().getUserList_join();
-							for(User user : list){
+            				for(User user : list){
 		            	%>      				  	
 		            		<tr class="board_tr" id="notice_nonfix">
 		            			<td><%=user.getUserName() %></td>
@@ -142,22 +158,12 @@
             	            	
             	<!-- 페이징 -->
  				<div class="board_page-move">
-            	<%
-            		if(pageNumber != 1){
-            	%>
             		<div class="board_page-move-symbol-left">
-            			<a href="team.jsp?pageNumber=<%=pageNumber-1%>" class="link"> ◀ 이전 페이지 </a>
+            			<a href="team.jsp?bbsID=<%=bbsID %>&pageNumber=<%=pageNumber-1%>&value=<%=value %>" class="link"> ◀ 이전 페이지 </a>
 					</div>
-				<% 
-					}
-            		//if(pageNumber < ){
-				%>
 					<div class="board_page-move-symbol-right">
-            			<a href="team.jsp?pageNumber=<%=pageNumber+1 %>" class="link"> 다음 페이지 ▶ </a>
+            			<a href="team.jsp?bbsID=<%=bbsID %>&pageNumber=<%=pageNumber+1 %>&value=<%=value %>" class="link"> 다음 페이지 ▶ </a>
             		</div>
-            	<%
-            		//}
-            	%>
             	</div> 
 	    	</div>  
         </section>

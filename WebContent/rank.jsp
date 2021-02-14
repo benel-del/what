@@ -82,9 +82,9 @@
 		   	        	<input id="bbs_search-btn" type="button" value="검색">
 		   	        	<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" value="<%if(!value.equals("")) %><%=value %>" maxlength="30">
 			        	<select id="bbs_search-option" name="option">
-	    	        		<option value='name' <%if(option.equals("name")){ %>selected<%} %>>이름</option>
-	    	        		<option value='level' <%if(option.equals("level")){ %>selected<%} %>>부수</option>
-	    	        		<option value='id' <%if(option.equals("id")){ %>selected<%} %>>아이디</option>
+	    	        		<option value='userName' <%if(option.equals("name")){ %>selected<%} %>>이름</option>
+	    	        		<option value='userLevel' <%if(option.equals("level")){ %>selected<%} %>>부수</option>
+	    	        		<option value='userID' <%if(option.equals("id")){ %>selected<%} %>>아이디</option>
 	    	        	</select>
 	    	        </form>
 		        </div>	
@@ -107,8 +107,8 @@
             	<%
             		UserDAO UserDAO = new UserDAO();
         			ArrayList<User> list;
-        			if(value.equals(""))	list = UserDAO.getUserlist();
-        			else	list = UserDAO.getUserlist(option, value);
+        			if(value.equals("")) list = UserDAO.getUserlist();
+        			else list = UserDAO.getUserlist(option, value);
             		for(int i=0; i<list.size(); i++){
             	%>
            				<tr class="board_tr" id="notice_nonfix">
