@@ -13,9 +13,9 @@ public class DbAccess {
 
 	public DbAccess(){
 		try {
-			String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";	// 'localhost:3306' : 컴퓨터에 설치된 mysql 서버 자체를 의미
-			String dbID = "root";
-			String dbPassword = "whatpassword0706!";
+			String dbURL = "jdbc:mysql://localhost/what0214";
+			String dbID = "what0214";
+			String dbPassword = "whatleague0706!";
 			Class.forName("com.mysql.jdbc.Driver");	// mysql driver 찾기. 'Driver' : mysql에 접속할 수 있도록 매개체 역할을 하는 라이브러리
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		} catch(Exception e) {
