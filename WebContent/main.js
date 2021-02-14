@@ -17,13 +17,14 @@ function sidebarClick(){
 	sideBar.classList.toggle("active");
 }
 
-
-
-
-
 function init(){
-	toggleBtn.addEventListener("click", menuClick);
-	sideBtn.addEventListener("click", sidebarClick);
+	if(toggleBtn){
+		toggleBtn.addEventListener("click", menuClick);
+	}
+	
+	if(sideBtn){
+		sideBtn.addEventListener("click", sidebarClick);
+	}
 }
 
 init();

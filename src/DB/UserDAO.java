@@ -15,7 +15,7 @@ public class UserDAO extends DbAccess{
 ***********************************************************************************/	
 	/* login - loginAction.jsp */
 	public int login(String userID, String userPassword) {
-		String SQL = "SELECT userPassword FROM USER WHERE userAvailable = 1 AND userID = ?;";
+		String SQL = "SELECT userPassword FROM user WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -38,7 +38,7 @@ public class UserDAO extends DbAccess{
 	
 	/* updateLastLogin - loginAction.jsp */
 	public int updateLastLogin(String userID) {
-		String SQL = "UPDATE USER SET userLogdate = ? WHERE userID = ?;";
+		String SQL = "UPDATE user SET userLogdate = ? WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, getDate().substring(0,11));
@@ -53,7 +53,7 @@ public class UserDAO extends DbAccess{
 	
 	/* findID(아이디찾기) - find_idAction.jsp */
 	public String findID(String userName, String userEmail) {
-		String SQL = "SELECT userID FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ?;";
+		String SQL = "SELECT userID FROM user WHERE userAvailable = 1 AND userName = ? AND userEmail = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);
@@ -70,7 +70,7 @@ public class UserDAO extends DbAccess{
 	
 	/* findPW(비밀번호 찾기) - find_pwAction.jsp */
 	public int findPW(String userID, String userName, String userEmail) {
-		String SQL = "SELECT * FROM USER WHERE userAvailable = 1 AND userName = ? AND userEmail = ? AND userID = ?;";
+		String SQL = "SELECT * FROM user WHERE userAvailable = 1 AND userName = ? AND userEmail = ? AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userName);	
@@ -88,7 +88,7 @@ public class UserDAO extends DbAccess{
 	
 	/* getUserEmail(임시 비번 전송할 이메일 찾아오기) - find_pwAction.jsp */
 	public String getUserEmail(String userID) {
-		String SQL = "SELECT userEmail FROM USER WHERE userAvailable = 1 AND userID = ?;";
+		String SQL = "SELECT userEmail FROM user WHERE userAvailable = 1 AND userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -108,7 +108,7 @@ public class UserDAO extends DbAccess{
  ***********************************************************************************/
 	/* register - registerAction.jsp */
 	public int register(User user) {
-		String SQL = "INSERT INTO USER(userID, userPassword, userName, userGender, userLevel, userEmail, userRegdate, userLogdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+		String SQL = "INSERT INTO user(userID, userPassword, userName, userGender, userLevel, userEmail, userRegdate, userLogdate) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  user.getUserID());
@@ -134,7 +134,7 @@ public class UserDAO extends DbAccess{
 	
 	/* pwHashing(비밀번호 저장시 해싱을 통해 암호화) - find_pwAction.jsp & registerAction.jsp */
 	public int pwHashing(String userPassword, String userID) {
-		String SQL = "UPDATE USER SET userPassword = ? WHERE userID = ?;";
+		String SQL = "UPDATE user SET userPassword = ? WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userPassword);
@@ -245,7 +245,7 @@ public class UserDAO extends DbAccess{
 ***********************************************************************************/
 	/* preModify(비번으로 본인확인) - preModifyAction.jsp */
 	public int preModify(String userID, String userPassword) {
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
+		String SQL = "SELECT userPassword FROM user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -267,7 +267,7 @@ public class UserDAO extends DbAccess{
 	/* modify(회원 정보 수정) - myinfoModifyAction.jsp */
 	public int modify(String userID, String userPassword, String userNewPassword, String userLevel, String userDescription, String userEmail) {
 		int rt = -1;
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
+		String SQL = "SELECT userPassword FROM user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -275,7 +275,7 @@ public class UserDAO extends DbAccess{
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(userPassword)) {
-					SQL = "UPDATE USER SET userPassword = ?, userLevel = ?, userDescription = ?, userEmail = ? WHERE userID = ?;";
+					SQL = "UPDATE user SET userPassword = ?, userLevel = ?, userDescription = ?, userEmail = ? WHERE userID = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1, userNewPassword);
@@ -325,7 +325,7 @@ public class UserDAO extends DbAccess{
 	/* delete(회원탈퇴) - deleteAction.jsp */
 	public int delete(String userID, String userPassword) {
 		int rt = -1;
-		String SQL = "SELECT userPassword FROM USER WHERE userID = ?;";
+		String SQL = "SELECT userPassword FROM user WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1,  userID);
@@ -333,7 +333,7 @@ public class UserDAO extends DbAccess{
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(userPassword)) {
-					SQL = "UPDATE USER SET userAvailable=0 WHERE userID = ? AND userPassword = ?;";
+					SQL = "UPDATE user SET userAvailable=0 WHERE userID = ? AND userPassword = ?;";
 					try {
 						pstmt = conn.prepareStatement(SQL);
 						pstmt.setString(1,  userID);
@@ -554,7 +554,7 @@ public class UserDAO extends DbAccess{
 	
 	/* user들 1, 2, 3위 횟수 업데이트 - result_updateAction.jsp & result_writeAction.jsp */
 	public int updateCount(String userID, String countName, int count) {
-		String SQL = "UPDATE USER SET "+countName+"="+countName+"+? WHERE userID = ?;";
+		String SQL = "UPDATE user SET "+countName+"="+countName+"+? WHERE userID = ?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, count);
@@ -573,7 +573,7 @@ public class UserDAO extends DbAccess{
 	}
 
 	public int setFirst() {
-		String SQL = "UPDATE USER SET userFirst=0 where userFirst < 0;";
+		String SQL = "UPDATE user SET userFirst=0 where userFirst < 0;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);		
 			return pstmt.executeUpdate();
@@ -583,7 +583,7 @@ public class UserDAO extends DbAccess{
 		return -1;
 	}
 	public int setSecond() {
-		String SQL = "UPDATE USER SET userSecond=0 where userSecond < 0;";
+		String SQL = "UPDATE user SET userSecond=0 where userSecond < 0;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);		
 			return pstmt.executeUpdate();
@@ -593,7 +593,7 @@ public class UserDAO extends DbAccess{
 		return -1;
 	}
 	public int setThird() {
-		String SQL = "UPDATE USER SET userThird=0 where userThird < 0;";
+		String SQL = "UPDATE user SET userThird=0 where userThird < 0;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);		
 			return pstmt.executeUpdate();
@@ -604,7 +604,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	public int updateRank() {
-		String SQL = "UPDATE USER a SET userRank = (SELECT ranks FROM (SELECT rank() over(ORDER BY userFirst DESC, userSecond DESC, userThird DESC) as ranks, userID FROM USER WHERE userID!='admin' AND userAvailable=1) b WHERE b.userID = a.userID);";
+		String SQL = "UPDATE user a SET userRank = (SELECT ranks FROM (SELECT rank() over(ORDER BY userFirst DESC, userSecond DESC, userThird DESC) as ranks, userID FROM user WHERE userID!='admin' AND userAvailable=1) b WHERE b.userID = a.userID);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);		
 			return pstmt.executeUpdate();
@@ -693,7 +693,7 @@ public class UserDAO extends DbAccess{
 	}
 	
 	public int admin_update(String userID, String userName, String userEmail, String userLevel, String userDescription, int userFirst, int userSecond, int userThird) {
-		String SQL = "UPDATE USER SET userName=?, userEmail=?, userLevel=?, userDescription=?, userFirst=?, userSecond=?, userThird=? WHERE userID=?;";
+		String SQL = "UPDATE user SET userName=?, userEmail=?, userLevel=?, userDescription=?, userFirst=?, userSecond=?, userThird=? WHERE userID=?;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);	
 			pstmt.setString(1,  userName);

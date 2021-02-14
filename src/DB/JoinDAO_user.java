@@ -105,31 +105,4 @@ public class JoinDAO_user extends DbAccess{
 		}
 		return -1;
 	}
-	
-	/*public int unselect(int bbsID, String id) {
-		BbsDAO_join bbs = new BbsDAO_join();
-		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, teamID = 0 WHERE teamID = ? AND userID = ?;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  bbs.getNext(bbsID));
-			pstmt.setString(2,  id);
-			return pstmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1; //데이터베이스 오류
-	}
-	
-	public int delete(int bbsID) {
-		BbsDAO_join bbs = new BbsDAO_join();
-		String SQL="UPDATE user_join" + bbsID + " SET isPart = 0, teamID = 0 WHERE teamID = ?;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1,  bbs.getNext(bbsID));
-			return pstmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return -1; //데이터베이스 오류
-	}*/
 }
