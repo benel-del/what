@@ -23,7 +23,7 @@
 		</ul>
 		
 		<ul class="navbar__icon">
-			<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+			<li><a href="https://www.instagram.com/suddenly_pingpong/"><i class="fab fa-instagram"></i></a></li>
 		</ul>
 		
 		
