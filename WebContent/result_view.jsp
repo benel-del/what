@@ -53,9 +53,8 @@
     
     <div id="wrapper">
         <section class="container">
-            <div class="board_subtitle">결과게시판</div>
-
-            <div class="view_container">
+			 <div class="view_container">
+            	<div class="board_subtitle">결과게시판</div>
             	<div class="view_row">
             		<table class="view_table">  
             			<thead>

@@ -113,14 +113,9 @@
 				** 모든 user들을 userFirst, userSecond, userThird, userName순으로 오름차순 정렬한 뒤 rank를 1부터 부여한다.
 				** 동점자는 같은 rank를 준다. (5등이 2명일 경우 다음 등수는 7등)
 				*/
-				result = new UserDAO().updateRank();
-				if(result == -1){
-					PrintWriter script = response.getWriter();
-					script.println("<script>");
-					script.println("alert('랭킹 업데이트에 실패하였습니다.')");
-					script.println("history.back()");
-					script.println("</script>");
-				}
+%>
+				<%@ include file="../updateRank.jsp" %>
+<%
 				
 				
 				PrintWriter script = response.getWriter();

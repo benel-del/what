@@ -8,54 +8,57 @@ import java.sql.Statement;
 
 public class DbAccess {
 	public Connection conn;
-	public ResultSet rs;	// Á¤º¸ ´ã´Â °´Ã¼
+	public ResultSet rs;	// ì •ë³´ ë‹´ëŠ” ê°ì²´
 	public Statement st;
 
 	public DbAccess(){
 		try {
-			String dbURL = "jdbc:mysql://localhost/what0214";
+			/*String dbURL = "jdbc:mysql://localhost:3307/what?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false";	// 'localhost:3306' : ï¿½ï¿½Ç»ï¿½Í¿ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ mysql ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Ç¹ï¿½
+			String dbID = "root";
+			String dbPassword = "whatpassword0706!";*/
+			String dbURL = "jdbc:mysql://localhost/what0214?useSSL=false&characterEncoding=utf8";
 			String dbID = "what0214";
 			String dbPassword = "whatleague0706!";
-			Class.forName("com.mysql.jdbc.Driver");	// mysql driver Ã£±â. 'Driver' : mysql¿¡ Á¢¼ÓÇÒ ¼ö ÀÖµµ·Ï ¸Å°³Ã¼ ¿ªÇÒÀ» ÇÏ´Â ¶óÀÌºê·¯¸®
+			Class.forName("com.mysql.jdbc.Driver");	// mysql driver ì°¾ê¸°. 'Driver' : mysqlì— ì ‘ì†í•  ìˆ˜ ìˆë„ë¡ ë§¤ê°œì²´ ì—­í• ì„ í•˜ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	/* ÇöÀç ½Ã°£ ºÒ·¯¿À±â - °Ô½Ã±Û ÀúÀå½Ã ÀÛ¼ºÀÏÀÚ Ç¥±â¿¡ ÇÊ¿ä */
+	/* í˜„ì¬ ì‹œê°„ ë¶ˆëŸ¬ì˜¤ê¸° - ê²Œì‹œê¸€ ì €ì¥ì‹œ ì‘ì„±ì¼ì í‘œê¸°ì— í•„ìš” */
 	public String getDate() {
 		String SQL="SELECT NOW();";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return rs.getString(1); //ÇöÀç ³â¿ùÀÏ ¹İÈ¯
+				return rs.getString(1); //í˜„ì¬ ë…„ì›”ì¼ ë°˜í™˜
 			}
 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return ""; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return ""; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
-	/* »õ ±Û ÀÛ¼º ½Ã ¸î ¹øÂ° °Ô½Ã±ÛÀÎÁö Ç¥±âÇÏ´Âµ¥ ÇÊ¿ä */
+	/* ìƒˆ ê¸€ ì‘ì„± ì‹œ ëª‡ ë²ˆì§¸ ê²Œì‹œê¸€ì¸ì§€ í‘œê¸°í•˜ëŠ”ë° í•„ìš” */
  	public int getNext(String table) {
 		String SQL="SELECT bbsID FROM " + table + " ORDER BY bbsID DESC;";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				return rs.getInt(1)+1; //°¡Àå ÃÖ±Ù °Ô½Ã¹°ÀÇ bbsID + 1 ¹İÈ¯
+				return rs.getInt(1)+1; //ê°€ì¥ ìµœê·¼ ê²Œì‹œë¬¼ì˜ bbsID + 1 ë°˜í™˜
 			}
-			return 1; //Ã¹ ¹øÂ° °Ô½Ã¹°ÀÎ °æ¿ì 1À» ¹İÈ¯
+			return 1; //ì²« ë²ˆì§¸ ê²Œì‹œë¬¼ì¸ ê²½ìš° 1ì„ ë°˜í™˜
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return -1; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
  	
- 	/* ±Û ÀÛ¼ºÀÚ ºÒ·¯¿À±â */
+ 	/* ê¸€ ì‘ì„±ì ë¶ˆëŸ¬ì˜¤ê¸° */
  	public String getWriter(String table, int bbsID) {
 		String SQL="SELECT writer FROM " + table + " WHERE bbsID = ?;";
 		try {
@@ -69,10 +72,10 @@ public class DbAccess {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return null; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
  	
-	/* °Ô½Ã±Û »èÁ¦ */
+	/* ê²Œì‹œê¸€ ì‚­ì œ */
 	public int delete(String table, int available, int bbsID) {
 		String SQL="UPDATE " + table + " SET bbsAvailable = " + available + " WHERE bbsID = ?;";
 		try {
@@ -82,10 +85,10 @@ public class DbAccess {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return -1; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
-	/* °èÁ¤ »èÁ¦ */
+	/* ê³„ì • ì‚­ì œ */
 	public int delete(int available, String userID) {
 		String SQL="UPDATE user SET userAvailable = " + available + " WHERE userID = ?;";
 		try {
@@ -95,10 +98,10 @@ public class DbAccess {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return -1; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
-	/* ÆäÀÌÂ¡ Ã³¸® : ÇÑ ÆäÀÌÁö ´ç 12°³ÀÇ °Ô½Ã¹° Ç¥½ÃÇÑ´Ù°í ÇÒ ¶§, ´ÙÀ½ ÆäÀÌÁö·Î ³Ñ¾î°¡´ÂÁö ¿©ºÎ */
+	/* í˜ì´ì§• ì²˜ë¦¬ : í•œ í˜ì´ì§€ ë‹¹ 12ê°œì˜ ê²Œì‹œë¬¼ í‘œì‹œí•œë‹¤ê³  í•  ë•Œ, ë‹¤ìŒ í˜ì´ì§€ë¡œ ë„˜ì–´ê°€ëŠ”ì§€ ì—¬ë¶€ */
 	public boolean nextPage(String table, int pageNumber) {
 		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 12;";
 		try {
@@ -114,7 +117,7 @@ public class DbAccess {
 		return false;
 	}
 	
-	/* °ü¸®ÀÚÆäÀÌÁöÀÇ ÆäÀÌÂ¡ Ã³¸® : ÇÑ ÆäÀÌÁö ´ç 12°³ÀÇ °Ô½Ã¹° Ç¥½ÃÇÑ´Ù°í ÇÒ ¶§, ´ÙÀ½ ÆäÀÌÁö·Î ³Ñ¾î°¡´ÂÁö ¿©ºÎ */
+	/* ê´€ë¦¬ìí˜ì´ì§€ì˜ í˜ì´ì§• ì²˜ë¦¬ : í•œ í˜ì´ì§€ ë‹¹ 12ê°œì˜ ê²Œì‹œë¬¼ í‘œì‹œí•œë‹¤ê³  í•  ë•Œ, ë‹¤ìŒ í˜ì´ì§€ë¡œ ë„˜ì–´ê°€ëŠ”ì§€ ì—¬ë¶€ */
 	public boolean admin_nextPage(String table, int pageNumber) {
 		String SQL="SELECT bbsID FROM " + table + " WHERE bbsID <= ? ORDER BY bbsID DESC LIMIT 12;";
 		try {

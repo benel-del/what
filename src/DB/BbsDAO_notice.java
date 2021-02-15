@@ -127,7 +127,7 @@ public class BbsDAO_notice extends DbAccess{
 	
 	/* n회 어쩌다 모임 전용 참가자목록 db 생성 */
 	public int createUserListDB(int bbsID) {
-		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0, FOREIGN KEY(userID, userAvailable) REFERENCES user(userID, userAvailable) ON UPDATE CASCADE);";
+		String SQL="CREATE TABLE join"+bbsID+"_user(userID VARCHAR(20) NOT NULL, userAvailable int default 1 not null, isPart INT default 0 NOT NULL, teamID INT default 0);";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.executeUpdate();
@@ -169,7 +169,7 @@ public class BbsDAO_notice extends DbAccess{
 * notice_index - index.jsp
 * *******************************************************************/
 	public ArrayList<Bbs_notice> notice_index(String type){
-		String SQL = "SELECT bbsID, bbsTitle FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 8;";
+		String SQL = "SELECT bbsID, bbsTitle, bbsDate FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 6;";
 		ArrayList<Bbs_notice> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -179,6 +179,7 @@ public class BbsDAO_notice extends DbAccess{
 				Bbs_notice bbs_notice = new Bbs_notice();
 				bbs_notice.setBbsID(rs.getInt(1));
 				bbs_notice.setBbsTitle(rs.getString(2));
+				bbs_notice.setBbsDate(rs.getString(3));
 				list.add(bbs_notice);
 			}
 		} catch(Exception e) {

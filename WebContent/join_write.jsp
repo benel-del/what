@@ -32,9 +32,9 @@
 	
     });
     
-    function memberList(){//checked list를 mem변수에 string으로 저장
+   function memberList(){//checked list를 mem변수에 string으로 저장
     	var mem="";
-    	$("input:checkbox[name=joinCheck]:checked").each(function(){
+    	$("input:checkbox[name='joinCheck']:checked").each(function(){
     		mem += $(this).val() + "<br>";
     	}); 
     	return mem;
@@ -106,7 +106,7 @@
             	    <% 
             	    	ArrayList<User> user_list = new UserDAO().getUserList_join();
             	    %>           	            	
-            		<table class="myinfo_table">
+            		<table class="join_table">
             			<thead>
             				<tr>
             					<th class="table_th1" colspan="2">
@@ -115,18 +115,21 @@
             				</tr>
             			</thead>
             			<tbody>
-							<tr>
-								<td colspan = "2">(전달사항 입력할 위치임) ex.조원 한 분이 일괄로 신청해 주시기 바랍니다</td>
+            				<tr>
+								<td colspan = "2">※ 전달사항</td>
 							</tr>
 							<tr>
-								<td colspan = "2">*조원들은 반드시 사이트에 가입되어 있어야 합니다.<br></td>
+								<td colspan = "2">- 조원 한 분이 일괄로 신청해 주시기 바랍니다</td>
 							</tr>
 							<tr>
-								<td class="table_th1">참가자</td>
+								<td colspan = "2">- 조원들은 반드시 사이트에 가입되어 있어야 합니다.<br></td>
+							</tr>
+							<tr>
+								<th class="table_th1">참가자</th>
 								<td class="table_th2">
 									<div class="join_search">
 										<input type="text" id="join_search-bar" placeholder="이름을 입력해주세요.">
-										<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색하기">
+										<input type="button" name="joinMeberSearch" id="join_search-btn" value="검색">
 									</div>
 									<table class="search_board">
 										<thead>
@@ -143,7 +146,9 @@
 												if(JoinDAO_user.userJoin(bbsID, user.getUserID()) != 1){
 										%>	
 											<tr class="search_board_tr">
-												<td><input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>"></td>
+												<td>												
+												 	<input type="checkbox" name="joinCheck" id="joinCheck" value="<%=user.getUserID()%>">
+											 	</td>
 												<td><%=user.getUserName()%>/<%=user.getUserLevel()%> (<%=user.getUserID() %>)</td>
 											</tr>
 										<%	
@@ -155,7 +160,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="table_th1">참가자 명단<br></td>
+								<th class="table_th1">참가자 명단<br></th>
 								<td class="table_th2">
 									<div class="join_member_list">
 										<input type="button" id="joinMemberCheck" onclick="join_click()" value="명단확인(아이디)">
@@ -166,28 +171,29 @@
 							</tr>
 							
 							<tr class="board_tr">
-								<td class="table_th1">신청자 연락처</td>
+								<th class="table_th1">신청자 연락처</th>
 								<td class="table_th2">
-									<input type="tel" name = "leaderPhone" placeholder="000-0000-0000" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}">
+									<input type="tel" name = "leaderPhone" placeholder="00012341234" pattern="[0-1]{3}[0-9]{4}[0-9]{4}">
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
-								<td class="table_th1">비밀번호</td>
+								<th class="table_th1">비밀번호</th>
 								<td class="table_th2">
-									<input type="password" name="teamPassword" placeholder="신청내용 수정시 필요(4자리)" maxlength="4">
+									<input type="password" name="teamPassword" placeholder="신청내용 수정시 필요(4자리)" pattern="[0-9]{4}" maxlength="4">
 								</td>
 							</tr>
 							
 							<tr class="board_tr">
-								<td class="table_th1">건의사항</td>
+								<th class="table_th1">건의사항</th>
 								<td class="table_th2">
-									<input type="text" placeholder="참가 관련 전달내용 기재" name="teamContent" maxlength="2048"></textarea>
+									<input type="text" placeholder="참가 관련 전달내용 기재" name="teamContent" maxlength="2048">
 								</td>
 							</tr>
             			</tbody>
             		</table>
-            		<input type="submit" class="login_submit-btn" value="참가신청">          	
+            		<input type="submit" class="login_submit-btn" value="참가신청"> 
+       	
             	</form>	
 	    	</div>  
         </section>

@@ -61,13 +61,9 @@
 		}		
 		else{
 			//랭킹 업데이트
-			if(new UserDAO().updateRank() == -1){
-				PrintWriter script = response.getWriter();
-				script.println("<script>");
-				script.println("alert('랭킹 업데이트를 실패하였습니다.')");
-				script.println("history.back()");
-				script.println("</script>");
-			}
+%>
+				<%@ include file="../updateRank.jsp" %>
+<%
 			
 			PrintWriter script = response.getWriter();
 			script.println("<script>");

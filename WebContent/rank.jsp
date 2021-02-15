@@ -79,12 +79,12 @@
            		<!-- 검색 바 -->
 		        <div class="board_search">
 		        	<form method="get" action="rank.jsp">       	
-		   	        	<input id="bbs_search-btn" type="button" value="검색">
-		   	        	<input id="bbs_search-bar" type="text" name="value" placeholder="제목을 입력해주세요" value="<%if(!value.equals("")) %><%=value %>" maxlength="30">
+		   	        	<input id="bbs_search-btn" type="submit" value="검색">
+		   	        	<input id="bbs_search-bar" type="text" name="value" placeholder="검색어를 입력해주세요" value="<%if(!value.equals("")) out.print(value); %>" maxlength="30">
 			        	<select id="bbs_search-option" name="option">
-	    	        		<option value='userName' <%if(option.equals("name")){ %>selected<%} %>>이름</option>
-	    	        		<option value='userLevel' <%if(option.equals("level")){ %>selected<%} %>>부수</option>
-	    	        		<option value='userID' <%if(option.equals("id")){ %>selected<%} %>>아이디</option>
+	    	        		<option value='userName' <%if(option.equals("userName")){ %>selected<%} %>>이름</option>
+	    	        		<option value='userLevel' <%if(option.equals("userLevel")){ %>selected<%} %>>부수</option>
+	    	        		<option value='userID' <%if(option.equals("userID")){ %>selected<%} %>>아이디</option>
 	    	        	</select>
 	    	        </form>
 		        </div>	

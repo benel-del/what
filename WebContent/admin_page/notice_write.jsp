@@ -92,7 +92,6 @@
             					<td>
             					<div class="write_subtitle" id="join_input">
             						<div class="join_input">
-            							* 모임 공지만<br>
             							모임 일시: 
 	            						<input type="date" id="join_teamDate" placeholder="모임일시" name="bbsJoindate">
 	            						<br>

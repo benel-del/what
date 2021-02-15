@@ -3,6 +3,7 @@
 <%@ page import="DB.UserDAO" %>
 <%@ page import="util.SHA256" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.util.ArrayList" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="user" class="DB.User" scope="page"/>
 <jsp:setProperty name="user" property="userID"/>
@@ -109,14 +110,10 @@
                     script.println("alert('Password hashing error!')");
                     script.println("</script>"); 
             	}
-            	
-            	if(new UserDAO().updateRank()==-1){
-            		PrintWriter script = response.getWriter();
-                  	script.println("<script>");
-                    script.println("alert('랭킹 업데이트 실패!')");
-                    script.println("</script>"); 
-            	}
-            	
+            
+%>
+				<%@ include file="updateRank.jsp" %>
+<%
     			session.setAttribute("userID", user.getUserID()); //회원가입 후 바로 로그인상태로 전환
                	PrintWriter script = response.getWriter();
               	script.println("<script>");

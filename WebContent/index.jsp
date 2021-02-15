@@ -64,26 +64,26 @@
         					if(noticeInfo != null){
         						bbsJoin = noticeInfo.getBbsID();
  	 	      			%>
-                        <table class="column_board"> 
+                        <table class="index_board"> 
               				<thead>
             					<tr>
-            						<th class="table_th1" colspan="2" style="height: 40px;"><%=noticeInfo.getBbsTitle() %></th>
+            						<th colspan="2"><%=noticeInfo.getBbsTitle() %></th>
             					</tr>
             				</thead>          			
             				<tbody>
             					<tr>
-            						<td class="table_th1">일시</td>
-            						<td class="table_th2"><%=noticeInfo.getBbsJoindate() %></td>
+            						<th>일시</th>
+            						<td><%=noticeInfo.getBbsJoindate() %></td>
             					</tr>
             					<tr>
-            						<td class="table_th1">장소</td>
-									<td class="table_th2"><%=noticeInfo.getBbsJoinplace() %></td>
+            						<th>장소</th>
+									<td><%=noticeInfo.getBbsJoinplace() %></td>
 						    	</tr>
 						    	<tr>
-						    		<td class="table_th1">요강</td>
-						    		<td class="table_th2" style="height: 300px">
+						    		<th id="index_board-content">요강</th>
+						    		<td>
 						    		<%
-						    			if(noticeInfo.getBbsContent().length() > 55){out.println(noticeInfo.getBbsContent().substring(0,55).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>")); 
+						    			if(noticeInfo.getBbsContent().length() > 100){out.println(noticeInfo.getBbsContent().substring(0,100).replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>")); 
 						    		%>
 						    		...
 						    		<%
@@ -92,7 +92,7 @@
 						    		</td>
 						    	</tr>
 						   	 	<tr>
-						    		<td class="table_th1" colspan="2" style="height: 30px;"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=noticeInfo.getBbsID() %>">요강 자세히 보기 </a></td>
+						    		<th colspan="2"><a class = "link" id="notice_more" href = "notice_view.jsp?bbsID=<%=noticeInfo.getBbsID() %>">요강 자세히 보기 </a></th>
 						    	</tr>		          					   				
             				</tbody>
             			</table>            			
@@ -110,7 +110,7 @@
 
                 <div id="index_rank">
                     <div class="index_title"><a class="link" href="rank.jsp">랭킹</a></div>
-              			<table class="board_table" style="border: none; padding-top: 10px;">
+              			<table class="board_table">
               			<thead>
             				<tr class="board_tr" style="height: 30px;">
             					<th class="board_thead">순위</th>
@@ -153,6 +153,7 @@
  	 	      			%>
  	 	      				<tr>
             					<td><a href="notice_view.jsp?bbsID=<%=list_notice1.get(i).getBbsID()%>"><%=list_notice1.get(i).getBbsTitle() %></a></td>
+            					<td style="text-align: right; font-size: 10px; color: #bcbcbc;"><%=list_notice1.get(i).getBbsDate().substring(0,11) %></td>
             				</tr>
             			<%
         					}
@@ -168,6 +169,7 @@
  	 	      			%>
  	 	      				<tr>
             					<td><a href="notice_view.jsp?bbsID=<%=list_notice2.get(i).getBbsID()%>"><%=list_notice2.get(i).getBbsTitle() %></a></td>
+            					<td style="text-align: right; font-size: 10px; color: #bcbcbc;"><%=list_notice2.get(i).getBbsDate().substring(0,11) %></td>
             				</tr>
             			<%
         					}
@@ -197,10 +199,10 @@
 	
     <footer>
        	<span>임원진</span><br>
-        <span>전성빈 tel.010-5602-4112</span><br>
+        <!--  <span>전성빈 tel.010-5602-4112</span><br>
       	<span>정하영 tel.010-9466-9742</span><br>
       	<span>김승현 tel.010-2749-1557</span><br>
-        <span>김민선 tel.010-3018-3568</span><br>
+        <span>김민선 tel.010-3018-3568</span><br>-->
         <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
     </footer>
     

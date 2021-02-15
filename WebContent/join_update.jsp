@@ -107,7 +107,7 @@
             %>
             <div class="board_container">
             	<form method="post" action="join_updateAction.jsp?bbsID=<%=bbsID%>&teamID=<%=teamID%>&admin=<%=admin %>" onsubmit="submit_click()">
-            		<table class="myinfo_table">
+            		<table class="join_table">
             		<tbody>
             			<tr>
 							<td class="table_th1">참가자</td>

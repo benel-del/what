@@ -10,6 +10,10 @@
 			<a href="index.jsp">어쩌다리그</a>
 		</div>
 		
+		<a href="#" class="navbar__toggleBtn">
+			<i class="fas fa-bars"></i>
+		</a>
+		
 		<ul class="navbar__menu">
 			<li><a href="notice.jsp">공지사항</a></li>
            	<li><a href="result.jsp">결과게시판</a></li>
@@ -22,8 +26,6 @@
 			<li><a href="#"><i class="fab fa-instagram"></i></a></li>
 		</ul>
 		
-		<a href="#" class="navbar__toggleBtn">
-			<i class="fas fa-bars"></i>
-		</a>
+		
 				
 	</nav>

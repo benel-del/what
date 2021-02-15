@@ -536,22 +536,6 @@ public class UserDAO extends DbAccess{
 /* ********************************************************************************
 * 랭킹
 * ********************************************************************************/
-	/* 랭킹게시판 다음 페이지 x >> 다음 랭킹 */
-	public int NumOfUser() {
-		int count = 0;
-		String SQL="SELECT userID FROM user;";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				count++;
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return count;
-	}
-	
 	/* user들 1, 2, 3위 횟수 업데이트 - result_updateAction.jsp & result_writeAction.jsp */
 	public int updateCount(String userID, String countName, int count) {
 		String SQL = "UPDATE user SET "+countName+"="+countName+"+? WHERE userID = ?;";
@@ -603,8 +587,8 @@ public class UserDAO extends DbAccess{
 		return -1;
 	}
 	
-	public int updateRank() {
-		String SQL = "UPDATE user a SET userRank = (SELECT ranks FROM (SELECT rank() over(ORDER BY userFirst DESC, userSecond DESC, userThird DESC) as ranks, userID FROM user WHERE userID!='admin' AND userAvailable=1) b WHERE b.userID = a.userID);";
+	public int updateRank(int rank, String userID) {
+		String SQL = "UPDATE user SET userRank = "+rank+" WHERE userID='"+userID+"';";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);		
 			return pstmt.executeUpdate();
@@ -612,6 +596,27 @@ public class UserDAO extends DbAccess{
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	public ArrayList<User> getRank(){
+		ArrayList<User> list = new ArrayList<User>();
+		String SQL = "SELECT userID, userFirst, userSecond, userThird FROM user WHERE userAvailable = 1 AND userID != 'admin' ORDER BY userFirst DESC, userSecond DESC, userThird DESC;";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();		
+			while(rs.next()) {
+				User user = new User();
+				user.setUserID(rs.getString(1));
+				user.setUserFirst(rs.getInt(2));
+				user.setUserSecond(rs.getInt(3));
+				user.setUserThird(rs.getInt(4));
+				list.add(user);
+			}
+		} catch(Exception e) {
+			System.out.println("ranking fail");
+		} finally {
+		}
+		return list;
 	}
 	
 /* *********************************************************************************
