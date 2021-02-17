@@ -198,12 +198,11 @@
 	</div>
 	
     <footer>
-       	<span>임원진</span><br>
-        <!--  <span>전성빈 tel.010-5602-4112</span><br>
-      	<span>정하영 tel.010-9466-9742</span><br>
-      	<span>김승현 tel.010-2749-1557</span><br>
-        <span>김민선 tel.010-3018-3568</span><br>-->
-        <span>Copyright 2020. 김민선&김현주. All Rights Reserved.</span>
+    	<div id="footer" style="text-align: center; line-height:30px; font-size: 10px;">
+	       	<span>어쩌다리그 <a href="http://www.whatleague.com">http://www.whatleague.com</a></span><br>
+	        <span>전성빈 ☎ 010-5602-4112</span><br>
+	        <span id="copyright">Copyright 2021. 김민선&김현주. All Rights Reserved.</span>            
+    	</div>
     </footer>
     
 </body>

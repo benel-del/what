@@ -95,6 +95,17 @@ a{
 	display: none;
 }
 
+/* *********************************************************
+** FOOTER
+************************************************************/
+footer{
+	background-color: #0F4C81;
+	color: white;
+	padding: 10px 10px;
+	font-size: 10px;
+	height: 130px;
+	margin: 0 auto;
+}
 
 /* *********************************************
 ** Wrapper
@@ -135,19 +146,6 @@ section
 {
     border-radius: 0.4em;
     color: #92A8D1;
-}
-
-/* *********************************************************
-** FOOTER
-************************************************************/
-footer{
-	
-	background-color: #0F4C81;
-	color: white;
-	padding: 10px 10px;
-	/*width: 1024px;*/
-	height: 130px;
-	margin: 0 auto;
 }
 
 /* *********************************************************
@@ -356,7 +354,7 @@ footer{
 .login_page{
 	margin:25px auto;
 	width:70%;
-	padding:10px 10px;
+	padding: 10px 10px;
 	text-align:center;
 	border:1px solid #0F4C81;
 }
@@ -1162,6 +1160,12 @@ input[id*="answer"] + label + div p{
 	display:none;
 }
 
+/* ********************************************
+** login.jsp
+************************************************/
+.login_page{
+	width: 100%;
+}
 
 
 }
