@@ -13,6 +13,7 @@
 <jsp:setProperty name="user" property="userGender"/>
 <jsp:setProperty name="user" property="userLevel"/>
 <jsp:setProperty name="user" property="userEmail"/>
+<jsp:setProperty name="user" property="tac"/>
 
 <%
     String userID = null;
@@ -92,6 +93,13 @@
             script.println("history.back()");
            	script.println("</script>");
         }
+    	else if(user.getTac() == null || user.getTac().equals("1") == false ){
+    		PrintWriter script = response.getWriter();
+           	script.println("<script>");
+            script.println("alert('이용약관에 동의해주십시오.')");
+            script.println("history.back()");
+           	script.println("</script>");
+    	}
     	else{
     		int result = UserDAO.register(user);
             if(result == -1){

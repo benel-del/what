@@ -17,6 +17,7 @@ public class User {
 	private int userAvailable;
 	private String userRegdate;
 	private String userLogdate;
+	private String tac;
 
 	public String getUserID() {
 		return userID;
@@ -114,4 +115,11 @@ public class User {
 	public void setUserLogdate(String userLogdate) {
 		this.userLogdate = userLogdate;
 	}
+	public String getTac() {
+		return tac;
+	}
+	public void setTac(String tac) {
+		this.tac = tac;
+	}
+	
 }

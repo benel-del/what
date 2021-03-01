@@ -87,6 +87,12 @@
   						<option value='7'>7</option>
 					</select>
 				<br><br>
+				
+				<div class="register_tac-area" style="font-size: 14px;">
+					<input type="checkbox" name="tac" value="1" style="width: auto; margin: 10px 5px; height: 14px;">이용약관 동의		
+				</div>
+				<textarea style="height: 60px; width: 85%;"><%@ include file="tac.jsp" %></textarea>
+				<br>
 									
 				<input type="submit" class="login_submit-btn" value="회원가입">
 				<br>

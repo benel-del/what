@@ -199,7 +199,7 @@
 	
     <footer>
     	<div id="footer" style="text-align: center; line-height:30px; font-size: 10px;">
-	       	<span>어쩌다리그 <a href="http://www.whatleague.com">http://www.whatleague.com</a></span><br>
+	       	<span>어쩌다리그 <a href="http://www.what0214.cafe24.com">http://www.what0214.cafe24.com</a></span><br>
 	        <span>전성빈 ☎ 010-5602-4112</span><br>
 	        <span id="copyright">Copyright 2021. 김민선&김현주. All Rights Reserved.</span>            
     	</div>
