@@ -69,8 +69,8 @@
 
        				<tr>
        				<th class="table_th1">내 소개</th>
-       				<th class="table_th2" style="min-height: 200px">
-       					<%if(user.getUserDescription() != null){out.println(user.getUserDescription());} else{ out.println("");}%>
+       				<th class="table_th2">
+       					<%if(user.getUserDescription() != null){out.println(user.getUserDescription());} else{ out.println("입력된 사항이 없습니다.");}%>
        				</th>
        				</tr>
 

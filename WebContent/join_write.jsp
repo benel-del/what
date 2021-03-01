@@ -173,7 +173,7 @@
 							<tr class="board_tr">
 								<th class="table_th1">신청자 연락처</th>
 								<td class="table_th2">
-									<input type="tel" name = "leaderPhone" placeholder="00012341234" pattern="[0-1]{3}[0-9]{4}[0-9]{4}">
+									<input type="tel" name = "leaderPhone" placeholder="'-'없이 입력" pattern="[0-1]{3}[0-9]{4}[0-9]{4}">
 								</td>
 							</tr>
 							

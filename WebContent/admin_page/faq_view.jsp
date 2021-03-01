@@ -79,9 +79,9 @@
             				</tr>
             				<tr>
 	            				<td class="view_subtitle">내용</td>
-	            				<td colspan="3" class="view_content2"><% if(bbs_faq.getBbsContent() != null){
+	            				<td colspan="3" class="view_content2"><div><% if(bbs_faq.getBbsContent() != null){
 	            					out.println(bbs_faq.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>"));
-	            					} else {out.println("");}%></td>
+	            					} else {out.println("");}%></div></td>
             				</tr>
             			</tbody>
             		</table>

@@ -41,11 +41,6 @@ public class BbsDAO_notice extends DbAccess{
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			int bbsID = getNext("bbs_notice");
-			if(bbsType.equals("모임공지")) {
-				if(createTeamListDB(bbsID)==-1 || createUserListDB(bbsID) == -1) {
-					return -2; //모임게시판 생성 실패
-				}
-			}
 			pstmt.setInt(1,  bbsID);
 			pstmt.setString(2,  bbsTitle);
 			pstmt.setString(3,  writer);
@@ -58,7 +53,7 @@ public class BbsDAO_notice extends DbAccess{
 			pstmt.setString(10, bbsJoinplace);
 			pstmt.setInt(11, 0);
 			pstmt.executeUpdate();
-			return 0;
+			return bbsID;
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -169,7 +164,7 @@ public class BbsDAO_notice extends DbAccess{
 * notice_index - index.jsp
 * *******************************************************************/
 	public ArrayList<Bbs_notice> notice_index(String type){
-		String SQL = "SELECT bbsID, bbsTitle, bbsDate FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 6;";
+		String SQL = "SELECT bbsID, bbsTitle, bbsDate FROM bbs_notice WHERE bbsAvailable = 1 AND bbsType=? ORDER BY bbsID DESC LIMIT 5;";
 		ArrayList<Bbs_notice> list = new ArrayList<>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);

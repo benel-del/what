@@ -41,7 +41,7 @@
             	<input type="checkbox" id="answer<%=i%>">
             	<label for="answer<%=i%>"><%=list.get(i).getBbsTitle() %></label>        
             	<div>          
-           			<p><%=list.get(i).getBbsContent() %></p>
+           			<p><%=list.get(i).getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt").replaceAll(">", "&gt").replaceAll("\n", "<br>") %></p>
         		</div>
         	<%
 				}
