@@ -58,11 +58,11 @@
 		}
 		
 		//emailSendAction
-		String host = "http://localhost:8080/what/";
+		String host = "http://what0214.cafe24.com";
 		String from = "whatleague@gmail.com";
 		String to = UserDAO.getUserEmail(user.getUserID());
 			
-		String subject = "어쩌다리그 : 비밀번호가 전송되었습니다.";
+		String subject = "어쩌다리그 : 임시비밀번호가 전송되었습니다.";
 		String content= user.getUserID() + " 회원님의 임시비밀번호는 "+newUserPw+"입니다.";
 			
 		Properties p = new Properties();
